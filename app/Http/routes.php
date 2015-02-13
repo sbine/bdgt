@@ -21,6 +21,8 @@ Route::resource('accounts', 'AccountController');
 
 Route::resource('transactions', 'TransactionController');
 
+Route::resource('bills', 'BillController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

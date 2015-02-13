@@ -41,6 +41,7 @@
 					<li><a href="/">Home</a></li>
 					<li><a href="/accounts">Accounts</a></li>
 					<li><a href="/transactions">Transactions</a></li>
+					<li><a href="/bills">Bills</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

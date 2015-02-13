@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('AccountSeeder');
 		$this->call('TransactionSeeder');
+		$this->call('BillSeeder');
 	}
 
 }
