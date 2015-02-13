@@ -39,7 +39,7 @@
 						</span>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading"><span class="moment">2015-02-04</span></h2>
+						<h2 class="media-heading"><span class="moment">2015-03-04</span></h2>
 						<span class="text-muted">next bill</span>
 					</div>
 				</div>
