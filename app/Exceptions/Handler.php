@@ -36,7 +36,32 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+		if (config('app.debug')) {
+            return $this->renderExceptionWithWhoops($e);
+        }
+
 		return parent::render($request, $e);
 	}
+
+	/**
+     * Render an exception using Whoops.
+     *
+     * @param  \Exception $e
+     * @return \Illuminate\Http\Response
+     */
+    protected function renderExceptionWithWhoops(Exception $e)
+    {
+        $whoops = new \Whoops\Run;
+        $handler = new \Whoops\Handler\PrettyPageHandler();
+        $handler->addResourcePath('/var/www/bdgt/public/');
+        $handler->addCustomCss('css/whoops.css');
+        $whoops->pushHandler($handler);
+
+        return new \Illuminate\Http\Response(
+            $whoops->handleException($e),
+            $e->getStatusCode(),
+            $e->getHeaders()
+        );
+    }
 
 }
