@@ -21,7 +21,13 @@ class BillController extends Controller
      */
     public function index()
     {
-        $c['bills'] = Bill::all();
+        $bills = Bill::all();
+
+        $bills->sortBy(function($bill) {
+            return $bill->nextDue();
+        });
+
+        $c['bills'] = $bills;
 
         return view('bill/index', $c);
     }
