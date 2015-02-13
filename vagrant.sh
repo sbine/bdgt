@@ -49,8 +49,6 @@ echo '...done'
 
 
 echo '--- Creating vHost ---'
-mkdir -p /var/www/bdgt/{public_html,logs}
-
 VHOST=$(cat <<EOF
 NameVirtualHost *:80
 
