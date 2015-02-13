@@ -66,6 +66,7 @@ EOF
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 echo '...done'
 
+sed -i 's/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
 sed -i 's/www-data/vagrant/' /etc/apache2/envvars
 chown vagrant: /var/lock/apache2
 
