@@ -15,6 +15,12 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+Route::get('ledger', 'LedgerController@index');
+
+Route::resource('accounts', 'AccountController');
+
+Route::resource('transactions', 'TransactionController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

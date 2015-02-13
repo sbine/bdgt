@@ -8,6 +8,7 @@
 		"filp/whoops": "~1.0"
 	},
 	"require-dev": {
+		"fzaninotto/faker": "~1.4.0",
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1"
 	},
