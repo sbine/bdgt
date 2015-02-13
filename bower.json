@@ -1,0 +1,22 @@
+{
+  "name": "bdgt",
+  "version": "0.0.1",
+  "homepage": "https://github.com/sbine/bdgt",
+  "authors": [
+    "Sara Bine <sara@sarabine.com>"
+  ],
+  "description": "bdgt",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "datatables": "~1.10.4",
+    "momentjs": "~2.9.0"
+  }
+}
