@@ -4,7 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>Bdgt</title>
+
+	<link rel="icon" type="image/png" href="favicon.png">
 
 	<link href="/css/app.css" rel="stylesheet">
 
@@ -28,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="#">Bdgt</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,5 +60,36 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<script src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+	<script>
+	@yield('scripts')
+
+	$(document).on('ready ajaxComplete', function() {
+		$(".moment").not('.processed-ready').each(function(value) {
+			var date = moment($(this).text());
+
+			$(this).text(date.fromNow());
+
+			$(this).addClass('processed-ready');
+		});
+
+		$(".money").not('processed-ready').each(function(value) {
+			if ($(this).text().charAt(0) == '-') {
+				$(this).addClass('negative');
+			}
+			else {
+				$(this).addClass('positive');
+			}
+		});
+	});
+
+	$(document).ready(function() {
+		@yield('scripts-ready')
+	});
+	</script>
 </body>
 </html>
