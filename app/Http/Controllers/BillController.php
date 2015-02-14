@@ -49,19 +49,23 @@ class BillController extends Controller
 
     public function store()
     {
-        $bill = Input::all();
-
-        if (Bill::create($bill)) {
-            return response()->json(["status" => "success"]);
+        if ($bill = Bill::create(Input::all())) {
+            session()->flash('alerts.success', 'Bill created');
+            return redirect("/bills/{$bill->id}");
+        } else {
+            session()->flash('alerts.danger', 'Bill creation failed');
+            return redirect()->back();
         }
-        return response()->json(["status" => "error"]);
     }
 
     public function destroy($id)
     {
         if (Bill::where('id', '=', $id)->delete()) {
-            return response()->json(["status" => "success"]);
+            session()->flash('alerts.success', 'Bill deleted');
+            return redirect("/bills");
+        } else {
+            session()->flash('alerts.danger', 'Bill deletion failed');
+            return redirect()->back();
         }
-        return response()->json(["status" => "error"]);
     }
 }

@@ -63,6 +63,8 @@
 		</div>
 	</nav>
 
+	@include('alerts')
+
 	@yield('content')
 
 	<!-- Scripts -->
