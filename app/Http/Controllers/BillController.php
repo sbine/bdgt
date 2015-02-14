@@ -36,7 +36,11 @@ class BillController extends Controller
 
     public function show($id)
     {
-        $bill = Bill::find($id);
+        try {
+            $bill = Bill::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect('/bills');
+        }
 
         $c['bill'] = $bill;
 
@@ -48,6 +52,14 @@ class BillController extends Controller
         $bill = Input::all();
 
         if (Bill::create($bill)) {
+            return response()->json(["status" => "success"]);
+        }
+        return response()->json(["status" => "error"]);
+    }
+
+    public function destroy($id)
+    {
+        if (Bill::where('id', '=', $id)->delete()) {
             return response()->json(["status" => "success"]);
         }
         return response()->json(["status" => "error"]);

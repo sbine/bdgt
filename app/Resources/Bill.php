@@ -28,7 +28,7 @@ class Bill extends Model
      */
     protected $hidden = ['id'];
 
-    protected $appends = ['total', 'nextDue', 'paid'];
+    protected $appends = ['total', 'nextDue', 'lastDue', 'paid'];
 
     public function transactions()
     {
@@ -39,8 +39,10 @@ class Bill extends Model
     {
         $total = 0;
         foreach ($this->transactions as $transaction) {
-            if (!$transaction->inflow) {
-                $total += $transaction->amount;
+            if ($transaction->date > $this->lastDue && $transaction->date < $this->nextDue) {
+                if (!$transaction->inflow) {
+                    $total += $transaction->amount;
+                }
             }
         }
         return $total;
@@ -67,5 +69,20 @@ class Bill extends Model
         }
 
         return $date->format('Y-m-d');
+    }
+
+    public function getLastDueAttribute()
+    {
+        $startDate = new DateTime(date('Y-m-d', strtotime($this->start_date)));
+        $currentDate = new DateTime(date('Y-m-d'));
+        $frequency = new DateInterval('P' . $this->frequency . 'D');
+
+        $date = $startDate;
+
+        while ($date <= $currentDate) {
+            $date->add($frequency);
+        }
+
+        return $date->sub($frequency)->format('Y-m-d');
     }
 }
