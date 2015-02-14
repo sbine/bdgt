@@ -12,5 +12,12 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less(['app.less', 'whoops.less']);
+    mix
+        .less(['whoops.less'])
+        .less('app.less', 'resources/.build/css')
+        .copy('resources/assets/js', 'resources/.build/js')
+        .copy('bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js', 'resources/.build/js/bootstrap-slider.js')
+        .copy('bower_components/seiyria-bootstrap-slider/css/bootstrap-slider.css', 'resources/.build/css/bootstrap-slider.css')
+        .stylesIn('resources/.build/css', 'public/css/app.css')
+        .scriptsIn('resources/.build/js', 'public/js/app.js');
 });
