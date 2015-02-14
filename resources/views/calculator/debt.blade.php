@@ -2,7 +2,7 @@
 
 @section('breadcrumbs.items')
 	<li><a href="/calculators">Calculators</a></li>
-	<li><a href="/calculators/debt">Debt</a></li>
+	<li class="active">Debt</li>
 @endsection
 
 @section('content')

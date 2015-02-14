@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<li><a href="/bills">Bills</a></li>
+	<li class="active">Bills</li>
 @endsection
 
 @section('breadcrumbs.actions')
