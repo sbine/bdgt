@@ -5082,6 +5082,11 @@ label,
 .navbar {
   margin-bottom: 30px;
 }
+.navbar .navbar-brand-image {
+  height: 20px;
+  float: left;
+  margin-right: 5px;
+}
 .heads-up {
   margin-top: 10px;
   margin-bottom: 20px;

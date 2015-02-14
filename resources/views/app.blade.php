@@ -35,7 +35,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Bdgt</a>
+				<a class="navbar-brand" href="/">
+					<img class="navbar-brand-image" alt="bdgt" src="/favicon.png">
+					<span>bdgt</span>
+				</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="primary-navbar">
