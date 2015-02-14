@@ -3,8 +3,6 @@ bdgt
 
 ## Big finance tools in a small package
 
-----
-
 bdgt is a one-stop personal finance management app. Planned features:  
 
 - Zero-based bugeting system
@@ -14,6 +12,12 @@ bdgt is a one-stop personal finance management app. Planned features:
 - Forecasting (net worth/account balance)
 - Debt and savings calculators
 - Interactive reports
+
+## Screenshots
+
+![screenshot: bills page](http://puu.sh/fUYT7/a9d80cd65e.png)
+
+![screenshot: goals page](http://puu.sh/fUYGh/c9e4c2e4bc.png)
 
 ## Installation
 
