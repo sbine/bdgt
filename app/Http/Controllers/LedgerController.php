@@ -22,16 +22,9 @@ class LedgerController extends Controller
      */
     public function index()
     {
-        $account = new Account;
-        $transactions = [];
+        $ledger = new Ledger;
 
-        for ($i = 1; $i < 10; $i++) {
-            $account->addTransaction(Transaction::find($i));
-        }
-
-        $c['ledger'] = [
-            $account
-        ];
+        $c['ledger'] = $ledger;
 
         return view('ledger/index', $c);
     }

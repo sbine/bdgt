@@ -29,6 +29,8 @@ class Bill extends Model
      */
     protected $hidden = ['id'];
 
+    protected $appends = ['nextDue'];
+
     protected $transactions;
 
     public function addTransaction($transaction)
@@ -46,7 +48,7 @@ class Bill extends Model
         return $this->hasMany('Bdgt\Resources\Transaction');
     }
 
-    public function nextDue()
+    public function getNextDueAttribute()
     {
         $startDate = new DateTime($this->start_date);
         $currentDate = new DateTime(date('Y-m-d'));

@@ -15,8 +15,6 @@ Route::get('/', 'TransactionController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::get('ledger', 'LedgerController@index');
-
 Route::resource('accounts', 'AccountController');
 
 Route::resource('transactions', 'TransactionController');

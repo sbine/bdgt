@@ -24,7 +24,7 @@ class BillController extends Controller
         $bills = Bill::all();
 
         $bills->sortBy(function($bill) {
-            return $bill->nextDue();
+            return $bill->nextDue;
         });
 
         $c['bills'] = $bills;

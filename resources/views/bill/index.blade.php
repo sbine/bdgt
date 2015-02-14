@@ -1,5 +1,13 @@
 @extends('app')
 
+@section('css')
+	<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css" rel="stylesheet">
+@endsection
+
+@section('js')
+	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
@@ -15,12 +23,33 @@
 							@endif
 
 							<h4 class="list-group-item-heading">{{ $bill->label }}</h4>
-							<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue() }}</span></p>
+							<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue }}</span></p>
 							<p class="list-group-item-text">$ {{ number_format($bill->amount, 2) }}</p>
 						</a>
 					@endforeach
 				</div>
 			</div>
 		</div>
+		<div class"row">
+			<div class="col-md-10 col-md-offset-1">
+				<div id="calendar"></div>
+			</div>
+		</div>
 	</div>
+@endsection
+
+@section('scripts')
+var bills = {!! json_encode(array_values($bills->toArray())) !!};
+
+$('#calendar').fullCalendar({
+	events: bills,
+	eventDataTransform: function(rawEventData) {
+		return {
+				id: rawEventData.id,
+				title: rawEventData.label + ' due',
+				start: rawEventData.nextDue,
+				end: rawEventData.nextDue
+		};
+	}
+});
 @endsection
