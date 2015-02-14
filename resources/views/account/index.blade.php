@@ -4,21 +4,16 @@
 	<li><a href="/accounts">Accounts</a></li>
 @endsection
 
+@section('breadcrumbs.actions')
+	<a href="#addAccountModal" data-toggle="modal" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add Account</a>
+@endsection
+
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="list-group">
-					<div class="list-group-item">
-						<div class="list-group-item-text">
-							<div class="pull-right">
-								<a href="#addAccountModal" data-toggle="modal" class="btn btn-success">
-									<i class="fa fa-plus"></i> Add Account
-								</a>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
 					@foreach ($accounts as $account)
 						<a href="/accounts/{{ $account->id }}" class="list-group-item">
 							<span class="badge">{{ $account->transactions->count() }}</span>
