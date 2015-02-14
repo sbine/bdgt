@@ -6,44 +6,48 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row heads-up">
-			<div class="col-md-3 col-md-offset-1">
-				<div class="media heads-up-item">
-					<div class="media-left">
-						<span class="media-object">
-							<i class="fa fa-dollar fa-4x"></i>
-						</span>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="media heads-up-item">
+							<div class="media-left">
+								<span class="media-object">
+									<i class="fa fa-dollar fa-4x"></i>
+								</span>
+							</div>
+							<div class="media-body">
+								<h2 class="media-heading"><span class="money">{{ number_format($ledger->balance(), 2) }}</span></h2>
+								<span class="text-muted">current balance</span>
+							</div>
+						</div>
 					</div>
-					<div class="media-body">
-						<h2 class="media-heading"><span class="money">{{ number_format($ledger->balance(), 2) }}</span></h2>
-						<span class="text-muted">current balance</span>
-					</div>
-				</div>
-			</div>
 
-			<div class="col-md-3 col-md-offset-1">
-				<div class="media heads-up-item">
-					<div class="media-left">
-						<span class="media-object">
-							<i class="fa fa-clock-o fa-4x"></i>
-						</span>
+					<div class="col-md-3 col-md-offset-1">
+						<div class="media heads-up-item">
+							<div class="media-left">
+								<span class="media-object">
+									<i class="fa fa-clock-o fa-4x"></i>
+								</span>
+							</div>
+							<div class="media-body">
+								<h2 class="media-heading"><span class="moment">{{ $ledger->lastPurchase() }}</span></h2>
+								<span class="text-muted">last purchase</span>
+							</div>
+						</div>
 					</div>
-					<div class="media-body">
-						<h2 class="media-heading"><span class="moment">{{ $ledger->lastPurchase() }}</span></h2>
-						<span class="text-muted">last purchase</span>
-					</div>
-				</div>
-			</div>
 
-			<div class="col-md-3 col-md-offset-1">
-				<div class="media heads-up-item">
-					<div class="media-left">
-						<span class="media-object">
-							<i class="fa fa-calendar fa-4x"></i>
-						</span>
-					</div>
-					<div class="media-body">
-						<h2 class="media-heading"><span class="moment">2015-03-04</span></h2>
-						<span class="text-muted">next bill</span>
+					<div class="col-md-3 col-md-offset-2">
+						<div class="media heads-up-item">
+							<div class="media-left">
+								<span class="media-object">
+									<i class="fa fa-calendar fa-4x"></i>
+								</span>
+							</div>
+							<div class="media-body">
+								<h2 class="media-heading"><span class="moment">{{ $nextBill->nextDue }}</span></h2>
+								<span class="text-muted">next bill</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -61,6 +65,7 @@
 							<th></th>
 							<th>Date</th>
 							<th>Account</th>
+							<th>Category</th>
 							<th>Payee</th>
 							<th>Inflow</th>
 							<th>Outflow</th>
@@ -84,6 +89,11 @@
 								</span>
 							</td>
 							<td>
+								<span class="editable" data-pk="{{ $transaction->id }}" data-url="/transactions/{{ $transaction->id }}" data-name="category_label">
+									{{ $transaction->category->label }}
+								</span>
+							</td>
+							<td>
 								<span class="editable" data-pk="{{ $transaction->id }}" data-url="/transactions/{{ $transaction->id }}" data-name="payee">
 									{{ $transaction->payee }}
 								</span>
@@ -101,6 +111,7 @@
 										{{ number_format($transaction->amount, 2) }}
 									</span>
 								@endif
+							</td>
 							<td>
 								@if ($transaction->cleared)
 									<i class="fa fa-check"></i>
@@ -110,7 +121,7 @@
 					@endforeach
 					<tfoot>
 						<tr>
-							<td colspan="4"><b>Total</b></td>
+							<td colspan="5"><b>Total</b></td>
 							<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
 							<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
 							<td></td>
@@ -130,7 +141,11 @@
 
 	$.fn.editable.defaults.mode = 'inline';
 
-	$("table").DataTable({order: [[1, "desc"]]});
+	$("table").DataTable({
+		order: [[1, "desc"]],
+		pageLength: 20,
+		lengthMenu: [ 10, 20, 30, 50 ]
+	});
 
 	$("table").editable({
 		emptytext: '',
