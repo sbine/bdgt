@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('breadcrumbs')
+@section('breadcrumbs.items')
 	<li><a href="/accounts">Accounts</a></li>
 	<li class="active">{{ $account->name }}</li>
 @endsection

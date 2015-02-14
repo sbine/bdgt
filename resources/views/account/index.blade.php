@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('breadcrumbs')
+@section('breadcrumbs.items')
 	<li><a href="/accounts">Accounts</a></li>
 @endsection
 
@@ -20,7 +20,7 @@
 						</div>
 					</div>
 					@foreach ($accounts as $account)
-						<a href="#" class="list-group-item">
+						<a href="/accounts/{{ $account->id }}" class="list-group-item">
 							<span class="badge">{{ $account->transactions->count() }}</span>
 							<h4 class="list-group-item-heading">{{ $account->name }}</h4>
 							<p class="list-group-item-text">$ {{ number_format($account->balance, 2) }}</p>

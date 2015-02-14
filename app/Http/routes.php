@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'TransactionController@index');
+Route::get('/', 'LedgerController@index');
 
 Route::get('home', 'HomeController@index');
 
@@ -22,6 +22,6 @@ Route::resource('transactions', 'TransactionController');
 Route::resource('bills', 'BillController');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);

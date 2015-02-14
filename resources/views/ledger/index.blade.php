@@ -1,8 +1,7 @@
 @extends('app')
 
-@section('breadcrumbs.items')
-	<li><a href="/transactions">Transactions</a></li>
-@endsection
+@section('breadcrumbs')
+@overwrite
 
 @section('content')
 	<div class="container-fluid">

@@ -8,7 +8,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 @endsection
 
-@section('breadcrumbs')
+@section('breadcrumbs.items')
 	<li><a href="/bills">Bills</a></li>
 @endsection
 

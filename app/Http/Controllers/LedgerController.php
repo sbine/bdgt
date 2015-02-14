@@ -1,7 +1,6 @@
 <?php namespace Bdgt\Http\Controllers;
 
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Transaction;
+use Bdgt\Resources\Ledger;
 
 class LedgerController extends Controller
 {

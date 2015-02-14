@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -18,13 +17,6 @@ class Account extends Model
      * @var array
      */
     protected $fillable = ['date_opened', 'name', 'balance'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['id'];
 
     protected $transactions;
 
