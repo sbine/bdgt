@@ -7,7 +7,6 @@ use DateInterval;
 
 class Bill extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -31,26 +30,25 @@ class Bill extends Model
 
     protected $appends = ['nextDue'];
 
-    protected $transactions;
-
-    public function addTransaction($transaction)
-    {
-        $this->transactions[] = $transaction;
-        if ($transaction->inflow) {
-            $this->total += $transaction->amount;
-        } else {
-            $this->total -= $transaction->amount;
-        }
-    }
-
     public function transactions()
     {
         return $this->hasMany('Bdgt\Resources\Transaction');
     }
 
+    public function getTotalAttribute()
+    {
+        $total = 0;
+        foreach ($this->transactions as $transaction) {
+            if (!$transaction->inflow) {
+                $total += $transaction->amount;
+            }
+        }
+        return $total;
+    }
+
     public function getNextDueAttribute()
     {
-        $startDate = new DateTime($this->start_date);
+        $startDate = new DateTime(date('Y-m-d', strtotime($this->start_date)));
         $currentDate = new DateTime(date('Y-m-d'));
         $frequency = new DateInterval('P' . $this->frequency . 'D');
 

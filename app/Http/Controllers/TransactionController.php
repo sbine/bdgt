@@ -32,6 +32,16 @@ class TransactionController extends Controller
         return view('transaction/index', $c);
     }
 
+    public function store()
+    {
+        $transaction = Input::all();
+
+        if (Transaction::create($transaction)) {
+            return Response::json(["status" => "success"]);
+        }
+        return Response::json(["status" => "error"]);
+    }
+
     public function update($id)
     {
         $transaction = Transaction::find($id);

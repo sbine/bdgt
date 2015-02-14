@@ -2,6 +2,8 @@
 
 use Bdgt\Resources\Bill;
 
+use Input;
+
 class BillController extends Controller
 {
     /**
@@ -23,12 +25,31 @@ class BillController extends Controller
     {
         $bills = Bill::all();
 
-        $bills->sortBy(function($bill) {
+        $bills->sortBy(function ($bill) {
             return $bill->nextDue;
         });
 
         $c['bills'] = $bills;
 
         return view('bill/index', $c);
+    }
+
+    public function show($id)
+    {
+        $bill = Bill::find($id);
+
+        $c['bill'] = $bill;
+
+        return view('bill/show', $c);
+    }
+
+    public function store()
+    {
+        $bill = Input::all();
+
+        if (Bill::create($bill)) {
+            return response()->json(["status" => "success"]);
+        }
+        return response()->json(["status" => "error"]);
     }
 }
