@@ -25,6 +25,8 @@ Route::resource('bills', 'BillController');
 
 Route::resource('goals', 'GoalController');
 
+Route::get('/calculators/debt', 'CalculatorController@debt');
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

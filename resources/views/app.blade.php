@@ -48,9 +48,9 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Calculators <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/liabilities/calculator">Debt Calculator</a></li>
+							<li><a href="/calculators/debt">Debt Calculator</a></li>
 							<li class="divider"></li>
-							<li><a href="#">Savings Calculator</a></li>
+							<li><a href="/calculators/savings">Savings Calculator</a></li>
 						</ul>
 					</li>
 				</ul>
