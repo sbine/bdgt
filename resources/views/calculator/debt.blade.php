@@ -11,21 +11,23 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
 					<div class="col-sm-12">
-						<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
-						<p class="lead">Total interest <span id="interestPaid" class="text-danger">$ 0.00</span></p>
-						<div id="errorContainer" style="display: none;">
-							<div id="errorMessage" class="text-danger"></div>
-							<br>
+						<div class="well">
+							<div class="row">
+								<div class="col-sm-6">
+									<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
+									<p class="lead">Total interest <span id="interestPaid" class="text-danger">$ 0.00</span></p>
+									<div id="errorContainer" style="display: none;">
+										<div id="errorMessage" class="text-danger"></div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<p>Monthly Payment</p>
+									<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<p>Monthly Payment</p>
-						<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
-					</div>
-				</div>
-				<br>
 				<div class="row">
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
