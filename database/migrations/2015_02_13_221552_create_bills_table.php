@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountsTable extends Migration
+class CreateBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('accounts');
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::dropIfExists('bills');
+        Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('date_opened');
-            $table->string('name', 128);
-            $table->float('balance');
-            $table->float('interest');
-            $table->integer('interest_period');
+            $table->date('start_date');
+            $table->integer('frequency');
+            $table->string('label', 128);
+            $table->float('amount');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('accounts');
+        Schema::drop('bills');
     }
 }

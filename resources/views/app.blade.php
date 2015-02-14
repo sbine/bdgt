@@ -29,21 +29,30 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-navbar">
 					<span class="sr-only">Toggle Navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Bdgt</a>
+				<a class="navbar-brand" href="/">Bdgt</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse" id="primary-navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
+					<li><a href="/">Dashboard</a></li>
 					<li><a href="/accounts">Accounts</a></li>
 					<li><a href="/transactions">Transactions</a></li>
 					<li><a href="/bills">Bills</a></li>
+					<li><a href="/goals">Goals</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Calculators <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/liabilities/calculator">Debt Calculator</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Savings Calculator</a></li>
+						</ul>
+					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -70,6 +79,9 @@
 				<ol class="breadcrumb">
 					<li><a href="/">Home</a></li>
 					@yield('breadcrumbs.items')
+					<div class="pull-right">
+						@yield('breadcrumbs.actions')
+					</div>
 				</ol>
 			</div>
 		</div>
@@ -80,6 +92,12 @@
 
 	@yield('content')
 
+	<footer class="footer">
+		<div class="text-center">
+			&copy; {{ date('Y') }} bdgt
+		</div>
+	</footer>
+
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -87,12 +105,11 @@
 	<script src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+	<script src="/js/app.js"></script>
 
 	@yield('js')
 
 	<script>
-	@yield('scripts')
-
 	$(document).on('ready ajaxComplete', function() {
 		$(".moment").not('.processed-ready').each(function(value) {
 			var date = moment($(this).text());
@@ -116,5 +133,7 @@
 		@yield('scripts-ready')
 	});
 	</script>
+
+	@yield('scripts')
 </body>
 </html>

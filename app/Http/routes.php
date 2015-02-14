@@ -19,7 +19,11 @@ Route::resource('accounts', 'AccountController');
 
 Route::resource('transactions', 'TransactionController');
 
+Route::resource('categories', 'CategoryController');
+
 Route::resource('bills', 'BillController');
+
+Route::resource('goals', 'GoalController');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
