@@ -24,6 +24,7 @@
 					Due <span class="moment">{{ $bill->nextDue }}</span>
 					<span class="text-muted">({{ $bill->nextDue }})</span>
 				</p>
+				<p>$ {{ number_format($bill->total, 2) }} paid since {{ $bill->lastDue }}</p>
 			</div>
 		</div>
 		<br><br>
@@ -45,7 +46,7 @@
 										{{ $transaction->date }}
 									</td>
 									<td>
-										{{ $transaction->amount }}
+										$ {{ number_format($transaction->amount, 2) }}
 									</td>
 								</tr>
 							@endif

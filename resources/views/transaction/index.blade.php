@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('breadcrumbs')
+	<li><a href="/transactions">Transactions</a></li>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row heads-up">
