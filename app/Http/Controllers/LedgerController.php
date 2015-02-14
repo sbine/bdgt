@@ -1,6 +1,7 @@
 <?php namespace Bdgt\Http\Controllers;
 
 use Bdgt\Resources\Ledger;
+use Bdgt\Resources\Bill;
 
 class LedgerController extends Controller
 {
@@ -24,6 +25,14 @@ class LedgerController extends Controller
         $ledger = new Ledger;
 
         $c['ledger'] = $ledger;
+
+        $bills = Bill::all();
+
+        $bills->sortBy(function ($bill) {
+            return $bill->nextDue;
+        });
+
+        $c['nextBill'] = $bills->first();
 
         return view('ledger/index', $c);
     }
