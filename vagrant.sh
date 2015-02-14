@@ -20,6 +20,12 @@ apt-get install -y apache2
 echo '...done'
 
 
+echo '--- Installing npm ---'
+apt-get install -y npm
+ln -s /usr/bin/nodejs /usr/bin/node
+echo '...done'
+
+
 echo '--- Installing MySQL and PHP5 ---'
 apt-get install -y php5 php5-cli php5-mcrypt libapache2-mod-php5 php5-curl php5-mysqlnd php5-sqlite
 echo '...done'

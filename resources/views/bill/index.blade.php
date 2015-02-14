@@ -8,6 +8,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 @endsection
 
+@section('breadcrumbs')
+	<li><a href="/bills">Bills</a></li>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
@@ -99,7 +103,8 @@ $('#calendar').fullCalendar({
 				title: rawEventData.label + ' due',
 				start: rawEventData.nextDue,
 				end: rawEventData.nextDue,
-				paid: rawEventData.paid
+				paid: rawEventData.paid,
+				url: "/bills/" + rawEventData.id
 		};
 	},
 	eventRender: function(event, element, view) {

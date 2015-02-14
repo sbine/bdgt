@@ -21,13 +21,6 @@ class Bill extends Model
      */
     protected $fillable = ['label', 'start_date', 'frequency', 'amount'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['id'];
-
     protected $appends = ['total', 'nextDue', 'lastDue', 'paid'];
 
     public function transactions()

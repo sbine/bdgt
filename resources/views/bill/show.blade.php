@@ -1,5 +1,10 @@
 @extends('app')
 
+@section('breadcrumbs')
+	<li><a href="/bills">Bills</a></li>
+	<li class="active">{{ $bill->label }}</li>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
@@ -21,8 +26,10 @@
 				</p>
 			</div>
 		</div>
+		<br><br>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
+				<p class="lead">Payments</p>
 				<table class="table">
 					<thead>
 						<tr>

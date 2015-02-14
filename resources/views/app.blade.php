@@ -63,6 +63,17 @@
 		</div>
 	</nav>
 
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<ol class="breadcrumb">
+					<li><a href="/">Home</a></li>
+					@yield('breadcrumbs')
+				</ol>
+			</div>
+		</div>
+	</div>
+
 	@include('alerts')
 
 	@yield('content')
