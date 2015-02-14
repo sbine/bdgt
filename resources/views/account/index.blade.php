@@ -49,13 +49,25 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Balance</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="balance">
+							<div class="input-group">
+								<span class="input-group-addon">$</span>
+								<input type="text" class="form-control" name="balance">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Interest Rate</label>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input type="text" class="form-control" name="interest">
+								<span class="input-group-addon">%</span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Date Opened</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="date_opened" required>
+							<input type="text" class="form-control" name="date_opened">
 						</div>
 					</div>
 				</div>

@@ -5,6 +5,11 @@
 	<li class="active">{{ $bill->label }}</li>
 @endsection
 
+@section('breadcrumbs.actions')
+	<a href="#editBillModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+	<!-- <a href="#deleteBillModal" data-toggle="modal" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Delete</a> -->
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
@@ -59,6 +64,49 @@
 			<div class="col-md-10 col-md-offset-1">
 				<a href="#deleteBillModal" data-toggle="modal" class="pull-right">Delete this bill</a>
 			</div>
+		</div>
+	</div>
+
+	<div id="editBillModal" class="modal fade">
+		<div class="modal-dialog">
+			<form class="modal-content form-horizontal" method="POST" action="/bills/{{ $bill->id }}">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="_method" value="PUT">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="modal-title">Edit Bill</h3>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Payee</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="label" value="{{ $bill->label }}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Amount</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="amount" value="{{ $bill->amount }}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Date</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="start_date" value="{{ $bill->start_date }}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Frequency</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="frequency" value="{{ $bill->frequency }}" required>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Edit</button>
+				</div>
+			</form>
 		</div>
 	</div>
 

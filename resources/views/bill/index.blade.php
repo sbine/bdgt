@@ -12,21 +12,15 @@
 	<li><a href="/bills">Bills</a></li>
 @endsection
 
+@section('breadcrumbs.actions')
+	<a href="#addBillModal" data-toggle="modal" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add Bill</a>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4 col-md-push-7">
 				<div class="list-group">
-					<div class="list-group-item">
-						<div class="list-group-item-text">
-							<div class="pull-right">
-								<a href="#addBillModal" data-toggle="modal" class="btn btn-success">
-									<i class="fa fa-plus"></i> Add Bill
-								</a>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
 					@foreach ($bills as $bill)
 						<a href="/bills/{{ $bill->id }}" class="list-group-item">
 
@@ -93,26 +87,28 @@
 @endsection
 
 @section('scripts')
-var bills = {!! json_encode(array_values($bills->toArray())) !!};
+<script>
+	var bills = {!! json_encode(array_values($bills->toArray())) !!};
 
-$('#calendar').fullCalendar({
-	events: bills,
-	eventDataTransform: function(rawEventData) {
-		return {
-				id: rawEventData.id,
-				title: rawEventData.label + ' due',
-				start: rawEventData.nextDue,
-				end: rawEventData.nextDue,
-				paid: rawEventData.paid,
-				url: "/bills/" + rawEventData.id
-		};
-	},
-	eventRender: function(event, element, view) {
-		if (event.paid === true) {
-			element.css('background-color', '#5cb85c').css('border-color', '#5cb85c');
-		} else {
-			element.css('background-color', '#d9534f').css('border-color', '#d9534f');
+	$('#calendar').fullCalendar({
+		events: bills,
+		eventDataTransform: function(rawEventData) {
+			return {
+					id: rawEventData.id,
+					title: rawEventData.label + ' due',
+					start: rawEventData.nextDue,
+					end: rawEventData.nextDue,
+					paid: rawEventData.paid,
+					url: "/bills/" + rawEventData.id
+			};
+		},
+		eventRender: function(event, element, view) {
+			if (event.paid === true) {
+				element.css('background-color', '#5cb85c').css('border-color', '#5cb85c');
+			} else {
+				element.css('background-color', '#d9534f').css('border-color', '#d9534f');
+			}
 		}
-	}
-});
+	});
+</script>
 @endsection
