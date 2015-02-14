@@ -98,8 +98,16 @@ $('#calendar').fullCalendar({
 				id: rawEventData.id,
 				title: rawEventData.label + ' due',
 				start: rawEventData.nextDue,
-				end: rawEventData.nextDue
+				end: rawEventData.nextDue,
+				paid: rawEventData.paid
 		};
+	},
+	eventRender: function(event, element, view) {
+		if (event.paid === true) {
+			element.css('background-color', '#5cb85c').css('border-color', '#5cb85c');
+		} else {
+			element.css('background-color', '#d9534f').css('border-color', '#d9534f');
+		}
 	}
 });
 @endsection

@@ -28,7 +28,7 @@ class Bill extends Model
      */
     protected $hidden = ['id'];
 
-    protected $appends = ['nextDue'];
+    protected $appends = ['total', 'nextDue', 'paid'];
 
     public function transactions()
     {
@@ -44,6 +44,14 @@ class Bill extends Model
             }
         }
         return $total;
+    }
+
+    public function getPaidAttribute()
+    {
+        if ($this->total >= $this->amount) {
+            return true;
+        }
+        return false;
     }
 
     public function getNextDueAttribute()
