@@ -29,4 +29,14 @@ class Transaction extends Model
     {
         return $this->belongsTo('Bdgt\Resources\Account');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('Bdgt\Resources\Category');
+    }
+
+    public function bill()
+    {
+        return $this->belongsTo('Bdgt\Resources\Bill');
+    }
 }

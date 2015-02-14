@@ -58,6 +58,17 @@ class BillController extends Controller
         }
     }
 
+    public function update($id)
+    {
+        if (Bill::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
+            session()->flash('alerts.success', 'Bill updated');
+            return redirect("/bills/{$id}");
+        } else {
+            session()->flash('alerts.danger', 'Bill update failed');
+            return redirect()->back();
+        }
+    }
+
     public function destroy($id)
     {
         if (Bill::where('id', '=', $id)->delete()) {

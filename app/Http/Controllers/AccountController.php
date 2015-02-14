@@ -43,11 +43,22 @@ class AccountController extends Controller
 
     public function store()
     {
-        if ($accounts = Account::create(Input::all())) {
+        if ($account = Account::create(Input::all())) {
             session()->flash('alerts.success', 'Account created');
-            return redirect("/accounts/{$accounts->id}");
+            return redirect("/accounts/{$account->id}");
         } else {
             session()->flash('alerts.danger', 'Account creation failed');
+            return redirect()->back();
+        }
+    }
+
+    public function update($id)
+    {
+        if (Account::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
+            session()->flash('alerts.success', 'Account updated');
+            return redirect("/accounts/{$id}");
+        } else {
+            session()->flash('alerts.danger', 'Account update failed');
             return redirect()->back();
         }
     }

@@ -5,7 +5,6 @@ use Bdgt\Resources\Account;
 
 class AccountSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -20,7 +19,9 @@ class AccountSeeder extends Seeder
                 'id' => null,
                 'date_opened' => $faker->dateTimeBetween('-10 years'),
                 'name' => $faker->creditCardType(),
-                'balance' => $faker->randomFloat(2, 0, 1000)
+                'balance' => $faker->randomFloat(2, 0, 1000),
+                'interest' => $faker->randomFloat(2, 0, 1),
+                'interest_period' => $faker->numberBetween(1, 12)
             ]);
         }
     }

@@ -5,7 +5,6 @@ use Bdgt\Resources\Transaction;
 
 class TransactionSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -20,6 +19,7 @@ class TransactionSeeder extends Seeder
                 'id' => null,
                 'date' => $faker->dateTimeBetween('-2 years'),
                 'account_id' => $faker->numberBetween(1, 3),
+                'category_id' => $faker->numberBetween(1, 3),
                 'bill_id' => $faker->numberBetween(1, 7),
                 'payee' => $faker->company(),
                 'amount' => $faker->randomFloat(2, 0, 200),
