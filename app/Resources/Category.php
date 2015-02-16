@@ -16,7 +16,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'parent_category_id',];
+    protected $fillable = ['label', 'parent_category_id', 'budgeted'];
 
     public function transactions()
     {

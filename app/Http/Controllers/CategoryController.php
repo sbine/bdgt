@@ -29,7 +29,9 @@ class CategoryController extends Controller
             return $category->nextDue;
         });
 
-        return response()->json($categories);
+        $c['categories'] = $categories;
+
+        return view('category/index', $c);
     }
 
     public function show($id)
