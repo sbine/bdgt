@@ -5,7 +5,7 @@ bdgt
 
 bdgt is a one-stop personal finance management app. Planned features:  
 
-- Zero-based bugeting system
+- Zero-based budgeting system
 - Bill management, calendar, and reminders
 - Account management/transaction history
 - Goal system with automatic monthly budgeting
