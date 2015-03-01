@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler {
     {
         $whoops = new \Whoops\Run;
         $handler = new \Whoops\Handler\PrettyPageHandler();
-        $handler->addResourcePath('/var/www/bdgt/public/');
+        $handler->addResourcePath(public_path());
         $handler->addCustomCss('css/whoops.css');
         $whoops->pushHandler($handler);
 
