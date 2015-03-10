@@ -68,6 +68,7 @@
 							</td>
 						</tr>
 					@endforeach
+					</tbody>
 					<tfoot>
 						<tr>
 							<td colspan="5"><b>Total</b></td>
@@ -76,7 +77,6 @@
 							<td></td>
 						</tr>
 					</tfoot>
-					</tbody>
 				</table>
 			</div>
 		</div>
