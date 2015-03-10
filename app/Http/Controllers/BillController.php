@@ -44,7 +44,7 @@ class BillController extends Controller
 
         $c['bill'] = $bill;
 
-        return view('bill/show', $c);
+        return view('bill/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
     }
 
     public function store()

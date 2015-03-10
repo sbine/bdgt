@@ -38,7 +38,7 @@ class AccountController extends Controller
 
         $c['account'] = $account;
 
-        return view('account/show', $c);
+        return view('account/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions() ]);
     }
 
     public function store()

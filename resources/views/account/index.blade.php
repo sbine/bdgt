@@ -17,7 +17,8 @@
 					@foreach ($accounts as $account)
 						<a href="/accounts/{{ $account->id }}" class="list-group-item">
 							<span class="badge">{{ $account->transactions->count() }}</span>
-							<h4 class="list-group-item-heading">{{ $account->name }}</h4>
+							<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
+							<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
 							<p class="list-group-item-text">$ {{ number_format($account->balance, 2) }}</p>
 						</a>
 					@endforeach

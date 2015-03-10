@@ -29,7 +29,7 @@ class TransactionController extends Controller
 
         $c['ledger'] = $ledger;
 
-        return view('transaction/index', $c);
+        return view('transaction/index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }
 
     public function store()

@@ -30,32 +30,7 @@
 			<div class="col-md-10 col-md-offset-1">
 				<p class="lead">Transactions</p>
 				<table class="table">
-					<thead>
-						<tr>
-							<th>Date</th>
-							<th>Inflow</th>
-							<th>Outflow</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($account->transactions as $transaction)
-							<tr>
-								<td>
-									{{ $transaction->date }}
-								</td>
-								<td>
-									@if ($transaction->inflow)
-										$ {{ number_format($transaction->amount, 2) }}
-									@endif
-								</td>
-								<td>
-									@if (!$transaction->inflow)
-										$ {{ number_format($transaction->amount, 2) }}
-									@endif
-								</td>
-							</tr>
-						@endforeach
-					</tbody>
+					{!! $transactions !!}
 				</table>
 			</div>
 		</div>

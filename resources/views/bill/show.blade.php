@@ -37,26 +37,7 @@
 			<div class="col-md-10 col-md-offset-1">
 				<p class="lead">Payments</p>
 				<table class="table">
-					<thead>
-						<tr>
-							<th>Date</th>
-							<th>Amount Paid</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($bill->transactions as $transaction)
-							@if (!$transaction->inflow)
-								<tr>
-									<td>
-										{{ $transaction->date }}
-									</td>
-									<td>
-										$ {{ number_format($transaction->amount, 2) }}
-									</td>
-								</tr>
-							@endif
-						@endforeach
-					</tbody>
+					{!! $transactions !!}
 				</table>
 			</div>
 		</div>
