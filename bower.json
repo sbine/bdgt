@@ -19,6 +19,7 @@
     "datatables": "~1.10.4",
     "momentjs": "~2.9.0",
     "fullcalendar": "~2.2.7",
-    "seiyria-bootstrap-slider": "~4.4.2"
+    "seiyria-bootstrap-slider": "~4.4.2",
+    "x-editable": "~1.5.1"
   }
 }

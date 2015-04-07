@@ -8,7 +8,8 @@
 
 	<link rel="icon" type="image/png" href="/favicon.png">
 
-	<link href="/css/app.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/app.min.css" rel="stylesheet">
 
 	@yield('css')
 
@@ -16,7 +17,8 @@
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
-	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<link href="/css/bootstrap-editable.min.css" rel="stylesheet"/>
+	<link href="/css/bootstrap-slider.min.css" rel="stylesheet"/>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -106,9 +108,10 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.datatables.min.js"></script>
 	<script src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-	<script src="/js/app.js"></script>
+	<script src="/js/bootstrap-editable.min.js"></script>
+	<script src="/js/bootstrap-slider.min.js"></script>
+	<script src="/js/moment.min.js"></script>
+	<script src="/js/app.min.js"></script>
 
 	@yield('js')
 
