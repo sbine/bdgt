@@ -85,6 +85,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
          dest: '<%= config.js %>/bootstrap-slider.min.js'
+       },
+       {
+         src: '<%= config.bower_path %>/fullcalendar/dist/fullcalendar.min.js',
+         dest: '<%= config.js %>/fullcalendar.min.js'
        }]
       },
       css: {
@@ -103,6 +107,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
          dest: '<%= config.build_path %>/bootstrap-slider.css'
+       },
+       {
+         src: '<%= config.bower_path %>/fullcalendar/dist/fullcalendar.min.css',
+         dest: '<%= config.build_path %>/fullcalendar.css'
        }]
       },
       fonts: {

@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('css')
-	<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css" rel="stylesheet">
+	<link href="/css/fullcalendar.min.css" rel="stylesheet">
 @endsection
 
 @section('js')
-	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+	<script src="/js/fullcalendar.min.js"></script>
 @endsection
 
 @section('breadcrumbs.items')
