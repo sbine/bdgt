@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     css: 'public/css',
     js: 'public/js',
     images: 'public/img',
-    fonts: 'public/font',
+    fonts: 'public/fonts',
   };
 
   /*
@@ -89,6 +89,10 @@ module.exports = function(grunt) {
       },
       css: {
        files: [{
+         src: '<%= config.bower_path %>/font-awesome/css/font-awesome.min.css',
+         dest: '<%= config.css %>/font-awesome.min.css'
+       },
+       {
          src: '<%= config.bower_path %>/datatables/media/css/jquery.dataTables.min.css',
          dest: '<%= config.css %>/jquery.datatables.min.css'
        },
@@ -99,6 +103,14 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
          dest: '<%= config.build_path %>/bootstrap-slider.css'
+       }]
+      },
+      fonts: {
+       files: [{
+         expand: true,
+         cwd: '<%= config.bower_path %>/font-awesome/fonts',
+         src: '*',
+         dest: '<%= config.fonts %>'
        }]
       }
     },
@@ -114,9 +126,9 @@ module.exports = function(grunt) {
       build: {
         files: [{
             expand: true,
+            cwd: '<%= config.build_path %>',
             src: '**/*.js',
             dest: '<%= config.js %>',
-            cwd: '<%= config.build_path %>',
             ext: '.min.js'
         }]
       }
