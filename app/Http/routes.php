@@ -13,21 +13,24 @@
 
 Route::get('/', 'LedgerController@index');
 
-Route::get('home', 'HomeController@index');
-
-Route::resource('accounts', 'AccountController');
-
-Route::resource('transactions', 'TransactionController');
-
-Route::resource('categories', 'CategoryController');
-
-Route::resource('bills', 'BillController');
-
-Route::resource('goals', 'GoalController');
-
-Route::get('/calculators/debt', 'CalculatorController@debt');
-
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('home', 'HomeController@index');
+
+    Route::resource('accounts', 'AccountController');
+
+    Route::resource('transactions', 'TransactionController');
+
+    Route::resource('categories', 'CategoryController');
+
+    Route::resource('bills', 'BillController');
+
+    Route::resource('goals', 'GoalController');
+
+    Route::get('/calculators/debt', 'CalculatorController@debt');
+});
