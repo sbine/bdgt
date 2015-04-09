@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration
         Schema::dropIfExists('categories');
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('label', 128);
             $table->integer('parent_category_id')->unsigned()->nullable();
             $table->softDeletes();
@@ -22,6 +23,10 @@ class CreateCategoriesTable extends Migration
 
             $table->foreign('parent_category_id')
                     ->references('id')->on('categories')
+                    ->onDelete('set null');
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
                     ->onDelete('set null');
         });
     }

@@ -15,6 +15,7 @@ class CreateAccountsTable extends Migration
         Schema::dropIfExists('accounts');
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->nullable();
             $table->dateTime('date_opened');
             $table->string('name', 128);
             $table->float('balance');
@@ -22,6 +23,10 @@ class CreateAccountsTable extends Migration
             $table->integer('interest_period');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('set null');
         });
     }
 

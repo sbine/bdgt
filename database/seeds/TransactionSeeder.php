@@ -17,6 +17,7 @@ class TransactionSeeder extends Seeder
         for ($i = 0; $i < 30; $i++) {
             Transaction::create([
                 'id' => null,
+                'user_id' => $faker->numberBetween(1, 30),
                 'date' => $faker->dateTimeBetween('-2 years'),
                 'account_id' => $faker->numberBetween(1, 3),
                 'category_id' => $faker->numberBetween(1, 3),

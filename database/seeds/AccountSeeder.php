@@ -14,9 +14,10 @@ class AccountSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Account::create([
                 'id' => null,
+                'user_id' => $faker->numberBetween(1, 30),
                 'date_opened' => $faker->dateTimeBetween('-10 years'),
                 'name' => $faker->creditCardType(),
                 'balance' => $faker->randomFloat(2, 0, 1000),
