@@ -145,6 +145,8 @@ return [
 		'Bdgt\Providers\EventServiceProvider',
 		'Bdgt\Providers\RouteServiceProvider',
 
+		'Bdgt\Providers\RepositoryServiceProvider',
+
 	],
 
 	/*

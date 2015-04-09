@@ -1,7 +1,9 @@
 <?php namespace Bdgt\Http\Controllers;
 
+use Bdgt\Repositories\Contracts\BillRepositoryInterface;
 use Bdgt\Resources\Bill;
 
+use Auth;
 use Input;
 
 class BillController extends Controller
@@ -11,8 +13,9 @@ class BillController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BillRepositoryInterface $billRepository)
     {
+        $this->repository = $billRepository;
         //$this->middleware('auth');
     }
 
@@ -23,7 +26,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::all();
+        $bills = $this->repository->all();
 
         $bills->sortBy(function ($bill) {
             return $bill->nextDue;
@@ -37,7 +40,7 @@ class BillController extends Controller
     public function show($id)
     {
         try {
-            $bill = Bill::findOrFail($id);
+            $bill = $this->repository->find($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect('/bills');
         }
@@ -49,7 +52,7 @@ class BillController extends Controller
 
     public function store()
     {
-        if ($bill = Bill::create(Input::all())) {
+        if ($bill = $this->repository->create(Input::all())) {
             session()->flash('alerts.success', 'Bill created');
             return redirect("/bills/{$bill->id}");
         } else {
@@ -60,7 +63,7 @@ class BillController extends Controller
 
     public function update($id)
     {
-        if (Bill::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
+        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
             session()->flash('alerts.success', 'Bill updated');
             return redirect("/bills/{$id}");
         } else {
@@ -71,7 +74,7 @@ class BillController extends Controller
 
     public function destroy($id)
     {
-        if (Bill::where('id', '=', $id)->delete()) {
+        if ($this->repository->delete($id)) {
             session()->flash('alerts.success', 'Bill deleted');
             return redirect("/bills");
         } else {
