@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
     css: 'public/css',
     js: 'public/js',
-    images: 'public/images',
+    images: 'public/img',
     fonts: 'public/fonts',
   };
 
@@ -127,14 +127,6 @@ module.exports = function(grunt) {
          cwd: '<%= config.bower_path %>/font-awesome/fonts',
          src: '*',
          dest: '<%= config.fonts %>'
-       }]
-      },
-      images: {
-       files: [{
-         expand: true,
-         cwd: '<%= config.bower_path %>/datatables-plugins/integration/bootstrap/images',
-         src: '*',
-         dest: '<%= config.images %>'
        }]
       }
     },
