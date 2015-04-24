@@ -86,11 +86,11 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Account</label>
+						<label class="col-sm-3 control-label">Category</label>
 						<div class="col-sm-8">
-							<select class="form-control" name="account_id" required>
-								@foreach ($accounts as $account)
-									<option value="{{ $account->id }}">{{ $account->name }}</option>
+							<select class="form-control" name="category_id" required>
+								@foreach ($categories as $category)
+									<option value="{{ $category->id }}">{{ $category->label }}</option>
 								@endforeach
 							</select>
 						</div>
