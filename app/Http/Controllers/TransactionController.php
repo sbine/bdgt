@@ -3,6 +3,7 @@
 use Bdgt\Resources\Ledger;
 use Bdgt\Resources\Transaction;
 use Bdgt\Resources\Account;
+use Bdgt\Resources\Category;
 
 use Input;
 use Response;
@@ -31,6 +32,8 @@ class TransactionController extends Controller
         $c['ledger'] = $ledger;
 
         $c['accounts'] = Account::all();
+
+        $c['categories'] = Category::all();
 
         return view('transaction/index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }
