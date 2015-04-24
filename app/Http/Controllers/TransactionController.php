@@ -2,6 +2,7 @@
 
 use Bdgt\Resources\Ledger;
 use Bdgt\Resources\Transaction;
+use Bdgt\Resources\Account;
 
 use Input;
 use Response;
@@ -28,6 +29,8 @@ class TransactionController extends Controller
         $ledger = new Ledger;
 
         $c['ledger'] = $ledger;
+
+        $c['accounts'] = Account::all();
 
         return view('transaction/index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }

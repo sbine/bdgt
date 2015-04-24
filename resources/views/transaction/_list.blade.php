@@ -28,7 +28,9 @@
 		</td>
 		<td>
 			<span class="editable" data-pk="{{ $transaction->id }}" data-url="/transactions/{{ $transaction->id }}" data-name="category_label">
-				{{ $transaction->category->label }}
+				@if ($transaction->category)
+					{{ $transaction->category->label }}
+				@endif
 			</span>
 		</td>
 		<td>

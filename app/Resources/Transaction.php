@@ -16,7 +16,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['date', 'payee', 'amount', 'cleared'];
+    protected $fillable = ['date', 'account_id', 'payee', 'amount', 'inflow', 'cleared', 'flair'];
 
     /**
      * The attributes excluded from the model's JSON form.
