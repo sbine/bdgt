@@ -5,10 +5,8 @@ use Bdgt\Resources\Bill;
 
 class EloquentBillRepository extends EloquentRepository implements BillRepositoryInterface
 {
-
-	public function __construct()
-	{
-		parent::__construct(new Bill);
-	}
-
+    public function __construct()
+    {
+        parent::__construct(new Bill);
+    }
 }

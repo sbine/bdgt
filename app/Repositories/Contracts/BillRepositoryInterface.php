@@ -4,5 +4,4 @@ use Bdgt\Resources\Bill;
 
 interface BillRepositoryInterface
 {
-
 }
