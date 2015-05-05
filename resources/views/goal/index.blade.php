@@ -45,6 +45,8 @@
 		<div class="modal-dialog">
 			<form class="modal-content form-horizontal" method="POST" action="/goals">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="start_date" value="{{ date('Y-m-d') }}">
+				<input type="hidden" name="balance" value="0">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Add a Goal</h4>
