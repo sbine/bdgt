@@ -28,6 +28,13 @@ class AccountController extends Controller
         return view('account/index', $c);
     }
 
+    /**
+     * Show an individual account to the user.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
     public function show($id)
     {
         try {
@@ -41,6 +48,11 @@ class AccountController extends Controller
         return view('account/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions() ]);
     }
 
+    /**
+     * Create and store a new account.
+     *
+     * @return Redirect
+     */
     public function store()
     {
         if ($account = Account::create(Input::all())) {
@@ -52,6 +64,13 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * Update an existing account with new data.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
         if (Account::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
@@ -63,6 +82,13 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * Delete an account by ID.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         if (Account::where('id', '=', $id)->delete()) {
