@@ -1,7 +1,6 @@
 <?php namespace Bdgt\Repositories\Eloquent;
 
 use Exception;
-use StdClass;
 use Illuminate\Database\Eloquent\Builder;
 use Bdgt\Repositories\Contracts\RepositoryInterface;
 
@@ -15,8 +14,6 @@ abstract class EloquentRepository implements RepositoryInterface
     public function __construct($model)
     {
         $this->model = $model;
-        $this->scopeKey = 'user_id';
-        $this->scopeValue = session('user.id');
     }
 
     public function scopeBy($key, $value)
@@ -65,7 +62,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $data[$this->scopeKey] = $this->scopeValue;
         }
 
-        if (!$data[$this->scopeKey] === $this->scopeValue) {
+        if ($data[$this->scopeKey] !== $this->scopeValue) {
             throw new Exception("Invalid scope");
         }
 
@@ -79,7 +76,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $data[$this->scopeKey] = $this->scopeValue;
         }
 
-        if (!$data[$this->scopeKey] === $this->scopeValue) {
+        if ($data[$this->scopeKey] !== $this->scopeValue) {
             throw new Exception("Invalid scope");
         }
 
@@ -91,7 +88,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $object = $this->model->find($id);
 
-        if (!$object->{$this->scopeKey} === $this->scopeValue) {
+        if ($object->{$this->scopeKey} !== $this->scopeValue) {
             throw new Exception("Invalid scope");
         }
 
@@ -102,7 +99,7 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $object = $this->model->find($id, $columns);
 
-        if (!$object->{$this->scopeKey} === $this->scopeValue) {
+        if ($object->{$this->scopeKey} !== $this->scopeValue) {
             throw new Exception("Invalid scope");
         }
 
