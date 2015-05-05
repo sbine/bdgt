@@ -16,7 +16,7 @@ class Account extends Model
      *
      * @var array
      */
-    protected $fillable = ['date_opened', 'name', 'balance', 'interest', 'interest_period'];
+    protected $fillable = ['date_opened', 'name', 'balance', 'interest', 'interest_period', 'user_id'];
 
     protected $transactions;
 
