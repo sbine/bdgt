@@ -37,6 +37,13 @@ class BillController extends Controller
         return view('bill/index', $c);
     }
 
+    /**
+     * Show an individual bill to the user.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
     public function show($id)
     {
         try {
@@ -50,6 +57,11 @@ class BillController extends Controller
         return view('bill/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
     }
 
+    /**
+     * Create and store a new bill.
+     *
+     * @return Redirect
+     */
     public function store()
     {
         if ($bill = $this->repository->create(Input::all())) {
@@ -61,6 +73,13 @@ class BillController extends Controller
         }
     }
 
+    /**
+     * Update an existing bill with new data.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
@@ -72,6 +91,13 @@ class BillController extends Controller
         }
     }
 
+    /**
+     * Delete a bill by ID.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {

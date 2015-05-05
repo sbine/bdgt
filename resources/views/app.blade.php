@@ -16,7 +16,7 @@
 	<!-- Fonts -->
 	<link href="//fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
-	<link href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="/css/datatables-bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-editable.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-slider.min.css" rel="stylesheet">
 
@@ -107,7 +107,7 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.datatables.min.js"></script>
-	<script src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+	<script src="/js/datatables-bootstrap.min.js"></script>
 	<script src="/js/bootstrap-editable.min.js"></script>
 	<script src="/js/bootstrap-slider.min.js"></script>
 	<script src="/js/moment.min.js"></script>
@@ -125,7 +125,7 @@
 			$(this).addClass('processed-ready');
 		});
 
-		$(".money").not('processed-ready').each(function(value) {
+		$(".money").not('.processed-ready').each(function(value) {
 			if ($(this).text().charAt(0) == '-') {
 				$(this).addClass('negative');
 			}

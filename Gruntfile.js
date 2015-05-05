@@ -79,6 +79,10 @@ module.exports = function(grunt) {
          dest: '<%= config.js %>/jquery.datatables.min.js'
        },
        {
+         src: '<%= config.bower_path %>/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js',
+         dest: '<%= config.js %>/datatables-bootstrap.min.js'
+       },
+       {
          src: '<%= config.bower_path %>/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
          dest: '<%= config.js %>/bootstrap-editable.min.js'
        },
@@ -99,6 +103,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/datatables/media/css/jquery.dataTables.min.css',
          dest: '<%= config.css %>/jquery.datatables.min.css'
+       },
+       {
+         src: '<%= config.bower_path %>/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css',
+         dest: '<%= config.build_path %>/datatables-bootstrap.css'
        },
        {
          src: '<%= config.bower_path %>/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css',

@@ -2,6 +2,8 @@
 
 use Bdgt\Resources\Ledger;
 use Bdgt\Resources\Transaction;
+use Bdgt\Resources\Account;
+use Bdgt\Resources\Category;
 
 use Input;
 use Response;
@@ -29,9 +31,18 @@ class TransactionController extends Controller
 
         $c['ledger'] = $ledger;
 
+        $c['accounts'] = Account::all();
+
+        $c['categories'] = Category::all();
+
         return view('transaction/index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }
 
+    /**
+     * Create and store a new transaction.
+     *
+     * @return Redirect
+     */
     public function store()
     {
         $transaction = Input::all();
@@ -42,6 +53,13 @@ class TransactionController extends Controller
         return Response::json(["status" => "error"]);
     }
 
+    /**
+     * Update an existing transaction with new data.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
         $transaction = Transaction::find($id);

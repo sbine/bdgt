@@ -12,6 +12,11 @@ class CalculatorController extends Controller
         //$this->middleware('auth');
     }
 
+    /**
+     * Show the debt calculator to the user.
+     *
+     * @return Response
+     */
     public function debt()
     {
         return view('calculator/debt');

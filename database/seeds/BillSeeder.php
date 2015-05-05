@@ -15,9 +15,10 @@ class BillSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 7; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             Bill::create([
                 'id' => null,
+                'user_id' => $faker->numberBetween(1, 30),
                 'start_date' => $faker->date(),
                 'frequency' => $faker->numberBetween(7, 90),
                 'label' => $faker->company(),

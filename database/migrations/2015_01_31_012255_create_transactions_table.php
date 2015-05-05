@@ -15,6 +15,7 @@ class CreateTransactionsTable extends Migration
         Schema::dropIfExists('transactions');
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->nullable();
             $table->dateTime('date');
             $table->integer('account_id')->unsigned();
             $table->integer('category_id')->unsigned()->nullable();
@@ -37,6 +38,10 @@ class CreateTransactionsTable extends Migration
 
             $table->foreign('bill_id')
                     ->references('id')->on('bills')
+                    ->onDelete('set null');
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
                     ->onDelete('set null');
         });
     }

@@ -34,6 +34,13 @@ class CategoryController extends Controller
         return view('category/index', $c);
     }
 
+    /**
+     * Show an individual category to the user.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
     public function show($id)
     {
         try {
@@ -47,6 +54,11 @@ class CategoryController extends Controller
         return view('category/show', $c);
     }
 
+    /**
+     * Create and store a new category.
+     *
+     * @return Redirect
+     */
     public function store()
     {
         if ($category = Category::create(Input::all())) {
@@ -58,6 +70,13 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     * Delete a category by ID.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         if (Category::where('id', '=', $id)->delete()) {

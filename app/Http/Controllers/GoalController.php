@@ -34,6 +34,13 @@ class GoalController extends Controller
         return view('goal/index', $c);
     }
 
+    /**
+     * Show an individual goal to the user.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
     public function show($id)
     {
         try {
@@ -47,6 +54,11 @@ class GoalController extends Controller
         return view('goal/show', $c);
     }
 
+    /**
+     * Create and store a new goal.
+     *
+     * @return Redirect
+     */
     public function store()
     {
         if ($goal = Goal::create(Input::all())) {
@@ -58,6 +70,13 @@ class GoalController extends Controller
         }
     }
 
+    /**
+     * Update an existing goal with new data.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
         if (Goal::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
@@ -69,6 +88,13 @@ class GoalController extends Controller
         }
     }
 
+    /**
+     * Delete a goal by ID.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         if (Goal::where('id', '=', $id)->delete()) {
