@@ -125,7 +125,7 @@
 			$(this).addClass('processed-ready');
 		});
 
-		$(".money").not('processed-ready').each(function(value) {
+		$(".money").not('.processed-ready').each(function(value) {
 			if ($(this).text().charAt(0) == '-') {
 				$(this).addClass('negative');
 			}
