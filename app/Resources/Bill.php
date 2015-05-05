@@ -19,7 +19,7 @@ class Bill extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'start_date', 'frequency', 'amount'];
+    protected $fillable = ['label', 'start_date', 'frequency', 'amount', 'user_id'];
 
     protected $appends = ['total', 'nextDue', 'lastDue', 'paid'];
 
