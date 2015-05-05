@@ -16,7 +16,7 @@ class Goal extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'start_date', 'goal_date', 'balance', 'amount'];
+    protected $fillable = ['label', 'start_date', 'goal_date', 'balance', 'amount', 'user_id'];
 
     protected $appends = ['achieved', 'progress'];
 

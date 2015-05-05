@@ -1,5 +1,6 @@
 <?php namespace Bdgt\Http\Controllers;
 
+use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
 use Bdgt\Resources\Goal;
 
 use Input;
@@ -11,9 +12,9 @@ class GoalController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(GoalRepositoryInterface $goalRepository)
     {
-        //$this->middleware('auth');
+        $this->repository = $goalRepository;
     }
 
     /**
@@ -23,7 +24,7 @@ class GoalController extends Controller
      */
     public function index()
     {
-        $goals = Goal::all();
+        $goals = $this->repository->all();
 
         $goals->sortByDesc(function ($goal) {
             return $goal->progress;
@@ -44,7 +45,7 @@ class GoalController extends Controller
     public function show($id)
     {
         try {
-            $goal = Goal::findOrFail($id);
+            $goal = $this->repository->find($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect('/goals');
         }
@@ -61,7 +62,7 @@ class GoalController extends Controller
      */
     public function store()
     {
-        if ($goal = Goal::create(Input::all())) {
+        if ($goal = $this->repository->create(Input::all())) {
             session()->flash('alerts.success', 'Goal created');
             return redirect("/goals/{$goal->id}");
         } else {
@@ -79,7 +80,7 @@ class GoalController extends Controller
      */
     public function update($id)
     {
-        if (Goal::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
+        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
             session()->flash('alerts.success', 'Goal updated');
             return redirect("/goals/{$id}");
         } else {
@@ -97,7 +98,7 @@ class GoalController extends Controller
      */
     public function destroy($id)
     {
-        if (Goal::where('id', '=', $id)->delete()) {
+        if ($this->repository->delete($id)) {
             session()->flash('alerts.success', 'Goal deleted');
             return redirect("/goals");
         } else {
