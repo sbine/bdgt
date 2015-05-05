@@ -14,7 +14,14 @@ class UserSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 30; $i++) {
+        User::create([
+            'id' => null,
+            'username' => "admin",
+            'email' => "admin@example.com",
+            'password' => Hash::make("admin")
+        ]);
+
+        for ($i = 0; $i < 29; $i++) {
             User::create([
                 'id' => null,
                 'username' => $faker->userName(),
