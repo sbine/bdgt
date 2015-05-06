@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', 'LedgerController@index');
 
     Route::get('dashboard', 'LedgerController@index');
 
