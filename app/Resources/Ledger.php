@@ -12,7 +12,7 @@ class Ledger
     {
         $this->transactions = $transactionRepository->all();
 
-        if (!empty($this->transactions)) {
+        if (!empty($this->transactions) && isset($this->transactions[0])) {
             $this->transactions->sortByDesc(function ($transaction) {
                 return $transaction->date;
             });
