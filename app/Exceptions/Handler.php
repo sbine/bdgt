@@ -54,13 +54,11 @@ class Handler extends ExceptionHandler {
         $whoops = new \Whoops\Run;
         $handler = new \Whoops\Handler\PrettyPageHandler();
         $handler->addResourcePath(public_path());
-        $handler->addCustomCss('css/whoops.css');
+        $handler->addCustomCss('css/whoops.min.css');
         $whoops->pushHandler($handler);
 
         return new \Illuminate\Http\Response(
-            $whoops->handleException($e),
-            $e->getStatusCode(),
-            $e->getHeaders()
+            $whoops->handleException($e)
         );
     }
 
