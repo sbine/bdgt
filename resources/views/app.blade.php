@@ -45,7 +45,7 @@
 
 			<div class="collapse navbar-collapse" id="primary-navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="/">Dashboard</a></li>
+					<li><a href="/dashboard">Dashboard</a></li>
 					<li><a href="/accounts">Accounts</a></li>
 					<li><a href="/transactions">Transactions</a></li>
 					<li><a href="/bills">Bills</a></li>

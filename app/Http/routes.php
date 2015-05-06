@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'LedgerController@index');
+Route::get('/', 'HomeController@index');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
@@ -20,7 +20,7 @@ Route::controllers([
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('home', 'HomeController@index');
+    Route::get('dashboard', 'LedgerController@index');
 
     Route::resource('accounts', 'AccountController');
 
