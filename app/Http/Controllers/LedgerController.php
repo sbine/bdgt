@@ -1,7 +1,8 @@
 <?php namespace Bdgt\Http\Controllers;
 
+use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
+use Bdgt\Repositories\Contracts\BillRepositoryInterface;
 use Bdgt\Resources\Ledger;
-use Bdgt\Resources\Bill;
 
 class LedgerController extends Controller
 {
@@ -10,9 +11,10 @@ class LedgerController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(TransactionRepositoryInterface $transactionRepository, BillRepositoryInterface $billRepository)
     {
-        //$this->middleware('auth');
+        $this->transactionRepository = $transactionRepository;
+        $this->billRepository = $billRepository;
     }
 
     /**
@@ -22,11 +24,11 @@ class LedgerController extends Controller
      */
     public function index()
     {
-        $ledger = new Ledger;
+        $ledger = new Ledger($this->transactionRepository);
 
         $c['ledger'] = $ledger;
 
-        $bills = Bill::all();
+        $bills = $this->billRepository->all();
 
         $bills->sortBy(function ($bill) {
             return $bill->nextDue;

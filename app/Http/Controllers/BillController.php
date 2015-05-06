@@ -1,9 +1,7 @@
 <?php namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
-use Bdgt\Resources\Bill;
 
-use Auth;
 use Input;
 
 class BillController extends Controller
@@ -16,7 +14,6 @@ class BillController extends Controller
     public function __construct(BillRepositoryInterface $billRepository)
     {
         $this->repository = $billRepository;
-        //$this->middleware('auth');
     }
 
     /**

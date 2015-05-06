@@ -1,6 +1,6 @@
 <?php namespace Bdgt\Http\Controllers;
 
-use Bdgt\Resources\Category;
+use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
 
 use Input;
 
@@ -11,9 +11,9 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
-        //$this->middleware('auth');
+        $this->repository = $categoryRepository;
     }
 
     /**
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->repository->all();
 
         $categories->sortBy(function ($category) {
             return $category->nextDue;
@@ -44,7 +44,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $category = Category::findOrFail($id);
+            $category = $this->repository->find($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect('/categories');
         }
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        if ($category = Category::create(Input::all())) {
+        if ($category = $this->repository->create(Input::all())) {
             session()->flash('alerts.success', 'Category created');
             return redirect("/categories/{$category->id}");
         } else {
@@ -79,7 +79,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if (Category::where('id', '=', $id)->delete()) {
+        if ($this->repository->delete($id)) {
             session()->flash('alerts.success', 'Category deleted');
             return redirect("/categories");
         } else {

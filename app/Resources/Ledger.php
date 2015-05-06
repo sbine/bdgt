@@ -1,26 +1,30 @@
 <?php namespace Bdgt\Resources;
 
-use Bdgt\Resources\Transaction;
-
 class Ledger
 {
-
     protected $transactions;
     protected $balance = 0.00;
     protected $totalOutflow = 0.00;
     protected $totalInflow = 0.00;
+    protected $lastPurchase = 'N/A';
 
-    public function __construct()
+    public function __construct($transactionRepository)
     {
-        $this->transactions = Transaction::orderBy('date', 'desc')->get();
+        $this->transactions = $transactionRepository->all();
 
-        $this->lastPurchase = $this->transactions[0]->date;
+        if (!empty($this->transactions)) {
+            $this->transactions->sortByDesc(function ($transaction) {
+                return $transaction->date;
+            });
 
-        foreach ($this->transactions as $t) {
-            if ($t->inflow) {
-                $this->totalInflow += $t->amount;
-            } else {
-                $this->totalOutflow += $t->amount;
+            $this->lastPurchase = $this->transactions[0]->date;
+
+            foreach ($this->transactions as $t) {
+                if ($t->inflow) {
+                    $this->totalInflow += $t->amount;
+                } else {
+                    $this->totalOutflow += $t->amount;
+                }
             }
         }
 

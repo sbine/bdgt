@@ -1,7 +1,7 @@
 <?php namespace Bdgt\Http\Controllers;
 
+use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use Bdgt\Resources\Ledger;
-use Bdgt\Resources\Transaction;
 use Bdgt\Resources\Account;
 use Bdgt\Resources\Category;
 
@@ -15,9 +15,9 @@ class TransactionController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(TransactionRepositoryInterface $transactionRepository)
     {
-        //$this->middleware('auth');
+        $this->repository = $transactionRepository;
     }
 
     /**
@@ -27,7 +27,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $ledger = new Ledger;
+        $ledger = new Ledger($this->repository);
 
         $c['ledger'] = $ledger;
 
@@ -47,7 +47,7 @@ class TransactionController extends Controller
     {
         $transaction = Input::all();
 
-        if (Transaction::create($transaction)) {
+        if ($this->repository->create($transaction)) {
             return Response::json(["status" => "success"]);
         }
         return Response::json(["status" => "error"]);
@@ -62,13 +62,11 @@ class TransactionController extends Controller
      */
     public function update($id)
     {
-        $transaction = Transaction::find($id);
+        $transaction = $this->repository->find($id);
 
-        $transaction = [
-            Input::get('name') => Input::get('value'),
-        ];
+        $transaction[Input::get('name')] = Input::get('value');
 
-        if (Transaction::where('id', '=', $id)->update($transaction)) {
+        if ($this->repository->update($transaction, $id)) {
             return Response::json(["status" => "success"]);
         }
         return Response::json(["status" => "error"]);

@@ -1,5 +1,6 @@
 <?php namespace Bdgt\Http\Controllers;
 
+use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
 use Bdgt\Resources\Account;
 
 use Input;
@@ -11,9 +12,9 @@ class AccountController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AccountRepositoryInterface $accountRepository)
     {
-        //$this->middleware('auth');
+        $this->repository = $accountRepository;
     }
 
     /**
@@ -23,7 +24,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $c['accounts'] = Account::all();
+        $c['accounts'] = $this->repository->all();
 
         return view('account/index', $c);
     }
@@ -38,7 +39,7 @@ class AccountController extends Controller
     public function show($id)
     {
         try {
-            $account = Account::findOrFail($id);
+            $account = $this->repository->find($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect('/accounts');
         }
@@ -55,7 +56,7 @@ class AccountController extends Controller
      */
     public function store()
     {
-        if ($account = Account::create(Input::all())) {
+        if ($account = $this->repository->create(Input::all())) {
             session()->flash('alerts.success', 'Account created');
             return redirect("/accounts/{$account->id}");
         } else {
@@ -73,7 +74,7 @@ class AccountController extends Controller
      */
     public function update($id)
     {
-        if (Account::where('id', '=', $id)->update(Input::except(['_token', '_method']))) {
+        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
             session()->flash('alerts.success', 'Account updated');
             return redirect("/accounts/{$id}");
         } else {
@@ -91,7 +92,7 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        if (Account::where('id', '=', $id)->delete()) {
+        if ($this->repository->delete($id)) {
             session()->flash('alerts.success', 'Account deleted');
             return redirect("/accounts");
         } else {
