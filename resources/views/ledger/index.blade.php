@@ -30,7 +30,9 @@
 								</span>
 							</div>
 							<div class="media-body">
-								<h2 class="media-heading"><span class="moment">{{ $ledger->lastPurchase() }}</span></h2>
+								<h2 class="media-heading">
+									<span class="moment">{{ $ledger->lastPurchase() }}</span>
+								</h2>
 								<span class="text-muted">last purchase</span>
 							</div>
 						</div>
@@ -44,7 +46,13 @@
 								</span>
 							</div>
 							<div class="media-body">
-								<h2 class="media-heading"><span class="moment">{{ $nextBill->nextDue }}</span></h2>
+								<h2 class="media-heading">
+									@if (is_object($nextBill))
+										<span class="moment">{{ $nextBill->nextDue }}</span>
+									@else
+										<span>N/A</span>
+									@endif
+								</h2>
 								<span class="text-muted">next bill</span>
 							</div>
 						</div>
