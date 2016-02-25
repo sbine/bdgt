@@ -59,6 +59,9 @@
 						</ul>
 					</li>
 				</ul>
+				<form class="navbar-form navbar-left" role="search">
+					<a href="#addTransactionModal" data-toggle="modal" class="btn btn-success"><i class="fa fa-plus"></i> Add Transaction</a>
+				</form>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
@@ -96,6 +99,10 @@
 	@include('alerts')
 
 	@yield('content')
+
+	@if (Auth::user())
+		@include('transaction.create_modal')
+	@endif
 
 	<footer class="footer">
 		<div class="text-center">
