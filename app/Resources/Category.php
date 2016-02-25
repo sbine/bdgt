@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +18,12 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'parent_category_id', 'budgeted', 'user_id'];
+    protected $fillable = [
+        'label',
+        'parent_category_id',
+        'budgeted',
+        'user_id'
+    ];
 
     public function transactions()
     {

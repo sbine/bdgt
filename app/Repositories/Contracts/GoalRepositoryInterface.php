@@ -1,7 +1,9 @@
-<?php namespace Bdgt\Repositories\Contracts;
+<?php
+
+namespace Bdgt\Repositories\Contracts;
 
 use Bdgt\Resources\Goal;
 
-interface GoalRepositoryInterface
+interface GoalRepositoryInterface extends RepositoryInterface
 {
 }

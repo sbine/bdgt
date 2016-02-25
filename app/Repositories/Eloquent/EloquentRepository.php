@@ -1,17 +1,24 @@
-<?php namespace Bdgt\Repositories\Eloquent;
+<?php
+
+namespace Bdgt\Repositories\Eloquent;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Bdgt\Repositories\Contracts\RepositoryInterface;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
-
     protected $model;
     protected $scopeKey;
     protected $scopeValue;
 
-    public function __construct($model)
+    /**
+     * Construct
+     *
+     * @param Illuminate\Database\Eloquent\Model $model
+     */
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -31,7 +38,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @return Illuminate\Database\Eloquent\Collection
      */
 
-    public function all($columns = array('*'))
+    public function all($columns = ['*'])
     {
         return $this->model->where($this->scopeKey, '=', $this->scopeValue)
                             ->get($columns);
@@ -43,7 +50,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @param array $columns
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function paginate($perPage = 10, $columns = array('*'))
+    public function paginate($perPage = 10, $columns = ['*'])
     {
         return $this->model->where($this->scopeKey, '=', $this->scopeValue)
                             ->paginate($perPage, $columns);
@@ -57,28 +64,14 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function create(array $data)
     {
-        // Automatically set scope property if it's not present
-        if (empty($data[$this->scopeKey]) || !isset($data[$this->scopeKey])) {
-            $data[$this->scopeKey] = $this->scopeValue;
-        }
-
-        if ($data[$this->scopeKey] !== $this->scopeValue) {
-            throw new Exception("Invalid scope");
-        }
+        $data = $this->ensureScopeIntegrity($data);
 
         return $this->model->create($data);
     }
 
     public function update(array $data, $id, $attribute = 'id')
     {
-        // Automatically set scope property if it's not present
-        if (empty($data[$this->scopeKey]) || !isset($data[$this->scopeKey])) {
-            $data[$this->scopeKey] = $this->scopeValue;
-        }
-
-        if ($data[$this->scopeKey] !== $this->scopeValue) {
-            throw new Exception("Invalid scope");
-        }
+        $data = $this->ensureScopeIntegrity($data);
 
         return $this->model->where($attribute, '=', $id)
                             ->update($data);
@@ -88,25 +81,21 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $object = $this->model->find($id);
 
-        if ($object->{$this->scopeKey} !== $this->scopeValue) {
-            throw new Exception("Invalid scope");
-        }
+        $this->ensureScopeIntegrity($object);
 
         return $object->delete();
     }
 
-    public function find($id, $columns = array('*'))
+    public function find($id, $columns = ['*'])
     {
         $object = $this->model->find($id, $columns);
 
-        if ($object->{$this->scopeKey} !== $this->scopeValue) {
-            throw new Exception("Invalid scope");
-        }
+        $this->ensureScopeIntegrity($object);
 
         return $object;
     }
 
-    public function findBy($field, $value, $columns = array('*'))
+    public function findBy($field, $value, $columns = ['*'])
     {
         return $this->model->where($this->scopeKey, '=', $this->scopeValue)
                             ->where($attribute, '=', $value)
@@ -130,4 +119,23 @@ abstract class EloquentRepository implements RepositoryInterface
         return $this->create($data);
     }
 
+    private function ensureScopeIntegrity($data)
+    {
+        if (is_array($data)) {
+            // Automatically set scope property if it's not present
+            if (empty($data[$this->scopeKey]) || !isset($data[$this->scopeKey])) {
+                $data[$this->scopeKey] = $this->scopeValue;
+            }
+
+            if ($data[$this->scopeKey] !== $this->scopeValue) {
+                throw new Exception("Invalid scope");
+            }
+        } elseif (is_object($data)) {
+            if ($data->{$this->scopeKey} !== $this->scopeValue) {
+                throw new Exception("Invalid scope");
+            }
+        }
+
+        return $data;
+    }
 }

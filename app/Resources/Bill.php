@@ -1,7 +1,8 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-
 use DateTime;
 use DateInterval;
 
@@ -19,9 +20,20 @@ class Bill extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'start_date', 'frequency', 'amount', 'user_id'];
+    protected $fillable = [
+        'label',
+        'start_date',
+        'frequency',
+        'amount',
+        'user_id'
+    ];
 
-    protected $appends = ['total', 'nextDue', 'lastDue', 'paid'];
+    protected $appends = [
+        'total',
+        'nextDue',
+        'lastDue',
+        'paid'
+    ];
 
     public function transactions()
     {

@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +18,17 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['date', 'account_id', 'category_id', 'payee', 'amount', 'inflow', 'cleared', 'flair', 'user_id'];
+    protected $fillable = [
+        'date',
+        'account_id',
+        'category_id',
+        'payee',
+        'amount',
+        'inflow',
+        'cleared',
+        'flair',
+        'user_id'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +18,14 @@ class Account extends Model
      *
      * @var array
      */
-    protected $fillable = ['date_opened', 'name', 'balance', 'interest', 'interest_period', 'user_id'];
+    protected $fillable = [
+        'date_opened',
+        'name',
+        'balance',
+        'interest',
+        'interest_period',
+        'user_id'
+    ];
 
     protected $transactions;
 

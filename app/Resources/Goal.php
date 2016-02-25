@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,9 +18,19 @@ class Goal extends Model
      *
      * @var array
      */
-    protected $fillable = ['label', 'start_date', 'goal_date', 'balance', 'amount', 'user_id'];
+    protected $fillable = [
+        'label',
+        'start_date',
+        'goal_date',
+        'balance',
+        'amount',
+        'user_id'
+    ];
 
-    protected $appends = ['achieved', 'progress'];
+    protected $appends = [
+        'achieved',
+        'progress'
+    ];
 
     public function getAchievedAttribute()
     {
