@@ -47,6 +47,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/dashboard">Dashboard</a></li>
 					<li><a href="/accounts">Accounts</a></li>
+					<li><a href="/categories">Categories</a></li>
 					<li><a href="/transactions">Transactions</a></li>
 					<li><a href="/bills">Bills</a></li>
 					<li><a href="/goals">Goals</a></li>
