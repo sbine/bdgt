@@ -24,9 +24,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $c['accounts'] = $this->repository->all();
-
-        $c['accounts']->sortBy('name');
+        $c['accounts'] = $this->repository->all(['name' => 'asc']);
 
         return view('account.index', $c);
     }

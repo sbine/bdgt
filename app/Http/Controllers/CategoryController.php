@@ -24,9 +24,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $c['categories'] = $this->repository->all();
-
-        $c['categories']->sortBy('label');
+        $c['categories'] = $this->repository->all(['label' => 'asc']);
 
         return view('category.index', $c);
     }

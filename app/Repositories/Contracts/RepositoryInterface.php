@@ -4,7 +4,7 @@ namespace Bdgt\Repositories\Contracts;
 
 interface RepositoryInterface
 {
-    public function all($columns = ['*']);
+    public function all($sortBy = [], $columns = ['*']);
 
     public function paginate($perPage = 10, $columns = ['*']);
 

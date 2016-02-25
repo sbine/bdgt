@@ -34,14 +34,20 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Retrieve all models based on criteria
      *
+     * @param array $sortBy
      * @param array $columns
      * @return Illuminate\Database\Eloquent\Collection
      */
 
-    public function all($columns = ['*'])
+    public function all($sortBy = [], $columns = ['*'])
     {
-        return $this->model->where($this->scopeKey, '=', $this->scopeValue)
-                            ->get($columns);
+        $all = $this->model->where($this->scopeKey, '=', $this->scopeValue);
+
+        if ($sortBy) {
+            $all->orderBy(key($sortBy), $sortBy[key($sortBy)]);
+        }
+
+        return $all->get($columns);
     }
 
     /**

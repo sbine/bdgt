@@ -1,7 +1,8 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
-
 use Input;
 
 class BillController extends Controller
@@ -62,7 +63,7 @@ class BillController extends Controller
     public function store()
     {
         if ($bill = $this->repository->create(Input::except(['_token', '_method']))) {
-            return redirect("/bills/{$bill->id}")->with('alerts.success', trans('crud.bills.created');
+            return redirect("/bills/{$bill->id}")->with('alerts.success', trans('crud.bills.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
@@ -78,7 +79,7 @@ class BillController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect("/bills/{$id}")->with('alerts.success', trans('crud.bills.updated');
+            return redirect("/bills/{$id}")->with('alerts.success', trans('crud.bills.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
@@ -94,7 +95,7 @@ class BillController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect("/bills")->with('alerts.success', trans('crud.bills.deleted');
+            return redirect("/bills")->with('alerts.success', trans('crud.bills.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }

@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Resources;
+<?php
+
+namespace Bdgt\Resources;
 
 class Ledger
 {
@@ -10,14 +12,10 @@ class Ledger
 
     public function __construct($transactionRepository)
     {
-        $this->transactions = $transactionRepository->all();
+        $this->transactions = $transactionRepository->all(['date' => 'desc']);
 
-        if (!empty($this->transactions) && isset($this->transactions[0])) {
-            $this->transactions->sortByDesc(function ($transaction) {
-                return $transaction->date;
-            });
-
-            $this->lastPurchase = $this->transactions[0]->date;
+        if (!empty($this->transactions)) {
+            $this->lastPurchase = $this->transactions->first()->date;
 
             foreach ($this->transactions as $t) {
                 if ($t->inflow) {
