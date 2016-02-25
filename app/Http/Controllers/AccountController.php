@@ -1,8 +1,9 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
 use Bdgt\Resources\Account;
-
 use Input;
 
 class AccountController extends Controller
@@ -26,7 +27,7 @@ class AccountController extends Controller
     {
         $c['accounts'] = $this->repository->all();
 
-        return view('account/index', $c);
+        return view('account.index', $c);
     }
 
     /**
@@ -46,7 +47,7 @@ class AccountController extends Controller
 
         $c['account'] = $account;
 
-        return view('account/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions() ]);
+        return view('account.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions() ]);
     }
 
     /**
@@ -56,12 +57,10 @@ class AccountController extends Controller
      */
     public function store()
     {
-        if ($account = $this->repository->create(Input::all())) {
-            session()->flash('alerts.success', 'Account created');
-            return redirect("/accounts/{$account->id}");
+        if ($account = $this->repository->create(Input::except(['_token', '_method']))) {
+            return redirect("/accounts/{$account->id}")->with('alerts.success', trans('crud.accounts.created'));
         } else {
-            session()->flash('alerts.danger', 'Account creation failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
     }
 
@@ -75,11 +74,9 @@ class AccountController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            session()->flash('alerts.success', 'Account updated');
-            return redirect("/accounts/{$id}");
+            return redirect("/accounts/{$id}")->with('alerts.success', trans('crud.accounts.updated'));
         } else {
-            session()->flash('alerts.danger', 'Account update failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
     }
 
@@ -93,11 +90,9 @@ class AccountController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            session()->flash('alerts.success', 'Account deleted');
-            return redirect("/accounts");
+            return redirect("/accounts")->with('alerts.success', trans('crud.accounts.deleted'));
         } else {
-            session()->flash('alerts.danger', 'Account deletion failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
     }
 }

@@ -31,7 +31,7 @@ class BillController extends Controller
 
         $c['bills'] = $bills;
 
-        return view('bill/index', $c);
+        return view('bill.index', $c);
     }
 
     /**
@@ -51,7 +51,7 @@ class BillController extends Controller
 
         $c['bill'] = $bill;
 
-        return view('bill/show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
+        return view('bill.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
     }
 
     /**
@@ -61,12 +61,10 @@ class BillController extends Controller
      */
     public function store()
     {
-        if ($bill = $this->repository->create(Input::all())) {
-            session()->flash('alerts.success', 'Bill created');
-            return redirect("/bills/{$bill->id}");
+        if ($bill = $this->repository->create(Input::except(['_token', '_method']))) {
+            return redirect("/bills/{$bill->id}")->with('alerts.success', trans('crud.bills.created');
         } else {
-            session()->flash('alerts.danger', 'Bill creation failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
     }
 
@@ -80,11 +78,9 @@ class BillController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            session()->flash('alerts.success', 'Bill updated');
-            return redirect("/bills/{$id}");
+            return redirect("/bills/{$id}")->with('alerts.success', trans('crud.bills.updated');
         } else {
-            session()->flash('alerts.danger', 'Bill update failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
     }
 
@@ -98,11 +94,9 @@ class BillController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            session()->flash('alerts.success', 'Bill deleted');
-            return redirect("/bills");
+            return redirect("/bills")->with('alerts.success', trans('crud.bills.deleted');
         } else {
-            session()->flash('alerts.danger', 'Bill deletion failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
     }
 }

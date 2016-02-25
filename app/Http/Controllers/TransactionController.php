@@ -1,10 +1,11 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use Bdgt\Resources\Ledger;
 use Bdgt\Resources\Account;
 use Bdgt\Resources\Category;
-
 use Input;
 use Response;
 
@@ -35,7 +36,7 @@ class TransactionController extends Controller
 
         $c['categories'] = Category::all();
 
-        return view('transaction/index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
+        return view('transaction.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }
 
     /**
@@ -45,12 +46,12 @@ class TransactionController extends Controller
      */
     public function store()
     {
-        $transaction = Input::all();
+        $transaction = Input::except(['_token', '_method']);
 
         if ($this->repository->create($transaction)) {
-            return Response::json(["status" => "success"]);
+            return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
-        return Response::json(["status" => "error"]);
+        return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
     /**

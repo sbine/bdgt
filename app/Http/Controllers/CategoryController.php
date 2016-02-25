@@ -1,7 +1,8 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
-
 use Input;
 
 class CategoryController extends Controller
@@ -31,7 +32,7 @@ class CategoryController extends Controller
 
         $c['categories'] = $categories;
 
-        return view('category/index', $c);
+        return view('category.index', $c);
     }
 
     /**
@@ -51,7 +52,7 @@ class CategoryController extends Controller
 
         $c['category'] = $category;
 
-        return view('category/show', $c);
+        return view('category.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $category->transactions() ]);
     }
 
     /**
@@ -61,12 +62,26 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        if ($category = $this->repository->create(Input::all())) {
-            session()->flash('alerts.success', 'Category created');
-            return redirect("/categories/{$category->id}");
+        if ($category = $this->repository->create(Input::except(['_token', '_method']))) {
+            return redirect("/categories/{$category->id}")->with('alerts.success', trans('crud.categories.created'));
         } else {
-            session()->flash('alerts.danger', 'Category creation failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
+        }
+    }
+
+    /**
+     * Update an existing category with new data.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
+    public function update($id)
+    {
+        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
+            return redirect("/categories/{$id}")->with('alerts.success', trans('crud.categories.updated'));
+        } else {
+            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
     }
 
@@ -80,11 +95,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            session()->flash('alerts.success', 'Category deleted');
-            return redirect("/categories");
+            return redirect("/categories")->with('alerts.success', trans('crud.categories.deleted'));
         } else {
-            session()->flash('alerts.danger', 'Category deletion failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
     }
 }

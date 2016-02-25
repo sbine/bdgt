@@ -22,7 +22,7 @@ class AccountSeeder extends Seeder
                 'name' => $faker->creditCardType(),
                 'balance' => $faker->randomFloat(2, 0, 1000),
                 'interest' => $faker->randomFloat(2, 0, 1),
-                'interest_period' => $faker->numberBetween(1, 12)
+                //'interest_period' => $faker->numberBetween(1, 12)
             ]);
         }
     }

@@ -1,8 +1,9 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
 use Bdgt\Resources\Goal;
-
 use Input;
 
 class GoalController extends Controller
@@ -32,7 +33,7 @@ class GoalController extends Controller
 
         $c['goals'] = $goals;
 
-        return view('goal/index', $c);
+        return view('goal.index', $c);
     }
 
     /**
@@ -52,7 +53,7 @@ class GoalController extends Controller
 
         $c['goal'] = $goal;
 
-        return view('goal/show', $c);
+        return view('goal.show', $c);
     }
 
     /**
@@ -62,12 +63,10 @@ class GoalController extends Controller
      */
     public function store()
     {
-        if ($goal = $this->repository->create(Input::all())) {
-            session()->flash('alerts.success', 'Goal created');
-            return redirect("/goals/{$goal->id}");
+        if ($goal = $this->repository->create(Input::except(['_token', '_method']))) {
+            return redirect("/goals/{$goal->id}")->with('alerts.success', trans('crud.goals.created'));
         } else {
-            session()->flash('alerts.danger', 'Goal creation failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
     }
 
@@ -81,11 +80,9 @@ class GoalController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            session()->flash('alerts.success', 'Goal updated');
-            return redirect("/goals/{$id}");
+            return redirect("/goals/{$id}")->with('alerts.success', trans('crud.goals.updated'));
         } else {
-            session()->flash('alerts.danger', 'Goal update failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
     }
 
@@ -99,11 +96,9 @@ class GoalController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            session()->flash('alerts.success', 'Goal deleted');
-            return redirect("/goals");
+            return redirect("/goals")->with('alerts.success', trans('crud.goals.deleted'));
         } else {
-            session()->flash('alerts.danger', 'Goal deletion failed');
-            return redirect()->back();
+            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
     }
 }
