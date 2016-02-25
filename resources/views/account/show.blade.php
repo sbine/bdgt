@@ -17,7 +17,7 @@
 				<h2>
 					{{ $account->name }}
 					<span class="pull-right">
-						$ {{ number_format($account->balance, 2) }}
+						$ {{ number_format($account->running_balance, 2) }}
 					</span>
 				</h2>
 				<p class="pull-right">

@@ -19,21 +19,21 @@
 							<div class="list-group-item-text">
 								<div class="progress">
 									<div class="progress-bar
-									@if ($category->balance < $category->budgeted)
+									@if ($category->spent < $category->budgeted)
 										progress-bar-success
-									@elseif ($category->balance == $category->budgeted)
+									@elseif ($category->spent == $category->budgeted)
 										progress-bar-warning
 									@else
 										progress-bar-danger
 									@endif
 									progress-bar-striped" role="progressbar" aria-valuenow="{{ $category->progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $category->progress }}%; min-width: 1%;">
 										{{ $category->progress }}%
-										<span class="sr-only">{{ $category->progress }}% Complete</span>
+										<span class="sr-only">{{ $category->progress }}%</span>
 									</div>
 								</div>
 							</div>
 							<p class="list-group-item-text pull-right">$ {{ number_format($category->budgeted, 2) }}</p>
-							<p class="list-group-item-text">$ {{ number_format($category->balance, 2) }} spent</p>
+							<p class="list-group-item-text">$ {{ number_format($category->spent, 2) }} spent / $ {{ number_format($category->budgeted - $category->spent, 2) }} remaining</p>
 						</a>
 					@endforeach
 				</div>

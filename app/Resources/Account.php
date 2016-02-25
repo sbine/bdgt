@@ -27,16 +27,17 @@ class Account extends Model
         'user_id'
     ];
 
-    protected $transactions;
-
-    public function addTransaction($transaction)
+    public function getRunningBalanceAttribute()
     {
-        $this->transactions[] = $transaction;
-        if ($transaction->inflow) {
-            $this->total += $transaction->amount;
-        } else {
-            $this->total -= $transaction->amount;
+        $runningBalance = 0;
+        foreach ($this->transactions()->get() as $transaction) {
+            if ($transaction->inflow) {
+                $runningBalance += $transaction->amount;
+            } else {
+                $runningBalance -= $transaction->amount;
+            }
         }
+        return $runningBalance;
     }
 
     public function transactions()

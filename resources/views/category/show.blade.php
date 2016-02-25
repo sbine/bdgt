@@ -17,9 +17,12 @@
 				<h2>
 					{{ $category->label }}
 					<span class="pull-right">
-						$ {{ number_format($category->budgeted, 2) }}
+						$ {{ number_format(($category->budgeted - $category->spent), 2) }}
 					</span>
 				</h2>
+				<p class="pull-right">
+					$ {{ number_format($category->budgeted, 2) }} Budgeted
+				</p>
 			</div>
 		</div>
 		<br><br>

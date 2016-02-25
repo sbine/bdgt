@@ -24,13 +24,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->all();
+        $c['categories'] = $this->repository->all();
 
-        $categories->sortBy(function ($category) {
-            return $category->nextDue;
-        });
-
-        $c['categories'] = $categories;
+        $c['categories']->sortBy('label');
 
         return view('category.index', $c);
     }
@@ -52,7 +48,7 @@ class CategoryController extends Controller
 
         $c['category'] = $category;
 
-        return view('category.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $category->transactions() ]);
+        return view('category.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $category->transactions ]);
     }
 
     /**

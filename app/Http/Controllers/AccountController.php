@@ -3,7 +3,6 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
-use Bdgt\Resources\Account;
 use Input;
 
 class AccountController extends Controller
@@ -27,6 +26,8 @@ class AccountController extends Controller
     {
         $c['accounts'] = $this->repository->all();
 
+        $c['accounts']->sortBy('name');
+
         return view('account.index', $c);
     }
 
@@ -47,7 +48,7 @@ class AccountController extends Controller
 
         $c['account'] = $account;
 
-        return view('account.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions() ]);
+        return view('account.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions ]);
     }
 
     /**
