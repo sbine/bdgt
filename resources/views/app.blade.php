@@ -45,12 +45,14 @@
 
 			<div class="collapse navbar-collapse" id="primary-navbar">
 				<ul class="nav navbar-nav">
+					@if (Auth::user())
 					<li><a href="/dashboard">Dashboard</a></li>
 					<li><a href="/accounts">Accounts</a></li>
 					<li><a href="/categories">Categories</a></li>
 					<li><a href="/transactions">Transactions</a></li>
 					<li><a href="/bills">Bills</a></li>
 					<li><a href="/goals">Goals</a></li>
+					@endif
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Calculators <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -60,9 +62,11 @@
 						</ul>
 					</li>
 				</ul>
+				@if (Auth::user())
 				<form class="navbar-form navbar-left" role="search">
 					<a href="#addTransactionModal" data-toggle="modal" class="btn btn-success"><i class="fa fa-plus"></i> Add Transaction</a>
 				</form>
+				@endif
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
