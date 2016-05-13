@@ -93,6 +93,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/fullcalendar/dist/fullcalendar.min.js',
          dest: '<%= config.js %>/fullcalendar.min.js'
+       },
+       {
+         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/bootstrap-datepicker.min.js',
+         dest: '<%= config.js %>/bootstrap-datepicker.min.js'
        }]
       },
       css: {
@@ -119,6 +123,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/fullcalendar/dist/fullcalendar.min.css',
          dest: '<%= config.build_path %>/fullcalendar.css'
+       },
+       {
+         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/bootstrap-datepicker3.min.css',
+         dest: '<%= config.build_path %>/bootstrap-datepicker3.css'
        }]
       },
       fonts: {

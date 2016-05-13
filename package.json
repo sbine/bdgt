@@ -3,6 +3,7 @@
   "author": "Sara Bine",
   "private": true,
   "devDependencies": {
+    "bower": "~1.7",
     "grunt": "~0.4",
     "grunt-cli": "~0.1",
     "grunt-contrib-clean": "^0.5.0",

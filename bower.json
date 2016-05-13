@@ -12,16 +12,16 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
     "tests"
   ],
   "dependencies": {
-    "datatables": "~1.10.4",
-    "momentjs": "~2.9.0",
-    "fullcalendar": "~2.2.7",
-    "seiyria-bootstrap-slider": "~4.4.2",
-    "x-editable": "~1.5.1",
-    "font-awesome": "~4.3.0",
-    "datatables-plugins": "~1.10.6"
+    "datatables": "1.10.*",
+    "momentjs": "2.12.*",
+    "fullcalendar": "2.2.*",
+    "seiyria-bootstrap-slider": "4.4.*",
+    "x-editable": "1.5.*",
+    "font-awesome": "4.3.*",
+    "datatables-plugins": "1.10.*",
+    "bootstrap-datepicker": "1.6.*",
   }
 }
