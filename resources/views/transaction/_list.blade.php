@@ -12,7 +12,7 @@
 </thead>
 <tbody>
 @foreach ($transactions as $transaction)
-	<tr>
+	<tr data-id="{{ $transaction->id }}">
 		<td>
 			<i class="fa fa-flag-o" style="color: {{ $transaction->flair }}"></i>
 		</td>

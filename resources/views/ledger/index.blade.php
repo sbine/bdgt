@@ -78,11 +78,12 @@
 							<th>Inflow</th>
 							<th>Outflow</th>
 							<th>Cleared</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 					@foreach ($ledger->transactions() as $transaction)
-						<tr>
+						<tr data-id="{{ $transaction->id }}">
 							<td>
 								<i class="fa fa-flag-o" style="color: {{ $transaction->flair }}"></i>
 							</td>
@@ -125,6 +126,15 @@
 									<i class="fa fa-check"></i>
 								@endif
 							</td>
+							<td>
+								<button class="btn btn-warning btn-sm edit-transaction">
+									<i class="fa fa-pencil"></i>
+								</button>
+
+								<button class="btn btn-danger btn-sm delete-transaction">
+									<i class="fa fa-remove"></i>
+								</button>
+							</td>
 						</tr>
 					@endforeach
 					<tfoot>
@@ -132,7 +142,7 @@
 							<td colspan="5"><b>Total</b></td>
 							<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
 							<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
-							<td></td>
+							<td colspan="2"></td>
 						</tr>
 					</tfoot>
 					</tbody>
@@ -140,34 +150,21 @@
 			</div>
 		</div>
 	</div>
+
+	@include('transaction.edit_modal')
 @endsection
 
 @section('scripts-ready')
-	$.fn.editableform.buttons =
-	  '<button type="submit" class="btn btn-primary editable-submit btn-sm"><i class="fa fa-check"></i></button>' +
-	  '<button type="button" class="btn btn-default editable-cancel btn-sm"><i class="fa fa-remove"></i></button>';
-
-	$.fn.editable.defaults.mode = 'inline';
-
 	$("table").DataTable({
 		order: [[1, "desc"]],
 		pageLength: 20,
 		lengthMenu: [ 10, 20, 30, 50 ]
 	});
 
-	$("table").editable({
-		emptytext: '',
-		selector: '.editable',
-		ajaxOptions: {
-			'method': 'PUT'
-		},
-		params: {
-			'_token': '{{ csrf_token() }}'
-		},
-		//toggle: 'manual'
-	});
-
 	$(".edit-transaction").on('click', function(e) {
-		$(this).closest('tr').editable('toggle');
+		$(this).closest('tr').find('td > span').each(function() {
+			$("#editTransactionModal").find('[name="' + $(this).attr("data-name") + '"]').val($.trim($(this).text())).change();
+		});
+		$("#editTransactionModal").modal('toggle');
 	});
 @endsection

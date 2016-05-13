@@ -17,7 +17,6 @@
 	<link href="//fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/datatables-bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-editable.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-slider.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
