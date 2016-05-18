@@ -4,14 +4,16 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.1.*",
+		"laravel/framework": "5.2.*",
 		"filp/whoops": "~1.0"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4.0",
 		"mockery/mockery": "~0.9.4",
 		"phpunit/phpunit": "4.0.*",
-		"phpspec/phpspec": "~2.1"
+		"phpspec/phpspec": "~2.1",
+		"symfony/dom-crawler": "~3.0",
+		"symfony/css-selector": "~3.0"
 	},
 	"autoload": {
 		"classmap": [

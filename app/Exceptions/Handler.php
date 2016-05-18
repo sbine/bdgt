@@ -1,9 +1,12 @@
-<?php namespace Bdgt\Exceptions;
+<?php
+
+namespace Bdgt\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler {
+class Handler extends ExceptionHandler
+{
 
     /**
      * A list of the exception types that should not be reported.
@@ -11,7 +14,10 @@ class Handler extends ExceptionHandler {
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
+        'Illuminate\Auth\Access\AuthorizationException',
+        'Symfony\Component\HttpKernel\Exception\HttpException',
+        'Illuminate\Database\Eloquent\ModelNotFoundException',
+        'Illuminate\Validation\ValidationException'
     ];
 
     /**
@@ -51,7 +57,7 @@ class Handler extends ExceptionHandler {
      */
     protected function renderExceptionWithWhoops(Exception $e)
     {
-        $whoops = new \Whoops\Run;
+        $whoops  = new \Whoops\Run;
         $handler = new \Whoops\Handler\PrettyPageHandler();
         $handler->addResourcePath(public_path());
         $handler->addCustomCss('css/whoops.min.css');
@@ -61,5 +67,4 @@ class Handler extends ExceptionHandler {
             $whoops->handleException($e)
         );
     }
-
 }
