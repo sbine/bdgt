@@ -78,8 +78,8 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">Flair</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="category_id" required>
-			@include('partials.dropdowns.categories')
+		<select class="form-control" name="flair">
+			@include('partials.dropdowns.flairs')
 		</select>
 	</div>
 </div>

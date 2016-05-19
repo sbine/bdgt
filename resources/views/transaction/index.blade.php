@@ -30,19 +30,3 @@
 	@include('transaction.edit_modal')
 @endsection
 
-@section('scripts')
-<script>
-$(document).ready(function() {
-	$(".edit-transaction").on('click', function(e) {
-		var $tableRow = $(this).closest('tr');
-		$tableRow.find('td > span').each(function() {
-			$("#editTransactionModal").find('[name="' + $(this).attr("data-name") + '"]').val($.trim($(this).text())).change();
-		});
-
-		$("#editTransactionModal").find('form').attr('action', '/transactions/' + $tableRow.attr("data-id"));
-
-		$("#editTransactionModal").modal('toggle');
-	});
-});
-</script>
-@endsection

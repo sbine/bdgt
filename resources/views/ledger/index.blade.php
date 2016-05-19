@@ -1,9 +1,15 @@
 @extends('app')
 
-@section('breadcrumbs')
-@overwrite
+@section('breadcrumbs.items')
+	<li class="active">Dashboard</li>
+@endsection
 
-@section('content')
+@section('breadcrumbs.actions')
+	<a href="#addTransactionModal" data-toggle="modal" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add Transaction</a>
+@endsection
+
+@section('top-content')
+	<br>
 	<div class="container-fluid">
 		<div class="row heads-up">
 			<div class="col-md-10 col-md-offset-1">
@@ -61,9 +67,11 @@
 			</div>
 		</div>
 	</div>
+	<br>
+@endsection
 
-	<br><br><br>
-
+@section('content')
+	<br>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -86,25 +94,3 @@
 	@include('transaction.edit_modal')
 @endsection
 
-@section('scripts')
-<script>
-$(document).ready(function() {
-	$("table").DataTable({
-		order: [[1, "desc"]],
-		pageLength: 20,
-		lengthMenu: [ 10, 20, 30, 50 ]
-	});
-
-	$(".edit-transaction").on('click', function(e) {
-		var $tableRow = $(this).closest('tr');
-		$tableRow.find('td > span').each(function() {
-			$("#editTransactionModal").find('[name="' + $(this).attr("data-name") + '"]').val($.trim($(this).text())).change();
-		});
-
-		$("#editTransactionModal").find('form').attr('action', '/transactions/' + $tableRow.attr("data-id"));
-
-		$("#editTransactionModal").modal('toggle');
-	});
-});
-</script>
-@endsection

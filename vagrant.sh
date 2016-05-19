@@ -23,6 +23,8 @@ echo '...done'
 echo '--- Installing npm ---'
 apt-get install -y npm
 ln -s /usr/bin/nodejs /usr/bin/node
+npm install -g n
+n 0.12.4
 echo '...done'
 
 

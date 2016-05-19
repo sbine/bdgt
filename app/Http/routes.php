@@ -20,8 +20,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', 'LedgerController@index');
 
-    Route::get('dashboard', 'LedgerController@index');
-
     Route::resource('accounts', 'AccountController');
 
     Route::resource('transactions', 'TransactionController');

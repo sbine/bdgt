@@ -35,7 +35,10 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Date Opened</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="date_opened" value="{{ $account->date_opened }}">
+						<div class="input-group">
+							<input type="text" class="form-control datepicker" name="date_opened" value="{{ $account->date_opened }}">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -83,10 +83,6 @@ module.exports = function(grunt) {
          dest: '<%= config.js %>/datatables-bootstrap.min.js'
        },
        {
-         src: '<%= config.bower_path %>/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
-         dest: '<%= config.js %>/bootstrap-editable.min.js'
-       },
-       {
          src: '<%= config.bower_path %>/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
          dest: '<%= config.js %>/bootstrap-slider.min.js'
        },
@@ -95,7 +91,7 @@ module.exports = function(grunt) {
          dest: '<%= config.js %>/fullcalendar.min.js'
        },
        {
-         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/bootstrap-datepicker.min.js',
+         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
          dest: '<%= config.js %>/bootstrap-datepicker.min.js'
        }]
       },
@@ -113,10 +109,6 @@ module.exports = function(grunt) {
          dest: '<%= config.build_path %>/datatables-bootstrap.css'
        },
        {
-         src: '<%= config.bower_path %>/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css',
-         dest: '<%= config.build_path %>/bootstrap-editable.css'
-       },
-       {
          src: '<%= config.bower_path %>/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
          dest: '<%= config.build_path %>/bootstrap-slider.css'
        },
@@ -125,7 +117,7 @@ module.exports = function(grunt) {
          dest: '<%= config.build_path %>/fullcalendar.css'
        },
        {
-         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/bootstrap-datepicker3.min.css',
+         src: '<%= config.bower_path %>/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
          dest: '<%= config.build_path %>/bootstrap-datepicker3.css'
        }]
       },
@@ -145,7 +137,7 @@ module.exports = function(grunt) {
         compress: true,
         mangle: false,
         warnings: false,
-        preserveComments: 'some'
+        preserveComments: /(?:^!|@(?:license|preserve|cc_on))/
       },
       build: {
         files: [{

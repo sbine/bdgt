@@ -18,6 +18,7 @@
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/datatables-bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-slider.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,7 +28,7 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-navbar">
@@ -45,12 +46,7 @@
 			<div class="collapse navbar-collapse" id="primary-navbar">
 				<ul class="nav navbar-nav">
 					@if (Auth::user())
-					<li><a href="/dashboard">Dashboard</a></li>
-					<li><a href="/accounts">Accounts</a></li>
-					<li><a href="/categories">Categories</a></li>
-					<li><a href="/transactions">Transactions</a></li>
-					<li><a href="/bills">Bills</a></li>
-					<li><a href="/goals">Goals</a></li>
+					<li><a href="/">Dashboard</a></li>
 					@endif
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Calculators <span class="caret"></span></a>
@@ -61,11 +57,13 @@
 						</ul>
 					</li>
 				</ul>
+				<!--
 				@if (Auth::user())
 				<form class="navbar-form navbar-left" role="search">
 					<a href="#addTransactionModal" data-toggle="modal" class="btn btn-success"><i class="fa fa-plus"></i> Add Transaction</a>
 				</form>
 				@endif
+				-->
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
@@ -84,29 +82,56 @@
 		</div>
 	</nav>
 
-	@section('breadcrumbs')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<ol class="breadcrumb">
-					<li><a href="/">Home</a></li>
-					@yield('breadcrumbs.items')
-					<div class="pull-right">
-						@yield('breadcrumbs.actions')
+	<div id="wrapper">
+
+		@if (Auth::user())
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<!--
+				<li class="sidebar-icon"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
+				<li class="sidebar-divider"></li>
+				-->
+				<li><a href="/accounts">Accounts</a></li>
+				<li><a href="/categories">Categories</a></li>
+				<li><a href="/transactions">Transactions</a></li>
+				<li><a href="/bills">Bills</a></li>
+				<li><a href="/goals">Goals</a></li>
+			</ul>
+		</div>
+		@endif
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+			@include('alerts')
+
+			@yield('top-content')
+
+			@section('breadcrumbs')
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<ol class="breadcrumb">
+							<li><a href="/">Home</a></li>
+							@yield('breadcrumbs.items')
+							<div class="pull-right">
+								@yield('breadcrumbs.actions')
+							</div>
+						</ol>
 					</div>
-				</ol>
+				</div>
 			</div>
+			@show
+
+			@yield('content')
+
+			@if (Auth::user())
+				@include('transaction.create_modal')
+			@endif
 		</div>
 	</div>
-	@show
-
-	@include('alerts')
-
-	@yield('content')
-
-	@if (Auth::user())
-		@include('transaction.create_modal')
-	@endif
 
 	<footer class="footer">
 		<div class="text-center">
@@ -119,7 +144,6 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.datatables.min.js"></script>
 	<script src="/js/datatables-bootstrap.min.js"></script>
-	<script src="/js/bootstrap-editable.min.js"></script>
 	<script src="/js/bootstrap-datepicker.min.js"></script>
 	<script src="/js/bootstrap-slider.min.js"></script>
 	<script src="/js/moment.min.js"></script>

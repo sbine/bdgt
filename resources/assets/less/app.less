@@ -1,3 +1,5 @@
+@import "bootstrap-variables.less";
+@import "simple-sidebar.less";
 @import "datatables.less";
 
 body, label, .checkbox label {
@@ -5,7 +7,11 @@ body, label, .checkbox label {
 }
 
 .navbar {
-	margin-bottom: 30px;
+	.navbar-brand {
+		font-size: 18px;
+		width: @sidebarWidth;
+		padding-left: @body-padding;
+	}
 	.navbar-brand-image {
 		height: 20px;
 		float: left;
@@ -52,6 +58,7 @@ html {
   min-height: 100%;
 }
 body {
+  padding-top: 50px;
   /* Margin bottom by footer height */
   margin-bottom: 100px;
 }

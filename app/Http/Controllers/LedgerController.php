@@ -38,6 +38,6 @@ class LedgerController extends Controller
 
         $c['nextBill'] = $bills->first();
 
-        return view('ledger.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
+        return view('ledger.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions(), 'actionable' => true ]);
     }
 }
