@@ -2,8 +2,8 @@
 
 namespace Bdgt\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Auth;
+use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

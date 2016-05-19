@@ -2,10 +2,12 @@
 
 namespace Bdgt\Http\Controllers;
 
+use Bdgt\Http\Requests\StoreTransactionRequest;
+use Bdgt\Http\Requests\UpdateTransactionRequest;
 use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Ledger;
 use Bdgt\Resources\Account;
 use Bdgt\Resources\Category;
+use Bdgt\Resources\Ledger;
 use Input;
 use Response;
 
@@ -44,11 +46,9 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function store()
+    public function store(StoreTransactionRequest $request)
     {
-        $transaction = Input::except(['_token', '_method']);
-
-        if ($this->repository->create($transaction)) {
+        if ($this->repository->create(Input::except(['_token', '_method']))) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
@@ -61,15 +61,11 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function update($id)
+    public function update(UpdateTransactionRequest $request, $id)
     {
-        $transaction = $this->repository->find($id);
-
-        $transaction[Input::get('name')] = Input::get('value');
-
-        if ($this->repository->update($transaction, $id)) {
-            return Response::json(["status" => "success"]);
+        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
+            return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
-        return Response::json(["status" => "error"]);
+        return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 }

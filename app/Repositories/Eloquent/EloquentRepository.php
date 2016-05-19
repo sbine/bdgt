@@ -2,10 +2,11 @@
 
 namespace Bdgt\Repositories\Eloquent;
 
+use Bdgt\Repositories\Contracts\RepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Bdgt\Repositories\Contracts\RepositoryInterface;
+use Log;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -25,7 +26,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
     public function scopeBy($key, $value)
     {
-        $this->scopeKey = $key;
+        $this->scopeKey   = $key;
         $this->scopeValue = $value;
 
         return $this;
@@ -119,7 +120,7 @@ abstract class EloquentRepository implements RepositoryInterface
     public function insertToTenant($key, $value, $data)
     {
         if ($data[$key] !== $value) {
-            throw new Exception("Object fails scope constraint");
+            throw new Exception('Object fails scope constraint');
         }
 
         return $this->create($data);
@@ -133,12 +134,16 @@ abstract class EloquentRepository implements RepositoryInterface
                 $data[$this->scopeKey] = $this->scopeValue;
             }
 
-            if ($data[$this->scopeKey] !== $this->scopeValue) {
-                throw new Exception("Invalid scope");
+            if ($data[$this->scopeKey] !== $this->scopeValue
+                && intval($data[$this->scopeKey]) !== intval($this->scopeValue)) {
+                Log::warning('Invalid scope: ' . $this->scopeKey . ' / ' . $this->scopeValue, $data[$this->scopeKey]);
+                throw new Exception('Invalid scope');
             }
         } elseif (is_object($data)) {
-            if ($data->{$this->scopeKey} !== $this->scopeValue) {
-                throw new Exception("Invalid scope");
+            if ($data->{$this->scopeKey} !== $this->scopeValue
+                && intval($data[$this->scopeKey]) !== intval($this->scopeValue)) {
+                Log::warning('Invalid scope: ' . $this->scopeKey . ' / ' . $this->scopeValue, [$data->{$this->scopeKey}]);
+                throw new Exception('Invalid scope');
             }
         }
 

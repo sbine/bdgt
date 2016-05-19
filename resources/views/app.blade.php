@@ -145,10 +145,6 @@
 			}
 		});
 	});
-
-	$(document).ready(function() {
-		@yield('scripts-ready')
-	});
 	</script>
 
 	@yield('scripts')

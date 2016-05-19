@@ -28,7 +28,9 @@
 	</div>
 @endsection
 
-@section('scripts-ready')
+@section('scripts')
+<script>
+$(document).ready(function() {
 	$.fn.editableform.buttons =
 	  '<button type="submit" class="btn btn-primary editable-submit btn-sm"><i class="fa fa-check"></i></button>' +
 	  '<button type="button" class="btn btn-default editable-cancel btn-sm"><i class="fa fa-remove"></i></button>';
@@ -52,4 +54,6 @@
 	$(".edit-transaction").on('click', function(e) {
 		$(this).closest('tr').editable('toggle');
 	});
+});
+</script>
 @endsection
