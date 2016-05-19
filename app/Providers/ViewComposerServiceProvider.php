@@ -20,6 +20,10 @@ class ViewComposerServiceProvider extends ServiceProvider
         view()->composer(
             'partials.dropdowns.categories', 'Bdgt\Http\Composers\CategoriesComposer'
         );
+
+        view()->composer(
+            'partials.dropdowns.bills', 'Bdgt\Http\Composers\BillsComposer'
+        );
     }
 
     /**

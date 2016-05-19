@@ -4,6 +4,7 @@
 		<th>Date</th>
 		<th>Account</th>
 		<th>Category</th>
+		<th class="hide">Bill</th>
 		<th>Payee</th>
 		<th>Inflow</th>
 		<th>Outflow</th>
@@ -23,10 +24,34 @@
 			<span data-name="date">{{ date('Y-m-d', strtotime($transaction->date)) }}</span>
 		</td>
 		<td>
-			<span data-name="account_name">{{ $transaction->account->name }}</span>
+			<span data-name="account_name">
+				{{ $transaction->account->name }}
+			</span>
+			<span class="hide" data-name="account_id">
+				{{ $transaction->account->id }}
+			</span>
 		</td>
 		<td>
-			<span data-name="category_label">@if ($transaction->category){{ $transaction->category->label }}
+			<span data-name="category_label">
+				@if ($transaction->category)
+					{{ $transaction->category->label }}
+				@endif
+			</span>
+			<span class="hide" data-name="category_id">
+				@if ($transaction->category)
+					{{ $transaction->category->id }}
+				@endif
+			</span>
+		</td>
+		<td class="hide">
+			<span data-name="bill_label">
+				@if ($transaction->bill)
+					{{ $transaction->bill->label }}
+				@endif
+			</span>
+			<span data-name="bill_id">
+				@if ($transaction->bill)
+					{{ $transaction->bill->id }}
 				@endif
 			</span>
 		</td>

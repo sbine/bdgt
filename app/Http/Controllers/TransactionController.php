@@ -38,7 +38,7 @@ class TransactionController extends Controller
 
         $c['categories'] = Category::all();
 
-        return view('transaction.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
+        return view('transaction.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions(), 'actionable' => true ]);
     }
 
     /**

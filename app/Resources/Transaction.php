@@ -22,6 +22,7 @@ class Transaction extends Model
         'date',
         'account_id',
         'category_id',
+        'bill_id',
         'payee',
         'amount',
         'inflow',

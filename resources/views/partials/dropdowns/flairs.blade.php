@@ -1,4 +1,4 @@
-<option value="">None</option>
+<option></option>
 <option value="red">Red</option>
 <option value="orange">Orange</option>
 <option value="yellow">Yellow</option>

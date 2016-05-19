@@ -64,6 +64,14 @@
 		</select>
 	</div>
 </div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">Bill</label>
+	<div class="col-sm-8">
+		<select class="form-control" name="bill_id">
+			@include('partials.dropdowns.bills')
+		</select>
+	</div>
+</div>
 @if (!$useDefaults)
 <div class="form-group">
 	<div class="col-sm-8 col-sm-offset-3">
