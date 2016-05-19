@@ -19,40 +19,29 @@
 							<td colspan="5"><b>Total</b></td>
 							<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
 							<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
-							<td></td>
+							<td colspan="2"></td>
 						</tr>
 					</tfoot>
 				</table>
 			</div>
 		</div>
 	</div>
+
+	@include('transaction.edit_modal')
 @endsection
 
 @section('scripts')
 <script>
 $(document).ready(function() {
-	$.fn.editableform.buttons =
-	  '<button type="submit" class="btn btn-primary editable-submit btn-sm"><i class="fa fa-check"></i></button>' +
-	  '<button type="button" class="btn btn-default editable-cancel btn-sm"><i class="fa fa-remove"></i></button>';
-
-	$.fn.editable.defaults.mode = 'inline';
-
-	$("table").DataTable({order: [[1, "desc"]]});
-
-	$("table").editable({
-		emptytext: '',
-		selector: '.editable',
-		ajaxOptions: {
-			'method': 'PUT'
-		},
-		params: {
-			'_token': '{{ csrf_token() }}'
-		},
-		//toggle: 'manual'
-	});
-
 	$(".edit-transaction").on('click', function(e) {
-		$(this).closest('tr').editable('toggle');
+		var $tableRow = $(this).closest('tr');
+		$tableRow.find('td > span').each(function() {
+			$("#editTransactionModal").find('[name="' + $(this).attr("data-name") + '"]').val($.trim($(this).text())).change();
+		});
+
+		$("#editTransactionModal").find('form').attr('action', '/transactions/' + $tableRow.attr("data-id"));
+
+		$("#editTransactionModal").modal('toggle');
 	});
 });
 </script>

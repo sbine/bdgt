@@ -8,6 +8,7 @@
 		<th>Inflow</th>
 		<th>Outflow</th>
 		<th>Cleared</th>
+		<th>Actions</th>
 	</tr>
 </thead>
 <tbody>
@@ -56,6 +57,15 @@
 			@if ($transaction->cleared)
 				<i class="fa fa-check"></i>
 			@endif
+		</td>
+		<td>
+			<button class="btn btn-warning btn-sm edit-transaction">
+				<i class="fa fa-pencil"></i>
+			</button>
+
+			<button class="btn btn-danger btn-sm delete-transaction">
+				<i class="fa fa-remove"></i>
+			</button>
 		</td>
 	</tr>
 @endforeach

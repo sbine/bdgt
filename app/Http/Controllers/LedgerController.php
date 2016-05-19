@@ -1,7 +1,9 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
 
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
+namespace Bdgt\Http\Controllers;
+
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
+use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use Bdgt\Resources\Ledger;
 
 class LedgerController extends Controller
@@ -14,7 +16,7 @@ class LedgerController extends Controller
     public function __construct(TransactionRepositoryInterface $transactionRepository, BillRepositoryInterface $billRepository)
     {
         $this->transactionRepository = $transactionRepository;
-        $this->billRepository = $billRepository;
+        $this->billRepository        = $billRepository;
     }
 
     /**
@@ -36,6 +38,6 @@ class LedgerController extends Controller
 
         $c['nextBill'] = $bills->first();
 
-        return view('ledger/index', $c);
+        return view('ledger.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions() ]);
     }
 }
