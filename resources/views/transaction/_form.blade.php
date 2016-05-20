@@ -59,7 +59,7 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">Category</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="category_id" required>
+		<select class="form-control" name="category_id">
 			@include('partials.dropdowns.categories')
 		</select>
 	</div>

@@ -22,12 +22,12 @@ class StoreTransactionRequest extends Request
     public function rules()
     {
         return [
-            'date'        => 'required',
+            'date'        => 'required|date',
             'amount'      => 'required',
             'payee'       => 'required',
-            'account_id'  => 'required',
+            'account_id'  => 'required|numeric',
             'inflow'      => 'required',
-            'category_id' => 'required',
+            'category_id' => 'numeric',
         ];
     }
 }

@@ -41,4 +41,29 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
         'remember_token'
     ];
+
+    public function accounts()
+    {
+        return $this->hasMany('Bdgt\Resources\Account');
+    }
+
+    public function bills()
+    {
+        return $this->hasMany('Bdgt\Resources\Bill');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany('Bdgt\Resources\Category');
+    }
+
+    public function goals()
+    {
+        return $this->hasMany('Bdgt\Resources\Goal');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('Bdgt\Resources\Transaction');
+    }
 }
