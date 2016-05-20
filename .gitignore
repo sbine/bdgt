@@ -2,5 +2,7 @@
 /vendor
 /bower_components
 /node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
 .env
-/storage/database.sqlite

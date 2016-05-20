@@ -1,7 +1,8 @@
-<?php namespace Bdgt\Events;
+<?php
 
-abstract class Event {
+namespace Bdgt\Events;
 
-	//
-
+abstract class Event
+{
+    //
 }

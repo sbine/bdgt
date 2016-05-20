@@ -2,6 +2,10 @@
   "name": "bdgt",
   "author": "Sara Bine",
   "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
   "devDependencies": {
     "bower": "~1.7",
     "grunt": "~1.0",

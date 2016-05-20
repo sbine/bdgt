@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateGoalsTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateGoalsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('goals');
+        //Schema::dropIfExists('goals');
         Schema::create('goals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();

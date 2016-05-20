@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTransactionsTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('transactions');
+        //Schema::dropIfExists('transactions');
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();

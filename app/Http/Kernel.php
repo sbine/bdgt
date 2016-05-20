@@ -44,10 +44,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'       => \Bdgt\Http\Middleware\Authenticate::class,
+        'auth' => \Bdgt\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'can'        => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest'      => \Bdgt\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
+        'guest' => \Bdgt\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

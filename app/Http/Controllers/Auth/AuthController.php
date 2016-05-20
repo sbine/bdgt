@@ -4,8 +4,9 @@ namespace Bdgt\Http\Controllers\Auth;
 
 use Bdgt\Http\Controllers\Controller;
 use Bdgt\Resources\User;
-use Validator;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -20,20 +21,23 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectTo = '/dashboard';
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Guard  $auth
-     * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'getLogout']]);
     }
 
     /**
@@ -42,12 +46,12 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function validator(array $data)
+    protected function validator(array $data)
     {
         return Validator::make($data, [
             'username' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -57,7 +61,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    public function create(array $data)
+    protected function create(array $data)
     {
         return User::create([
             'username' => $data['username'],

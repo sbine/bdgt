@@ -162,11 +162,6 @@ module.exports = function(grunt) {
           "<%= config.build_path %>/bootstrap.css": "<%= config.assets_less %>/bootstrap.less"
         }
       },
-      theme: {
-        files: {
-          "<%= config.build_path %>/whoops.css": "<%= config.assets_less %>/whoops.less"
-        }
-      }
     },
 
 
