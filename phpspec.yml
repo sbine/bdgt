@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Bdgt
-        psr4_prefix: Bdgt
-        src_path: app

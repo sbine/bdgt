@@ -35,7 +35,7 @@ class RepositoryScopeTest extends TestCase
     {
         $id = 3;
 
-        $this->model->shouldReceive('find')->once()->with($id)->andReturn($this->model)->shouldReceive('getAttribute')->once();
+        $this->model->shouldReceive('find')->once()->with($id)->andReturn($this->model)->shouldReceive('offsetGet')->once()->andReturn(1)->shouldReceive('getAttribute')->twice();
 
         $this->setExpectedException('Exception', 'Invalid scope');
 
