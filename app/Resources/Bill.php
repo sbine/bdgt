@@ -2,9 +2,9 @@
 
 namespace Bdgt\Resources;
 
-use Illuminate\Database\Eloquent\Model;
-use DateTime;
 use DateInterval;
+use DateTime;
+use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
@@ -59,6 +59,28 @@ class Bill extends Model
             return true;
         }
         return false;
+    }
+
+    public function getDueDatesForInterval($intervalStart, $intervalEnd, $frequency, $initialStart)
+    {
+        $intervalStart = new DateTime(date('Y-m-d', strtotime($intervalStart)));
+        $intervalEnd   = new DateTime(date('Y-m-d', strtotime($intervalEnd)));
+        $initialStart  = new DateTime(date('Y-m-d', strtotime($initialStart)));
+        $frequency     = new DateInterval('P' . $frequency . 'D');
+
+        $dates = [];
+        $date  = $initialStart;
+
+        while ($date < $intervalStart) {
+            $date->add($frequency);
+        }
+
+        while ($date <= $intervalEnd) {
+            $dates[] = $date->format('Y-m-d');
+            $date->add($frequency);
+        }
+
+        return $dates;
     }
 
     public function getNextDueAttribute()

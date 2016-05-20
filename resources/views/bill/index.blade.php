@@ -88,20 +88,8 @@
 
 @section('scripts')
 <script>
-	var bills = {!! json_encode(array_values($bills->toArray())) !!};
-
 	$('#calendar').fullCalendar({
-		events: bills,
-		eventDataTransform: function(rawEventData) {
-			return {
-					id: rawEventData.id,
-					title: rawEventData.label + ' due',
-					start: rawEventData.nextDue,
-					end: rawEventData.nextDue,
-					paid: rawEventData.paid,
-					url: "/bills/" + rawEventData.id
-			};
-		},
+		events: '/bills/ajax_calendar_events',
 		eventRender: function(event, element, view) {
 			if (event.paid === true) {
 				element.css('background-color', '#5cb85c').css('border-color', '#5cb85c');

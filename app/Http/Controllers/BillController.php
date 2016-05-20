@@ -95,9 +95,40 @@ class BillController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect("/bills")->with('alerts.success', trans('crud.bills.deleted'));
+            return redirect('/bills')->with('alerts.success', trans('crud.bills.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
+    }
+
+    public function ajax_calendar_events()
+    {
+        $intervalStart = Input::get('start');
+        $intervalEnd   = Input::get('end');
+
+        $billsByDate = [];
+        if ($intervalStart && $intervalEnd) {
+            $bills = $this->repository->all();
+
+            foreach ($bills as $bill) {
+                $datesInInterval = $bill->getDueDatesForInterval($intervalStart, $intervalEnd, $bill->frequency, $bill->start_date);
+                $b               = [
+                    'id'         => $bill->id,
+                    'title'      => $bill->label,
+                    'frequency'  => $bill->frequency,
+                    'paid'       => $bill->paid,
+                    'url'        => '/bills/' . $bill->id,
+                ];
+
+                foreach ($datesInInterval as $date) {
+                    $b['nextDue']  = $date;
+                    $b['start']    = $date;
+                    $b['end']      = $date;
+                    $billsByDate[] = $b;
+                }
+            }
+        }
+
+        return response()->json($billsByDate);
     }
 }

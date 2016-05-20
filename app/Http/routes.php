@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('categories', 'CategoryController');
 
+    Route::get('bills/ajax_calendar_events', 'BillController@ajax_calendar_events');
     Route::resource('bills', 'BillController');
 
     Route::resource('goals', 'GoalController');
