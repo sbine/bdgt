@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">
+				<a class="navbar-brand" href="{{ route('index') }}">
 					<img class="navbar-brand-image" alt="bdgt" src="/favicon.png">
 					<span>bdgt</span>
 				</a>
@@ -46,14 +46,14 @@
 			<div class="collapse navbar-collapse" id="primary-navbar">
 				<ul class="nav navbar-nav">
 					@if (Auth::user())
-					<li><a href="/">Dashboard</a></li>
+					<li class="{{ (request()->route()->getName() == 'index' ? 'active' : '') }}"><a href="{{ route('index') }}">Dashboard</a></li>
 					@endif
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Calculators <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calculators <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/calculators/debt">Debt Calculator</a></li>
+							<li><a href="{{ route('calculators.debt') }}">Debt Calculator</a></li>
 							<li class="divider"></li>
-							<li><a href="/calculators/savings">Savings Calculator</a></li>
+							<li><a href="{{ route('calculators.savings') }}">Savings Calculator</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -92,11 +92,11 @@
 				<li class="sidebar-icon"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
 				<li class="sidebar-divider"></li>
 				-->
-				<li><a href="/accounts">Accounts</a></li>
-				<li><a href="/categories">Categories</a></li>
-				<li><a href="/transactions">Transactions</a></li>
-				<li><a href="/bills">Bills</a></li>
-				<li><a href="/goals">Goals</a></li>
+				<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
+				<li><a href="{{ route('categories.index') }}">Categories</a></li>
+				<li><a href="{{ route('transactions.index') }}">Transactions</a></li>
+				<li><a href="{{ route('bills.index') }}">Bills</a></li>
+				<li><a href="{{ route('goals.index') }}">Goals</a></li>
 			</ul>
 		</div>
 		@endif
@@ -105,7 +105,9 @@
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
 
-			@include('alerts')
+			@section('alerts')
+				@include('alerts')
+			@show
 
 			@yield('top-content')
 
@@ -114,7 +116,7 @@
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 						<ol class="breadcrumb">
-							<li><a href="/">Home</a></li>
+							<li><a href="{{ route('index') }}">Home</a></li>
 							@yield('breadcrumbs.items')
 							<div class="pull-right">
 								@yield('breadcrumbs.actions')

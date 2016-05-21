@@ -4,6 +4,9 @@
 	<li class="active">Login</li>
 @endsection
 
+@section('alerts')
+@overwrite
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">

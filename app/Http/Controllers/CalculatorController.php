@@ -1,4 +1,6 @@
-<?php namespace Bdgt\Http\Controllers;
+<?php
+
+namespace Bdgt\Http\Controllers;
 
 class CalculatorController extends Controller
 {
@@ -20,5 +22,15 @@ class CalculatorController extends Controller
     public function debt()
     {
         return view('calculator/debt');
+    }
+
+    /**
+     * Show the savings calculator to the user.
+     *
+     * @return Response
+     */
+    public function savings()
+    {
+        return view('errors.coming_soon');
     }
 }

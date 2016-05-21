@@ -18,7 +18,10 @@ Route::controllers([
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/', 'LedgerController@index');
+    Route::get('/', [
+        'as' => 'index',
+        'uses' => 'LedgerController@index',
+    ]);
 
     Route::resource('accounts', 'AccountController');
 
@@ -31,5 +34,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('goals', 'GoalController');
 
-    Route::get('/calculators/debt', 'CalculatorController@debt');
+    Route::get('/calculators/debt', [
+        'as' => 'calculators.debt',
+        'uses' => 'CalculatorController@debt'
+    ]);
+
+    Route::get('/calculators/savings', [
+        'as' => 'calculators.savings',
+        'uses' => 'CalculatorController@savings'
+    ]);
 });
