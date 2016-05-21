@@ -2,7 +2,7 @@
 
 namespace Bdgt\Resources;
 
-use Illuminate\Database\Eloquent\Model;
+use Bdgt\Resources\Model;
 
 class Category extends Model
 {

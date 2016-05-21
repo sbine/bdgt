@@ -4,7 +4,7 @@ namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
 use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Ledger;
+use Illuminate\Support\Facades\Input;
 
 class LedgerController extends Controller
 {

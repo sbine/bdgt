@@ -3,7 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
 {
@@ -89,7 +89,7 @@ class AccountController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect("/accounts")->with('alerts.success', trans('crud.accounts.deleted'));
+            return redirect('/accounts')->with('alerts.success', trans('crud.accounts.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }

@@ -89,6 +89,9 @@ class RepositoryServiceProvider extends ServiceProvider
         if (env('APP_ENV') === 'testing') {
             return $repository->scopeBy('user_id', 'testing');
         }
+        if (!Auth::check()) {
+            return $repository->scopeBy('user_id', 'access_denied');
+        }
         return $repository->scopeBy('user_id', Auth::user()->id);
     }
 }

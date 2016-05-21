@@ -14,7 +14,7 @@ class Ledger
     {
         $this->transactions = $transactionRepository->all(['date' => 'desc']);
 
-        if (!empty($this->transactions)) {
+        if (!$this->transactions()->isEmpty()) {
             $this->lastPurchase = $this->transactions->first()->date;
 
             foreach ($this->transactions as $t) {

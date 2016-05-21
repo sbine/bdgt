@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "bdgt"
-    vb.customize ["modifyvm", :id, "--memory", "768"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
   config.vm.provision :shell, :path => "vagrant.sh"

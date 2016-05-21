@@ -2,7 +2,7 @@
 
 namespace Bdgt\Resources;
 
-use Illuminate\Database\Eloquent\Model;
+use Bdgt\Resources\Model;
 
 class Transaction extends Model
 {
@@ -28,7 +28,11 @@ class Transaction extends Model
         'inflow',
         'cleared',
         'flair',
-        'user_id'
+        'user_id',
+    ];
+
+    protected $nullable = [
+        'bill_id',
     ];
 
     /**

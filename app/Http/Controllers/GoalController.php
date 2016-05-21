@@ -4,7 +4,7 @@ namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
 use Bdgt\Resources\Goal;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class GoalController extends Controller
 {
@@ -96,7 +96,7 @@ class GoalController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect("/goals")->with('alerts.success', trans('crud.goals.deleted'));
+            return redirect('/goals')->with('alerts.success', trans('crud.goals.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }

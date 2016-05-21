@@ -8,8 +8,7 @@ use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use Bdgt\Resources\Account;
 use Bdgt\Resources\Category;
 use Bdgt\Resources\Ledger;
-use Input;
-use Response;
+use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller
 {

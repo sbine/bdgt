@@ -6,39 +6,54 @@ class CategoryRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->category = $this->mock('Bdgt\Resources\Category[create,save,update,delete]');
-        $this->category->user_id = 'testing';
-
-        $this->repository = $this->app->make('Bdgt\Repositories\Contracts\CategoryRepositoryInterface', [$this->category]);
+        $this->category = $this->mock('Bdgt\Resources\Category[save,delete]');
+        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentCategoryRepository[instance]', [$this->category]);
+        $this->repository->scopeBy('user_id', 'testing');
     }
 
+    /**
+     * Test that the repository 'create' method sets attributes and saves a model
+     */
     public function testCreateMethodIsCalled()
     {
         $categoryArray = [
             'label' => 'Emergency Fund'
         ];
 
-        $this->category->shouldReceive('create')->once()->with($this->addScopeKeyToData($categoryArray));
+        $this->repository->shouldReceive('instance')->once()->andReturn($this->category);
+        $this->category->shouldReceive('save')->once();
 
         $this->repository->create($categoryArray);
+
+        $this->assertEquals('Emergency Fund', $this->category->label);
     }
 
+    /**
+     * Test that the repository 'update' method changes attributes and saves a model
+     */
     public function testUpdateMethodIsCalled()
     {
         $categoryArray = [
             'label' => 'Emergency Fund'
         ];
 
-        $this->category->shouldReceive('where')->once()->andReturn($this->category)->shouldReceive('update')->once()->with($this->addScopeKeyToData($categoryArray));
+        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->category);
+        $this->category->shouldReceive('save')->once();
 
         $this->repository->update($categoryArray, 1);
+
+        $this->assertEquals('Emergency Fund', $this->category->label);
     }
 
+    /**
+     * Test that the repository 'delete' method deletes a model
+     */
     public function testDeleteMethodIsCalled()
     {
         $id = 3;
 
-        $this->category->shouldReceive('find')->once()->with($id)->andReturn($this->category)->shouldReceive('delete')->once();
+        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->category);
+        $this->category->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
     }

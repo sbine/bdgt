@@ -3,7 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class BillController extends Controller
 {

@@ -6,39 +6,54 @@ class TransactionRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->transaction = $this->mock('Bdgt\Resources\Transaction[create,save,update,delete]');
-        $this->transaction->user_id = 'testing';
-
-        $this->repository = $this->app->make('Bdgt\Repositories\Contracts\TransactionRepositoryInterface', [$this->transaction]);
+        $this->transaction = $this->mock('Bdgt\Resources\Transaction[save,delete]');
+        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentTransactionRepository[instance]', [$this->transaction]);
+        $this->repository->scopeBy('user_id', 'testing');
     }
 
+    /**
+     * Test that the repository 'create' method sets attributes and saves a model
+     */
     public function testCreateMethodIsCalled()
     {
         $transactionArray = [
-            'amount' => '50'
+            'amount' => 50
         ];
 
-        $this->transaction->shouldReceive('create')->once()->with($this->addScopeKeyToData($transactionArray));
+        $this->repository->shouldReceive('instance')->once()->andReturn($this->transaction);
+        $this->transaction->shouldReceive('save')->once();
 
         $this->repository->create($transactionArray);
+
+        $this->assertEquals(50, $this->transaction->amount);
     }
 
+    /**
+     * Test that the repository 'update' method changes attributes and saves a model
+     */
     public function testUpdateMethodIsCalled()
     {
         $transactionArray = [
-            'amount' => '50'
+            'amount' => 50
         ];
 
-        $this->transaction->shouldReceive('where')->once()->andReturn($this->transaction)->shouldReceive('update')->once()->with($this->addScopeKeyToData($transactionArray));
+        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->transaction);
+        $this->transaction->shouldReceive('save')->once();
 
         $this->repository->update($transactionArray, 1);
+
+        $this->assertEquals(50, $this->transaction->amount);
     }
 
+    /**
+     * Test that the repository 'delete' method deletes a model
+     */
     public function testDeleteMethodIsCalled()
     {
         $id = 3;
 
-        $this->transaction->shouldReceive('find')->once()->with($id)->andReturn($this->transaction)->shouldReceive('delete')->once();
+        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->transaction);
+        $this->transaction->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
     }

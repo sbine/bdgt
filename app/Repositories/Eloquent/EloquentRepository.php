@@ -32,6 +32,15 @@ abstract class EloquentRepository implements RepositoryInterface
         return $this;
     }
 
+    public function instance($attribute = 'id', $value = null)
+    {
+        if ($value) {
+            return $this->findBy($attribute, $value);
+        }
+
+        return new $this->model;
+    }
+
     /**
      * Retrieve all models based on criteria
      *
@@ -73,36 +82,47 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $data = $this->ensureScopeIntegrity($data);
 
-        return $this->model->create($data);
+        $instance = $this->instance();
+
+        foreach ($data as $key => $value) {
+            $instance->setAttribute($key, $value);
+        }
+
+        return $instance->save();
     }
 
     public function update(array $data, $id, $attribute = 'id')
     {
         $data = $this->ensureScopeIntegrity($data);
 
-        return $this->model->where($attribute, '=', $id)
-                            ->update($data);
+        $instance = $this->instance($attribute, $id);
+
+        foreach ($data as $key => $value) {
+            $instance->setAttribute($key, $value);
+        }
+
+        return $instance->save();
     }
 
     public function delete($id)
     {
-        $object = $this->model->find($id);
+        $instance = $this->instance('id', $id);
 
-        $this->ensureScopeIntegrity($object);
+        $this->ensureScopeIntegrity($instance);
 
-        return $object->delete();
+        return $instance->delete();
     }
 
     public function find($id, $columns = ['*'])
     {
-        $object = $this->model->find($id, $columns);
+        $instance = $this->model->find($id, $columns);
 
-        $this->ensureScopeIntegrity($object);
+        $this->ensureScopeIntegrity($instance);
 
-        return $object;
+        return $instance;
     }
 
-    public function findBy($field, $value, $columns = ['*'])
+    public function findBy($attribute, $value, $columns = ['*'])
     {
         return $this->model->where($this->scopeKey, '=', $this->scopeValue)
                             ->where($attribute, '=', $value)

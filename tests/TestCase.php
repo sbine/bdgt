@@ -16,6 +16,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
+        putenv('DB_DEFAULT=sqlite_testing');
+
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
@@ -28,9 +30,13 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @return mixed
      */
-    public function mock($class)
+    public function mock($class, $args = null)
     {
-        $mock = Mockery::mock($class);
+        if ($args) {
+            $mock = Mockery::mock($class, $args);
+        } else {
+            $mock = Mockery::mock($class);
+        }
 
         $this->app->instance($class, $mock);
 

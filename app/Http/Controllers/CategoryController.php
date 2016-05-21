@@ -3,7 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -89,7 +89,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect("/categories")->with('alerts.success', trans('crud.categories.deleted'));
+            return redirect('/categories')->with('alerts.success', trans('crud.categories.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }

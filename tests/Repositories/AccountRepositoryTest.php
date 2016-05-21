@@ -6,39 +6,54 @@ class AccountRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->account = $this->mock('Bdgt\Resources\Account[create,save,update,delete]');
-        $this->account->user_id = 'testing';
-
-        $this->repository = $this->app->make('Bdgt\Repositories\Contracts\AccountRepositoryInterface', [$this->account]);
+        $this->account = $this->mock('Bdgt\Resources\Account[save,delete]');
+        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentAccountRepository[instance]', [$this->account]);
+        $this->repository->scopeBy('user_id', 'testing');
     }
 
+    /**
+     * Test that the repository 'create' method sets attributes and saves a model
+     */
     public function testCreateMethodIsCalled()
     {
         $accountArray = [
             'name' => 'Checking'
         ];
 
-        $this->account->shouldReceive('create')->once()->with($this->addScopeKeyToData($accountArray));
+        $this->repository->shouldReceive('instance')->once()->andReturn($this->account);
+        $this->account->shouldReceive('save')->once();
 
         $this->repository->create($accountArray);
+
+        $this->assertEquals('Checking', $this->account->name);
     }
 
+    /**
+     * Test that the repository 'update' method changes attributes and saves a model
+     */
     public function testUpdateMethodIsCalled()
     {
         $accountArray = [
             'name' => 'Checking'
         ];
 
-        $this->account->shouldReceive('where')->once()->andReturn($this->account)->shouldReceive('update')->once()->with($this->addScopeKeyToData($accountArray));
+        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->account);
+        $this->account->shouldReceive('save')->once();
 
         $this->repository->update($accountArray, 1);
+
+        $this->assertEquals('Checking', $this->account->name);
     }
 
+    /**
+     * Test that the repository 'delete' method deletes a model
+     */
     public function testDeleteMethodIsCalled()
     {
         $id = 3;
 
-        $this->account->shouldReceive('find')->once()->with($id)->andReturn($this->account)->shouldReceive('delete')->once();
+        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->account);
+        $this->account->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
     }

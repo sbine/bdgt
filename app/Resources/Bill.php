@@ -2,9 +2,9 @@
 
 namespace Bdgt\Resources;
 
+use Bdgt\Resources\Model;
 use DateInterval;
 use DateTime;
-use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {

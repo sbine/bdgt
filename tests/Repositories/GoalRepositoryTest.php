@@ -6,39 +6,54 @@ class GoalRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->goal = $this->mock('Bdgt\Resources\Goal[create,save,update,delete]');
-        $this->goal->user_id = 'testing';
-
-        $this->repository = $this->app->make('Bdgt\Repositories\Contracts\GoalRepositoryInterface', [$this->goal]);
+        $this->goal = $this->mock('Bdgt\Resources\Goal[save,delete]');
+        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentGoalRepository[instance]', [$this->goal]);
+        $this->repository->scopeBy('user_id', 'testing');
     }
 
+    /**
+     * Test that the repository 'create' method sets attributes and saves a model
+     */
     public function testCreateMethodIsCalled()
     {
         $goalArray = [
             'label' => 'Retirement'
         ];
 
-        $this->goal->shouldReceive('create')->once()->with($this->addScopeKeyToData($goalArray));
+        $this->repository->shouldReceive('instance')->once()->andReturn($this->goal);
+        $this->goal->shouldReceive('save')->once();
 
         $this->repository->create($goalArray);
+
+        $this->assertEquals('Retirement', $this->goal->label);
     }
 
+    /**
+     * Test that the repository 'update' method changes attributes and saves a model
+     */
     public function testUpdateMethodIsCalled()
     {
         $goalArray = [
             'label' => 'Retirement'
         ];
 
-        $this->goal->shouldReceive('where')->once()->andReturn($this->goal)->shouldReceive('update')->once()->with($this->addScopeKeyToData($goalArray));
+        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->goal);
+        $this->goal->shouldReceive('save')->once();
 
         $this->repository->update($goalArray, 1);
+
+        $this->assertEquals('Retirement', $this->goal->label);
     }
 
+    /**
+     * Test that the repository 'delete' method deletes a model
+     */
     public function testDeleteMethodIsCalled()
     {
         $id = 3;
 
-        $this->goal->shouldReceive('find')->once()->with($id)->andReturn($this->goal)->shouldReceive('delete')->once();
+        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->goal);
+        $this->goal->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
     }
