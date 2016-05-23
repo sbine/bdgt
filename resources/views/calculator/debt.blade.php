@@ -66,7 +66,6 @@
 	$("#currentBalance, #interestRate, #minimumPayment").on('keyup', inputUpdate);
 
 	function inputUpdate(e) {
-		console.log(validInput());
 		if (validInput()) {
 			if (paymentSlider.slider('getValue') < $("#minimumPayment").val()) {
 				paymentSlider.slider('setValue', parseInt($("#minimumPayment").val(), 10));
@@ -103,13 +102,9 @@
 			$("#payoffDate").siblings('.moment').text(response.date.fromNow());
 			$("#interestPaid").text('$ ' + response.interest.toFixed(2));
 			$("#errorContainer").hide();
-
-			calculation = null;
 		}).fail(function() {
 			$("#payoffDate").text('');
 			$("#payoffDate").siblings('.moment').text('in over 80 years');
-
-			calculation = null;
 		});
 	}
 
