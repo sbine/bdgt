@@ -62,33 +62,34 @@
 
 	var paymentSlider = $("#payment").slider();
 
-	$("#currentBalance, #interestRate, #minimumPayment").on('keyup', function(e) {
-		if ($("#minimumPayment").val() !== undefined && $("#interestRate").val() !== undefined && $("#currentBalance").val() !== undefined &&
-			$("#minimumPayment").val() !== NaN && $("#interestRate").val() !== NaN && $("#currentBalance").val() !== NaN) {
+	paymentSlider.on('slide', inputUpdate);
+	$("#currentBalance, #interestRate, #minimumPayment").on('keyup', inputUpdate);
 
+	function inputUpdate(e) {
+		console.log(validInput());
+		if (validInput()) {
 			if (paymentSlider.slider('getValue') < $("#minimumPayment").val()) {
 				paymentSlider.slider('setValue', parseInt($("#minimumPayment").val(), 10));
 			}
+
 			calculate();
 		}
-	});
+	}
 
-	paymentSlider.on('slide', function(e) {
-		if (paymentSlider.slider('getValue') < $("#minimumPayment").val()) {
-			paymentSlider.slider('setValue', parseInt($("#minimumPayment").val(), 10));
-		}
-		else {
-			calculate();
-		}
-	});
+	function validInput() {
+		return ($("#minimumPayment").val() 			!== undefined 	&& 
+				$("#interestRate").val() 			!== undefined 	&&
+				$("#currentBalance").val() 			!== undefined 	&&
+				$("#minimumPayment").val() 			!== NaN 		&&
+				$("#interestRate").val() 			!== NaN			&&
+				$("#currentBalance").val() 			!== NaN			&&
+				paymentSlider.slider('getValue') 	!== undefined 	&&
+				paymentSlider.slider('getValue') 	!== NaN)
+	}
 
-	function calculate() {
-		if (calculation) {
-			calculation.reject();
-		}
-		
+	function calculate() {		
 		calculation = $.Deferred(function() {
-			var loan = new Loan(parseFloat($("#currentBalance").val()), parseFloat($("#interestRate").val()) / 100, parseFloat($("#minimumPayment").val()));
+			var loan = new Loan($("#currentBalance").val(), $("#interestRate").val(), paymentSlider.slider('getValue'));
 			var interest = loan.calculate();
 
 			if (interest.interest === -1) {
@@ -102,9 +103,13 @@
 			$("#payoffDate").siblings('.moment').text(response.date.fromNow());
 			$("#interestPaid").text('$ ' + response.interest.toFixed(2));
 			$("#errorContainer").hide();
+
+			calculation = null;
 		}).fail(function() {
 			$("#payoffDate").text('');
 			$("#payoffDate").siblings('.moment').text('in over 80 years');
+
+			calculation = null;
 		});
 	}
 

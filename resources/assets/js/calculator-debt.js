@@ -1,8 +1,13 @@
 var Loan = function(amount, interestRate, minimumPayment) {
-  this.amount = amount;
-  this.interestRate = interestRate;
-  this.minimumPayment = minimumPayment;
-  this.payment = minimumPayment;
+  this.amount = parseFloat(amount);
+  this.interestRate = parseFloat(interestRate);
+
+  if (this.interestRate > 1) {
+  	this.interestRate /= 100;
+  }
+
+  this.minimumPayment = parseFloat(minimumPayment);
+  this.payment = this.minimumPayment;
 };
 
 Loan.prototype.makePayment = function(amount) {
@@ -33,8 +38,7 @@ Loan.prototype.calculate = function() {
 
 		currentBalance      -= this.payment;
 		currentBalance      *= 1 + this.interestRate;
-		additionalInterest  = (currentBalance * this.interestRate);
-		interestPaid        += additionalInterest;
+		interestPaid        += currentBalance * this.interestRate;
 
 		if (i > 960 || currentBalance >= Infinity) {
 			return { interest: -1 }
