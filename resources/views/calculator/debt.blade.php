@@ -32,14 +32,14 @@
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
 							<label for="currentBalance">Current Balance</label>
-							<input id="currentBalance" type="text" class="form-control">
+							<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
 							<label for="interestRate">Interest Rate</label>
 							<div class="input-group">
-								<input id="interestRate" type="text" class="form-control" value="0.00">
+								<input id="interestRate" type="number" step="0.1" class="form-control" value="5.4">
 								<span class="input-group-addon">%</span>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
 							<label for="minimumPayment">Minimum Payment</label>
-							<input id="minimumPayment" type="number" class="form-control" value="10" min="10">
+							<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
 						</div>
 					</div>
 				</div>
@@ -62,86 +62,41 @@
 
 	var paymentSlider = $("#payment").slider();
 
-	var loan = new Loan(2000, 0.05, 200);
+	paymentSlider.on('slide', inputUpdate);
+	$("#currentBalance, #interestRate, #minimumPayment").on('keyup', inputUpdate);
 
-	console.log(loan.interest(500));
-
-	$("#currentBalance, #interestRate, #minimumPayment").on('keyup', function(e) {
-		if ($("#minimumPayment").val() !== undefined && $("#interestRate").val() !== undefined && $("#currentBalance").val() !== undefined) {
+	function inputUpdate(e) {
+		if (validInput()) {
 			if (paymentSlider.slider('getValue') < $("#minimumPayment").val()) {
 				paymentSlider.slider('setValue', parseInt($("#minimumPayment").val(), 10));
 			}
+
 			calculate();
 		}
-	});
+	}
 
-	paymentSlider.on('slide', function(e) {
-		if (paymentSlider.slider('getValue') < $("#minimumPayment").val()) {
-			paymentSlider.slider('setValue', parseInt($("#minimumPayment").val(), 10));
-		}
-		else {
-			calculate();
-		}
-	});
+	function validInput() {
+		return ($("#minimumPayment").val() 			!== undefined 	&& 
+				$("#interestRate").val() 			!== undefined 	&&
+				$("#currentBalance").val() 			!== undefined 	&&
+				$("#minimumPayment").val() 			!== NaN 		&&
+				$("#interestRate").val() 			!== NaN			&&
+				$("#currentBalance").val() 			!== NaN			&&
+				paymentSlider.slider('getValue') 	!== undefined 	&&
+				paymentSlider.slider('getValue') 	!== NaN)
+	}
 
-	function calculate() {
-		if (calculation) {
-			calculation.reject();
-		}
+	function calculate() {		
 		calculation = $.Deferred(function() {
+			var loan = new Loan($("#currentBalance").val(), $("#interestRate").val(), paymentSlider.slider('getValue'));
+			var interest = loan.calculate();
 
-			var i = 0;
-			var principal = parseFloat($("#currentBalance").val());
-			if (principal === undefined) {
-				principal = 0;
+			if (interest.interest === -1) {
+				showError('Increase your monthly payments -- current payment plan will take over 80 years!');
+				return this.reject();
 			}
-			var interestRate = parseFloat($("#interestRate").val()) / 100;
-			var payment = parseFloat(paymentSlider.slider('getValue'));
-			var interestPaid = 0;
 
-			var date = moment();
-			var currentBalance = principal;
-
-			while (currentBalance > 0) {
-				date.add(1, 'M');
-
-				if (currentBalance <= 0) { break; }
-
-				//  payment = principle * monthly interest/(1 - (1/(1+MonthlyInterest)*Months))
-				//  payment / principle = monthly interest/(1 - (1/(1+MonthlyInterest)*Months))
-				//
-				//   Increment month
-				//  Generate interest
-				//   Pay min payment
-				//   *Pay interest
-				//   *Pay principal
-				//   If leftover money, add to extra_payment
-				//   Remove loans at 0
-				//   Apply extra payment to loans until extra payment is 0 or remaining_loans is 0
-				//   Sort based on payment type
-				//   Remove loans as paid
-
-				currentBalance = currentBalance - payment;
-				currentBalance = currentBalance * (1 + interestRate);
-				additionalInterest = (currentBalance * interestRate);
-				interestPaid = interestPaid + additionalInterest;
-
-				console.log("BALANCE " + currentBalance);
-				console.log("ADDITIONAL INTEREST " + additionalInterest);
-				console.log("INTEREST " + additionalInterest);
-
-				i++;
-
-				if (i > 960 || currentBalance >= Infinity) {
-					showError('Increase your monthly payments -- current payment plan will take over 80 years!');
-					return this.reject();
-					break;
-				}
-			}
-			return this.resolve({
-				date: date,
-				interest: interestPaid
-			});
+			return this.resolve(interest);
 		}).done(function(response) {
 			$("#payoffDate").text('on ' + response.date.format('MMM Do, YYYY'));
 			$("#payoffDate").siblings('.moment').text(response.date.fromNow());
@@ -157,5 +112,9 @@
 		$("#errorMessage").text(text);
 		$("#errorContainer").show();
 	}
+
+	$(document).on('ready', function() {
+		$("#minimumPayment").trigger('keyup');
+	});
 </script>
 @endsection
