@@ -14,15 +14,18 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            'partials.dropdowns.accounts', 'Bdgt\Http\Composers\AccountsComposer'
+            'partials.dropdowns.accounts',
+            'Bdgt\Http\Composers\AccountsComposer'
         );
 
         view()->composer(
-            'partials.dropdowns.categories', 'Bdgt\Http\Composers\CategoriesComposer'
+            'partials.dropdowns.categories',
+            'Bdgt\Http\Composers\CategoriesComposer'
         );
 
         view()->composer(
-            'partials.dropdowns.bills', 'Bdgt\Http\Composers\BillsComposer'
+            'partials.dropdowns.bills',
+            'Bdgt\Http\Composers\BillsComposer'
         );
     }
 

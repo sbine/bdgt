@@ -1,7 +1,7 @@
 <?php
-	if (!isset($useDefaults)) {
-		$useDefaults = false;
-	}
+    if (!isset($useDefaults)) {
+        $useDefaults = false;
+    }
 ?>
 
 @if ($useDefaults)
