@@ -37,7 +37,7 @@
 							</div>
 							<div class="media-body">
 								<h2 class="media-heading">
-									@if (is_object($ledger->lastPurchase()))
+									@if ($ledger->lastPurchase())
 										<span class="moment">{{ $ledger->lastPurchase() }}</span>
 									@else
 										<span>N/A</span>

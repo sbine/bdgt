@@ -156,9 +156,11 @@
 	<script>
 	$(document).on('ready ajaxComplete', function() {
 		$(".moment").not('.processed-ready').each(function(value) {
-			var date = moment($(this).text());
+			var dateFromNow = moment(new Date($(this).text())).fromNow();
 
-			$(this).text(date.fromNow());
+			if (dateFromNow !== 'Invalid date') {
+				$(this).text(dateFromNow);
+			}
 
 			$(this).addClass('processed-ready');
 		});
