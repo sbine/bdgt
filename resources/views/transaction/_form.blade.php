@@ -77,6 +77,7 @@
 	<div class="col-sm-8 col-sm-offset-3">
 		<div class="checkbox">
 			<label>
+				<input type="hidden" name="cleared" value="0">
 				<input type="checkbox" name="cleared" value="1">
 				Cleared
 			</label>
