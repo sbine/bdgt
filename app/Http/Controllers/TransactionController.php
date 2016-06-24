@@ -41,6 +41,24 @@ class TransactionController extends Controller
     }
 
     /**
+     * Show an individual transaction to the user.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        try {
+            $transaction = $this->repository->find($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect('/transactions');
+        }
+
+        return response()->json($transaction->toArray());
+    }
+
+    /**
      * Create and store a new transaction.
      *
      * @return Redirect

@@ -75,11 +75,11 @@
 		</td>
 		@if (isset($actionable))
 		<td>
-			<button class="btn btn-warning btn-sm edit-transaction">
+			<button class="btn btn-warning btn-xs edit-transaction">
 				<i class="fa fa-pencil"></i>
 			</button>
 
-			<button class="btn btn-danger btn-sm delete-transaction">
+			<button class="btn btn-danger btn-xs delete-transaction">
 				<i class="fa fa-remove"></i>
 			</button>
 		</td>
@@ -99,16 +99,28 @@ $(document).ready(function() {
 	});
 
 	$(".edit-transaction").on('click', function(e) {
-		var $tableRow = $(this).closest('tr');
-		$tableRow.find('td > span').each(function() {
-			$("#editTransactionModal").find('[name="' + $(this).attr("data-name") + '"]').val($.trim($(this).text())).change();
+		var transactionId = $(this).closest('tr').data('id');
 
-			$("#editTransactionModal").find('.datepicker[name="' + $(this).attr("data-name") + '"]').datepicker('update', $.trim($(this).text()));
+		$.getJSON('/transactions/' + transactionId, function(transaction) {
+			$('#editTransactionModal input[type="text"], select').each(function() {
+				$(this).val(transaction[$(this).attr('name')]);
+			});
+			$('#editTransactionModal input[type="radio"]').each(function() {
+				$(this).val([transaction[$(this).attr('name')]]);
+			});
+			$('#editTransactionModal input:checkbox').each(function() {
+				if (transaction[$(this).attr('name')] === 1) {
+					$(this).attr('checked', true);
+				}
+			});
+			$('#editTransactionModal .datepicker').each(function() {
+				$(this).datepicker('update', moment(transaction[$(this).attr('name')]).format('YYYY-MM-DD'));
+			});
+
+			$('#editTransactionModal').find('form').attr('action', '/transactions/' + transactionId);
+
+			$('#editTransactionModal').modal('toggle');
 		});
-
-		$("#editTransactionModal").find('form').attr('action', '/transactions/' + $tableRow.attr("data-id"));
-
-		$("#editTransactionModal").modal('toggle');
 	});
 });
 </script>
