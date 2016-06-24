@@ -27,5 +27,5 @@
 		</div>
 	</div>
 
-	@include('account.create_modal')
+	@include('account.modals.create')
 @endsection

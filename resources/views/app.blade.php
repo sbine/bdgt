@@ -130,7 +130,7 @@
 			@yield('content')
 
 			@if (Auth::user())
-				@include('transaction.create_modal')
+				@include('transaction.modals.create')
 			@endif
 		</div>
 	</div>

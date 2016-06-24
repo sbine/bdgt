@@ -41,7 +41,6 @@
 		</div>
 	</div>
 
-	@include('account.edit_modal')
-
-	@include('account.delete_modal')
+	@include('account.modals.edit')
+	@include('account.modals.delete')
 @endsection

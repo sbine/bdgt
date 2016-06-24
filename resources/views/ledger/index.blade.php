@@ -95,7 +95,7 @@
 		</div>
 	</div>
 
-	@include('transaction.edit_modal')
-	@include('transaction.delete_modal')
+	@include('transaction.modals.edit')
+	@include('transaction.modals.delete')
 @endsection
 

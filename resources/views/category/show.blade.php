@@ -41,7 +41,6 @@
 		</div>
 	</div>
 
-	@include('category.edit_modal')
-
-	@include('category.delete_modal')
+	@include('category.modals.edit')
+	@include('category.modals.delete')
 @endsection

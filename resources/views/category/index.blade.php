@@ -41,5 +41,5 @@
 		</div>
 	</div>
 
-	@include('category.create_modal')
+	@include('category.modals.edit')
 @endsection

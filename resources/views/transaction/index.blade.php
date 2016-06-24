@@ -27,6 +27,6 @@
 		</div>
 	</div>
 
-	@include('transaction.edit_modal')
+	@include('transaction.modals.edit')
 @endsection
 
