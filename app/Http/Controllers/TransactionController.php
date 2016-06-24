@@ -85,4 +85,20 @@ class TransactionController extends Controller
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
+
+    /**
+     * Delete a transaction by ID.
+     *
+     * @param  int $id
+     *
+     * @return Redirect
+     */
+    public function destroy($id)
+    {
+        if ($this->repository->delete($id)) {
+            return redirect('/transactions')->with('alerts.success', trans('crud.transactions.deleted'));
+        } else {
+            return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
+        }
+    }
 }

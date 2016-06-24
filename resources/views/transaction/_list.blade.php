@@ -92,13 +92,13 @@
 @if (isset($actionable))
 <script>
 $(document).ready(function() {
-	$("table").DataTable({
-		order: [[1, "desc"]],
+	$('table').DataTable({
+		order: [[1, 'desc']],
 		pageLength: 20,
 		lengthMenu: [ 10, 20, 30, 50 ]
 	});
 
-	$(".edit-transaction").on('click', function(e) {
+	$('.edit-transaction').on('click', function(e) {
 		var transactionId = $(this).closest('tr').data('id');
 
 		$.getJSON('/transactions/' + transactionId, function(transaction) {
@@ -118,9 +118,15 @@ $(document).ready(function() {
 			});
 
 			$('#editTransactionModal').find('form').attr('action', '/transactions/' + transactionId);
-
 			$('#editTransactionModal').modal('toggle');
 		});
+	});
+
+	$('.delete-transaction').on('click', function(e) {
+		var transactionId = $(this).closest('tr').data('id');
+
+		$('#deleteTransactionModal').find('form').attr('action', '/transactions/' + transactionId);
+		$('#deleteTransactionModal').modal('toggle');
 	});
 });
 </script>
