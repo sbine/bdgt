@@ -1,5 +1,9 @@
 <?php
 
+namespace Bdgt\Tests\Resources;
+
+use Bdgt\Tests\TestCase;
+
 class BillTest extends TestCase
 {
     public function setUp()

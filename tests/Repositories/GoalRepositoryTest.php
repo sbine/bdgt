@@ -1,5 +1,10 @@
 <?php
 
+namespace Bdgt\Tests\Repositories;
+
+use Bdgt\Tests\TestCase;
+use Mockery;
+
 class GoalRepositoryTest extends TestCase
 {
     public function setUp()

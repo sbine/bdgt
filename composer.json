@@ -27,7 +27,10 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
-        ]
+        ],
+        "psr-4": {
+            "Bdgt\\Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
