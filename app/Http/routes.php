@@ -33,14 +33,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('bills', 'BillController');
 
     Route::resource('goals', 'GoalController');
-
-    Route::get('/calculators/debt', [
-        'as' => 'calculators.debt',
-        'uses' => 'CalculatorController@debt'
-    ]);
-
-    Route::get('/calculators/savings', [
-        'as' => 'calculators.savings',
-        'uses' => 'CalculatorController@savings'
-    ]);
 });
+
+Route::get('/calculators/debt', [
+    'as' => 'calculators.debt',
+    'uses' => 'CalculatorController@debt'
+]);
+
+Route::get('/calculators/savings', [
+    'as' => 'calculators.savings',
+    'uses' => 'CalculatorController@savings'
+]);
