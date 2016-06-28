@@ -11,7 +11,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<table class="table table-bordered">
 					{!! $transactions !!}
 					<tfoot>

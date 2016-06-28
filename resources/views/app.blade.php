@@ -114,7 +114,7 @@
 			@section('breadcrumbs')
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
+					<div class="{{ config('layout.grid_class') }}">
 						<ol class="breadcrumb">
 							<li><a href="{{ route('index') }}">Home</a></li>
 							@yield('breadcrumbs.items')
@@ -152,29 +152,6 @@
 	<script src="/js/app.min.js"></script>
 
 	@yield('js')
-
-	<script>
-	$(document).on('ready ajaxComplete', function() {
-		$(".moment").not('.processed-ready').each(function(value) {
-			var dateFromNow = moment(new Date($(this).text())).fromNow();
-
-			if (dateFromNow !== 'Invalid date') {
-				$(this).text(dateFromNow);
-			}
-
-			$(this).addClass('processed-ready');
-		});
-
-		$(".money").not('.processed-ready').each(function(value) {
-			if ($(this).text().charAt(0) == '-') {
-				$(this).addClass('negative');
-			}
-			else {
-				$(this).addClass('positive');
-			}
-		});
-	});
-	</script>
 
 	@yield('scripts')
 </body>

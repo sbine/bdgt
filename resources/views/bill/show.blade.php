@@ -13,7 +13,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<h2>
 					{{ $bill->label }}
 					@if ($bill->total >= $bill->amount)
@@ -34,7 +34,7 @@
 		</div>
 		<br><br>
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<p class="lead">Payments</p>
 				<table class="table">
 					{!! $transactions !!}
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<a href="#deleteBillModal" data-toggle="modal" class="pull-right">Delete this bill</a>
 			</div>
 		</div>

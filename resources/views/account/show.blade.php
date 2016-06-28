@@ -13,7 +13,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<h2>
 					{{ $account->name }}
 					<span class="pull-right">
@@ -27,7 +27,7 @@
 		</div>
 		<br><br>
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<p class="lead">Transactions</p>
 				<table class="table">
 					{!! $transactions !!}
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<a href="#deleteAccountModal" data-toggle="modal" class="pull-right">Delete this account</a>
 			</div>
 		</div>

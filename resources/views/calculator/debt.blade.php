@@ -8,7 +8,7 @@
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="{{ config('layout.grid_class') }}">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="well">
@@ -76,7 +76,7 @@
 	}
 
 	function validInput() {
-		return ($("#minimumPayment").val() 			!== undefined 	&& 
+		return ($("#minimumPayment").val() 			!== undefined 	&&
 				$("#interestRate").val() 			!== undefined 	&&
 				$("#currentBalance").val() 			!== undefined 	&&
 				$("#minimumPayment").val() 			!== NaN 		&&
@@ -86,7 +86,7 @@
 				paymentSlider.slider('getValue') 	!== NaN)
 	}
 
-	function calculate() {		
+	function calculate() {
 		calculation = $.Deferred(function() {
 			var loan = new Loan($("#currentBalance").val(), $("#interestRate").val(), paymentSlider.slider('getValue'));
 			var interest = loan.calculate();
