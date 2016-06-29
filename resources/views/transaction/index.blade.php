@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addTransactionModal" data-toggle="modal" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add Transaction</a>
+	<a href="#addTransactionModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> Add Transaction</a>
 @endsection
 
 @section('content')

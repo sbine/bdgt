@@ -28,7 +28,7 @@
     height: 100%;
     margin-left: -@sidebarWidth;
     overflow-y: auto;
-    background: #F3F3F3;
+    background: @sidebar-bg;
     box-shadow: inset -10px 0px 20px -10px #C6C6C6;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -87,6 +87,9 @@
 .sidebar-nav > .sidebar-icon {
     height: 65px;
     line-height: 60px;
+    .fa {
+        display: inline;
+    }
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -110,7 +113,7 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: @sidebarWidth;
+        //padding-left: @sidebarWidth;
     }
 
     #wrapper.toggled {
@@ -127,6 +130,7 @@
 
     #page-content-wrapper {
         padding: 20px;
+        padding-left: @sidebarWidth + 20px;
         position: relative;
     }
 

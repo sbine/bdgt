@@ -92,6 +92,8 @@
 				<li class="sidebar-icon"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
 				<li class="sidebar-divider"></li>
 				-->
+				<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> Add Transaction</button></a></li>
+				<li class="sidebar-divider hidden-xs"></li>
 				<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
 				<li><a href="{{ route('categories.index') }}">Categories</a></li>
 				<li><a href="{{ route('transactions.index') }}">Transactions</a></li>
@@ -108,6 +110,8 @@
 			@section('alerts')
 				@include('alerts')
 			@show
+
+			<a class="btn btn-lg btn-block btn-success visible-xs-block" href="#addTransactionModal" data-toggle="modal"><i class="fa fa-plus"></i> Add Transaction</a>
 
 			@yield('top-content')
 

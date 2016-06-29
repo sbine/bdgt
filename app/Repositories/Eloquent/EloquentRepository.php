@@ -88,7 +88,10 @@ abstract class EloquentRepository implements RepositoryInterface
             $instance->setAttribute($key, $value);
         }
 
-        return $instance->save();
+        if ($instance->save()) {
+            return $instance;
+        }
+        return null;
     }
 
     public function update(array $data, $id, $attribute = 'id')
