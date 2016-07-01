@@ -21,6 +21,7 @@
     "seiyria-bootstrap-slider": "4.4.*",
     "font-awesome": "4.3.*",
     "datatables-plugins": "1.10.*",
-    "bootstrap-datepicker": "1.6.*"
+    "bootstrap-datepicker": "1.6.*",
+    "Chart.js": "2.1.*"
   }
 }

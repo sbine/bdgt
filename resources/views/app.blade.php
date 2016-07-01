@@ -48,11 +48,23 @@
 					@if (Auth::user())
 					<li class="{{ (request()->route()->getName() == 'index' ? 'active' : '') }}"><a href="{{ route('index') }}">Dashboard</a></li>
 					@endif
+					@if (Auth::user())
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Budget <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
+							<li><a href="{{ route('categories.index') }}">Categories</a></li>
+							<li><a href="{{ route('transactions.index') }}">Transactions</a></li>
+							<li><a href="{{ route('goals.index') }}">Goals</a></li>
+						</ul>
+					</li>
+					<li class="{{ (request()->route()->getName() == 'bills.index' ? 'active' : '') }}"><a href="{{ route('bills.index') }}">Bills</a></li>
+					<li class="{{ (request()->route()->getName() == 'reports.index' ? 'active' : '') }}"><a href="{{ route('reports.index') }}">Reports</a></li>
+					@endif
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calculators <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('calculators.debt') }}">Debt Calculator</a></li>
-							<li class="divider"></li>
 							<li><a href="{{ route('calculators.savings') }}">Savings Calculator</a></li>
 						</ul>
 					</li>
@@ -88,17 +100,20 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
+				@section('sidebar-nav')
 				<!--
 				<li class="sidebar-icon"><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
 				<li class="sidebar-divider"></li>
 				-->
 				<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> Add Transaction</button></a></li>
 				<li class="sidebar-divider hidden-xs"></li>
+				<li><a href="{{ route('index') }}">Dashboard</a></li>
 				<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
 				<li><a href="{{ route('categories.index') }}">Categories</a></li>
 				<li><a href="{{ route('transactions.index') }}">Transactions</a></li>
 				<li><a href="{{ route('bills.index') }}">Bills</a></li>
 				<li><a href="{{ route('goals.index') }}">Goals</a></li>
+				@show
 			</ul>
 		</div>
 		@endif
@@ -153,9 +168,10 @@
 	<script src="/js/bootstrap-datepicker.min.js"></script>
 	<script src="/js/bootstrap-slider.min.js"></script>
 	<script src="/js/moment.min.js"></script>
-	<script src="/js/app.min.js"></script>
 
 	@yield('js')
+
+	<script src="/js/app.min.js"></script>
 
 	@yield('scripts')
 </body>

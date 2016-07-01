@@ -85,17 +85,21 @@ class Bill extends Model
 
     public function getNextDueAttribute()
     {
-        $startDate = new DateTime(date('Y-m-d', strtotime($this->start_date)));
-        $currentDate = new DateTime(date('Y-m-d'));
-        $frequency = new DateInterval('P' . $this->frequency . 'D');
+        if (!$this->cachedNextDue) {
+            $startDate = new DateTime(date('Y-m-d 23:59:59', strtotime($this->start_date)));
+            $currentDate = new DateTime(date('Y-m-d'));
+            $frequency = new DateInterval('P' . $this->frequency . 'D');
 
-        $date = $startDate;
+            $date = $startDate;
 
-        while ($date <= $currentDate) {
-            $date->add($frequency);
+            while ($date <= $currentDate) {
+                $date->add($frequency);
+            }
+
+            $this->cachedNextDue = $date->format('Y-m-d');
         }
 
-        return $date->format('Y-m-d');
+        return $this->cachedNextDue;
     }
 
     public function getLastDueAttribute()

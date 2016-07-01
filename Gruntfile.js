@@ -93,6 +93,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
          dest: '<%= config.js %>/bootstrap-datepicker.min.js'
+       },
+       {
+         src: '<%= config.bower_path %>/Chart.js/dist/Chart.min.js',
+         dest: '<%= config.js %>/chart.min.js'
        }]
       },
       css: {

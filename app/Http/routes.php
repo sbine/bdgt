@@ -33,6 +33,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('bills', 'BillController');
 
     Route::resource('goals', 'GoalController');
+
+    Route::resource('reports', 'ReportController');
+    Route::group(['prefix' => 'reports'], function () {
+        Route::get('/', [
+            'as' => 'reports.index',
+            'uses' => 'ReportController@index'
+        ]);
+        Route::get('/{type}', [
+            'as' => 'reports.show',
+            'uses' => 'ReportController@show'
+        ]);
+        Route::get('ajax/{type}', [
+            'as' => 'reports.ajax.report',
+            'uses' => 'ReportController@ajax_report'
+        ]);
+    });
 });
 
 Route::get('/calculators/debt', [

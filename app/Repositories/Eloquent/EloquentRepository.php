@@ -132,6 +132,11 @@ abstract class EloquentRepository implements RepositoryInterface
                             ->first($columns);
     }
 
+    public function query()
+    {
+        return $this->model->where($this->model->getTable() . '.' . $this->scopeKey, '=', $this->scopeValue);
+    }
+
     /**
      * Save an object if it passes scope constraint
      *

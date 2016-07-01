@@ -39,8 +39,9 @@ $factory->define(Bdgt\Resources\Bill::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Bdgt\Resources\Category::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new \Bdgt\Providers\FakerProvider($faker));
     return [
-        'label'    => $faker->words(2, true),
+        'label'    => $faker->randomCategory(),
         'budgeted' => $faker->randomFloat(2, 0, 5000),
     ];
 });
@@ -57,13 +58,13 @@ $factory->define(Bdgt\Resources\Goal::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Bdgt\Resources\Transaction::class, function (Faker\Generator $faker) {
-    $flairs = [ 'lightgray', 'red', 'orange', 'yellow', 'green', 'blue', 'purple' ];
+
     return [
-        'date'    => $faker->dateTimeThisYear()->format('Y-m-d'),
+        'date'    => $faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
         'payee'   => $faker->name,
-        'amount'  => $faker->randomFloat(2, 0, 2500),
+        'amount'  => (2000 - $faker->biasedNumberBetween(1, 2000)) . '.' . $faker->numberBetween(0, 100),
         'inflow'  => $faker->boolean(),
         'cleared' => $faker->boolean(),
-        'flair'   => $flairs[rand(0, count($flairs) - 1)],
+        'flair'   => $faker->randomFlair(),
     ];
 });

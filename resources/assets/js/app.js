@@ -1,6 +1,6 @@
 $(document).on('ready ajaxComplete', function() {
 	$(".moment").not('.processed-ready').each(function(value) {
-		var dateFromNow = moment(new Date($(this).text())).fromNow();
+		var dateFromNow = moment($(this).text(), "YYYY-MM-DD").fromNow();
 
 		if (dateFromNow !== 'Invalid date') {
 			$(this).text(dateFromNow);

@@ -20,8 +20,13 @@ class DummyDataSeeder extends Seeder
         ])->each(function ($u) {
             $u->accounts()->saveMany(factory(Bdgt\Resources\Account::class, 5)->make());
             $u->bills()->saveMany(factory(Bdgt\Resources\Bill::class, 5)->make());
-            $u->categories()->saveMany(factory(Bdgt\Resources\Category::class, 5)->make());
+            $u->categories()->saveMany(factory(Bdgt\Resources\Category::class, 7)->make());
             $u->goals()->saveMany(factory(Bdgt\Resources\Goal::class, 5)->make());
+            $u->transactions()->saveMany(factory(Bdgt\Resources\Transaction::class, 100)->make([
+                'account_id'  => rand(1, 5),
+                'category_id' => rand(1, 7),
+                'bill_id'     => rand(1, 5),
+            ]));
         });
 
         factory(Bdgt\Resources\Transaction::class)->create([
@@ -38,12 +43,12 @@ class DummyDataSeeder extends Seeder
             $u->goals()->saveMany(factory(Bdgt\Resources\Goal::class, 5)->make());
         });
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             factory(Bdgt\Resources\Transaction::class)->create([
                 'user_id'     => rand(1, 3),
-                'account_id'  => rand(1, 4),
-                'category_id' => rand(1, 4),
-                'bill_id'     => rand(1, 4),
+                'account_id'  => rand(1, 5),
+                'category_id' => rand(1, 5),
+                'bill_id'     => rand(1, 5),
             ]);
         }
     }

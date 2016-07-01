@@ -33,6 +33,7 @@ class Transaction extends Model
 
     protected $nullable = [
         'bill_id',
+        'category_id',
     ];
 
     /**
