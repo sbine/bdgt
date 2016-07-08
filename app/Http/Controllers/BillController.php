@@ -108,24 +108,14 @@ class BillController extends Controller
 
         $billsByDate = [];
         if ($intervalStart && $intervalEnd) {
-            $bills = $this->repository->all();
+            $bills = $this->repository->allForInterval($intervalStart, $intervalEnd);
 
             foreach ($bills as $bill) {
-                $datesInInterval = $bill->getDueDatesForInterval($intervalStart, $intervalEnd, $bill->frequency, $bill->start_date);
-                $b               = [
-                    'id'         => $bill->id,
-                    'title'      => $bill->label,
-                    'frequency'  => $bill->frequency,
-                    'paid'       => $bill->paid,
-                    'url'        => '/bills/' . $bill->id,
-                ];
-
-                foreach ($datesInInterval as $date) {
-                    $b['nextDue']  = $date;
-                    $b['start']    = $date;
-                    $b['end']      = $date;
-                    $billsByDate[] = $b;
-                }
+                $bill['title'] = $bill['label'] . ' due';
+                $bill['url'] = '/bills/' . $bill['id'];
+                $bill['start'] = $bill['start_date'];
+                $bill['end'] = $bill['start_date'];
+                $billsByDate[] = $bill;
             }
         }
 

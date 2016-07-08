@@ -57,5 +57,6 @@
 			}
 		}
 	});
+	$('.fc-button').addClass('btn btn-default').removeClass('fc-state-default');
 </script>
 @endsection
