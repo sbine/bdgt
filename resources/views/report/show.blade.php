@@ -5,12 +5,12 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<li><a href="/reports">Reports</a></li>
+	<li><a href="/reports">{{ trans('labels.reports.plural') }}</a></li>
 	<li class="active">{{ $report->name }}</li>
 @endsection
 
 @section('sidebar-nav')
-	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> Add Transaction</button></a></li>
+	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> {{ trans('labels.transactions.add_button') }}</button></a></li>
 	<li class="sidebar-divider hidden-xs"></li>
 	<li><a href="/reports/spending">Spending Over Time</a></li>
 @overwrite

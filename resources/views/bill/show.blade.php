@@ -1,13 +1,12 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li><a href="/bills">Bills</a></li>
+	<li><a href="/bills">{{ trans('labels.bills.plural') }}</a></li>
 	<li class="active">{{ $bill->label }}</li>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editBillModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-	<!-- <a href="#deleteBillModal" data-toggle="modal" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Delete</a> -->
+	<a href="#editBillModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.bills.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -43,7 +42,7 @@
 		</div>
 		<div class="row">
 			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteBillModal" data-toggle="modal" class="pull-right">Delete this bill</a>
+				<a href="#deleteBillModal" data-toggle="modal" class="pull-right">{{ trans('labels.bills.delete_button') }}</a>
 			</div>
 		</div>
 	</div>

@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">Goals</li>
+	<li class="active">{{ trans('labels.goals.plural') }}</li>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addGoalModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> Add Goal</a>
+	<a href="#addGoalModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.goals.add_button') }}</a>
 @endsection
 
 @section('content')

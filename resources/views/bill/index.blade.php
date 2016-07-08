@@ -9,11 +9,11 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<li class="active">Bills</li>
+	<li class="active">{{ trans('labels.bills.plural') }}</li>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addBillModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> Add Bill</a>
+	<a href="#addBillModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.bills.add_button') }}</a>
 @endsection
 
 @section('content')

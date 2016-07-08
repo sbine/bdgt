@@ -4,18 +4,18 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="hidden" name="_method" value="PUT">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title">Edit Account</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.accounts.modals.edit.close_button') }}"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title">{{ trans('labels.accounts.modals.edit.title') }}</h3>
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Name</label>
+					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.name') }}</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="name" value="{{ $account->name }}" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Balance</label>
+					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.balance') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Interest Rate</label>
+					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.interest') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
 							<input type="text" class="form-control" name="interest" value="{{ $account->interest }}">
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Date Opened</label>
+					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.date_opened') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
 							<input type="text" class="form-control datepicker" name="date_opened" value="{{ $account->date_opened }}">
@@ -43,8 +43,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Edit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('labels.accounts.modals.edit.close_button') }}</button>
+				<button type="submit" class="btn btn-primary">{{ trans('labels.accounts.modals.edit.save_button') }}</button>
 			</div>
 		</form>
 	</div>

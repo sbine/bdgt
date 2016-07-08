@@ -1,1 +1,1 @@
-Click here to reset your password: {{ url('password/reset/'.$token) }}
+{{ trans('labels.emails.forgot_password_text') }} {{ url('password/reset/'.$token) }}

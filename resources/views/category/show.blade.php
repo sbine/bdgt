@@ -1,13 +1,12 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li><a href="/categories">Categories</a></li>
+	<li><a href="/categories">{{ trans('labels.categories.plural') }}</a></li>
 	<li class="active">{{ $category->label }}</li>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editCategoryModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-	<!-- <a href="#deleteCategoryModal" data-toggle="modal" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Delete</a> -->
+	<a href="#editCategoryModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.categories.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -28,7 +27,7 @@
 		<br><br>
 		<div class="row">
 			<div class="{{ config('layout.grid_class') }}">
-				<p class="lead">Transactions</p>
+				<p class="lead">{{ trans('labels.transactions.plural') }}</p>
 				<table class="table">
 					{!! $transactions !!}
 				</table>
@@ -36,7 +35,7 @@
 		</div>
 		<div class="row">
 			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteCategoryModal" data-toggle="modal" class="pull-right">Delete this category</a>
+				<a href="#deleteCategoryModal" data-toggle="modal" class="pull-right">{{ trans('labels.categories.delete_button') }}</a>
 			</div>
 		</div>
 	</div>

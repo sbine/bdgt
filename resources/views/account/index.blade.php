@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">Accounts</li>
+	<li class="active">{{ trans('labels.accounts.plural') }}</li>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addAccountModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> Add Account</a>
+	<a href="#addAccountModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.accounts.add_button') }}</a>
 @endsection
 
 

@@ -9,7 +9,7 @@
 	<input type="hidden" name="flair" value="lightgray">
 @endif
 <div class="form-group">
-	<label class="col-sm-3 control-label">Date</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.date') }}</label>
 	<div class="col-sm-8">
 		<div class="input-group">
 			<input type="text" class="form-control datepicker" name="date" required>
@@ -18,7 +18,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Amount</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.amount') }}</label>
 	<div class="col-sm-8">
 		<div class="input-group">
 			<span class="input-group-addon">$</span>
@@ -27,13 +27,13 @@
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Payee</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.payee') }}</label>
 	<div class="col-sm-8">
 		<input type="text" class="form-control" name="payee" required>
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Account</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.account_id') }}</label>
 	<div class="col-sm-8">
 		<select class="form-control" name="account_id" required>
 			@include('partials.dropdowns.accounts')
@@ -45,19 +45,19 @@
 		<div class="radio">
 			<label>
 				<input type="radio" name="inflow" value="1" required>
-				Inflow
+				{{ trans('labels.transactions.properties.inflow') }}
 			</label>
 		</div>
 		<div class="radio">
 			<label>
 				<input type="radio" name="inflow" value="0" required checked>
-				Outflow
+				{{ trans('labels.transactions.properties.outflow') }}
 			</label>
 		</div>
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Category</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.category_id') }}</label>
 	<div class="col-sm-8">
 		<select class="form-control" name="category_id">
 			@include('partials.dropdowns.categories')
@@ -65,7 +65,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Bill</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.bill_id') }}</label>
 	<div class="col-sm-8">
 		<select class="form-control" name="bill_id">
 			@include('partials.dropdowns.bills')
@@ -79,13 +79,13 @@
 			<label>
 				<input type="hidden" name="cleared" value="0">
 				<input type="checkbox" name="cleared" value="1">
-				Cleared
+				{{ trans('labels.transactions.properties.cleared') }}
 			</label>
 		</div>
 	</div>
 </div>
 <div class="form-group">
-	<label class="col-sm-3 control-label">Flair</label>
+	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.flair') }}</label>
 	<div class="col-sm-8">
 		<select class="form-control" name="flair">
 			@include('partials.dropdowns.flairs')

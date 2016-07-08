@@ -1,14 +1,14 @@
 <thead>
 	<tr>
 		<th></th>
-		<th>Date</th>
-		<th>Account</th>
-		<th>Category</th>
-		<th class="hide">Bill</th>
-		<th>Payee</th>
-		<th>Inflow</th>
-		<th>Outflow</th>
-		<th>Cleared</th>
+		<th>{{ trans('labels.transactions.properties.date') }}</th>
+		<th>{{ trans('labels.transactions.properties.account_id') }}</th>
+		<th>{{ trans('labels.transactions.properties.category_id') }}</th>
+		<th class="hide">{{ trans('labels.transactions.properties.bill_id') }}</th>
+		<th>{{ trans('labels.transactions.properties.payee') }}</th>
+		<th>{{ trans('labels.transactions.properties.inflow') }}</th>
+		<th>{{ trans('labels.transactions.properties.outflow') }}</th>
+		<th>{{ trans('labels.transactions.properties.cleared') }}</th>
 		@if (isset($actionable))
 		<th>Actions</th>
 		@endif

@@ -5,8 +5,8 @@
 			<input type="hidden" name="cleared" value="0">
 			<input type="hidden" name="flair" value="lightgray">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Add a Transaction</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.transactions.modals.create.close_button') }}"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{{ trans('labels.transactions.modals.create.title') }}</h4>
 			</div>
 			<div class="modal-body">
 				@include('transaction._form', [
@@ -14,8 +14,8 @@
 				])
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('labels.transactions.modals.create.close_button') }}</button>
+				<button type="submit" class="btn btn-primary">{{ trans('labels.transactions.modals.create.save_button') }}</button>
 			</div>
 		</form>
 	</div>

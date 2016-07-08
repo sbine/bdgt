@@ -1,14 +1,14 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li><a href="/calculators">Calculators</a></li>
-	<li class="active">Debt</li>
+	<li><a href="/calculators">{{ trans('labels.calculators.plural') }}</a></li>
+	<li class="active">{{ trans('labels.calculators.debt.label') }}</li>
 @endsection
 
 @section('sidebar-nav')
-	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> Add Transaction</button></a></li>
+	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> {{ trans('labels.transactions.add_button') }}</button></a></li>
 	<li class="sidebar-divider hidden-xs"></li>
-	<li><a href="{{ route('calculators.debt') }}">Debt Calculator</a></li>
+	<li><a href="{{ route('calculators.debt') }}">{{ trans('labels.calculators.debt.label') }}</a></li>
 @overwrite
 
 @section('content')
@@ -27,7 +27,7 @@
 									</div>
 								</div>
 								<div class="col-sm-6">
-									<p>Monthly Payment</p>
+									<p>{{ trans('labels.calculators.debt.properties.payment') }}</p>
 									<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
 								</div>
 							</div>
@@ -37,13 +37,13 @@
 				<div class="row">
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
-							<label for="currentBalance">Current Balance</label>
+							<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
 							<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
-							<label for="interestRate">Interest Rate</label>
+							<label for="interestRate">{{ trans('labels.calculators.debt.properties.interestRate') }}</label>
 							<div class="input-group">
 								<input id="interestRate" type="number" step="0.1" class="form-control" value="5.4">
 								<span class="input-group-addon">%</span>
@@ -52,7 +52,7 @@
 					</div>
 					<div class="col-md-2 col-sm-3 col-xs-4">
 						<div class="form-group">
-							<label for="minimumPayment">Minimum Payment</label>
+							<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
 							<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
 						</div>
 					</div>
