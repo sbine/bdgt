@@ -70,10 +70,12 @@ window.onload = function() {
     var reportName = $('#bdgtReport').data('name');
     var reportUrl = $('#bdgtReport').data('url');
 
-    window.bdgtReport = new StackedBarChart($("#bdgtReport"), reportName);
+    if (reportUrl !== undefined) {
+        window.bdgtReport = new StackedBarChart($("#bdgtReport"), reportName);
 
-    $.getJSON(reportUrl, function(json) {
-        window.bdgtReport.updateData(json);
-        window.bdgtReport.redraw();
-    });
+        $.getJSON(reportUrl, function(json) {
+            window.bdgtReport.updateData(json);
+            window.bdgtReport.redraw();
+        });
+    }
 };
