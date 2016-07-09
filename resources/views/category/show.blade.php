@@ -10,35 +10,21 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<h2>
-					{{ $category->label }}
-					<span class="pull-right">
-						$ {{ number_format(($category->budgeted - $category->spent), 2) }}
-					</span>
-				</h2>
-				<p class="pull-right">
-					$ {{ number_format($category->budgeted, 2) }} Budgeted
-				</p>
-			</div>
-		</div>
+		<h2>
+			{{ $category->label }}
+			<span class="pull-right">
+				$ {{ number_format(($category->budgeted - $category->spent), 2) }}
+			</span>
+		</h2>
+		<p class="pull-right">
+			$ {{ number_format($category->budgeted, 2) }} Budgeted
+		</p>
 		<br><br>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<p class="lead">{{ trans('labels.transactions.plural') }}</p>
-				<table class="table">
-					{!! $transactions !!}
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteCategoryModal" data-toggle="modal" class="pull-right">{{ trans('labels.categories.delete_button') }}</a>
-			</div>
-		</div>
-	</div>
+		<p class="lead">{{ trans('labels.transactions.plural') }}</p>
+		<table class="table">
+			{!! $transactions !!}
+		</table>
+		<a href="#deleteCategoryModal" data-toggle="modal" class="pull-right">{{ trans('labels.categories.delete_button') }}</a>
 
 	@include('category.modals.edit')
 	@include('category.modals.delete')

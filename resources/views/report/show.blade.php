@@ -16,11 +16,5 @@
 @overwrite
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<canvas id="bdgtReport" data-name="{{ $report->name }}" data-url="{{ $report->url }}"></canvas>
-			</div>
-		</div>
-	</div>
+	<canvas id="bdgtReport" data-name="{{ $report->name }}" data-url="{{ $report->url }}"></canvas>
 @endsection

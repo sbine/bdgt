@@ -34,10 +34,12 @@ class EloquentBillRepository extends EloquentRepository implements BillRepositor
 
             while ($date <= $intervalEnd) {
                 $b = $bill->replicate();
+                $b->id = $bill->id;
                 $b->transactions = $bill->transactions;
                 $b->start_date = $date->format('Y-m-d');
                 $lastDue = clone $date;
                 $b->cachedLastDue = $lastDue->sub($frequency)->format('Y-m-d');
+                unset($b->user_id);
                 $instances->push($b);
                 $date->add($frequency);
             }

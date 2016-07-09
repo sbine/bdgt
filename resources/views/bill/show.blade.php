@@ -10,42 +10,28 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<h2>
-					{{ $bill->label }}
-					@if ($bill->total >= $bill->amount)
-						<span class="label label-success">PAID</span>
-					@else
-						<span class="label label-danger">UNPAID</span>
-					@endif
-					<span class="pull-right">
-						$ {{ number_format($bill->amount, 2) }}
-					</span>
-				</h2>
-				<p>
-					Due <span class="moment">{{ $bill->nextDue }}</span>
-					<span class="text-muted">({{ $bill->nextDue }})</span>
-				</p>
-				<p>$ {{ number_format($bill->total, 2) }} paid since {{ $bill->lastDue }}</p>
-			</div>
-		</div>
-		<br><br>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<p class="lead">Payments</p>
-				<table class="table">
-					{!! $transactions !!}
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteBillModal" data-toggle="modal" class="pull-right">{{ trans('labels.bills.delete_button') }}</a>
-			</div>
-		</div>
-	</div>
+	<h2>
+		{{ $bill->label }}
+		@if ($bill->total >= $bill->amount)
+			<span class="label label-success">PAID</span>
+		@else
+			<span class="label label-danger">UNPAID</span>
+		@endif
+		<span class="pull-right">
+			$ {{ number_format($bill->amount, 2) }}
+		</span>
+	</h2>
+	<p>
+		Due <span class="moment">{{ $bill->nextDue }}</span>
+		<span class="text-muted">({{ $bill->nextDue }})</span>
+	</p>
+	<p>$ {{ number_format($bill->total, 2) }} paid since {{ $bill->lastDue }}</p>
+	<br><br>
+	<p class="lead">Payments</p>
+	<table class="table">
+		{!! $transactions !!}
+	</table>
+	<a href="#deleteBillModal" data-toggle="modal" class="pull-right">{{ trans('labels.bills.delete_button') }}</a>
 
 	@include('bill.modals.edit')
 	@include('bill.modals.delete')

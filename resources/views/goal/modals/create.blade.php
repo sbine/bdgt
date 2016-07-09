@@ -27,16 +27,16 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.goal_date') }}</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="goal_date">
+						<div class="input-group">
+							<input type="text" class="form-control datepicker" name="goal_date">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.interest') }}</label>
+					<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.balance') }}</label>
 					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" class="form-control" name="interest">
-							<span class="input-group-addon">%</span>
-						</div>
+						<input type="text" class="form-control" name="balance">
 					</div>
 				</div>
 			</div>

@@ -141,7 +141,6 @@ return [
             'amount' => 'Goal Amount',
             'balance' => 'Current Balance',
             'goal_date' => 'Goal Date',
-            'interest' => 'Interest Rate',
         ],
         'modals' => [
             'create' => [

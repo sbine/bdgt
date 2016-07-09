@@ -10,35 +10,21 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<h2>
-					{{ $account->name }}
-					<span class="pull-right">
-						$ {{ number_format($account->running_balance, 2) }}
-					</span>
-				</h2>
-				<p class="pull-right">
-					{{ number_format($account->interest, 2) }}%
-				</p>
-			</div>
-		</div>
+		<h2>
+			{{ $account->name }}
+			<span class="pull-right">
+				$ {{ number_format($account->running_balance, 2) }}
+			</span>
+		</h2>
+		<p class="pull-right">
+			{{ number_format($account->interest, 2) }}%
+		</p>
 		<br><br>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<p class="lead">{{ trans('labels.transactions.plural') }}</p>
-				<table class="table">
-					{!! $transactions !!}
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteAccountModal" data-toggle="modal" class="pull-right">{{ trans('labels.accounts.delete_button') }}</a>
-			</div>
-		</div>
-	</div>
+		<p class="lead">{{ trans('labels.transactions.plural') }}</p>
+		<table class="table">
+			{!! $transactions !!}
+		</table>
+		<a href="#deleteAccountModal" data-toggle="modal" class="pull-right">{{ trans('labels.accounts.delete_button') }}</a>
 
 	@include('account.modals.edit')
 	@include('account.modals.delete')

@@ -10,21 +10,15 @@
 
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<div class="list-group">
-					@foreach ($accounts as $account)
-						<a href="/accounts/{{ $account->id }}" class="list-group-item">
-							<span class="badge">{{ $account->transactions->count() }}</span>
-							<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
-							<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
-							<p class="list-group-item-text">$ {{ number_format($account->balance, 2) }}</p>
-						</a>
-					@endforeach
-				</div>
-			</div>
-		</div>
+	<div class="list-group">
+		@foreach ($accounts as $account)
+			<a href="/accounts/{{ $account->id }}" class="list-group-item">
+				<span class="badge">{{ $account->transactions->count() }}</span>
+				<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
+				<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
+				<p class="list-group-item-text">$ {{ number_format($account->balance, 2) }}</p>
+			</a>
+		@endforeach
 	</div>
 
 	@include('account.modals.create')

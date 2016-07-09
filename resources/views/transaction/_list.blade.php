@@ -4,7 +4,6 @@
 		<th>{{ trans('labels.transactions.properties.date') }}</th>
 		<th>{{ trans('labels.transactions.properties.account_id') }}</th>
 		<th>{{ trans('labels.transactions.properties.category_id') }}</th>
-		<th class="hide">{{ trans('labels.transactions.properties.bill_id') }}</th>
 		<th>{{ trans('labels.transactions.properties.payee') }}</th>
 		<th>{{ trans('labels.transactions.properties.inflow') }}</th>
 		<th>{{ trans('labels.transactions.properties.outflow') }}</th>
@@ -27,31 +26,11 @@
 			<span data-name="account_name">
 				{{ $transaction->account->name }}
 			</span>
-			<span class="hide" data-name="account_id">
-				{{ $transaction->account->id }}
-			</span>
 		</td>
 		<td>
 			<span data-name="category_label">
 				@if ($transaction->category)
 					{{ $transaction->category->label }}
-				@endif
-			</span>
-			<span class="hide" data-name="category_id">
-				@if ($transaction->category)
-					{{ $transaction->category->id }}
-				@endif
-			</span>
-		</td>
-		<td class="hide">
-			<span data-name="bill_label">
-				@if ($transaction->bill)
-					{{ $transaction->bill->label }}
-				@endif
-			</span>
-			<span data-name="bill_id">
-				@if ($transaction->bill)
-					{{ $transaction->bill->id }}
 				@endif
 			</span>
 		</td>

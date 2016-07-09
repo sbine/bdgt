@@ -10,39 +10,29 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<h2>
-					{{ $goal->label }}
-					<span class="pull-right">
-						$ {{ number_format($goal->balance, 2) }} / $ {{ number_format($goal->amount, 2) }}
-					</span>
-				</h2>
-				<div class="progress">
-					<div class="progress-bar
-					@if ($goal->achieved)
-						progress-bar-success
-					@elseif ($goal->balance > 0)
-						progress-bar-warning
-					@else
-						progress-bar-danger
-					@endif
-					progress-bar-striped" role="progressbar" aria-valuenow="{{ $goal->progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $goal->progress }}%; min-width: 1%;">
-						{{ $goal->progress }}%
-						<span class="sr-only">{{ $goal->progress }}% Complete</span>
-					</div>
-				</div>
-				<p>{{ trans('labels.goals.properties.goal_date') }}: {{ $goal->goal_date }} (<span class="moment">{{ $goal->goal_date }}</span>)</p>
+		<h2>
+			{{ $goal->label }}
+			<span class="pull-right">
+				$ {{ number_format($goal->balance, 2) }} / $ {{ number_format($goal->amount, 2) }}
+			</span>
+		</h2>
+		<div class="progress">
+			<div class="progress-bar
+			@if ($goal->achieved)
+				progress-bar-success
+			@elseif ($goal->balance > 0)
+				progress-bar-warning
+			@else
+				progress-bar-danger
+			@endif
+			progress-bar-striped" role="progressbar" aria-valuenow="{{ $goal->progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $goal->progress }}%; min-width: 1%;">
+				{{ $goal->progress }}%
+				<span class="sr-only">{{ $goal->progress }}% Complete</span>
 			</div>
 		</div>
+		<p>{{ trans('labels.goals.properties.goal_date') }}: {{ $goal->goal_date }} (<span class="moment">{{ $goal->goal_date }}</span>)</p>
 		<br><br>
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<a href="#deleteGoalModal" data-toggle="modal" class="pull-right">{{ trans('labels.goals.delete_button') }}</a>
-			</div>
-		</div>
-	</div>
+		<a href="#deleteGoalModal" data-toggle="modal" class="pull-right">{{ trans('labels.goals.delete_button') }}</a>
 
 	@include('goal.modals.edit')
 	@include('goal.modals.delete')

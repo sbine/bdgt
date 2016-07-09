@@ -9,23 +9,17 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<table class="table table-bordered">
-					{!! $transactions !!}
-					<tfoot>
-						<tr>
-							<td colspan="5"><b>Total</b></td>
-							<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
-							<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
-							<td colspan="2"></td>
-						</tr>
-					</tfoot>
-				</table>
-			</div>
-		</div>
-	</div>
+	<table class="table table-bordered">
+		{!! $transactions !!}
+		<tfoot>
+			<tr>
+				<td colspan="5"><b>Total</b></td>
+				<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
+				<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
+				<td colspan="2"></td>
+			</tr>
+		</tfoot>
+	</table>
 
 	@include('transaction.modals.edit')
 @endsection

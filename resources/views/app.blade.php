@@ -58,10 +58,15 @@
 							<li><a href="{{ route('goals.index') }}">Goals</a></li>
 						</ul>
 					</li>
-					<li class="{{ (request()->route()->getName() == 'bills.index' ? 'active' : '') }}"><a href="{{ route('bills.index') }}">Bills</a></li>
-					<li class="{{ (request()->route()->getName() == 'reports.index' ? 'active' : '') }}"><a href="{{ route('reports.index') }}">Reports</a></li>
+					<li class="{{ (strpos(request()->route()->getName(), 'bills') !== false ? 'active' : '') }}"><a href="{{ route('bills.index') }}">Bills</a></li>
+					<li class="dropdown {{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/reports/spending">Spending Trends</a></li>
+						</ul>
+					</li>
 					@endif
-					<li class="dropdown">
+					<li class="dropdown {{ (strpos(request()->route()->getName(), 'calculators') !== false ? 'active' : '') }}">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calculators <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('calculators.debt') }}">Debt Calculator</a></li>
@@ -146,7 +151,13 @@
 			</div>
 			@show
 
-			@yield('content')
+			<div class="container-fluid">
+				<div class="row">
+					<div class="{{ config('layout.grid_class') }}">
+						@yield('content')
+					</div>
+				</div>
+			</div>
 
 			@if (Auth::user())
 				@include('transaction.modals.create')

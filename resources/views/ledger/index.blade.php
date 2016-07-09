@@ -78,24 +78,18 @@
 
 @section('content')
 	<br>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
-				<table class="table table-bordered">
-					{!! $transactions !!}
-					<tfoot>
-						<tr>
-							<td colspan="5"><b>Total</b></td>
-							<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
-							<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
-							<td colspan="2"></td>
-						</tr>
-					</tfoot>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+	<table class="table table-bordered">
+		{!! $transactions !!}
+		<tfoot>
+			<tr>
+				<td colspan="5"><b>Total</b></td>
+				<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
+				<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
+				<td colspan="2"></td>
+			</tr>
+		</tfoot>
+		</tbody>
+	</table>
 
 	@include('transaction.modals.edit')
 	@include('transaction.modals.delete')

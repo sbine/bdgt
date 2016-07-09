@@ -12,51 +12,45 @@
 @overwrite
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="{{ config('layout.grid_class') }}">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="well">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="well">
-							<div class="row">
-								<div class="col-sm-6">
-									<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
-									<p class="lead">Total interest <span id="interestPaid" class="text-danger">$ 0.00</span></p>
-									<div id="errorContainer" style="display: none;">
-										<div id="errorMessage" class="text-danger"></div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<p>{{ trans('labels.calculators.debt.properties.payment') }}</p>
-									<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
-								</div>
-							</div>
+					<div class="col-sm-6">
+						<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
+						<p class="lead">Total interest <span id="interestPaid" class="text-danger">$ 0.00</span></p>
+						<div id="errorContainer" style="display: none;">
+							<div id="errorMessage" class="text-danger"></div>
 						</div>
+					</div>
+					<div class="col-sm-6">
+						<p>{{ trans('labels.calculators.debt.properties.payment') }}</p>
+						<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<div class="form-group">
-							<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
-							<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
-						</div>
-					</div>
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<div class="form-group">
-							<label for="interestRate">{{ trans('labels.calculators.debt.properties.interestRate') }}</label>
-							<div class="input-group">
-								<input id="interestRate" type="number" step="0.1" class="form-control" value="5.4">
-								<span class="input-group-addon">%</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<div class="form-group">
-							<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
-							<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
-						</div>
-					</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-sm-3 col-xs-4">
+			<div class="form-group">
+				<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
+				<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-3 col-xs-4">
+			<div class="form-group">
+				<label for="interestRate">{{ trans('labels.calculators.debt.properties.interestRate') }}</label>
+				<div class="input-group">
+					<input id="interestRate" type="number" step="0.1" class="form-control" value="5.4">
+					<span class="input-group-addon">%</span>
 				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-3 col-xs-4">
+			<div class="form-group">
+				<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
+				<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
 			</div>
 		</div>
 	</div>

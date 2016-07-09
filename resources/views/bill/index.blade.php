@@ -17,29 +17,27 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-5 col-sm-push-7">
-				<div class="list-group">
-					@foreach ($bills as $bill)
-						<a href="/bills/{{ $bill->id }}" class="list-group-item">
+	<div class="row">
+		<div class="col-sm-5 col-sm-push-7">
+			<div class="list-group">
+				@foreach ($bills as $bill)
+					<a href="/bills/{{ $bill->id }}" class="list-group-item">
 
-							@if ($bill->total >= $bill->amount)
-								<span class="pull-right label label-success">PAID</span>
-							@else
-								<span class="pull-right label label-danger">UNPAID</span>
-							@endif
+						@if ($bill->total >= $bill->amount)
+							<span class="pull-right label label-success">PAID</span>
+						@else
+							<span class="pull-right label label-danger">UNPAID</span>
+						@endif
 
-							<h4 class="list-group-item-heading">{{ $bill->label }}</h4>
-							<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue }}</span><span class="hide">{{ $bill->nextDue }}</span></p>
-							<p class="list-group-item-text">$ {{ number_format($bill->amount, 2) }}</p>
-						</a>
-					@endforeach
-				</div>
+						<h4 class="list-group-item-heading">{{ $bill->label }}</h4>
+						<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue }}</span><span class="hide">{{ $bill->nextDue }}</span></p>
+						<p class="list-group-item-text">$ {{ number_format($bill->amount, 2) }}</p>
+					</a>
+				@endforeach
 			</div>
-			<div class="col-sm-7 col-sm-pull-5">
-				<div id="calendar"></div>
-			</div>
+		</div>
+		<div class="col-sm-7 col-sm-pull-5">
+			<div id="calendar"></div>
 		</div>
 	</div>
 	@include('bill.modals.create')
