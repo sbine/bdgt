@@ -15,13 +15,14 @@
     "tests"
   ],
   "dependencies": {
-    "datatables": "1.10.*",
-    "momentjs": "2.12.*",
-    "fullcalendar": "2.2.*",
-    "seiyria-bootstrap-slider": "4.4.*",
-    "font-awesome": "4.3.*",
-    "datatables-plugins": "1.10.*",
-    "bootstrap-datepicker": "1.6.*",
-    "Chart.js": "2.1.*"
+    "datatables": "~1.10",
+    "moment": "~2.14",
+    "fullcalendar": "~2.8",
+    "seiyria-bootstrap-slider": "~4.4",
+    "font-awesome": "~4.3",
+    "datatables-plugins": "~1.10",
+    "bootstrap-datepicker": "~1.6",
+    "Chart.js": "~2.1",
+    "accounting.js": "~0.4"
   }
 }

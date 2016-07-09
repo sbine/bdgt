@@ -10,6 +10,14 @@ $(document).on('ready ajaxComplete', function() {
 	});
 
 	$(".money").not('.processed-ready').each(function(value) {
+		var formattedValue = accounting.formatMoney($(this).text(), "$ ");
+
+		if (formattedValue !== undefined) {
+			$(this).text(formattedValue);
+		}
+	});
+
+	$(".money-signed").not('.processed-ready').each(function(value) {
 		if ($(this).text().charAt(0) == '-') {
 			$(this).addClass('negative');
 		}

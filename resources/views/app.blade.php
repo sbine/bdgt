@@ -179,6 +179,7 @@
 	<script src="/js/bootstrap-datepicker.min.js"></script>
 	<script src="/js/bootstrap-slider.min.js"></script>
 	<script src="/js/moment.min.js"></script>
+	<script src="/js/accounting.min.js"></script>
 
 	@yield('js')
 

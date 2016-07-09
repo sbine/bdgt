@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
-						<p class="lead">Total interest <span id="interestPaid" class="text-danger">$ 0.00</span></p>
+						<p class="lead">Total interest <span id="interestPaid" class="text-danger money">0.00</span></p>
 						<div id="errorContainer" style="display: none;">
 							<div id="errorMessage" class="text-danger"></div>
 						</div>
@@ -100,7 +100,7 @@
 		}).done(function(response) {
 			$("#payoffDate").text('on ' + response.date.format('MMM Do, YYYY'));
 			$("#payoffDate").siblings('.moment').text(response.date.fromNow());
-			$("#interestPaid").text('$ ' + response.interest.toFixed(2));
+			$("#interestPaid").text(accounting.formatMoney(response.interest));
 			$("#errorContainer").hide();
 		}).fail(function() {
 			$("#payoffDate").text('');

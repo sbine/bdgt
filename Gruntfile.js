@@ -97,6 +97,10 @@ module.exports = function(grunt) {
        {
          src: '<%= config.bower_path %>/Chart.js/dist/Chart.min.js',
          dest: '<%= config.js %>/chart.min.js'
+       },
+       {
+         src: '<%= config.bower_path %>/accounting.js/accounting.min.js',
+         dest: '<%= config.js %>/accounting.min.js'
        }]
       },
       css: {

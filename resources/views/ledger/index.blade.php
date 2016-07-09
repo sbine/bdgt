@@ -24,7 +24,7 @@
 								</span>
 							</div>
 							<div class="media-body">
-								<h2 class="media-heading"><span class="money">{{ number_format($ledger->balance(), 2) }}</span></h2>
+								<h2 class="media-heading"><span class="money-signed">{{ number_format($ledger->balance(), 2) }}</span></h2>
 								<span class="text-muted">current balance</span>
 							</div>
 						</div>
@@ -73,7 +73,6 @@
 			</div>
 		</div>
 	</div>
-	<br>
 @endsection
 
 @section('content')

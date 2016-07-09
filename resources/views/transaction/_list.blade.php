@@ -39,12 +39,12 @@
 		</td>
 		<td>
 			@if ($transaction->inflow)
-				$ <span data-name="amount">{{ number_format($transaction->amount, 2) }}</span>
+				<span data-name="amount" class="money">{{ $transaction->amount }}</span>
 			@endif
 		</td>
 		<td>
 			@if (!$transaction->inflow)
-				$ <span data-name="amount">{{ number_format($transaction->amount, 2) }}</span>
+				<span data-name="amount" class="money">{{ $transaction->amount }}</span>
 			@endif
 		</td>
 		<td>
@@ -77,7 +77,7 @@ $(document).ready(function() {
 		lengthMenu: [ 10, 20, 30, 50 ]
 	});
 
-	$('.edit-transaction').on('click', function(e) {
+	$('body').on('click', '.edit-transaction', function(e) {
 		var transactionId = $(this).closest('tr').data('id');
 
 		$.getJSON('/transactions/' + transactionId, function(transaction) {
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$('.delete-transaction').on('click', function(e) {
+	$('body').on('click', '.delete-transaction', function(e) {
 		var transactionId = $(this).closest('tr').data('id');
 
 		$('#deleteTransactionModal').find('form').attr('action', '/transactions/' + transactionId);
