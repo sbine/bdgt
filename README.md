@@ -15,9 +15,11 @@ bdgt is a one-stop personal finance management app. Planned features:
 
 ## Screenshots
 
-![screenshot: bills page](http://puu.sh/fUYT7/a9d80cd65e.png)
+![screenshot: bills page](https://sarabine.com/bdgt-bills.png)
 
-![screenshot: goals page](http://puu.sh/fUYGh/c9e4c2e4bc.png)
+![screenshot: goals page](https://sarabine.com/bdgt-goals.png)
+
+![screenshot: reports](https://sarabine.com/bdgt-reports.png)
 
 ## Installation
 
