@@ -19,8 +19,8 @@ class CreateGoalsTable extends Migration
             $table->string('label', 128);
             $table->date('start_date');
             $table->date('goal_date');
-            $table->float('balance');
-            $table->float('amount');
+            $table->float('balance', 12, 3);
+            $table->float('amount', 12, 3);
             $table->softDeletes();
             $table->timestamps();
 
