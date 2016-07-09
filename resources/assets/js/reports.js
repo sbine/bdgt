@@ -50,8 +50,11 @@ StackedBarChart.prototype.initializeChart = function() {
 StackedBarChart.prototype.updateData = function(data) {
     var self = this;
     self.data = data;
+    var colors = self.getSemiRandomColors();
     $.each(self.data.datasets, function(i, dataset) {
-        dataset.backgroundColor = 'rgba(' + self.randomColor() + ',' + self.randomColor() + ',' + self.randomColor() + ',.7)';
+        var randColor = Math.floor(Math.random() * colors.length);
+        dataset.backgroundColor = colors[randColor]; // 'rgba(' + self.randomColor() + ',' + self.randomColor() + ',' + self.randomColor() + ',.7)'
+        colors.splice(randColor, 1);
     });
 }
 
@@ -60,6 +63,20 @@ StackedBarChart.prototype.redraw = function() {
         this.chart.clear();
     }
     this.initializeChart();
+}
+
+StackedBarChart.prototype.getSemiRandomColors = function() {
+    return [
+        '#4D4D4D',
+        '#5DA5DA',
+        '#FAA43A',
+        '#60BD68',
+        '#F17CB0',
+        '#B2912F',
+        '#B276B2',
+        '#DECF3F',
+        '#F15854',
+    ];
 }
 
 StackedBarChart.prototype.randomColor = function() {

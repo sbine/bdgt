@@ -9,19 +9,30 @@ class FakerProvider extends Base
     public function randomCategory()
     {
         $categories = [
-            'Gas',
+            'Fuel',
             'Groceries',
-            'Bills',
             'Restaurants',
+            'Fast Food',
             'Entertainment',
             'Rent',
-            'Insurance',
+            'Car Insurance',
+            'Car Repairs',
+            'Home Maintenance',
+            'Clothing',
+            'Health Insurance',
             'Cell Phone',
             'Pets',
             'Home',
             'Childcare',
             'Gifts',
-            'Health',
+            'Health Expenses',
+            'Charity',
+            'Energy Bill',
+            'Water Bill',
+            'Coffee',
+            'Alcohol',
+            'Education',
+            'Digital Services',
         ];
 
         return $this->randomElement($categories);
