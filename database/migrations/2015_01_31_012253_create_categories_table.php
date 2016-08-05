@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('label', 128);
-            $table->float('budgeted', 12, 3);
+            $table->decimal('budgeted', 12, 3);
             $table->integer('parent_category_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();

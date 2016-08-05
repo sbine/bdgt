@@ -62,7 +62,7 @@ $factory->define(Bdgt\Resources\Transaction::class, function (Faker\Generator $f
     return [
         'date'    => $faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
         'payee'   => $faker->name,
-        'amount'  => (2000 - $faker->biasedNumberBetween(1, 2000)) . '.' . $faker->numberBetween(0, 100),
+        'amount'  => (800 - $faker->biasedNumberBetween(1, 800)) . '.' . $faker->numberBetween(0, 99),
         'inflow'  => $faker->boolean(),
         'cleared' => $faker->boolean(),
         'flair'   => $faker->randomFlair(),

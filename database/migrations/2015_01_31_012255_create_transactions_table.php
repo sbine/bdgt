@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->integer('bill_id')->unsigned()->nullable();
             $table->string('payee', 128);
-            $table->float('amount', 12, 3);
+            $table->decimal('amount', 12, 3);
             $table->tinyInteger('inflow');
             $table->tinyInteger('cleared');
             $table->string('flair', 32)->nullable();

@@ -18,8 +18,8 @@ class CreateAccountsTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->dateTime('date_opened');
             $table->string('name', 128);
-            $table->float('balance', 12, 3);
-            $table->float('interest');
+            $table->decimal('balance', 12, 3);
+            $table->decimal('interest', 10, 3);
             //$table->integer('interest_period');
             $table->softDeletes();
             $table->timestamps();

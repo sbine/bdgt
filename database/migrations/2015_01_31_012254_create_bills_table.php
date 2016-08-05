@@ -19,7 +19,7 @@ class CreateBillsTable extends Migration
             $table->date('start_date');
             $table->integer('frequency');
             $table->string('label', 128);
-            $table->float('amount', 12, 3);
+            $table->decimal('amount', 12, 3);
             $table->softDeletes();
             $table->timestamps();
 
