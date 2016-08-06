@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 echo '--- Update repositories with apt ---'
 apt-get update
 echo '...done'
@@ -28,10 +30,12 @@ n 0.12.4
 echo '...done'
 
 
-echo '--- Installing MySQL and PHP5 ---'
+echo '--- Installing MariaDB and PHP5 ---'
+debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password password '
+debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again password '
 apt-get install -y php5 php5-cli php5-mcrypt libapache2-mod-php5 php5-curl php5-mysqlnd php5-sqlite
-apt-get install -y mariadb-server
-mysql -e 'CREATE DATABASE bdgt;'
+apt-get install -y mariadb-server-5.5
+mysql -uroot -e "CREATE DATABASE bdgt;"
 echo '...done'
 
 
