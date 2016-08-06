@@ -1,4 +1,4 @@
-@extends('app')
+@extends('guest')
 
 @section('content')
 	<div class="row">

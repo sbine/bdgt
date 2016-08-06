@@ -1,4 +1,4 @@
-@extends('app')
+@extends('guest')
 
 @section('breadcrumbs.items')
 	<li class="active">{{ trans('labels.auth.register') }}</li>

@@ -14,6 +14,11 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
+            'partials.sidebar',
+            'Bdgt\Http\Composers\AccountsComposer'
+        );
+
+        view()->composer(
             'partials.dropdowns.accounts',
             'Bdgt\Http\Composers\AccountsComposer'
         );
