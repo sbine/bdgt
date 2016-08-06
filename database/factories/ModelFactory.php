@@ -49,9 +49,10 @@ $factory->define(Bdgt\Resources\Category::class, function (Faker\Generator $fake
 });
 
 $factory->define(Bdgt\Resources\Goal::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new \Bdgt\Providers\FakerProvider($faker));
     $amount = $faker->randomFloat(2, 0, 200);
     return [
-        'label'      => $faker->words(2, true),
+        'label'      => $faker->randomGoal(),
         'start_date' => $faker->dateTimeThisDecade()->format('Y-m-d'),
         'goal_date'  => $faker->dateTimeBetween('now', '+10 years')->format('Y-m-d'),
         'balance'    => $faker->randomFloat(2, 0, $amount),

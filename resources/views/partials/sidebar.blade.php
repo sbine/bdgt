@@ -9,6 +9,7 @@
 	<li><a href="{{ route('index') }}">Transactions</a></li>
 	<li><a href="{{ route('categories.index') }}">Categories</a></li>
 	<li><a href="{{ route('goals.index') }}">Goals</a></li>
+	<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
 	<li class="sidebar-divider hidden-xs"></li>
 	@foreach ($accounts as $account)
 		<li><a href="{{ route('accounts.show', $account->id) }}">{{ $account->name }}<span class="money nav-subtext">{{ $account->balance }}</span></a></li>
