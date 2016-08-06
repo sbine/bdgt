@@ -21,20 +21,22 @@ $factory->define(Bdgt\Resources\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Bdgt\Resources\Account::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new \Bdgt\Providers\FakerProvider($faker));
     return [
         'date_opened' => $faker->dateTimeThisDecade()->format('Y-m-d'),
-        'name'        => $faker->creditCardType(),
-        'balance'     => $faker->randomFloat(2, 0, 100000),
+        'name'        => $faker->randomAccount(),
+        'balance'     => $faker->randomFloat(2, 0, 10000),
         'interest'    => $faker->numberBetween(0, 20),
     ];
 });
 
 $factory->define(Bdgt\Resources\Bill::class, function (Faker\Generator $faker) {
+    $faker->addProvider(new \Bdgt\Providers\FakerProvider($faker));
     return [
         'start_date' => $faker->dateTimeThisDecade()->format('Y-m-d'),
-        'frequency'  => $faker->randomDigitNotNull(),
-        'label'      => $faker->words(2, true),
-        'amount'     => $faker->randomFloat(2, 0, 2000),
+        'frequency'  => $faker->numberBetween(28, 60),
+        'label'      => $faker->randomBill(),
+        'amount'     => $faker->randomAmount(1200),
     ];
 });
 
@@ -58,12 +60,13 @@ $factory->define(Bdgt\Resources\Goal::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Bdgt\Resources\Transaction::class, function (Faker\Generator $faker) {
-
+    $faker->addProvider(new \Bdgt\Providers\FakerProvider($faker));
+    $isInflow = $faker->optional(0.3, 0)->boolean();
     return [
         'date'    => $faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
         'payee'   => $faker->name,
-        'amount'  => (800 - $faker->biasedNumberBetween(1, 800)) . '.' . $faker->numberBetween(0, 99),
-        'inflow'  => $faker->boolean(),
+        'amount'  => ($isInflow ? $faker->biasedNumberBetween(50, 2000, function($x) { return cos($x); }) : $faker->randomAmount(2000)),
+        'inflow'  => $isInflow,
         'cleared' => $faker->boolean(),
         'flair'   => $faker->randomFlair(),
     ];
