@@ -22,5 +22,6 @@
 	</table>
 
 	@include('transaction.modals.edit')
+	@include('transaction.modals.delete')
 @endsection
 

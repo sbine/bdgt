@@ -73,6 +73,13 @@
 $(document).ready(function() {
 	$('table').DataTable({
 		order: [[1, 'desc']],
+		"columnDefs": [
+			{ "width": "3%", "targets": 0 },
+			{ "width": "8%", "targets": 5 },
+			{ "width": "8%", "targets": 6 },
+			{ "width": "3%", "targets": 7 },
+			{ "width": "5%", "targets": 8 }
+		],
 		pageLength: 20,
 		lengthMenu: [ 10, 20, 30, 50 ]
 	});
