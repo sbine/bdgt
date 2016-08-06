@@ -13,6 +13,10 @@ bdgt is a one-stop personal finance management app. Planned features:
 - Debt and savings calculators
 - Interactive reports
 
+## Demo
+
+A demo application is available at [https://bdgt.it](https://bdgt.it)
+
 ## Screenshots
 
 ![screenshot: bills page](https://sarabine.com/bdgt-bills.png)
