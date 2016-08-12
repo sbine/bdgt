@@ -29,8 +29,15 @@ $(document).on('ready ajaxComplete', function() {
 
 $(document).ready(function()
 {
-	$('.datepicker').datepicker({
-		'zIndexOffset': 1050,
-		'format': 'yyyy-mm-dd',
-	}).datepicker('setDate', new Date()).datepicker('update');
+	$('.datepicker').each(function() {
+		var dp = $(this);
+		dp.datepicker({
+			'zIndexOffset': 1050,
+			'format': 'yyyy-mm-dd',
+		})
+
+		if (!dp.val()) {
+			dp.datepicker('setDate', new Date()).datepicker('update');
+		}
+	});
 });

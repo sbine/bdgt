@@ -18,14 +18,14 @@
 			<span class="label label-danger">UNPAID</span>
 		@endif
 		<span class="pull-right">
-			$ {{ number_format($bill->amount, 2) }}
+			@money($bill->amount)
 		</span>
 	</h2>
 	<p>
 		Due <span class="moment">{{ $bill->nextDue }}</span>
 		<span class="text-muted">({{ $bill->nextDue }})</span>
 	</p>
-	<p>$ {{ number_format($bill->total, 2) }} paid since {{ $bill->lastDue }}</p>
+	<p>@money($bill->total) paid since {{ $bill->lastDue }}</p>
 	<br><br>
 	<p class="lead">Payments</p>
 	<table class="table">

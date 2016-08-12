@@ -157,6 +157,7 @@ return [
         Bdgt\Providers\RouteServiceProvider::class,
 
         Bdgt\Providers\RepositoryServiceProvider::class,
+        Bdgt\Providers\BladeServiceProvider::class,
         Bdgt\Providers\ViewComposerServiceProvider::class,
 
     ],

@@ -29,8 +29,8 @@
 						</div>
 					</div>
 				</div>
-				<p class="list-group-item-text pull-right">$ {{ number_format($category->budgeted, 2) }}</p>
-				<p class="list-group-item-text">$ {{ number_format($category->spent, 2) }} spent / $ {{ number_format($category->budgeted - $category->spent, 2) }} remaining</p>
+				<p class="list-group-item-text pull-right">@money($category->budgeted)</p>
+				<p class="list-group-item-text">@money($category->spent) spent / @money($category->budgeted - $category->spent) remaining</p>
 			</a>
 		@endforeach
 	</div>

@@ -1,7 +1,9 @@
+<title>bdgt</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>bdgt</title>
+<meta name="description" content="big finance tools in a small package">
+<meta name="keywords" content="budget,bdgt,finance,financial,money">
 
 <link rel="icon" type="image/png" href="/favicon.png">
 

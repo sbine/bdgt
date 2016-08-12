@@ -29,8 +29,8 @@
 						</div>
 					</div>
 				</div>
-				<p class="list-group-item-text pull-right">$ {{ number_format($goal->amount, 2) }}</p>
-				<p class="list-group-item-text">$ {{ number_format($goal->balance, 2) }} saved</p>
+				<p class="list-group-item-text pull-right">@money($goal->amount)</p>
+				<p class="list-group-item-text">@money($goal->balance) saved</p>
 			</a>
 		@endforeach
 	</div>

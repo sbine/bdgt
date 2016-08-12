@@ -16,7 +16,7 @@
 				<span class="badge">{{ $account->transactions->count() }}</span>
 				<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
 				<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
-				<p class="list-group-item-text">$ {{ number_format($account->balance, 2) }}</p>
+				<p class="list-group-item-text">@money($account->balance)</p>
 			</a>
 		@endforeach
 	</div>

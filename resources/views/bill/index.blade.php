@@ -31,7 +31,7 @@
 
 						<h4 class="list-group-item-heading">{{ $bill->label }}</h4>
 						<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue }}</span><span class="hide">{{ $bill->nextDue }}</span></p>
-						<p class="list-group-item-text">$ {{ number_format($bill->amount, 2) }}</p>
+						<p class="list-group-item-text">@money($bill->amount)</p>
 					</a>
 				@endforeach
 			</div>

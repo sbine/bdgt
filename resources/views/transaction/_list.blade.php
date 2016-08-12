@@ -50,6 +50,8 @@
 		<td>
 			@if ($transaction->cleared)
 				<i class="fa fa-check"></i>
+			@else
+				<i class="fa fa-check icon-unchecked"></i>
 			@endif
 		</td>
 		@if (isset($actionable))
@@ -72,6 +74,7 @@
 <script>
 $(document).ready(function() {
 	$('table').DataTable({
+		stateSave: true,
 		order: [[1, 'desc']],
 		"columnDefs": [
 			{ "width": "3%", "targets": 0 },

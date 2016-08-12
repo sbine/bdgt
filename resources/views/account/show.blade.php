@@ -13,11 +13,11 @@
 		<h2>
 			{{ $account->name }}
 			<span class="pull-right">
-				$ {{ number_format($account->running_balance, 2) }}
+				@money($account->running_balance)
 			</span>
 		</h2>
 		<p class="pull-right">
-			{{ number_format($account->interest, 2) }}%
+			@number($account->interest)%
 		</p>
 		<br><br>
 		<p class="lead">{{ trans('labels.transactions.plural') }}</p>

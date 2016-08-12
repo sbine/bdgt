@@ -13,7 +13,7 @@
 		<h2>
 			{{ $goal->label }}
 			<span class="pull-right">
-				$ {{ number_format($goal->balance, 2) }} / $ {{ number_format($goal->amount, 2) }}
+				@money($goal->balance) / @money($goal->amount)
 			</span>
 		</h2>
 		<div class="progress">

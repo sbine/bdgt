@@ -13,11 +13,11 @@
 		<h2>
 			{{ $category->label }}
 			<span class="pull-right">
-				$ {{ number_format(($category->budgeted - $category->spent), 2) }}
+				@money($category->budgeted - $category->spent)
 			</span>
 		</h2>
 		<p class="pull-right">
-			$ {{ number_format($category->budgeted, 2) }} Budgeted
+			@money($category->budgeted) Budgeted
 		</p>
 		<br><br>
 		<p class="lead">{{ trans('labels.transactions.plural') }}</p>

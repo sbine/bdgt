@@ -24,7 +24,7 @@
 								</span>
 							</div>
 							<div class="media-body">
-								<h2 class="media-heading"><span class="money-signed">{{ number_format($ledger->balance(), 2) }}</span></h2>
+								<h2 class="media-heading"><span class="money-signed">@number($ledger->balance())</span></h2>
 								<span class="text-muted">current balance</span>
 							</div>
 						</div>
@@ -77,13 +77,13 @@
 
 @section('content')
 	<br>
-	<table class="table table-bordered">
+	<table class="table table-striped">
 		{!! $transactions !!}
 		<tfoot>
 			<tr>
 				<td colspan="5"><b>Total</b></td>
-				<td><b>$ {{ number_format($ledger->totalInflow(), 2) }}</b></td>
-				<td><b>$ {{ number_format($ledger->totalOutflow(), 2) }}</b></td>
+				<td><b>@money($ledger->totalInflow())</b></td>
+				<td><b>@money($ledger->totalOutflow())</b></td>
 				<td colspan="2"></td>
 			</tr>
 		</tfoot>
