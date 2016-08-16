@@ -22,8 +22,8 @@
 				<li class="dropdown {{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="/reports/spending">Spending Trends</a></li>
-						<li><a href="/reports/networth">Net Worth</a></li>
+						<li><a href="/reports/categorial">Spending By Category</a></li>
+						<li><a href="/reports/spending">Spending Over Time</a></li>
 					</ul>
 				</li>
 				@endif
