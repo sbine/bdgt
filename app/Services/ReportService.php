@@ -22,6 +22,9 @@ class ReportService
     private function getReportForType($type)
     {
         switch ($type) {
+            case 'categorial':
+                $report = app()->make('Bdgt\Reports\SpendingByCategory');
+                break;
             case 'spending':
                 $report = app()->make('Bdgt\Reports\Spending');
                 break;
