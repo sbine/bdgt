@@ -75,16 +75,22 @@
 $(document).ready(function() {
 	$('table').DataTable({
 		stateSave: true,
+		language: {
+			info: 'Page _PAGE_ of _PAGES_',
+		},
 		order: [[1, 'desc']],
-		"columnDefs": [
+		columnDefs: [
 			{ "width": "3%", "targets": 0 },
 			{ "width": "8%", "targets": 5 },
 			{ "width": "8%", "targets": 6 },
 			{ "width": "3%", "targets": 7 },
 			{ "width": "5%", "targets": 8 }
 		],
-		pageLength: 20,
-		lengthMenu: [ 10, 20, 30, 50 ]
+		pageLength: 25,
+		lengthMenu: [ 10, 25, 50 ],
+		dom: "<'row'<'col-sm-6'i><'col-sm-6'f>>" +
+"<'row'<'col-sm-12'tr>>" +
+"<'row'<'col-sm-5'l><'col-sm-7'p>>",
 	});
 
 	$('body').on('click', '.edit-transaction', function(e) {
