@@ -31,6 +31,11 @@ class Transaction extends Model
         'user_id',
     ];
 
+    /**
+     * The attributes that accept null as a value.
+     *
+     * @var array
+     */
     protected $nullable = [
         'bill_id',
         'category_id',
@@ -44,6 +49,15 @@ class Transaction extends Model
     protected $hidden = [
         'id',
         'user_id',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'amount' => 'float',
     ];
 
     public function account()

@@ -25,8 +25,7 @@
 
 			<a class="btn btn-lg btn-block btn-success visible-xs-block" href="#addTransactionModal" data-toggle="modal"><i class="fa fa-plus"></i> Add Transaction</a>
 
-			@yield('top-content')
-
+			<!-- Breadcrumbs -->
 			@section('breadcrumbs')
 			<div class="container-fluid">
 				<div class="row">
@@ -42,6 +41,9 @@
 				</div>
 			</div>
 			@show
+			<!-- /Breadcrumbs -->
+
+			@yield('top-content')
 
 			<div class="container-fluid">
 				<div class="row">
@@ -56,6 +58,7 @@
 			@endif
 		</div>
 	</div>
+	<!-- /#page-content-wrapper -->
 
 	<footer class="footer">
 		<div class="text-center">

@@ -16,7 +16,7 @@
 		<div class="collapse navbar-collapse" id="primary-navbar">
 			<ul class="nav navbar-nav">
 				@if (Auth::user())
-				<li class="{{ (request()->route()->getName() == 'index' ? 'active' : '') }}"><a href="{{ route('index') }}">Dashboard</a></li>
+				<li class="{{ (request()->route()->getName() == 'dashboard' ? 'active' : '') }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
 				<li class="{{ (strpos(request()->route()->getName(), 'goals') !== false ? 'active' : '') }}"><a href="{{ route('goals.index') }}">Goals</a></li>
 				<li class="{{ (strpos(request()->route()->getName(), 'bills') !== false ? 'active' : '') }}"><a href="{{ route('bills.index') }}">Bills</a></li>
 				<li class="dropdown {{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
@@ -31,7 +31,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calculators <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{ route('calculators.debt') }}">Debt Calculator</a></li>
-						<li><a href="{{ route('calculators.savings') }}">Savings Calculator</a></li>
+						<!--<li><a href="{{ route('calculators.savings') }}">Savings Calculator</a></li>-->
 					</ul>
 				</li>
 			</ul>

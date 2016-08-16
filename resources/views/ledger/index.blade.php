@@ -11,13 +11,12 @@
 @endsection
 
 @section('top-content')
-	<br>
 	<div class="container-fluid">
 		<div class="row heads-up">
 			<div class="{{ config('layout.grid_class') }}">
 				<div class="row">
 					<div class="col-md-3 col-sm-4">
-						<div class="media heads-up-item">
+						<div class="heads-up-item">
 							<div class="media-left">
 								<span class="media-object">
 									<i class="fa fa-dollar fa-4x"></i>
@@ -31,7 +30,7 @@
 					</div>
 
 					<div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
-						<div class="media heads-up-item">
+						<div class="heads-up-item">
 							<div class="media-left">
 								<span class="media-object">
 									<i class="fa fa-clock-o fa-4x"></i>
@@ -51,7 +50,7 @@
 					</div>
 
 					<div class="col-md-3 col-md-offset-2 col-sm-4 col-sm-offset-0">
-						<div class="media heads-up-item">
+						<div class="heads-up-item">
 							<div class="media-left">
 								<span class="media-object">
 									<i class="fa fa-calendar fa-4x"></i>

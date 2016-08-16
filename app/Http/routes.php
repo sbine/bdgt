@@ -16,10 +16,14 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::get('/', [
+    'as' => 'index',
+    'uses' => 'PageController@index',
+]);
 
-    Route::get('/', [
-        'as' => 'index',
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', [
+        'as' => 'dashboard',
         'uses' => 'LedgerController@index',
     ]);
 

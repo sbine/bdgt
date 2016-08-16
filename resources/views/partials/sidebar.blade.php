@@ -6,7 +6,7 @@
 	-->
 	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> Add Transaction</button></a></li>
 	<li class="sidebar-divider hidden-xs"></li>
-	<li><a href="{{ route('index') }}">Transactions</a></li>
+	<li><a href="{{ route('dashboard') }}">Transactions</a></li>
 	<li><a href="{{ route('categories.index') }}">Categories</a></li>
 	<li><a href="{{ route('goals.index') }}">Goals</a></li>
 	<li><a href="{{ route('accounts.index') }}">Accounts</a></li>
