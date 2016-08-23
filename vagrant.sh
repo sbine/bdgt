@@ -34,8 +34,8 @@ echo '...done'
 echo '--- Installing MariaDB and PHP5 ---'
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password password '
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again password '
-apt-get install -y php5 php5-cli php5-mcrypt libapache2-mod-php5 php5-curl php5-mysqlnd php5-sqlite
-apt-get install -y mariadb-server-5.5
+apt-get install -y php7.0 php7.0-cli libapache2-mod-php7.0 php7.0-mysql php7.0-sqlite
+apt-get install -y mariadb-server-10.0
 mysql -uroot -e "CREATE DATABASE bdgt;"
 echo '...done'
 
@@ -59,7 +59,6 @@ echo '...done'
 echo '--- Activating mod_rewrite / mod_ssl / mcrypt ---'
 a2enmod rewrite
 a2enmod ssl
-php5enmod mcrypt
 echo '...done'
 
 
@@ -88,7 +87,3 @@ chown vagrant: /var/lock/apache2
 echo '--- Restarting Apache ---'
 service apache2 restart
 echo '...done'
-
-# mcrypt problem: http://askubuntu.com/questions/460837/mcrypt-extension-is-missing-in-14-04-server-for-mysql
-# Apache conf problem: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
-# index.php problem: http://stackoverflow.com/a/26852680/1684247
