@@ -39,12 +39,12 @@
 		</td>
 		<td>
 			@if ($transaction->inflow)
-				<span data-name="amount" class="money">{{ $transaction->amount }}</span>
+				<span class="hide">{{ $transaction->amount }}</span><span data-name="amount" class="money">@money($transaction->amount)</span>
 			@endif
 		</td>
 		<td>
 			@if (!$transaction->inflow)
-				<span data-name="amount" class="money">{{ $transaction->amount }}</span>
+				<span class="hide">{{ $transaction->amount }}</span><span data-name="amount" class="money">@money($transaction->amount)</span>
 			@endif
 		</td>
 		<td>
@@ -72,7 +72,6 @@
 @section('scripts')
 @if (isset($actionable))
 <script>
-$(document).ready(function() {
 	$('table').DataTable({
 		stateSave: true,
 		language: {
@@ -123,7 +122,6 @@ $(document).ready(function() {
 		$('#deleteTransactionModal').find('form').attr('action', '/transactions/' + transactionId);
 		$('#deleteTransactionModal').modal('toggle');
 	});
-});
 </script>
 @endif
 @endsection

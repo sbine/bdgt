@@ -45,7 +45,7 @@ class SpendingByCategory implements ReportInterface
         $labels = [];
         foreach ($results as $result) {
             $labels[] = $result->category;
-            $dataSets[] = number_format($result->total, 2);
+            $dataSets[] = $result->total;
         }
         return [
             'labels' => $labels,

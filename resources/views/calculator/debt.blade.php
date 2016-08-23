@@ -17,7 +17,7 @@
 			<div class="well">
 				<div class="row">
 					<div class="col-sm-6">
-						<p class="lead">Paid off <span class="moment text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
+						<p class="lead">Paid off <span class="text-success">2020-06-12</span> <span id="payoffDate">on June 12, 2020</span></p>
 						<p class="lead">Total interest <span id="interestPaid" class="text-danger money">0.00</span></p>
 						<div id="errorContainer" style="display: none;">
 							<div id="errorMessage" class="text-danger"></div>
@@ -25,7 +25,7 @@
 					</div>
 					<div class="col-sm-6">
 						<p>{{ trans('labels.calculators.debt.properties.payment') }}</p>
-						<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="10"></div>
+						<div id="payment" data-slider-min="10" data-slider-max="1000" data-slider-value="150"></div>
 					</div>
 				</div>
 			</div>
@@ -35,7 +35,10 @@
 		<div class="col-md-2 col-sm-3 col-xs-4">
 			<div class="form-group">
 				<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
-				<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
+				<div class="input-group">
+					<span class="input-group-addon">$</span>
+					<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
+				</div>
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-4">
@@ -50,7 +53,10 @@
 		<div class="col-md-2 col-sm-3 col-xs-4">
 			<div class="form-group">
 				<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
-				<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
+				<div class="input-group">
+					<span class="input-group-addon">$</span>
+					<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -98,13 +104,13 @@
 
 			return this.resolve(interest);
 		}).done(function(response) {
-			$("#payoffDate").text('on ' + response.date.format('MMM Do, YYYY'));
-			$("#payoffDate").siblings('.moment').text(response.date.fromNow());
+			$("#payoffDate").text('on ' + response.date.format('MMMM Do, YYYY'));
+			$("#payoffDate").siblings('.text-success').text(response.date.fromNow());
 			$("#interestPaid").text(accounting.formatMoney(response.interest));
 			$("#errorContainer").hide();
 		}).fail(function() {
 			$("#payoffDate").text('');
-			$("#payoffDate").siblings('.moment').text('in over 80 years');
+			$("#payoffDate").siblings('.text-success').text('in over 80 years');
 		});
 	}
 
@@ -113,8 +119,6 @@
 		$("#errorContainer").show();
 	}
 
-	$(document).on('ready', function() {
-		$("#minimumPayment").trigger('keyup');
-	});
+	inputUpdate();
 </script>
 @endsection

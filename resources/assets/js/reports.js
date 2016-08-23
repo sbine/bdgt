@@ -164,9 +164,9 @@ window.onload = function() {
 
     if (reportUrl !== undefined) {
         if (reportName === 'Spending By Category') {
-            window.bdgtReport = new PieChart($("#bdgtReport")[0], reportName);
+            window.bdgtReport = new PieChart($('#bdgtReport')[0], reportName);
         } else {
-            window.bdgtReport = new StackedBarChart($("#bdgtReport"), reportName);
+            window.bdgtReport = new StackedBarChart($('#bdgtReport'), reportName);
         }
 
         $.getJSON(reportUrl, function(json) {
