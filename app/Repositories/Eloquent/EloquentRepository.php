@@ -104,7 +104,9 @@ abstract class EloquentRepository implements RepositoryInterface
             $instance->setAttribute($key, $value);
         }
 
-        return $instance->save();
+        $instance->save();
+
+        return true;
     }
 
     public function delete($id)

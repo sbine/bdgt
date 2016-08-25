@@ -8,7 +8,7 @@
 					<span class="badge">alpha</span></h1>
 			</div>
 			@if (!Auth::user())
-			<p><a class="btn btn-success btn-lg" href="/auth/login" role="button">Sign In</a></p>
+			<p><a class="btn btn-success btn-lg" href="/login" role="button">Sign In</a></p>
 			@endif
 		</div>
 	</div>

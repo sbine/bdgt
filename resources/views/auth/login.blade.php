@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">{{ trans('labels.auth.login') }} <a class="pull-right" href="/auth/register">{{ trans('labels.auth.register_button') }}</a></div>
+				<div class="panel-heading">{{ trans('labels.auth.login') }} <a class="pull-right" href="/register">{{ trans('labels.auth.register_button') }}</a></div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -24,7 +24,7 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/auth/login">
+					<form class="form-horizontal" role="form" method="POST" action="/login">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">

@@ -36,17 +36,21 @@ class Spending implements ReportInterface
         if (!$endDate) {
             $endDate = new DateTime(date('Y-m-d'));
         }
+        // Limit it to our date range and group by category
+        $query = $query->whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d')])
+                        ->addSelect('date')
+                        ->addSelect(DB::raw('categories.label AS category'))
+                        ->groupBy('category')
+                        ->join('categories', 'category_id', '=', 'categories.id');
+
         $date = new DateTime($startDate->format('Y-m-d'));
         while ($date <= $endDate) {
             // Select totals for every month
-            $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
+            $query = $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
             $date->add($monthInterval);
         }
-        // Limit it to our date range and group by category
-        $results = $query->whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d')])
-                        ->selectRaw('date, categories.label AS category')
-                        ->groupBy('category')
-                        ->join('categories', 'category_id', '=', 'categories.id')->get();
+
+        $results = $query->get();
 
         $dataSets = [];
         $labels = [];
