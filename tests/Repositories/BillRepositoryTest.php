@@ -13,7 +13,6 @@ class BillRepositoryTest extends TestCase
 
         $this->bill = $this->mock('Bdgt\Resources\Bill[save,delete]');
         $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentBillRepository[instance]', [$this->bill]);
-        $this->repository->scopeBy('user_id', 'testing');
     }
 
     /**
@@ -61,12 +60,5 @@ class BillRepositoryTest extends TestCase
         $this->bill->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
-    }
-
-    private function addScopeKeyToData($data)
-    {
-        $data['user_id'] = 'testing';
-
-        return $data;
     }
 }

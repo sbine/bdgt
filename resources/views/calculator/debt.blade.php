@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li><a href="/calculators">{{ trans('labels.calculators.plural') }}</a></li>
+	<li>{{ trans('labels.calculators.plural') }}</li>
 	<li class="active">{{ trans('labels.calculators.debt.label') }}</li>
 @endsection
 

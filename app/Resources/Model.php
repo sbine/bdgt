@@ -2,6 +2,7 @@
 
 namespace Bdgt\Resources;
 
+use Bdgt\Scopes\TenancyScope;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel
@@ -12,6 +13,8 @@ class Model extends EloquentModel
     {
         parent::boot();
 
+        static::addGlobalScope(new TenancyScope);
+
         static::saving(function ($model) {
             self::setNullables($model);
         });
@@ -20,10 +23,10 @@ class Model extends EloquentModel
     // http://laravel-tricks.com/tricks/setting-null-values-only-on-certain-fields
     protected static function setNullables($model)
     {
-        foreach ($model->nullable as $field) {
-            if ($model->{$field} === '') {
-                $model->attributes[$field] = null;
+        array_map(function ($property) use ($model) {
+            if ($model->{$property} === '') {
+                $model->attributes[$property] = null;
             }
-        }
+        }, $model->nullable);
     }
 }

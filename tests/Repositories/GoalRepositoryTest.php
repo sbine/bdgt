@@ -13,7 +13,6 @@ class GoalRepositoryTest extends TestCase
 
         $this->goal = $this->mock('Bdgt\Resources\Goal[save,delete]');
         $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentGoalRepository[instance]', [$this->goal]);
-        $this->repository->scopeBy('user_id', 'testing');
     }
 
     /**
@@ -61,12 +60,5 @@ class GoalRepositoryTest extends TestCase
         $this->goal->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
-    }
-
-    private function addScopeKeyToData($data)
-    {
-        $data['user_id'] = 'testing';
-
-        return $data;
     }
 }

@@ -13,7 +13,6 @@ class CategoryRepositoryTest extends TestCase
 
         $this->category = $this->mock('Bdgt\Resources\Category[save,delete]');
         $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentCategoryRepository[instance]', [$this->category]);
-        $this->repository->scopeBy('user_id', 'testing');
     }
 
     /**
@@ -61,12 +60,5 @@ class CategoryRepositoryTest extends TestCase
         $this->category->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
-    }
-
-    private function addScopeKeyToData($data)
-    {
-        $data['user_id'] = 'testing';
-
-        return $data;
     }
 }

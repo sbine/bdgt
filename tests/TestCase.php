@@ -4,6 +4,7 @@ namespace Bdgt\Tests;
 
 use Mockery;
 use Illuminate\Contracts\Console\Kernel;
+use ReflectionMethod;
 
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -46,5 +47,24 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
         $this->app->instance($class, $mock);
 
         return $mock;
+    }
+
+    /**
+     * @param  StdClass  $object
+     * @param  string    $method
+     * @param  array     $args
+     *
+     * @return mixed
+     */
+    protected function runReflectedMethod($object, $method, $args = [])
+    {
+        if (is_string($object)) {
+            $object = get_class($object);
+        }
+
+        $method = new ReflectionMethod($object, $method);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $args);
     }
 }

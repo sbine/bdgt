@@ -13,7 +13,6 @@ class TransactionRepositoryTest extends TestCase
 
         $this->transaction = $this->mock('Bdgt\Resources\Transaction[save,delete]');
         $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentTransactionRepository[instance]', [$this->transaction]);
-        $this->repository->scopeBy('user_id', 'testing');
     }
 
     /**
@@ -61,12 +60,5 @@ class TransactionRepositoryTest extends TestCase
         $this->transaction->shouldReceive('delete')->once();
 
         $this->repository->delete($id);
-    }
-
-    private function addScopeKeyToData($data)
-    {
-        $data['user_id'] = 'testing';
-
-        return $data;
     }
 }

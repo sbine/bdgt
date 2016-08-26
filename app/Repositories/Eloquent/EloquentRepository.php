@@ -11,8 +11,6 @@ use Log;
 abstract class EloquentRepository implements RepositoryInterface
 {
     protected $model;
-    protected $scopeKey;
-    protected $scopeValue;
 
     /**
      * Construct
@@ -22,14 +20,6 @@ abstract class EloquentRepository implements RepositoryInterface
     public function __construct(Model $model)
     {
         $this->model = $model;
-    }
-
-    public function scopeBy($key, $value)
-    {
-        $this->scopeKey   = $key;
-        $this->scopeValue = $value;
-
-        return $this;
     }
 
     public function instance($attribute = 'id', $value = null)
@@ -51,7 +41,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
     public function all($sortBy = [], $columns = ['*'])
     {
-        $all = $this->model->where($this->scopeKey, '=', $this->scopeValue);
+        $all = $this->model;
 
         if ($sortBy) {
             $all->orderBy(key($sortBy), $sortBy[key($sortBy)]);
@@ -68,8 +58,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function paginate($perPage = 10, $columns = ['*'])
     {
-        return $this->model->where($this->scopeKey, '=', $this->scopeValue)
-                            ->paginate($perPage, $columns);
+        return $this->model->paginate($perPage, $columns);
     }
 
     /**
@@ -80,8 +69,6 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function create(array $data)
     {
-        $data = $this->ensureScopeIntegrity($data);
-
         $instance = $this->instance();
 
         foreach ($data as $key => $value) {
@@ -96,8 +83,6 @@ abstract class EloquentRepository implements RepositoryInterface
 
     public function update(array $data, $id, $attribute = 'id')
     {
-        $data = $this->ensureScopeIntegrity($data);
-
         $instance = $this->instance($attribute, $id);
 
         foreach ($data as $key => $value) {
@@ -113,8 +98,6 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $instance = $this->instance('id', $id);
 
-        $this->ensureScopeIntegrity($instance);
-
         return $instance->delete();
     }
 
@@ -122,25 +105,22 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         $instance = $this->model->find($id, $columns);
 
-        $this->ensureScopeIntegrity($instance);
-
         return $instance;
     }
 
     public function findBy($attribute, $value, $columns = ['*'])
     {
-        return $this->model->where($this->scopeKey, '=', $this->scopeValue)
-                            ->where($attribute, '=', $value)
+        return $this->model->where($attribute, '=', $value)
                             ->first($columns);
     }
 
     public function query()
     {
-        return $this->model->where($this->model->getTable() . '.' . $this->scopeKey, '=', $this->scopeValue);
+        return $this->model;
     }
 
     /**
-     * Save an object if it passes scope constraint
+     * Save an object
      *
      * @param string $key
      * @param mixed $value
@@ -149,34 +129,6 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function insertToTenant($key, $value, $data)
     {
-        if ($data[$key] !== $value) {
-            throw new Exception('Object fails scope constraint');
-        }
-
         return $this->create($data);
-    }
-
-    private function ensureScopeIntegrity($data)
-    {
-        if (is_array($data)) {
-            // Automatically set scope property if it's not present
-            if (empty($data[$this->scopeKey]) || !isset($data[$this->scopeKey])) {
-                $data[$this->scopeKey] = $this->scopeValue;
-            }
-
-            if ($data[$this->scopeKey] !== $this->scopeValue
-                && intval($data[$this->scopeKey]) !== intval($this->scopeValue)) {
-                Log::warning('Invalid scope: ' . $this->scopeKey . ' / ' . $this->scopeValue, $data[$this->scopeKey]);
-                throw new Exception('Invalid scope');
-            }
-        } elseif (is_object($data)) {
-            if ($data->{$this->scopeKey} !== $this->scopeValue
-                && intval($data[$this->scopeKey]) !== intval($this->scopeValue)) {
-                Log::warning('Invalid scope: ' . $this->scopeKey . ' / ' . $this->scopeValue, [$data->{$this->scopeKey}]);
-                throw new Exception('Invalid scope');
-            }
-        }
-
-        return $data;
     }
 }

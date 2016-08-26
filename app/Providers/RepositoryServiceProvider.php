@@ -2,7 +2,6 @@
 
 namespace Bdgt\Providers;
 
-use Auth;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -40,21 +39,9 @@ class RepositoryServiceProvider extends ServiceProvider
                         $model = $app->make('Bdgt\Resources\\' . $resource);
                     }
                     $repositoryPath = '\Bdgt\Repositories\Eloquent\Eloquent' . $resource . 'Repository';
-                    $repository = new $repositoryPath($model);
-                    return $this->scopeForCurrentTenant($repository);
+                    return new $repositoryPath($model);
                 }
             );
         }
-    }
-
-    private function scopeForCurrentTenant($repository)
-    {
-        if (env('APP_ENV') === 'testing') {
-            return $repository->scopeBy('user_id', 'testing');
-        }
-        if (!Auth::check()) {
-            return $repository->scopeBy('user_id', 'access_denied');
-        }
-        return $repository->scopeBy('user_id', Auth::user()->id);
     }
 }
