@@ -7,7 +7,7 @@ apt-get update
 echo '...done'
 
 
-echo '--- Installing gcc screen vim unzip curl wget man ---'
+echo '--- Installing build-essential screen vim unzip curl wget man ---'
 apt-get install -y build-essential screen vim unzip curl wget man
 echo '...done'
 
@@ -31,12 +31,14 @@ npm install -g grunt bower
 echo '...done'
 
 
-echo '--- Installing MariaDB and PHP5 ---'
+echo '--- Installing MariaDB and PHP7 ---'
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password password '
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again password '
 apt-get install -y php7.0 php7.0-cli php7.0-mbstring php7.0-xml libapache2-mod-php7.0 php7.0-mysql php7.0-sqlite
 apt-get install -y mariadb-server-10.0
 mysql -uroot -e "CREATE DATABASE bdgt;"
+mysql -uroot -e "CREATE USER 'bdgt'@'localhost' IDENTIFIED BY 'password';"
+mysql -uroot -e "GRANT ALL ON bdgt.* TO 'bdgt'@'localhost';"
 echo '...done'
 
 
@@ -56,7 +58,7 @@ apt-get install -y openssl
 echo '...done'
 
 
-echo '--- Activating mod_rewrite / mod_ssl / mcrypt ---'
+echo '--- Activating mod_rewrite / mod_ssl ---'
 a2enmod rewrite
 a2enmod ssl
 echo '...done'
@@ -86,4 +88,8 @@ chown vagrant: /var/lock/apache2
 
 echo '--- Restarting Apache ---'
 service apache2 restart
+echo '...done'
+
+echo '--- Configuring bashrc ---'
+echo 'cd /var/www/bdgt' >> /home/vagrant/.bashrc
 echo '...done'
