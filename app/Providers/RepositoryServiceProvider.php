@@ -33,13 +33,9 @@ class RepositoryServiceProvider extends ServiceProvider
         foreach ($resources as $resource) {
             $this->app->bind(
                 'Bdgt\Repositories\Contracts\\' . $resource . 'RepositoryInterface',
-                function ($app, $parameters) use ($resource) {
-                    $model = reset($parameters);
-                    if (!$model) {
-                        $model = $app->make('Bdgt\Resources\\' . $resource);
-                    }
-                    $repositoryPath = '\Bdgt\Repositories\Eloquent\Eloquent' . $resource . 'Repository';
-                    return new $repositoryPath($model);
+                function ($app) use ($resource) {
+                    $repositoryPath = 'Bdgt\Repositories\Eloquent\Eloquent' . $resource . 'Repository';
+                    return $app->make($repositoryPath);
                 }
             );
         }

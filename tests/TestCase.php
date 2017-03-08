@@ -4,10 +4,13 @@ namespace Bdgt\Tests;
 
 use Mockery;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use ReflectionMethod;
 
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * The base URL to use while testing the application.
      *
@@ -33,7 +36,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
 
     /**
      * @param string $class
-     *
+     * @param null $args
      * @return mixed
      */
     public function mock($class, $args = null)
@@ -50,10 +53,9 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
     }
 
     /**
-     * @param  StdClass  $object
+     * @param  \stdClass  $object
      * @param  string    $method
      * @param  array     $args
-     *
      * @return mixed
      */
     protected function runReflectedMethod($object, $method, $args = [])

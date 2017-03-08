@@ -14,6 +14,7 @@ class Model extends EloquentModel
         parent::boot();
 
         static::addGlobalScope(new TenancyScope);
+        static::observe(new TenancyObserver);
 
         static::saving(function ($model) {
             self::setNullables($model);

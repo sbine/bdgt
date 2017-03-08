@@ -2,23 +2,17 @@
 
 namespace Bdgt\Tests\Resources;
 
-use Bdgt\Tests\TestCase;
-use Bdgt\Resources\Transaction;
 use Bdgt\Scopes\TenancyScope;
+use Bdgt\Tests\TestCase;
+use Bdgt\Resources\Model;
+use Bdgt\Resources\Transaction;
 
 class ModelTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->model = $this->mock('Bdgt\Resources\Model[save,update,create,delete,destroy]');
-    }
-
     public function testTenancyScopeIsApplied()
     {
         // Assert that we are applying the TenancyScope in Model::boot
-        $this->assertTrue($this->model->hasGlobalScope(TenancyScope::class));
+        $this->assertTrue((new Model)->hasGlobalScope(TenancyScope::class));
     }
 
     public function testNullablesCanBeSetToNull()
@@ -28,7 +22,7 @@ class ModelTest extends TestCase
         $transaction->bill_id = '';
         $transaction->category_id = '';
 
-        $this->runReflectedMethod($this->model, 'setNullables', [$transaction]);
+        $this->runReflectedMethod(new Model, 'setNullables', [$transaction]);
 
         // payee is not nullable
         $this->assertEquals('', $transaction->payee);
