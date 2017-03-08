@@ -26,8 +26,7 @@ echo '--- Installing npm ---'
 apt-get install -y npm
 ln -s /usr/bin/nodejs /usr/bin/node
 npm install -g n
-n 0.12.4
-npm install -g grunt bower
+n 6.9.5
 echo '...done'
 
 
@@ -82,11 +81,11 @@ EOF
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 echo '...done'
 
+echo '--- Restarting Apache ---'
 sed -i 's/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
 sed -i 's/www-data/vagrant/' /etc/apache2/envvars
 chown vagrant: /var/lock/apache2
 
-echo '--- Restarting Apache ---'
 service apache2 restart
 echo '...done'
 
