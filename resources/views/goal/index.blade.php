@@ -12,7 +12,10 @@
 	<div class="list-group">
 		@foreach ($goals as $goal)
 			<a href="/goals/{{ $goal->id }}" class="list-group-item">
-				<h4 class="list-group-item-heading">{{ $goal->label }}</h4>
+				<h4 class="list-group-item-heading">
+					{{ $goal->label }}
+					<span class="pull-right">@money($goal->amount)</span>
+				</h4>
 				<div class="list-group-item-text">
 					<div class="progress">
 						<div class="progress-bar
@@ -29,7 +32,6 @@
 						</div>
 					</div>
 				</div>
-				<p class="list-group-item-text pull-right">@money($goal->amount)</p>
 				<p class="list-group-item-text">@money($goal->balance) saved</p>
 			</a>
 		@endforeach
