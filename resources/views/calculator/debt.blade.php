@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('meta-description')
+"Calculate loan duration and total interest paid based on monthly payments."
+@overwrite
+
 @section('breadcrumbs.items')
 	<li>{{ trans('labels.calculators.plural') }}</li>
 	<li class="active">{{ trans('labels.calculators.debt.label') }}</li>

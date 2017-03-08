@@ -22,7 +22,7 @@ class SpendingByCategory implements ReportInterface
 
     public function get($startDate = null, $endDate = null)
     {
-        $query = $this->transactionRepository->query();
+        $query = $this->transactionRepository->model();
 
         // If no start date, initialize to 1 year ago
         if (!$startDate) {

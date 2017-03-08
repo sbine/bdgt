@@ -3,10 +3,7 @@
 namespace Bdgt\Repositories\Eloquent;
 
 use Bdgt\Repositories\Contracts\RepositoryInterface;
-use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Log;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -15,14 +12,21 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Construct
      *
-     * @param Illuminate\Database\Eloquent\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
     public function __construct(Model $model)
     {
         $this->model = $model;
     }
 
-    public function instance($attribute = 'id', $value = null)
+    /**
+     * Retrieve an instance of the model
+     *
+     * @param  string $attribute
+     * @param  mixed $value
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function instance(string $attribute = 'id', $value = null)
     {
         if ($value) {
             return $this->findBy($attribute, $value);
@@ -36,10 +40,10 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @param array $sortBy
      * @param array $columns
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
 
-    public function all($sortBy = [], $columns = ['*'])
+    public function all(array $sortBy = [], array $columns = ['*'])
     {
         $all = $this->model;
 
@@ -53,19 +57,20 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Retrieve all models based on criteria, paginated
      *
+     * @param int $perPage
      * @param array $columns
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function paginate($perPage = 10, $columns = ['*'])
+    public function paginate(int $perPage = 10, array $columns = ['*'])
     {
         return $this->model->paginate($perPage, $columns);
     }
 
     /**
-     * Create a new object from the provided data
+     * Create a new model instance from the provided data
      *
      * @param array $data
-     * @return Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $data)
     {
@@ -81,7 +86,15 @@ abstract class EloquentRepository implements RepositoryInterface
         return null;
     }
 
-    public function update(array $data, $id, $attribute = 'id')
+    /**
+     * Update the model
+     *
+     * @param  array  $data
+     * @param  integer $id
+     * @param  string $attribute
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function update(array $data, int $id, string $attribute = 'id')
     {
         $instance = $this->instance($attribute, $id);
 
@@ -89,46 +102,60 @@ abstract class EloquentRepository implements RepositoryInterface
             $instance->setAttribute($key, $value);
         }
 
-        $instance->save();
-
-        return true;
+        if ($instance->save()) {
+            return $instance;
+        }
+        return null;
     }
 
-    public function delete($id)
+    /**
+     * Delete the model
+     *
+     * @param  int $id
+     * @return boolean
+     */
+    public function delete(int $id)
     {
         $instance = $this->instance('id', $id);
 
         return $instance->delete();
     }
 
-    public function find($id, $columns = ['*'])
+    /**
+     * Retrieve a model by ID
+     *
+     * @param  int $id
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function find(int $id, array $columns = ['*'])
     {
         $instance = $this->model->find($id, $columns);
 
         return $instance;
     }
 
-    public function findBy($attribute, $value, $columns = ['*'])
+    /**
+     * Find a model by attribute/value
+     *
+     * @param  string $attribute
+     * @param  mixed $value
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function findBy(string $attribute, $value, array $columns = ['*'])
     {
         return $this->model->where($attribute, '=', $value)
-                            ->first($columns);
-    }
-
-    public function query()
-    {
-        return $this->model;
+                            ->firstOrFail($columns);
     }
 
     /**
-     * Save an object
+     * Retrieve the model
      *
-     * @param string $key
-     * @param mixed $value
-     * @param array $data
-     * @return Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function insertToTenant($key, $value, $data)
+    public function model()
     {
-        return $this->create($data);
+        return $this->model;
     }
 }

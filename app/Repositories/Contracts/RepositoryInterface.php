@@ -4,17 +4,17 @@ namespace Bdgt\Repositories\Contracts;
 
 interface RepositoryInterface
 {
-    public function all($sortBy = [], $columns = ['*']);
+    public function all(array $sortBy = [], array $columns = ['*']);
 
-    public function paginate($perPage = 10, $columns = ['*']);
+    public function paginate(int $perPage = 10, array $columns = ['*']);
 
     public function create(array $data);
 
-    public function update(array $data, $id, $attribute = 'id');
+    public function update(array $data, int $id, string $attribute = 'id');
 
-    public function delete($id);
+    public function delete(int $id);
 
-    public function find($id, $columns = ['*']);
+    public function find(int $id, array $columns = ['*']);
 
-    public function findBy($field, $value, $columns = ['*']);
+    public function findBy(string $field, $value, array $columns = ['*']);
 }

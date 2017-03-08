@@ -12,7 +12,7 @@ jQuery(function($) {
 	}
 	var formatMoney = function() {
 		$('.money').not('.processed-ready').each(function(value) {
-			var formattedValue = accounting.formatMoney($(this).text(), '$ ');
+			var formattedValue = accounting.formatMoney(accounting.unformat($(this).text()), '$ ');
 
 			if (formattedValue !== undefined) {
 				$(this).text(formattedValue);
