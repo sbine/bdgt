@@ -10,7 +10,7 @@
     "accounting-js": "~1.1",
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "~1.6",
-    "chartjs": "~0.3",
+    "chart.js": "~2.5",
     "bootstrap-slider": "~9.7",
     "datatables": "~1.10",
     "datatables.net-bs": "~1.10",

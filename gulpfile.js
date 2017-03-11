@@ -88,7 +88,7 @@ elixir(function(mix) {
             paths.js + '/bootstrap-datepicker.min.js'
         )
         .copy(
-            paths.node + '/chartjs/chart.js',
+            paths.node + '/chart.js/dist/Chart.js',
             paths.js + '/chart.min.js'
         )
         .copy(

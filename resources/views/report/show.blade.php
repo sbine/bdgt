@@ -17,5 +17,5 @@
 @overwrite
 
 @section('content')
-	<canvas id="bdgtReport" data-name="{{ $report->name }}" data-url="{{ $report->url }}"></canvas>
+	<canvas id="bdgtReport" class="report" data-name="{{ $report->name }}" data-url="{{ $report->url }}" height="150%"></canvas>
 @endsection
