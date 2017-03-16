@@ -2,10 +2,10 @@
 
 namespace Bdgt\Http\Controllers\Auth;
 
-use Bdgt\User;
-use Validator;
 use Bdgt\Http\Controllers\Controller;
+use Bdgt\Resources\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
