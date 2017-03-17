@@ -2,63 +2,63 @@
 
 namespace Bdgt\Tests\Repositories;
 
+use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
+use Bdgt\Resources\Category;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
-use Mockery;
 
 class CategoryRepositoryTest extends TestCase
 {
+    private $repository;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->category = $this->mock('Bdgt\Resources\Category[save,delete]');
-        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentCategoryRepository[instance]', [$this->category]);
+        $this->repository = app()->make(CategoryRepositoryInterface::class);
+
+        $this->be(factory(User::class)->create());
     }
 
     /**
-     * Test that the repository 'create' method sets attributes and saves a model
+     * Test that the repository 'create' method stores its input in the database
      */
-    public function testCreateMethodIsCalled()
+    public function testCreateStoresInputToDatabase()
     {
-        $categoryArray = [
-            'label' => 'Emergency Fund'
-        ];
+        $category = factory(Category::class)->make();
 
-        $this->repository->shouldReceive('instance')->once()->andReturn($this->category);
-        $this->category->shouldReceive('save')->once();
+        $createdCategory = $this->repository->create($category->toArray());
 
-        $this->repository->create($categoryArray);
-
-        $this->assertEquals('Emergency Fund', $this->category->label);
+        $this->assertEquals($category->label, $createdCategory->label);
+        $this->assertDatabaseHas('categories', array_add($category->toArray(), 'id', $createdCategory->id));
     }
 
     /**
-     * Test that the repository 'update' method changes attributes and saves a model
+     * Test that the repository 'update' method updates the database with its input
      */
-    public function testUpdateMethodIsCalled()
+    public function testUpdateChangesInputInDatabase()
     {
-        $categoryArray = [
-            'label' => 'Emergency Fund'
-        ];
+        $category = factory(Category::class)->create();
+        $categoryArray = $category->toArray();
+        $categoryArray['label'] = 'Acme';
 
-        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->category);
-        $this->category->shouldReceive('save')->once();
+        $updatedCategory = $this->repository->update($categoryArray, $category->id);
 
-        $this->repository->update($categoryArray, 1);
-
-        $this->assertEquals('Emergency Fund', $this->category->label);
+        $this->assertEquals($category->id, $updatedCategory->id);
+        $this->assertDatabaseHas('categories', array_add($categoryArray, 'id', $updatedCategory->id));
     }
 
     /**
-     * Test that the repository 'delete' method deletes a model
+     * Test that the repository 'delete' method deletes the applicable row from the database
      */
-    public function testDeleteMethodIsCalled()
+    public function testDeleteMethodRemovesRowFromDatabase()
     {
-        $id = 3;
+        $category = factory(Category::class)->create();
 
-        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->category);
-        $this->category->shouldReceive('delete')->once();
+        $this->repository->delete($category->id);
 
-        $this->repository->delete($id);
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id
+        ]);
     }
 }

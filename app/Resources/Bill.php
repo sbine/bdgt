@@ -28,13 +28,6 @@ class Bill extends Model
         'user_id'
     ];
 
-    protected $appends = [
-        'total',
-        'nextDue',
-        'lastDue',
-        'paid'
-    ];
-
     public function transactions()
     {
         return $this->hasMany('Bdgt\Resources\Transaction');

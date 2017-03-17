@@ -27,11 +27,6 @@ class Goal extends Model
         'user_id'
     ];
 
-    protected $appends = [
-        'achieved',
-        'progress'
-    ];
-
     public function getAchievedAttribute()
     {
         if ($this->balance >= $this->amount) {

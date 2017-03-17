@@ -2,63 +2,63 @@
 
 namespace Bdgt\Tests\Repositories;
 
+use Bdgt\Repositories\Contracts\BillRepositoryInterface;
+use Bdgt\Resources\Bill;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
-use Mockery;
 
 class BillRepositoryTest extends TestCase
 {
+    private $repository;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->bill = $this->mock('Bdgt\Resources\Bill[save,delete]');
-        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentBillRepository[instance]', [$this->bill]);
+        $this->repository = app()->make(BillRepositoryInterface::class);
+
+        $this->be(factory(User::class)->create());
     }
 
     /**
-     * Test that the repository 'create' method sets attributes and saves a model
+     * Test that the repository 'create' method stores its input in the database
      */
-    public function testCreateMethodIsCalled()
+    public function testCreateStoresInputToDatabase()
     {
-        $billArray = [
-            'label' => 'Acme'
-        ];
+        $bill = factory(Bill::class)->make();
 
-        $this->repository->shouldReceive('instance')->once()->andReturn($this->bill);
-        $this->bill->shouldReceive('save')->once();
+        $createdBill = $this->repository->create($bill->toArray());
 
-        $this->repository->create($billArray);
-
-        $this->assertEquals('Acme', $this->bill->label);
+        $this->assertEquals($bill->label, $createdBill->label);
+        $this->assertDatabaseHas('bills', array_add($bill->toArray(), 'id', $createdBill->id));
     }
 
     /**
-     * Test that the repository 'update' method changes attributes and saves a model
+     * Test that the repository 'update' method updates the database with its input
      */
-    public function testUpdateMethodIsCalled()
+    public function testUpdateChangesInputInDatabase()
     {
-        $billArray = [
-            'label' => 'Acme'
-        ];
+        $bill = factory(Bill::class)->create();
+        $billArray = $bill->toArray();
+        $billArray['label'] = 'Acme';
 
-        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->bill);
-        $this->bill->shouldReceive('save')->once();
+        $updatedBill = $this->repository->update($billArray, $bill->id);
 
-        $this->repository->update($billArray, 1);
-
-        $this->assertEquals('Acme', $this->bill->label);
+        $this->assertEquals($bill->id, $updatedBill->id);
+        $this->assertDatabaseHas('bills', array_add($billArray, 'id', $updatedBill->id));
     }
 
     /**
-     * Test that the repository 'delete' method deletes a model
+     * Test that the repository 'delete' method deletes the applicable row from the database
      */
-    public function testDeleteMethodIsCalled()
+    public function testDeleteMethodRemovesRowFromDatabase()
     {
-        $id = 3;
+        $bill = factory(Bill::class)->create();
 
-        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->bill);
-        $this->bill->shouldReceive('delete')->once();
+        $this->repository->delete($bill->id);
 
-        $this->repository->delete($id);
+        $this->assertDatabaseMissing('bills', [
+            'id' => $bill->id
+        ]);
     }
 }

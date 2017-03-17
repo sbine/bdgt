@@ -2,63 +2,63 @@
 
 namespace Bdgt\Tests\Repositories;
 
+use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
+use Bdgt\Resources\Transaction;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
-use Mockery;
 
 class TransactionRepositoryTest extends TestCase
 {
+    private $repository;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->transaction = $this->mock('Bdgt\Resources\Transaction[save,delete]');
-        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentTransactionRepository[instance]', [$this->transaction]);
+        $this->repository = app()->make(TransactionRepositoryInterface::class);
+
+        $this->be(factory(User::class)->create());
     }
 
     /**
-     * Test that the repository 'create' method sets attributes and saves a model
+     * Test that the repository 'create' method stores its input in the database
      */
-    public function testCreateMethodIsCalled()
+    public function testCreateStoresInputToDatabase()
     {
-        $transactionArray = [
-            'amount' => 50
-        ];
+        $transaction = factory(Transaction::class)->states('with_account')->make();
 
-        $this->repository->shouldReceive('instance')->once()->andReturn($this->transaction);
-        $this->transaction->shouldReceive('save')->once();
+        $createdTransaction = $this->repository->create($transaction->toArray());
 
-        $this->repository->create($transactionArray);
-
-        $this->assertEquals(50, $this->transaction->amount);
+        $this->assertEquals($transaction->amount, $createdTransaction->amount);
+        $this->assertDatabaseHas('transactions', array_add($transaction->toArray(), 'id', $createdTransaction->id));
     }
 
     /**
-     * Test that the repository 'update' method changes attributes and saves a model
+     * Test that the repository 'update' method updates the database with its input
      */
-    public function testUpdateMethodIsCalled()
+    public function testUpdateChangesInputInDatabase()
     {
-        $transactionArray = [
-            'amount' => 50
-        ];
+        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transactionArray = $transaction->toArray();
+        $transactionArray['amount'] = 155.49;
 
-        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->transaction);
-        $this->transaction->shouldReceive('save')->once();
+        $updatedTransaction = $this->repository->update($transactionArray, $transaction->id);
 
-        $this->repository->update($transactionArray, 1);
-
-        $this->assertEquals(50, $this->transaction->amount);
+        $this->assertEquals($transaction->id, $updatedTransaction->id);
+        $this->assertDatabaseHas('transactions', array_add($transactionArray, 'id', $updatedTransaction->id));
     }
 
     /**
-     * Test that the repository 'delete' method deletes a model
+     * Test that the repository 'delete' method deletes the applicable row from the database
      */
-    public function testDeleteMethodIsCalled()
+    public function testDeleteMethodRemovesRowFromDatabase()
     {
-        $id = 3;
+        $transaction = factory(Transaction::class)->states('with_account')->create();
 
-        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->transaction);
-        $this->transaction->shouldReceive('delete')->once();
+        $this->repository->delete($transaction->id);
 
-        $this->repository->delete($id);
+        $this->assertDatabaseMissing('transactions', [
+            'id' => $transaction->id
+        ]);
     }
 }

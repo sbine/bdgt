@@ -2,7 +2,12 @@
 
 namespace Bdgt\Tests\Resources;
 
+use Bdgt\Resources\Bill;
+use Bdgt\Resources\Transaction;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
+use DateInterval;
+use DateTime;
 
 class BillTest extends TestCase
 {
@@ -10,7 +15,23 @@ class BillTest extends TestCase
     {
         parent::setUp();
 
-        $this->model = $this->mock('Bdgt\Resources\Bill[save,update,create,delete,destroy]');
+        $this->be(factory(User::class)->create());
+    }
+
+    public function testPaidAttribute()
+    {
+        $bill = factory(Bill::class)->make([
+            'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
+            'frequency' => 30,
+            'amount' => 140,
+        ]);
+        $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
+            'amount' => 60,
+            'inflow' => false,
+            'date' => date('Y-m-d H:i:s')
+        ]));
+
+        $this->assertTrue($bill->paid);
     }
 
     public function testGetDueDatesForInterval()
@@ -20,7 +41,7 @@ class BillTest extends TestCase
         $frequency  = 30;
         $initialStart = '2011-01-01';
 
-        $dueDates = $this->model->getDueDatesForInterval($intervalStart, $intervalEnd, $frequency, $initialStart);
+        $dueDates = (new Bill)->getDueDatesForInterval($intervalStart, $intervalEnd, $frequency, $initialStart);
 
         $this->assertEquals([
             '2015-01-10',

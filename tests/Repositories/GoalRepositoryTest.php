@@ -2,63 +2,63 @@
 
 namespace Bdgt\Tests\Repositories;
 
+use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
+use Bdgt\Resources\Goal;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
-use Mockery;
 
 class GoalRepositoryTest extends TestCase
 {
+    private $repository;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->goal = $this->mock('Bdgt\Resources\Goal[save,delete]');
-        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentGoalRepository[instance]', [$this->goal]);
+        $this->repository = app()->make(GoalRepositoryInterface::class);
+
+        $this->be(factory(User::class)->create());
     }
 
     /**
-     * Test that the repository 'create' method sets attributes and saves a model
+     * Test that the repository 'create' method stores its input in the database
      */
-    public function testCreateMethodIsCalled()
+    public function testCreateStoresInputToDatabase()
     {
-        $goalArray = [
-            'label' => 'Retirement'
-        ];
+        $goal = factory(Goal::class)->make();
 
-        $this->repository->shouldReceive('instance')->once()->andReturn($this->goal);
-        $this->goal->shouldReceive('save')->once();
+        $createdGoal = $this->repository->create($goal->toArray());
 
-        $this->repository->create($goalArray);
-
-        $this->assertEquals('Retirement', $this->goal->label);
+        $this->assertEquals($goal->label, $createdGoal->label);
+        $this->assertDatabaseHas('goals', array_add($goal->toArray(), 'id', $createdGoal->id));
     }
 
     /**
-     * Test that the repository 'update' method changes attributes and saves a model
+     * Test that the repository 'update' method updates the database with its input
      */
-    public function testUpdateMethodIsCalled()
+    public function testUpdateChangesInputInDatabase()
     {
-        $goalArray = [
-            'label' => 'Retirement'
-        ];
+        $goal = factory(Goal::class)->create();
+        $goalArray = $goal->toArray();
+        $goalArray['label'] = 'Acme';
 
-        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->goal);
-        $this->goal->shouldReceive('save')->once();
+        $updatedGoal = $this->repository->update($goalArray, $goal->id);
 
-        $this->repository->update($goalArray, 1);
-
-        $this->assertEquals('Retirement', $this->goal->label);
+        $this->assertEquals($goal->id, $updatedGoal->id);
+        $this->assertDatabaseHas('goals', array_add($goalArray, 'id', $updatedGoal->id));
     }
 
     /**
-     * Test that the repository 'delete' method deletes a model
+     * Test that the repository 'delete' method deletes the applicable row from the database
      */
-    public function testDeleteMethodIsCalled()
+    public function testDeleteMethodRemovesRowFromDatabase()
     {
-        $id = 3;
+        $goal = factory(Goal::class)->create();
 
-        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->goal);
-        $this->goal->shouldReceive('delete')->once();
+        $this->repository->delete($goal->id);
 
-        $this->repository->delete($id);
+        $this->assertDatabaseMissing('goals', [
+            'id' => $goal->id
+        ]);
     }
 }

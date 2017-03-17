@@ -2,63 +2,63 @@
 
 namespace Bdgt\Tests\Repositories;
 
+use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
+use Bdgt\Resources\Account;
+use Bdgt\Resources\User;
 use Bdgt\Tests\TestCase;
-use Mockery;
 
 class AccountRepositoryTest extends TestCase
 {
+    private $repository;
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->account = $this->mock('Bdgt\Resources\Account[save,delete]');
-        $this->repository = Mockery::mock('Bdgt\Repositories\Eloquent\EloquentAccountRepository[instance]', [$this->account]);
+        $this->repository = app()->make(AccountRepositoryInterface::class);
+
+        $this->be(factory(User::class)->create());
     }
 
     /**
-     * Test that the repository 'create' method sets attributes and saves a model
+     * Test that the repository 'create' method stores its input in the database
      */
-    public function testCreateMethodIsCalled()
+    public function testCreateStoresInputToDatabase()
     {
-        $accountArray = [
-            'name' => 'Checking'
-        ];
+        $account = factory(Account::class)->make();
 
-        $this->repository->shouldReceive('instance')->once()->andReturn($this->account);
-        $this->account->shouldReceive('save')->once();
+        $createdAccount = $this->repository->create($account->toArray());
 
-        $this->repository->create($accountArray);
-
-        $this->assertEquals('Checking', $this->account->name);
+        $this->assertEquals($account->name, $createdAccount->name);
+        $this->assertDatabaseHas('accounts', array_add($account->toArray(), 'id', $createdAccount->id));
     }
 
     /**
-     * Test that the repository 'update' method changes attributes and saves a model
+     * Test that the repository 'update' method updates the database with its input
      */
-    public function testUpdateMethodIsCalled()
+    public function testUpdateChangesInputInDatabase()
     {
-        $accountArray = [
-            'name' => 'Checking'
-        ];
+        $account = factory(Account::class)->create();
+        $accountArray = $account->toArray();
+        $accountArray['name'] = 'Acme';
 
-        $this->repository->shouldReceive('instance')->once()->with('id', 1)->andReturn($this->account);
-        $this->account->shouldReceive('save')->once();
+        $updatedAccount = $this->repository->update($accountArray, $account->id);
 
-        $this->repository->update($accountArray, 1);
-
-        $this->assertEquals('Checking', $this->account->name);
+        $this->assertEquals($account->id, $updatedAccount->id);
+        $this->assertDatabaseHas('accounts', array_add($accountArray, 'id', $updatedAccount->id));
     }
 
     /**
-     * Test that the repository 'delete' method deletes a model
+     * Test that the repository 'delete' method deletes the applicable row from the database
      */
-    public function testDeleteMethodIsCalled()
+    public function testDeleteMethodRemovesRowFromDatabase()
     {
-        $id = 3;
+        $account = factory(Account::class)->create();
 
-        $this->repository->shouldReceive('instance')->once()->with('id', $id)->andReturn($this->account);
-        $this->account->shouldReceive('delete')->once();
+        $this->repository->delete($account->id);
 
-        $this->repository->delete($id);
+        $this->assertDatabaseMissing('accounts', [
+            'id' => $account->id
+        ]);
     }
 }
