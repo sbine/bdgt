@@ -86,10 +86,10 @@
 				<td colspan="2"></td>
 			</tr>
 		</tfoot>
+		<tbody>
 		</tbody>
 	</table>
 
 	@include('transaction.modals.edit')
 	@include('transaction.modals.delete')
 @endsection
-

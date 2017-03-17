@@ -3,6 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
@@ -10,7 +11,7 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param CategoryRepositoryInterface $categoryRepository
      */
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
@@ -24,9 +25,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $c['categories'] = $this->repository->all(['label' => 'asc']);
+        $categories = $this->repository->all(['label' => 'asc']);
 
-        return view('category.index', $c);
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -40,13 +41,11 @@ class CategoryController extends Controller
     {
         try {
             $category = $this->repository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect('/categories');
+        } catch (ModelNotFoundException $e) {
+            return redirect(route('categories.index'));
         }
 
-        $c['category'] = $category;
-
-        return view('category.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $category->transactions ]);
+        return view('category.show', compact('category'))->nest('transactions', 'transaction._list', [ 'transactions' => $category->transactions ]);
     }
 
     /**
@@ -57,7 +56,7 @@ class CategoryController extends Controller
     public function store()
     {
         if ($category = $this->repository->create(Input::except(['_token', '_method']))) {
-            return redirect("/categories/{$category->id}")->with('alerts.success', trans('crud.categories.created'));
+            return redirect(route('categories.show', $category->id))->with('alerts.success', trans('crud.categories.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
@@ -73,7 +72,7 @@ class CategoryController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect("/categories/{$id}")->with('alerts.success', trans('crud.categories.updated'));
+            return redirect(route('categories.show', $id))->with('alerts.success', trans('crud.categories.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
@@ -89,7 +88,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect('/categories')->with('alerts.success', trans('crud.categories.deleted'));
+            return redirect(route('categories.index'))->with('alerts.success', trans('crud.categories.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }

@@ -3,6 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
@@ -10,7 +11,7 @@ class AccountController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param AccountRepositoryInterface $accountRepository
      */
     public function __construct(AccountRepositoryInterface $accountRepository)
     {
@@ -24,9 +25,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $c['accounts'] = $this->repository->all(['name' => 'asc']);
+        $accounts = $this->repository->all(['name' => 'asc']);
 
-        return view('account.index', $c);
+        return view('account.index', compact('accounts'));
     }
 
     /**
@@ -40,13 +41,11 @@ class AccountController extends Controller
     {
         try {
             $account = $this->repository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect('/accounts');
+        } catch (ModelNotFoundException $e) {
+            return redirect(route('accounts.index'));
         }
 
-        $c['account'] = $account;
-
-        return view('account.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions ]);
+        return view('account.show', compact('account'))->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions ]);
     }
 
     /**
@@ -57,7 +56,7 @@ class AccountController extends Controller
     public function store()
     {
         if ($account = $this->repository->create(Input::except(['_token', '_method']))) {
-            return redirect("/accounts/{$account->id}")->with('alerts.success', trans('crud.accounts.created'));
+            return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
@@ -73,7 +72,7 @@ class AccountController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect("/accounts/{$id}")->with('alerts.success', trans('crud.accounts.updated'));
+            return redirect(route('accounts.show', $id))->with('alerts.success', trans('crud.accounts.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
@@ -89,7 +88,7 @@ class AccountController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect('/accounts')->with('alerts.success', trans('crud.accounts.deleted'));
+            return redirect(route('accounts.index'))->with('alerts.success', trans('crud.accounts.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }

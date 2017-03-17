@@ -8,6 +8,7 @@ use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use Bdgt\Resources\Account;
 use Bdgt\Resources\Category;
 use Bdgt\Resources\Ledger;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller
@@ -31,13 +32,15 @@ class TransactionController extends Controller
     {
         $ledger = new Ledger($this->repository);
 
-        $c['ledger'] = $ledger;
+        $accounts = Account::all();
 
-        $c['accounts'] = Account::all();
+        $categories = Category::all();
 
-        $c['categories'] = Category::all();
-
-        return view('transaction.index', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $ledger->transactions(), 'actionable' => true ]);
+        return view('transaction.index', compact('ledger', 'accounts', 'categories'))
+            ->nest('transactions', 'transaction._list', [
+                'transactions' => $ledger->transactions(),
+                'actionable' => true
+            ]);
     }
 
     /**
@@ -51,8 +54,8 @@ class TransactionController extends Controller
     {
         try {
             $transaction = $this->repository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect('/transactions');
+        } catch (ModelNotFoundException $e) {
+            return redirect(route('transactions.index'));
         }
 
         return response()->json($transaction->toArray());
@@ -96,7 +99,7 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect('/transactions')->with('alerts.success', trans('crud.transactions.deleted'));
+            return redirect(route('transactions.index'))->with('alerts.success', trans('crud.transactions.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
         }

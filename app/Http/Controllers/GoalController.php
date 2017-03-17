@@ -4,6 +4,7 @@ namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
 use Bdgt\Resources\Goal;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class GoalController extends Controller
@@ -11,7 +12,7 @@ class GoalController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param GoalRepositoryInterface $goalRepository
      */
     public function __construct(GoalRepositoryInterface $goalRepository)
     {
@@ -25,15 +26,11 @@ class GoalController extends Controller
      */
     public function index()
     {
-        $goals = $this->repository->all();
-
-        $goals->sortByDesc(function ($goal) {
+        $goals = $this->repository->all()->sortByDesc(function ($goal) {
             return $goal->progress;
         });
 
-        $c['goals'] = $goals;
-
-        return view('goal.index', $c);
+        return view('goal.index', compact('goals'));
     }
 
     /**
@@ -47,13 +44,11 @@ class GoalController extends Controller
     {
         try {
             $goal = $this->repository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect('/goals');
+        } catch (ModelNotFoundException $e) {
+            return redirect(route('goals.index'));
         }
 
-        $c['goal'] = $goal;
-
-        return view('goal.show', $c);
+        return view('goal.show', compact('goal'));
     }
 
     /**
@@ -64,7 +59,7 @@ class GoalController extends Controller
     public function store()
     {
         if ($goal = $this->repository->create(Input::except(['_token', '_method']))) {
-            return redirect("/goals/{$goal->id}")->with('alerts.success', trans('crud.goals.created'));
+            return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
@@ -80,7 +75,7 @@ class GoalController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect("/goals/{$id}")->with('alerts.success', trans('crud.goals.updated'));
+            return redirect(route('goals.show', $id))->with('alerts.success', trans('crud.goals.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
@@ -96,7 +91,7 @@ class GoalController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect('/goals')->with('alerts.success', trans('crud.goals.deleted'));
+            return redirect(route('goals.index'))->with('alerts.success', trans('crud.goals.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }

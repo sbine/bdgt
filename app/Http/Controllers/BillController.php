@@ -3,6 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Repositories\Contracts\BillRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class BillController extends Controller
@@ -10,7 +11,7 @@ class BillController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param BillRepositoryInterface $billRepository
      */
     public function __construct(BillRepositoryInterface $billRepository)
     {
@@ -24,15 +25,11 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = $this->repository->all();
-
-        $bills->sortBy(function ($bill) {
+        $bills = $this->repository->all()->sortBy(function ($bill) {
             return $bill->nextDue;
         });
 
-        $c['bills'] = $bills;
-
-        return view('bill.index', $c);
+        return view('bill.index', compact('bills'));
     }
 
     /**
@@ -46,13 +43,11 @@ class BillController extends Controller
     {
         try {
             $bill = $this->repository->find($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect('/bills');
+        } catch (ModelNotFoundException $e) {
+            return redirect(route('bills.index'));
         }
 
-        $c['bill'] = $bill;
-
-        return view('bill.show', $c)->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
+        return view('bill.show', compact('bill'))->nest('transactions', 'transaction._list', [ 'transactions' => $bill->transactions ]);
     }
 
     /**
@@ -63,7 +58,7 @@ class BillController extends Controller
     public function store()
     {
         if ($bill = $this->repository->create(Input::except(['_token', '_method']))) {
-            return redirect("/bills/{$bill->id}")->with('alerts.success', trans('crud.bills.created'));
+            return redirect(route('bills.show', $bill->id))->with('alerts.success', trans('crud.bills.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
@@ -79,7 +74,7 @@ class BillController extends Controller
     public function update($id)
     {
         if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect("/bills/{$id}")->with('alerts.success', trans('crud.bills.updated'));
+            return redirect(route('bills.show', $id))->with('alerts.success', trans('crud.bills.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }
@@ -95,7 +90,7 @@ class BillController extends Controller
     public function destroy($id)
     {
         if ($this->repository->delete($id)) {
-            return redirect('/bills')->with('alerts.success', trans('crud.bills.deleted'));
+            return redirect(route('bills.index'))->with('alerts.success', trans('crud.bills.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
         }

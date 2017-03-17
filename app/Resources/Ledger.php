@@ -12,9 +12,9 @@ class Ledger
 
     public function __construct($transactionRepository)
     {
-        $this->transactions = $transactionRepository->all(['date' => 'desc']);
+        $this->transactions = $transactionRepository->all()->sortByDesc('date');
 
-        if (!$this->transactions()->isEmpty()) {
+        if (!$this->transactions->isEmpty()) {
             $this->lastPurchase = $this->transactions->first()->date;
 
             foreach ($this->transactions as $t) {

@@ -14,6 +14,7 @@
 	</tr>
 </thead>
 <tbody>
+@if (! $transactions->isEmpty())
 @foreach ($transactions as $transaction)
 	<tr data-id="{{ $transaction->id }}">
 		<td>
@@ -67,6 +68,7 @@
 		@endif
 	</tr>
 @endforeach
+@endif
 </tbody>
 
 @section('scripts')

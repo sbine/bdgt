@@ -4,6 +4,7 @@ namespace Bdgt\Repositories\Eloquent;
 
 use Bdgt\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -74,6 +75,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function create(array $data)
     {
+        if (empty($data)) {
+            return null;
+        }
+
         $instance = $this->instance();
 
         foreach ($data as $key => $value) {
@@ -96,6 +101,10 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function update(array $data, int $id, string $attribute = 'id')
     {
+        if (empty($data)) {
+            return null;
+        }
+
         $instance = $this->instance($attribute, $id);
 
         foreach ($data as $key => $value) {
@@ -116,7 +125,11 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function delete(int $id)
     {
-        $instance = $this->instance('id', $id);
+        $instance = $this->model->find($id);
+
+        if (!$instance) {
+            return null;
+        }
 
         return $instance->delete();
     }
@@ -130,7 +143,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function find(int $id, array $columns = ['*'])
     {
-        $instance = $this->model->find($id, $columns);
+        $instance = $this->model->findOrFail($id, $columns);
 
         return $instance;
     }
