@@ -2,19 +2,25 @@
 
 namespace Bdgt\Resources;
 
-use Bdgt\Scopes\TenancyScope;
+use Bdgt\Resources\Traits\HasTenancy;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel
 {
+    use HasTenancy;
+
     protected $nullable = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['user'];
 
     protected static function boot()
     {
         parent::boot();
-
-        static::addGlobalScope(new TenancyScope);
-        static::observe(new TenancyObserver);
 
         static::saving(function ($model) {
             self::setNullables($model);
