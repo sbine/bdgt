@@ -3,6 +3,7 @@
 namespace Bdgt\Http\Controllers;
 
 use Bdgt\Services\ReportService;
+use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
@@ -28,14 +29,15 @@ class ReportController extends Controller
     /**
      * Show an individual report to the user.
      *
+     * @param $type
      * @return Response
      */
     public function show($type)
     {
-        $reportService = new ReportService;
+        $reportService = new ReportService($type);
 
         $report = (object)[
-            'name' => $reportService->getName($type),
+            'name' => $reportService->getReportName(),
             'url' => '/reports/ajax/' . $type,
         ];
 
@@ -49,7 +51,8 @@ class ReportController extends Controller
      */
     public function ajax_report($type)
     {
-        $reportService = new ReportService;
-        return response()->json($reportService->get($type));
+        $reportService = new ReportService($type);
+
+        return response()->json($reportService->get(Input::get('startDate'), Input::get('endDate')));
     }
 }

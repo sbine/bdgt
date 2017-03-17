@@ -3,8 +3,6 @@
 namespace Bdgt\Reports;
 
 use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
-use DB;
 use DateTime;
 use DateInterval;
 
