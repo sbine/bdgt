@@ -101,7 +101,7 @@ class FakerProvider extends Base
 
     public function randomAmount($max = 2000)
     {
-        $random = rand(0, 100);
+        $random = random_int(0, 100);
         if ($random <= 90) {
             return $this->generator->biasedNumberBetween(0, 50) . '.' . $this->numberBetween(0, 99);
         }
@@ -117,18 +117,6 @@ class FakerProvider extends Base
         } catch (OverflowException $e) {
             $this->unique(true);
             return $this->randomElement($elements);
-        }
-    }
-
-    public static function getRandomWeightedElement($values)
-    {
-        $rand = mt_rand(1, (int)array_sum($values));
-
-        foreach ($values as $k => $v) {
-            $rand -= $v;
-            if ($rand <= 0) {
-                return $k;
-            }
         }
     }
 }
