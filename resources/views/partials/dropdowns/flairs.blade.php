@@ -1,7 +1,7 @@
-<option value="lightgray"></option>
-<option value="red">Red</option>
-<option value="orange">Orange</option>
-<option value="yellow">Yellow</option>
-<option value="green">Green</option>
-<option value="blue">Blue</option>
-<option value="purple">Purple</option>
+<option value="lightgray">{{ trans('colors.lightgray') }}</option>
+<option value="red">{{ trans('colors.red') }}</option>
+<option value="orange">{{ trans('colors.orange') }}</option>
+<option value="yellow">{{ trans('colors.yellow') }}</option>
+<option value="green">{{ trans('colors.green') }}</option>
+<option value="blue">{{ trans('colors.blue') }}</option>
+<option value="purple">{{ trans('colors.purple') }}</option>
