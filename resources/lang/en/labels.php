@@ -9,6 +9,7 @@ return [
     ],
     'auth' => [
         'login' => 'Login',
+        'logout' => 'Logout',
         'register' => 'Register',
         'register_button' => 'Register an account',
         'forgot_password' => 'Forgot Your Password?',
@@ -165,6 +166,8 @@ return [
     'reports' => [
         'singular' => 'Report',
         'plural' => 'Reports',
+        'spending_by_category' => 'Spending By Category',
+        'spending_over_time' => 'Spending Over Time'
     ],
     'transactions' => [
         'singular' => 'Transaction',
