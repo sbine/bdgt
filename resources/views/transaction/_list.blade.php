@@ -101,6 +101,9 @@
 			$('#editTransactionModal input[type="text"], select').each(function() {
 				$(this).val(transaction[$(this).attr('name')]);
 			});
+            $('#editTransactionModal input[type="number"]').each(function() {
+                $(this).val(transaction[$(this).attr('name')].toFixed(2));
+            });
 			$('#editTransactionModal input[type="radio"]').each(function() {
 				$(this).val([transaction[$(this).attr('name')]]);
 			});

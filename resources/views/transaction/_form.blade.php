@@ -22,7 +22,7 @@
 	<div class="col-sm-8">
 		<div class="input-group">
 			<span class="input-group-addon">$</span>
-			<input type="text" class="form-control" name="amount" required>
+			<input type="number" class="form-control" name="amount" step="0.01" min="0" max="1000000" required>
 		</div>
 	</div>
 </div>
