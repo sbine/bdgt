@@ -25,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->tinyInteger('inflow');
             $table->tinyInteger('cleared');
             $table->string('flair', 32)->nullable();
+            $table->text('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

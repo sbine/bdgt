@@ -12,11 +12,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [
-        'Bdgt\Events\SomeEvent' => [
-            'Bdgt\Listeners\EventListener',
-        ],
-    ];
+    protected $listen = [];
 
     /**
      * Register any other events for your application.
