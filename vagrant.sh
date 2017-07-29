@@ -26,14 +26,14 @@ echo '--- Installing npm ---'
 apt-get install -y npm
 ln -s /usr/bin/nodejs /usr/bin/node
 npm install -g n
-n 6.9.5
+n 6.10.3
 echo '...done'
 
 
 echo '--- Installing MariaDB and PHP7 ---'
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password password '
 debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again password '
-apt-get install -y php7.0 php7.0-cli php7.0-mbstring php7.0-xml libapache2-mod-php7.0 php7.0-mysql php7.0-sqlite
+apt-get install -y php7.0 php7.0-cli php7.0-mbstring php7.0-xml libapache2-mod-php7.0 php7.0-mysql php7.0-sqlite php-xdebug
 apt-get install -y mariadb-server-10.0
 mysql -uroot -e "CREATE DATABASE bdgt;"
 mysql -uroot -e "CREATE USER 'bdgt'@'localhost' IDENTIFIED BY 'password';"
