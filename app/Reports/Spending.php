@@ -25,7 +25,7 @@ class Spending implements Reportable
      * @param $endDate
      * @return array
      */
-    public function get($startDate = null, $endDate = null)
+    public function forDateRange($startDate = null, $endDate = null)
     {
         // If no start date, initialize to 1 year ago
         if (!$startDate) {

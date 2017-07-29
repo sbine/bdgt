@@ -54,7 +54,7 @@ class ReportController extends Controller
     {
         return response()->json(
             $this->reportService->generate($type)
-                                ->get(Input::get('startDate'), Input::get('endDate'))
+                                ->forDateRange(Input::get('startDate'), Input::get('endDate'))
         );
     }
 }

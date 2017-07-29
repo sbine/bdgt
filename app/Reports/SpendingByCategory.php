@@ -18,7 +18,7 @@ class SpendingByCategory implements Reportable
         return 'Spending By Category';
     }
 
-    public function get($startDate = null, $endDate = null)
+    public function forDateRange($startDate = null, $endDate = null)
     {
         $query = $this->transactionRepository->model();
 
