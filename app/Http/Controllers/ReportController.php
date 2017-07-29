@@ -2,23 +2,11 @@
 
 namespace Bdgt\Http\Controllers;
 
-use Bdgt\Services\ReportService;
+use Bdgt\Reports\ReportFactory;
 use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
-    private $reportService;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param ReportService $reportService
-     */
-    public function __construct(ReportService $reportService)
-    {
-        $this->reportService = $reportService;
-    }
-
     /**
      * Show the default report to the user.
      *
@@ -38,7 +26,7 @@ class ReportController extends Controller
     public function show($type)
     {
         $report = (object)[
-            'name' => $this->reportService->generate($type)->name(),
+            'name' => ReportFactory::generate($type)->name(),
             'url' => '/reports/ajax/' . $type,
         ];
 
@@ -53,8 +41,8 @@ class ReportController extends Controller
     public function ajax_report($type)
     {
         return response()->json(
-            $this->reportService->generate($type)
-                                ->forDateRange(Input::get('startDate'), Input::get('endDate'))
+            ReportFactory::generate($type)
+                           ->forDateRange(Input::get('startDate'), Input::get('endDate'))
         );
     }
 }

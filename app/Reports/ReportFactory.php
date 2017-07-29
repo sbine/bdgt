@@ -1,15 +1,12 @@
 <?php
 
-namespace Bdgt\Services;
+namespace Bdgt\Reports;
 
 use InvalidArgumentException;
-use Bdgt\Reports\Reportable;
-use Bdgt\Reports\Spending;
-use Bdgt\Reports\SpendingByCategory;
 
-class ReportService
+class ReportFactory
 {
-    public function generate(string $reportType): Reportable
+    public static function generate(string $reportType): Reportable
     {
         switch ($reportType) {
             case 'categorial':
