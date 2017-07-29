@@ -7,13 +7,16 @@ use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
+    private $reportService;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param ReportService $reportService
      */
-    public function __construct()
+    public function __construct(ReportService $reportService)
     {
+        $this->reportService = $reportService;
     }
 
     /**
@@ -34,10 +37,8 @@ class ReportController extends Controller
      */
     public function show($type)
     {
-        $reportService = new ReportService($type);
-
         $report = (object)[
-            'name' => $reportService->getReportName(),
+            'name' => $this->reportService->generate($type)->name(),
             'url' => '/reports/ajax/' . $type,
         ];
 
@@ -51,8 +52,9 @@ class ReportController extends Controller
      */
     public function ajax_report($type)
     {
-        $reportService = new ReportService($type);
-
-        return response()->json($reportService->get(Input::get('startDate'), Input::get('endDate')));
+        return response()->json(
+            $this->reportService->generate($type)
+                                ->get(Input::get('startDate'), Input::get('endDate'))
+        );
     }
 }

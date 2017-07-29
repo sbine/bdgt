@@ -8,7 +8,7 @@ use DateInterval;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Spending implements ReportInterface
+class Spending implements Reportable
 {
     public function __construct(TransactionRepositoryInterface $transactionRepository)
     {

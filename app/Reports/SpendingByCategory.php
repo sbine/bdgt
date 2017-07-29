@@ -6,7 +6,7 @@ use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
 use DateTime;
 use DateInterval;
 
-class SpendingByCategory implements ReportInterface
+class SpendingByCategory implements Reportable
 {
     public function __construct(TransactionRepositoryInterface $transactionRepository)
     {

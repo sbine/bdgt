@@ -2,7 +2,7 @@
 
 namespace Bdgt\Reports;
 
-interface ReportInterface
+interface Reportable
 {
     public function name();
 

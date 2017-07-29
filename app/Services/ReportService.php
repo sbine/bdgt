@@ -3,32 +3,15 @@
 namespace Bdgt\Services;
 
 use InvalidArgumentException;
-use Bdgt\Reports\ReportInterface;
+use Bdgt\Reports\Reportable;
 use Bdgt\Reports\Spending;
 use Bdgt\Reports\SpendingByCategory;
 
 class ReportService
 {
-    private $report;
-
-    public function __construct(string $reportType)
+    public function generate(string $reportType): Reportable
     {
-        $this->report = $this->getReportForType($reportType);
-    }
-
-    public function getReportName()
-    {
-        return $this->report->name();
-    }
-
-    public function get($startDate = null, $endDate = null)
-    {
-        return $this->report->get($startDate, $endDate);
-    }
-
-    private function getReportForType($type): ReportInterface
-    {
-        switch ($type) {
+        switch ($reportType) {
             case 'categorial':
                 $report = app()->make(SpendingByCategory::class);
                 break;
@@ -39,6 +22,7 @@ class ReportService
                 throw new InvalidArgumentException('Invalid report type');
                 break;
         }
+
         return $report;
     }
 }
