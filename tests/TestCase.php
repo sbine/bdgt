@@ -39,7 +39,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
      * @param null $args
      * @return mixed
      */
-    public function mock($class, $args = null)
+    public function mock(string $class, $args = null)
     {
         if ($args) {
             $mock = Mockery::mock($class, $args);
@@ -50,23 +50,5 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
         $this->app->instance($class, $mock);
 
         return $mock;
-    }
-
-    /**
-     * @param  \stdClass  $object
-     * @param  string    $method
-     * @param  array     $args
-     * @return mixed
-     */
-    protected function runReflectedMethod($object, $method, $args = [])
-    {
-        if (is_string($object)) {
-            $object = get_class($object);
-        }
-
-        $method = new ReflectionMethod($object, $method);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $args);
     }
 }

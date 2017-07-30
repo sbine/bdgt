@@ -2,22 +2,21 @@
 
 namespace Bdgt\Tests\Services;
 
-use Bdgt\Reports\NetWorth;
-use Bdgt\Reports\ReportInterface;
+use Bdgt\Reports\Reportable;
+use Bdgt\Reports\ReportFactory;
 use Bdgt\Reports\Spending;
 use Bdgt\Reports\SpendingByCategory;
-use Bdgt\Services\ReportService;
 use Bdgt\Tests\TestCase;
 use InvalidArgumentException;
 
-class ReportServiceTest extends TestCase
+class ReportFactoryTest extends TestCase
 {
     public function testGetName()
     {
-        $this->mock(Spending::class, ReportInterface::class)
+        $this->mock(Spending::class, Reportable::class)
             ->shouldReceive('name')->once()->andReturn('Report Name');
 
-        $this->assertEquals('Report Name', (new ReportService('spending'))->getReportName());
+        $this->assertEquals('Report Name', ReportFactory::generate('spending')->name());
     }
 
     public function testGetSpendingReport()
@@ -27,10 +26,10 @@ class ReportServiceTest extends TestCase
             'data',
         ];
 
-        $this->mock(Spending::class, ReportInterface::class)
+        $this->mock(Spending::class, Reportable::class)
             ->shouldReceive('get')->once()->andReturn($reportData);
 
-        $this->assertEquals($reportData, (new ReportService('spending'))->get());
+        $this->assertEquals($reportData, ReportFactory::generate('spending')->get());
     }
 
     public function testGetSpendingByCategoryReport()
@@ -40,16 +39,16 @@ class ReportServiceTest extends TestCase
             'data',
         ];
 
-        $this->mock(SpendingByCategory::class, ReportInterface::class)
+        $this->mock(SpendingByCategory::class, Reportable::class)
             ->shouldReceive('get')->once()->andReturn($reportData);
 
-        $this->assertEquals($reportData, (new ReportService('categorial'))->get());
+        $this->assertEquals($reportData, ReportFactory::generate('categorial')->get());
     }
 
     public function testGetInvalidReportThrowsException()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new ReportService(''))->get();
+        ReportFactory::generate('');
     }
 }
