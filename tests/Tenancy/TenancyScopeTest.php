@@ -2,6 +2,7 @@
 
 namespace Bdgt\Tests\Scopes;
 
+use Bdgt\Resources\User;
 use Bdgt\Tenancy\TenancyScope;
 use Bdgt\Tests\TestCase;
 use DomainException;
@@ -16,8 +17,11 @@ class TenancyScopeTest extends TestCase
         $builder = $this->mock(Builder::class);
         $model = $this->mock(Model::class);
 
+        $user = new User();
+        $user->id = 50;
+
         Auth::shouldReceive('check')->once()->andReturn(true);
-        Auth::shouldReceive('user')->once()->andReturn(new class { public $id = 50; });
+        Auth::shouldReceive('user')->once()->andReturn($user);
 
         $model->shouldReceive('getTable')->once()->andReturn('table');
         $builder->shouldReceive('where')->once()->with('table.user_id', '=', 50);
@@ -31,6 +35,8 @@ class TenancyScopeTest extends TestCase
         $model = $this->mock(Model::class);
 
         Auth::shouldReceive('check')->once()->andReturn(false);
+
+        $model->shouldReceive('getTable')->once()->andReturn('table');
 
         $this->expectException(DomainException::class);
 

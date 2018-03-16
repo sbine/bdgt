@@ -7,6 +7,8 @@ use Bdgt\Resources\Goal;
 use Bdgt\Resources\Transaction;
 use Bdgt\Resources\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DummyDataSeeder extends Seeder
 {
@@ -24,12 +26,15 @@ class DummyDataSeeder extends Seeder
         Goal::flushEventListeners();
         Transaction::flushEventListeners();
 
-        factory(Bdgt\Resources\User::class)->create([
+        $adminUser = factory(User::class)->create([
             'id'       => 1,
             'username' => 'admin',
             'email'    => 'admin@example.com',
             'password' => Hash::make('admin')
-        ])->each(function ($u) {
+        ]);
+
+        Auth::login($adminUser);
+        $adminUser->each(function ($u) {
             $u->accounts()->saveMany(factory(Account::class, 5)->make());
             $u->bills()->saveMany(factory(Bill::class, 5)->make());
             $u->categories()->save(factory(Category::class)->make([
@@ -61,6 +66,18 @@ class DummyDataSeeder extends Seeder
             $u->categories()->saveMany(factory(Category::class, 5)->make());
             $u->goals()->saveMany(factory(Goal::class, 5)->make());
         });
+
+        // Seed Rent transactions first as a nice baseline for reports.
+        for ($i = 0; $i < 50; $i++) {
+            factory(Transaction::class)->create([
+                'user_id'     => $adminUser->id,
+                'account_id'  => rand(1, 5),
+                'category_id' => $adminUser->categories()->first()->id,
+                'bill_id'     => rand(1, 5),
+                'amount'      => rand(1000, 3000),
+                'inflow'      => 0,
+            ]);
+        }
 
         for ($i = 0; $i < 100; $i++) {
             factory(Transaction::class)->create([

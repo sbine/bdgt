@@ -2,12 +2,10 @@
 
 namespace Bdgt\Tenancy;
 
-use Illuminate\Support\Facades\Auth;
-
 class TenancyObserver
 {
     public function saving($model)
     {
-        $model->user_id = Auth::user()->id;
+        $model->{Tenant::COLUMN} = app(Tenant::class)->id();
     }
 }
