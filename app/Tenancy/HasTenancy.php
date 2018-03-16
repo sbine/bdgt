@@ -1,10 +1,8 @@
 <?php
 
-namespace Bdgt\Resources\Traits;
+namespace Bdgt\Tenancy;
 
-use Bdgt\Resources\TenancyObserver;
 use Bdgt\Resources\User;
-use Bdgt\Scopes\TenancyScope;
 
 trait HasTenancy
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Scopes;
+namespace Bdgt\Tenancy;
 
 use DomainException;
 use Illuminate\Database\Eloquent\Scope;

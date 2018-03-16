@@ -2,7 +2,7 @@
 
 namespace Bdgt\Resources;
 
-use Bdgt\Resources\Traits\HasTenancy;
+use Bdgt\Tenancy\HasTenancy;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel

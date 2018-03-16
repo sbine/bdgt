@@ -2,7 +2,7 @@
 
 namespace Bdgt\Tests\Scopes;
 
-use Bdgt\Scopes\TenancyScope;
+use Bdgt\Tenancy\TenancyScope;
 use Bdgt\Tests\TestCase;
 use DomainException;
 use Illuminate\Database\Eloquent\Builder;

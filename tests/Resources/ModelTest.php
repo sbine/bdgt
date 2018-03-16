@@ -2,10 +2,9 @@
 
 namespace Bdgt\Tests\Resources;
 
-use Bdgt\Scopes\TenancyScope;
+use Bdgt\Tenancy\TenancyScope;
 use Bdgt\Tests\TestCase;
 use Bdgt\Resources\Model;
-use Bdgt\Resources\Transaction;
 
 class ModelTest extends TestCase
 {

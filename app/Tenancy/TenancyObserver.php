@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Resources;
+namespace Bdgt\Tenancy;
 
 use Illuminate\Support\Facades\Auth;
 

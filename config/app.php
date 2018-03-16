@@ -155,6 +155,7 @@ return [
         Bdgt\Providers\AppServiceProvider::class,
         // Bdgt\Providers\BroadcastServiceProvider::class,
         Bdgt\Providers\AuthServiceProvider::class,
+        Bdgt\Providers\TenancyProvider::class,
         Bdgt\Providers\EventServiceProvider::class,
         Bdgt\Providers\RouteServiceProvider::class,
 
