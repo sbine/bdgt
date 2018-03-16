@@ -52,7 +52,7 @@ elixir(function(mix) {
             paths.js + '/bootstrap.min.js'
         )
         .scripts([
-                paths.node_full + '/moment/moment.js',
+                paths.node_full + '/moment/min/moment.min.js',
                 paths.node_full + '/moment-duration-format/lib/moment-duration-format.js',
             ],
             paths.js + '/moment.min.js'
