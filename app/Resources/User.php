@@ -40,26 +40,26 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->hasMany('Bdgt\Resources\Account');
+        return $this->hasMany(Account::class);
     }
 
     public function bills()
     {
-        return $this->hasMany('Bdgt\Resources\Bill');
+        return $this->hasMany(Bill::class);
     }
 
     public function categories()
     {
-        return $this->hasMany('Bdgt\Resources\Category');
+        return $this->hasMany(Category::class);
     }
 
     public function goals()
     {
-        return $this->hasMany('Bdgt\Resources\Goal');
+        return $this->hasMany(Goal::class);
     }
 
     public function transactions()
     {
-        return $this->hasMany('Bdgt\Resources\Transaction');
+        return $this->hasMany(Transaction::class);
     }
 }

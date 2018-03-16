@@ -163,11 +163,6 @@ return [
         Bdgt\Providers\BladeServiceProvider::class,
         Bdgt\Providers\ViewComposerServiceProvider::class,
 
-        /*
-         * 3rd-Party Service Providers...
-         */
-        Laravel\Tinker\TinkerServiceProvider::class,
-
     ],
 
     /*

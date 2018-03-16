@@ -4,12 +4,13 @@ namespace Bdgt\Tests;
 
 use Mockery;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use ReflectionMethod;
 
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
-    use DatabaseTransactions;
+    use CreatesApplication;
+    use RefreshDatabase;
 
     /**
      * The base URL to use while testing the application.
@@ -25,7 +26,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        putenv('DB_DEFAULT=sqlite_testing');
+        putenv('DB_CONNECTION=sqlite_testing');
 
         $app = require __DIR__.'/../bootstrap/app.php';
 

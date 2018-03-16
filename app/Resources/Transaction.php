@@ -59,20 +59,21 @@ class Transaction extends Model
      */
     protected $casts = [
         'amount' => 'float',
+        'cleared' => 'bool',
     ];
 
     public function account()
     {
-        return $this->belongsTo('Bdgt\Resources\Account');
+        return $this->belongsTo(Account::class);
     }
 
     public function category()
     {
-        return $this->belongsTo('Bdgt\Resources\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function bill()
     {
-        return $this->belongsTo('Bdgt\Resources\Bill');
+        return $this->belongsTo(Bill::class);
     }
 }

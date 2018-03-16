@@ -27,7 +27,17 @@ class Goal extends Model
         'user_id'
     ];
 
-    public function getAchievedAttribute()
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'amount' => 'float',
+        'balance' => 'float',
+    ];
+
+    public function getAchievedAttribute(): bool
     {
         if ($this->balance >= $this->amount) {
             return true;
@@ -35,7 +45,7 @@ class Goal extends Model
         return false;
     }
 
-    public function getProgressAttribute()
+    public function getProgressAttribute(): float
     {
         return sprintf('%0.0f', ($this->balance / $this->amount) * 100);
     }

@@ -5,16 +5,20 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "asgrim/ofxparser": "^1.2",
-        "laravel/framework": "~5.4",
-        "simshaun/recurr": "^1.0"
+        "asgrim/ofxparser": "~1.2",
+        "laravel/framework": "~5.5",
+        "laravel/passport": "~4.0",
+        "moneyphp/money": "~3.0",
+        "simshaun/recurr": "~1.0"
     },
     "require-dev": {
+        "filp/whoops": "~2.0",
         "friendsofphp/php-cs-fixer": "~1.11",
         "fzaninotto/faker": "~1.6",
         "laravel/tinker": "~1.0",
         "mockery/mockery": "~0.9",
-        "phpunit/phpunit": "~5.7",
+        "phploc/phploc": "~4.0",
+        "phpunit/phpunit": "~6.0",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "~2.6",
         "symfony/css-selector": "2.8.*|3.0.*",
@@ -44,12 +48,10 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
         ],
         "coverage": "php vendor/bin/phpunit --coverage-html=public/coverage",
         "test": "php vendor/bin/phpunit"
