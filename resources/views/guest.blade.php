@@ -7,10 +7,6 @@
 	@include('partials.nav')
 
 	<div id="wrapper">
-		@section('alerts')
-			@include('alerts')
-		@show
-
 		<br><br><!-- No one saw that -->
 
 		@yield('top-content')
