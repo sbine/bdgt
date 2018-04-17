@@ -10,15 +10,27 @@ jobs:
       steps:
         - checkout
 
-        - run: composer self-update
+        - run:
+            name: Update Composer
+            command: composer self-update
         - restore_cache:
             keys:
               - composer-v1-{{ checksum "composer.lock" }}
               - composer-v1-
-        - run: composer install -n --prefer-dist
+        - run:
+            name: Install Composer dependencies
+            command: composer install -n --prefer-dist
         - save_cache:
             key: composer-v1-{{ checksum "composer.lock" }}
             paths:
               - vendor
 
-        - run: vendor/bin/phpunit
+        - run:
+            name: Run PHPUnit tests
+            command: |
+              mkdir -p ~/phpunit
+              vendor/bin/phpunit --log-junit ~/phpunit/junit.xml
+        - store_test_results:
+            path: ~/phpunit
+        - store_artifacts:
+            path: ~/phpunit
