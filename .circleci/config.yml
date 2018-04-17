@@ -1,0 +1,24 @@
+version: 2
+
+jobs:
+  build:
+      docker:
+        - image: circleci/php:7.1-node-browsers
+
+      working_directory: ~/laravel
+
+      steps:
+        - checkout
+
+        - run: composer self-update
+        - restore_cache:
+            keys:
+              - composer-v1-{{ checksum "composer.lock" }}
+              - composer-v1-
+        - run: composer install -n --prefer-dist
+        - save_cache:
+            key: composer-v1-{{ checksum "composer.lock" }}
+            paths:
+              - vendor
+
+        - run: vendor/bin/phpunit
