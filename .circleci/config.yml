@@ -11,14 +11,14 @@ jobs:
         - checkout
 
         - run:
-            name: Update Composer
+            name: Updating Composer
             command: composer self-update
         - restore_cache:
             keys:
               - composer-v1-{{ checksum "composer.lock" }}
               - composer-v1-
         - run:
-            name: Install Composer dependencies
+            name: Installing Composer dependencies
             command: composer install -n --prefer-dist
         - save_cache:
             key: composer-v1-{{ checksum "composer.lock" }}
@@ -26,7 +26,7 @@ jobs:
               - vendor
 
         - run:
-            name: Run PHPUnit tests
+            name: Running PHPUnit tests
             command: |
               mkdir -p ~/phpunit
               vendor/bin/phpunit --log-junit ~/phpunit/junit.xml
