@@ -1,6 +1,8 @@
 bdgt
 ====
 
+[![build](https://img.shields.io/circleci/project/github/sbine/bdgt.svg)](https://circleci.com/gh/sbine/bdgt)
+
 ## Big finance tools in a small package
 
 bdgt is a one-stop personal finance management app. Planned features:  
