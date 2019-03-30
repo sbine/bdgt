@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
 use App\Resources\Account;
 use App\Resources\Category;
 use App\Resources\Ledger;
@@ -48,8 +46,17 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function store(StoreTransactionRequest $request)
+    public function store()
     {
+        request()->validate([
+            'date'        => 'required|date',
+            'amount'      => 'required',
+            'payee'       => 'required',
+            'account_id'  => 'required|numeric',
+            'inflow'      => 'required',
+            'category_id' => 'numeric',
+        ]);
+
         if (Transaction::create(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
@@ -63,8 +70,17 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function update(UpdateTransactionRequest $request, $transaction)
+    public function update($transaction)
     {
+        request()->validate([
+            'date'        => 'required|date',
+            'amount'      => 'required',
+            'payee'       => 'required',
+            'account_id'  => 'required|numeric',
+            'inflow'      => 'required',
+            'category_id' => 'numeric',
+        ]);
+
         if ($transaction->update(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
