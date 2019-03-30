@@ -1,24 +1,34 @@
 {
-  "name": "bdgt",
-  "author": "Sara Bine",
-  "private": true,
-  "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
-  },
-  "devDependencies": {
-    "accounting-js": "~1.1",
-    "bootstrap": "^3.3.7",
-    "bootstrap-datepicker": "~1.6",
-    "chart.js": "~2.5",
-    "bootstrap-slider": "~9.7",
-    "datatables": "~1.10",
-    "datatables.net-bs": "~1.10",
-    "font-awesome": "~4.3",
-    "fullcalendar": "~3.1",
-    "gulp": "~3.9",
-    "laravel-elixir": "^6.0.0-10",
-    "moment": "~2.21",
-    "moment-duration-format": "~1.3"
-  }
+    "name": "bdgt",
+    "author": "Sara Bine",
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.17",
+        "@fortawesome/free-regular-svg-icons": "^5.8.1",
+        "@fortawesome/free-solid-svg-icons": "^5.8.1",
+        "@fortawesome/vue-fontawesome": "^0.1.6",
+        "axios": "^0.18",
+        "chart.js": "^2.8.0",
+        "cross-env": "^5.1",
+        "dayjs": "^1.8.11",
+        "fullcalendar": "^3.10.0",
+        "laravel-mix": "^4.0.7",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "^7.1.0",
+        "tailwindcss": "^1.0.0-beta.4",
+        "vue": "^2.5.17",
+        "vue-slider-component": "^3.0.21",
+        "vue-tables-2": "^1.4.70",
+        "vue-template-compiler": "^2.6.10"
+    }
 }

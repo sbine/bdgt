@@ -7,17 +7,12 @@
 
 <link rel="icon" type="image/png" href="/favicon.png">
 
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/app.min.css" rel="stylesheet">
+<link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 @yield('css')
 
 <!-- Fonts -->
 <link href="//fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
-<link href="/css/font-awesome.min.css" rel="stylesheet">
-<link href="/css/datatables-bootstrap.min.css" rel="stylesheet">
-<link href="/css/bootstrap-slider.min.css" rel="stylesheet">
-<link href="/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
