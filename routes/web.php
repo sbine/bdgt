@@ -13,16 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', [
-    'as' => 'index',
-    'uses' => 'PageController@index',
-]);
+Route::get('/', 'PageController@index')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [
-        'as' => 'dashboard',
-        'uses' => 'LedgerController@index',
-    ]);
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     /*
      | Accounts
@@ -42,10 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      | Bills
      */
-    Route::get('bills/ajax_calendar_events', [
-        'as' => 'bills.ajax.calendar.events',
-        'uses' => 'BillController@ajax_calendar_events'
-    ]);
+    Route::get('bills/ajax_calendar_events', 'BillController@ajax_calendar_events')
+        ->name('bills.ajax.calendar.events');
 
     Route::resource('bills', 'BillController');
 
@@ -60,20 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reports', 'ReportController');
 
     Route::group(['prefix' => 'reports'], function () {
-        Route::get('/', [
-            'as' => 'reports.index',
-            'uses' => 'ReportController@index'
-        ]);
+        Route::get('/', 'ReportController@index')->name('reports.index');
 
-        Route::get('/{type}', [
-            'as' => 'reports.show',
-            'uses' => 'ReportController@show'
-        ]);
+        Route::get('{type}', 'ReportController@show')->name('reports.show');
 
-        Route::get('ajax/{type}', [
-            'as' => 'reports.ajax.report',
-            'uses' => 'ReportController@ajax_report'
-        ]);
+        Route::get('ajax/{type}', 'ReportController@ajax_report')->name('reports.ajax.report');
 
     });
 });
@@ -81,12 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
 /*
  | Calculators
  */
-Route::get('/calculators/debt', [
-    'as' => 'calculators.debt',
-    'uses' => 'CalculatorController@debt'
-]);
+Route::get('calculators/debt', 'CalculatorController@debt')->name('calculators.debt');
 
-Route::get('/calculators/savings', [
-    'as' => 'calculators.savings',
-    'uses' => 'CalculatorController@savings'
-]);
+Route::get('calculators/savings', 'CalculatorController@savings')->name('calculators.savings');

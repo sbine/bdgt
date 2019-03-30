@@ -2,6 +2,8 @@
 
 namespace App\Resources;
 
+use App\Resources\Transaction;
+
 class Ledger
 {
     protected $transactions;
@@ -10,9 +12,9 @@ class Ledger
     protected $totalInflow = 0.00;
     protected $lastPurchase = 'N/A';
 
-    public function __construct($transactionRepository)
+    public function __construct()
     {
-        $this->transactions = $transactionRepository->all()->sortByDesc('date');
+        $this->transactions = Transaction::all()->sortByDesc('date');
 
         if (!$this->transactions->isEmpty()) {
             $this->lastPurchase = $this->transactions->first()->date;

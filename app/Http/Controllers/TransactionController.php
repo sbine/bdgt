@@ -4,33 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
-use App\Repositories\Contracts\TransactionRepositoryInterface;
 use App\Resources\Account;
 use App\Resources\Category;
 use App\Resources\Ledger;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(TransactionRepositoryInterface $transactionRepository)
-    {
-        $this->repository = $transactionRepository;
-    }
-
-    /**
      * Show the application dashboard to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $ledger = new Ledger($this->repository);
+        $ledger = new Ledger;
 
         $accounts = Account::all();
 
@@ -46,19 +34,13 @@ class TransactionController extends Controller
     /**
      * Show an individual transaction to the user.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($transaction)
     {
-        try {
-            $transaction = $this->repository->find($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect(route('transactions.index'));
-        }
-
-        return response()->json($transaction->toArray());
+        return response()->json($transaction);
     }
 
     /**
@@ -68,7 +50,7 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        if ($this->repository->create(Input::except(['_token', '_method']))) {
+        if (Transaction::create(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
@@ -77,13 +59,13 @@ class TransactionController extends Controller
     /**
      * Update an existing transaction with new data.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
      * @return Redirect
      */
-    public function update(UpdateTransactionRequest $request, $id)
+    public function update(UpdateTransactionRequest $request, $transaction)
     {
-        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
+        if ($transaction->update(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
@@ -92,13 +74,13 @@ class TransactionController extends Controller
     /**
      * Delete a transaction by ID.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
      * @return Redirect
      */
-    public function destroy($id)
+    public function destroy($transaction)
     {
-        if ($this->repository->delete($id)) {
+        if ($transaction->delete()) {
             return redirect(route('transactions.index'))->with('alerts.success', trans('crud.transactions.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));

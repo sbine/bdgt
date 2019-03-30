@@ -17,7 +17,7 @@ class CalculatorController extends Controller
     /**
      * Show the debt calculator to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function debt()
     {
@@ -27,7 +27,7 @@ class CalculatorController extends Controller
     /**
      * Show the savings calculator to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function savings()
     {

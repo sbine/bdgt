@@ -10,7 +10,7 @@ class ReportController extends Controller
     /**
      * Show the default report to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class ReportController extends Controller
      * Show an individual report to the user.
      *
      * @param $type
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show($type)
     {
@@ -36,11 +36,11 @@ class ReportController extends Controller
     /**
      * Retrieve report data based on type
      * @param  string $type
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function ajax_report($type)
     {
-        return response()->json(
+        return \Illuminate\Http\Response()->json(
             ReportFactory::generate($type)
                            ->forDateRange(Input::get('startDate'), Input::get('endDate'))
         );

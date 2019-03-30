@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Blade;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
