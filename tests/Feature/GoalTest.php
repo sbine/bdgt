@@ -1,15 +1,14 @@
 <?php
 
-namespace Bdgt\Tests\Http\Controllers;
+namespace Tests\Feature;
 
-use Bdgt\Http\Controllers\GoalController;
-use Bdgt\Resources\Goal;
-use Bdgt\Resources\User;
-use Bdgt\Tests\TestCase;
+use App\Resources\Goal;
+use App\Resources\User;
+use Tests\TestCase;
 
-class GoalControllerTest extends TestCase
+class GoalTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

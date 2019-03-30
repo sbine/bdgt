@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Resources;
+namespace App\Resources;
 
 class Ledger
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Http\Requests;
+namespace App\Http\Requests;
 
 class UpdateTransactionRequest extends Request
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Transaction;
+use App\Repositories\Contracts\TransactionRepositoryInterface;
+use App\Resources\Transaction;
 
 class EloquentTransactionRepository extends EloquentRepository implements TransactionRepositoryInterface
 {

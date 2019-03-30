@@ -1,12 +1,12 @@
 <?php
 
-namespace Bdgt\Tests\Services;
+namespace Tests\Feature\Services;
 
-use Bdgt\Reports\Reportable;
-use Bdgt\Reports\ReportFactory;
-use Bdgt\Reports\Spending;
-use Bdgt\Reports\SpendingByCategory;
-use Bdgt\Tests\TestCase;
+use App\Reports\Reportable;
+use App\Reports\ReportFactory;
+use App\Reports\Spending;
+use App\Reports\SpendingByCategory;
+use Tests\TestCase;
 use InvalidArgumentException;
 
 class ReportFactoryTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
-use Bdgt\Resources\Goal;
+use App\Repositories\Contracts\GoalRepositoryInterface;
+use App\Resources\Goal;
 
 class EloquentGoalRepository extends EloquentRepository implements GoalRepositoryInterface
 {

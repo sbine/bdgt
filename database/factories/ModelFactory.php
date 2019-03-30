@@ -1,24 +1,24 @@
 <?php
 
-use Bdgt\Providers\FakerProvider;
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Bill;
-use Bdgt\Resources\Category;
-use Bdgt\Resources\Goal;
-use Bdgt\Resources\Transaction;
-use Bdgt\Resources\User;
-use Faker\Generator;
+use App\Providers\FakerProvider;
+use App\Resources\Account;
+use App\Resources\Bill;
+use App\Resources\Category;
+use App\Resources\Goal;
+use App\Resources\Transaction;
+use App\Resources\User;
+use Faker\Generator as Faker;
 
-$factory->define(User::class, function (Generator $faker) {
+$factory->define(User::class, function (Faker $faker) {
     return [
         'username'       => $faker->userName(),
-        'email'          => $faker->safeEmail(),
+        'email'          => $faker->unique()->safeEmail(),
         'password'       => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(Account::class, function (Generator $faker) {
+$factory->define(Account::class, function (Faker $faker) {
     $faker->addProvider(new FakerProvider($faker));
     return [
         'date_opened' => $faker->dateTimeThisDecade()->format('Y-m-d H:i:s'),
@@ -27,7 +27,7 @@ $factory->define(Account::class, function (Generator $faker) {
         'interest'    => $faker->numberBetween(0, 20),
     ];
 });
-$factory->state(Account::class, 'with_user', function (Generator $faker) {
+$factory->state(Account::class, 'with_user', function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory(User::class)->create()->id;
@@ -35,7 +35,7 @@ $factory->state(Account::class, 'with_user', function (Generator $faker) {
     ];
 });
 
-$factory->define(Bill::class, function (Generator $faker) {
+$factory->define(Bill::class, function (Faker $faker) {
     $faker->addProvider(new FakerProvider($faker));
     return [
         'start_date' => $faker->dateTimeThisDecade()->format('Y-m-d'),
@@ -44,7 +44,7 @@ $factory->define(Bill::class, function (Generator $faker) {
         'amount'     => $faker->randomAmount(1200),
     ];
 });
-$factory->state(Bill::class, 'with_user', function (Generator $faker) {
+$factory->state(Bill::class, 'with_user', function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory(User::class)->create()->id;
@@ -52,14 +52,14 @@ $factory->state(Bill::class, 'with_user', function (Generator $faker) {
     ];
 });
 
-$factory->define(Category::class, function (Generator $faker) {
+$factory->define(Category::class, function (Faker $faker) {
     $faker->addProvider(new FakerProvider($faker));
     return [
         'label'    => $faker->randomCategory(),
         'budgeted' => $faker->randomFloat(2, 0, 5000),
     ];
 });
-$factory->state(Category::class, 'with_user', function (Generator $faker) {
+$factory->state(Category::class, 'with_user', function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory(User::class)->create()->id;
@@ -67,7 +67,7 @@ $factory->state(Category::class, 'with_user', function (Generator $faker) {
     ];
 });
 
-$factory->define(Goal::class, function (Generator $faker) {
+$factory->define(Goal::class, function (Faker $faker) {
     $faker->addProvider(new FakerProvider($faker));
     $amount = $faker->randomFloat(2, 0, 200);
     return [
@@ -78,7 +78,7 @@ $factory->define(Goal::class, function (Generator $faker) {
         'amount'     => $amount,
     ];
 });
-$factory->state(Goal::class, 'with_user', function (Generator $faker) {
+$factory->state(Goal::class, 'with_user', function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory(User::class)->create()->id;
@@ -86,7 +86,7 @@ $factory->state(Goal::class, 'with_user', function (Generator $faker) {
     ];
 });
 
-$factory->define(Transaction::class, function (Generator $faker) {
+$factory->define(Transaction::class, function (Faker $faker) {
     $faker->addProvider(new FakerProvider($faker));
     $isInflow = $faker->optional(0.3, 0)->boolean();
     return [
@@ -98,7 +98,7 @@ $factory->define(Transaction::class, function (Generator $faker) {
         'flair'   => $faker->randomFlair(),
     ];
 });
-$factory->state(Transaction::class, 'with_user', function (Generator $faker) {
+$factory->state(Transaction::class, 'with_user', function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory(User::class)->create()->id;
@@ -106,7 +106,7 @@ $factory->state(Transaction::class, 'with_user', function (Generator $faker) {
     ];
 });
 
-$factory->state(Transaction::class, 'with_account', function (Generator $faker) {
+$factory->state(Transaction::class, 'with_account', function (Faker $faker) {
     $account = factory(Account::class)->states('with_user')->create();
     return [
         'account_id' => $account->id,

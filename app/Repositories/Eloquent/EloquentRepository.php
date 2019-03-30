@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 

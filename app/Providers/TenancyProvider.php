@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
-use Bdgt\Tenancy\Tenant;
+use App\Tenancy\Tenant;
 use DomainException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Reports\ReportFactory;
+use App\Reports\ReportFactory;
 use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller

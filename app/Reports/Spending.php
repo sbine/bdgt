@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Reports;
+namespace App\Reports;
 
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
+use App\Repositories\Contracts\TransactionRepositoryInterface;
 use DateTime;
 use DateInterval;
 use Illuminate\Database\Eloquent\Collection;

@@ -14,8 +14,8 @@ class CreateAccountsTable extends Migration
     {
         //Schema::dropIfExists('accounts');
         Schema::create('accounts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->dateTime('date_opened');
             $table->string('name', 128);
             $table->decimal('balance', 12, 3);

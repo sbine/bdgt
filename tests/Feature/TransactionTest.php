@@ -1,16 +1,15 @@
 <?php
 
-namespace Bdgt\Tests\Http\Controllers;
+namespace Tests\Feature;
 
-use Bdgt\Http\Controllers\TransactionController;
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Transaction;
-use Bdgt\Resources\User;
-use Bdgt\Tests\TestCase;
+use App\Resources\Account;
+use App\Resources\Transaction;
+use App\Resources\User;
+use Tests\TestCase;
 
-class TransactionControllerTest extends TestCase
+class TransactionTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

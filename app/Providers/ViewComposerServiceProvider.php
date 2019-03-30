@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -15,22 +15,22 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer(
             'partials.sidebar',
-            'Bdgt\Http\Composers\AccountsComposer'
+            'App\Http\Composers\AccountsComposer'
         );
 
         view()->composer(
             'partials.dropdowns.accounts',
-            'Bdgt\Http\Composers\AccountsComposer'
+            'App\Http\Composers\AccountsComposer'
         );
 
         view()->composer(
             'partials.dropdowns.categories',
-            'Bdgt\Http\Composers\CategoriesComposer'
+            'App\Http\Composers\CategoriesComposer'
         );
 
         view()->composer(
             'partials.dropdowns.bills',
-            'Bdgt\Http\Composers\BillsComposer'
+            'App\Http\Composers\BillsComposer'
         );
     }
 

@@ -14,8 +14,8 @@ class CreateGoalsTable extends Migration
     {
         //Schema::dropIfExists('goals');
         Schema::create('goals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('label', 128);
             $table->date('start_date');
             $table->date('goal_date');

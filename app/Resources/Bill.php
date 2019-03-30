@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Resources;
+namespace App\Resources;
 
-use Bdgt\Resources\Model;
+use App\Resources\Model;
 use DateInterval;
 use DateTime;
 

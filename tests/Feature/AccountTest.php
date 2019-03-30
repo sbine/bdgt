@@ -1,15 +1,14 @@
 <?php
 
-namespace Bdgt\Tests\Http\Controllers;
+namespace Tests\Feature;
 
-use Bdgt\Http\Controllers\AccountController;
-use Bdgt\Resources\Account;
-use Bdgt\Resources\User;
-use Bdgt\Tests\TestCase;
+use App\Resources\Account;
+use App\Resources\User;
+use Tests\TestCase;
 
-class AccountControllerTest extends TestCase
+class AccountTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

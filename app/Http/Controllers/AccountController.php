@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
+use App\Repositories\Contracts\AccountRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 

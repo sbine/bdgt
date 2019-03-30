@@ -1,11 +1,11 @@
 <?php
 
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Bill;
-use Bdgt\Resources\Category;
-use Bdgt\Resources\Goal;
-use Bdgt\Resources\Transaction;
-use Bdgt\Resources\User;
+use App\Resources\Account;
+use App\Resources\Bill;
+use App\Resources\Category;
+use App\Resources\Goal;
+use App\Resources\Transaction;
+use App\Resources\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,24 +34,27 @@ class DummyDataSeeder extends Seeder
         ]);
 
         Auth::login($adminUser);
-        $adminUser->each(function ($u) {
-            $u->accounts()->saveMany(factory(Account::class, 5)->make());
-            $u->bills()->saveMany(factory(Bill::class, 5)->make());
-            $u->categories()->save(factory(Category::class)->make([
-                'label' => 'Rent',
-                'budgeted' => '2000',
-            ]));
-            $u->categories()->saveMany(factory(Category::class, 10)->make());
-            $u->goals()->saveMany(factory(Goal::class, 5)->make());
-            for ($i = 0; $i < 100; $i++) {
-                factory(Transaction::class)->create([
-                    'user_id'     => 1,
-                    'account_id'  => rand(1, 5),
-                    'category_id' => rand(1, 10),
-                    'bill_id'     => rand(1, 5),
-                ]);
-            }
-        });
+        $adminUser->accounts()->saveMany(factory(Account::class, 5)->make());
+
+        $adminUser->bills()->saveMany(factory(Bill::class, 5)->make());
+
+        $rentCategory = factory(Category::class)->make([
+            'label' => 'Rent',
+            'budgeted' => '2000',
+        ]);
+        $adminUser->categories()->save($rentCategory);
+        $adminUser->categories()->saveMany(factory(Category::class, 10)->make());
+
+        $adminUser->goals()->saveMany(factory(Goal::class, 5)->make());
+
+        for ($i = 0; $i < 100; $i++) {
+            factory(Transaction::class)->create([
+                'user_id'     => $adminUser->id,
+                'account_id'  => rand(1, 5),
+                'category_id' => rand(1, 10),
+                'bill_id'     => rand(1, 5),
+            ]);
+        }
 
         factory(Transaction::class)->create([
             'user_id'     => 1,
@@ -72,7 +75,7 @@ class DummyDataSeeder extends Seeder
             factory(Transaction::class)->create([
                 'user_id'     => $adminUser->id,
                 'account_id'  => rand(1, 5),
-                'category_id' => $adminUser->categories()->first()->id,
+                'category_id' => $rentCategory->id,
                 'bill_id'     => rand(1, 5),
                 'amount'      => rand(1000, 3000),
                 'inflow'      => 0,

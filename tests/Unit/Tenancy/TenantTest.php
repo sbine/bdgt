@@ -1,10 +1,10 @@
 <?php
 
-namespace Bdgt\Tests\Unit\Tenancy;
+namespace Tests\Unit\Tenancy;
 
-use Bdgt\Resources\User;
-use Bdgt\Tenancy\Tenant;
-use Bdgt\Tests\TestCase;
+use App\Resources\User;
+use App\Tenancy\Tenant;
+use Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 
 class TenantTest extends TestCase

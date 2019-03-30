@@ -1,17 +1,17 @@
 <?php
 
-namespace Bdgt\Tests\Repositories;
+namespace Tests\Feature\Repositories;
 
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Transaction;
-use Bdgt\Resources\User;
-use Bdgt\Tests\TestCase;
+use App\Repositories\Contracts\TransactionRepositoryInterface;
+use App\Resources\Transaction;
+use App\Resources\User;
+use Tests\TestCase;
 
 class TransactionRepositoryTest extends TestCase
 {
     private $repository;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

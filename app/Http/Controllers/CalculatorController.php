@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
 class CalculatorController extends Controller
 {

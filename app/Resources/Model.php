@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Resources;
+namespace App\Resources;
 
-use Bdgt\Tenancy\HasTenancy;
+use App\Tenancy\HasTenancy;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel

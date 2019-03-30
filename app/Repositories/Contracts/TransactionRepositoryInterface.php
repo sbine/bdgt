@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Repositories\Contracts;
+namespace App\Repositories\Contracts;
 
-use Bdgt\Resources\Transaction;
+use App\Resources\Transaction;
 
 interface TransactionRepositoryInterface extends RepositoryInterface
 {

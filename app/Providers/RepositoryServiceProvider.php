@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -32,9 +32,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         foreach ($resources as $resource) {
             $this->app->bind(
-                'Bdgt\Repositories\Contracts\\' . $resource . 'RepositoryInterface',
+                'App\Repositories\Contracts\\' . $resource . 'RepositoryInterface',
                 function ($app) use ($resource) {
-                    $repositoryPath = 'Bdgt\Repositories\Eloquent\Eloquent' . $resource . 'Repository';
+                    $repositoryPath = 'App\Repositories\Eloquent\Eloquent' . $resource . 'Repository';
                     return $app->make($repositoryPath);
                 }
             );

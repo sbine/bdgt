@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Http\Composers;
+namespace App\Http\Composers;
 
 use Illuminate\Contracts\View\View;
-use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
+use App\Repositories\Contracts\AccountRepositoryInterface;
 
 class AccountsComposer
 {

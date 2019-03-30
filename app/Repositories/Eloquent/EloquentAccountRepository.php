@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
-use Bdgt\Resources\Account;
+use App\Repositories\Contracts\AccountRepositoryInterface;
+use App\Resources\Account;
 
 class EloquentAccountRepository extends EloquentRepository implements AccountRepositoryInterface
 {

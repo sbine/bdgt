@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
@@ -16,11 +16,6 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        /*
-         * Authenticate the user's personal channel...
-         */
-        Broadcast::channel('Bdgt.User.*', function ($user, $userId) {
-            return (int) $user->id === (int) $userId;
-        });
+        require base_path('routes/channels.php');
     }
 }

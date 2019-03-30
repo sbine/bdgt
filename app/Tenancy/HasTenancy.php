@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Tenancy;
+namespace App\Tenancy;
 
-use Bdgt\Resources\User;
+use App\Resources\User;
 
 trait HasTenancy
 {

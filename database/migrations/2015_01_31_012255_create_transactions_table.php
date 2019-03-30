@@ -14,12 +14,12 @@ class CreateTransactionsTable extends Migration
     {
         //Schema::dropIfExists('transactions');
         Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->dateTime('date');
-            $table->integer('account_id')->unsigned();
-            $table->integer('category_id')->unsigned()->nullable();
-            $table->integer('bill_id')->unsigned()->nullable();
+            $table->bigInteger('account_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->bigInteger('bill_id')->unsigned()->nullable();
             $table->string('payee', 128);
             $table->decimal('amount', 12, 3);
             $table->tinyInteger('inflow');

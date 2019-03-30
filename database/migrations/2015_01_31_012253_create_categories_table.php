@@ -14,11 +14,11 @@ class CreateCategoriesTable extends Migration
     {
         //Schema::dropIfExists('categories');
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('label', 128);
             $table->decimal('budgeted', 12, 3);
-            $table->integer('parent_category_id')->unsigned()->nullable();
+            $table->bigInteger('parent_category_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 

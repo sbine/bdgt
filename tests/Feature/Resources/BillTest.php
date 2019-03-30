@@ -1,17 +1,17 @@
 <?php
 
-namespace Bdgt\Tests\Resources;
+namespace Tests\Feature\Resources;
 
-use Bdgt\Resources\Bill;
-use Bdgt\Resources\Transaction;
-use Bdgt\Resources\User;
-use Bdgt\Tests\TestCase;
+use App\Resources\Bill;
+use App\Resources\Transaction;
+use App\Resources\User;
+use Tests\TestCase;
 use DateInterval;
 use DateTime;
 
 class BillTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

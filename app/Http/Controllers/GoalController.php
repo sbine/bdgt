@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Repositories\Contracts\GoalRepositoryInterface;
-use Bdgt\Resources\Goal;
+use App\Repositories\Contracts\GoalRepositoryInterface;
+use App\Resources\Goal;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 

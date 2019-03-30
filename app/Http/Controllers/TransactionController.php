@@ -1,13 +1,13 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Http\Requests\StoreTransactionRequest;
-use Bdgt\Http\Requests\UpdateTransactionRequest;
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Category;
-use Bdgt\Resources\Ledger;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
+use App\Repositories\Contracts\TransactionRepositoryInterface;
+use App\Resources\Account;
+use App\Resources\Category;
+use App\Resources\Ledger;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Input;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Http\Composers;
+namespace App\Http\Composers;
 
-use Bdgt\Repositories\Contracts\BillRepositoryInterface;
+use App\Repositories\Contracts\BillRepositoryInterface;
 use Illuminate\Contracts\View\View;
 
 class BillsComposer

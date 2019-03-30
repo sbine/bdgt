@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\BillRepositoryInterface;
-use Bdgt\Resources\Bill;
+use App\Repositories\Contracts\BillRepositoryInterface;
+use App\Resources\Bill;
 use DateInterval;
 use DateTime;
 

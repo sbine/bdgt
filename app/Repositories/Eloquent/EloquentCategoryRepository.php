@@ -1,9 +1,9 @@
 <?php
 
-namespace Bdgt\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
-use Bdgt\Resources\Category;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Resources\Category;
 
 class EloquentCategoryRepository extends EloquentRepository implements CategoryRepositoryInterface
 {

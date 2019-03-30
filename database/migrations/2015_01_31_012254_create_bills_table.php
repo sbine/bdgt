@@ -14,8 +14,8 @@ class CreateBillsTable extends Migration
     {
         //Schema::dropIfExists('bills');
         Schema::create('bills', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->date('start_date');
             $table->integer('frequency');
             $table->string('label', 128);

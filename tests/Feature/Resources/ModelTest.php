@@ -1,10 +1,10 @@
 <?php
 
-namespace Bdgt\Tests\Resources;
+namespace Tests\Feature\Resources;
 
-use Bdgt\Tenancy\TenancyScope;
-use Bdgt\Tests\TestCase;
-use Bdgt\Resources\Model;
+use App\Tenancy\TenancyScope;
+use Tests\TestCase;
+use App\Resources\Model;
 
 class ModelTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Repositories\Contracts\BillRepositoryInterface;
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Ledger;
+use App\Repositories\Contracts\BillRepositoryInterface;
+use App\Repositories\Contracts\TransactionRepositoryInterface;
+use App\Resources\Ledger;
 use Illuminate\Support\Facades\Input;
 
 class LedgerController extends Controller

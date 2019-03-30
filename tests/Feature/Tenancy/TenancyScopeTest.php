@@ -1,10 +1,10 @@
 <?php
 
-namespace Bdgt\Tests\Scopes;
+namespace Tests\Feature\Scopes;
 
-use Bdgt\Resources\User;
-use Bdgt\Tenancy\TenancyScope;
-use Bdgt\Tests\TestCase;
+use App\Resources\User;
+use App\Tenancy\TenancyScope;
+use Tests\TestCase;
 use DomainException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

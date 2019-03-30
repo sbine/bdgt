@@ -1,8 +1,8 @@
 <?php
 
-namespace Bdgt\Repositories\Contracts;
+namespace App\Repositories\Contracts;
 
-use Bdgt\Resources\Category;
+use App\Resources\Category;
 
 interface CategoryRepositoryInterface extends RepositoryInterface
 {
