@@ -5,8 +5,8 @@
 @overwrite
 
 @section('breadcrumbs.items')
-	<li>{{ trans('labels.calculators.plural') }}</li>
-	<li class="active">{{ trans('labels.calculators.debt.label') }}</li>
+	<div class="breadcrumb">{{ trans('labels.calculators.plural') }}</div>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.calculators.debt.label') }}</div>
 @endsection
 
 @section('sidebar-nav')

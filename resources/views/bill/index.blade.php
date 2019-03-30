@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.bills.plural') }}</li>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.bills.plural') }}</div>
 @endsection
 
 @section('breadcrumbs.actions')

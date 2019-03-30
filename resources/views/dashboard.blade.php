@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">Dashboard</li>
+	<div class="breadcrumb breadcrumb--active">Dashboard</div>
 @endsection
 
 @section('breadcrumbs.actions')
@@ -11,64 +11,46 @@
 @endsection
 
 @section('top-content')
-	<div class="container-fluid">
-		<div class="row heads-up">
-			<div class="{{ config('layout.grid_class') }}">
-				<div class="row">
-					<div class="col-md-3 col-sm-4">
-						<div class="heads-up-item">
-							<div class="media-left">
-								<span class="media-object">
-									<i class="fa fa-dollar fa-4x"></i>
-								</span>
-							</div>
-							<div class="media-body">
-								<h2 class="media-heading"><span class="money-signed">@number($ledger->balance())</span></h2>
-								<span class="text-muted">current balance</span>
-							</div>
-						</div>
-					</div>
+	<div class="flex justify-between">
+		<div class="flex items-center">
+			<div class="mr-6">
+				<font-awesome-icon icon="dollar-sign" class="fa-4x"></font-awesome-icon>
+			</div>
+			<div class="flex flex-col">
+				<h2 class="text-3xl"><span class="money-signed">@number($ledger->balance())</span></h2>
+				<span class="text-gray-500">current balance</span>
+			</div>
+		</div>
 
-					<div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-0">
-						<div class="heads-up-item">
-							<div class="media-left">
-								<span class="media-object">
-									<i class="fa fa-clock-o fa-4x"></i>
-								</span>
-							</div>
-							<div class="media-body">
-								<h2 class="media-heading">
-									@if ($ledger->lastPurchase())
-										<span class="moment">{{ $ledger->lastPurchase() }}</span>
-									@else
-										<span>N/A</span>
-									@endif
-								</h2>
-								<span class="text-muted">last purchase</span>
-							</div>
-						</div>
-					</div>
+		<div class="flex">
+			<div class="mr-6">
+				<font-awesome-icon :icon="['far', 'clock']" class="fa-4x"></font-awesome-icon>
+			</div>
+			<div class="flex flex-col">
+				<h2 class="text-3xl">
+					@if ($ledger->lastPurchase())
+						<span class="moment">{{ $ledger->lastPurchase() }}</span>
+					@else
+						<span>N/A</span>
+					@endif
+				</h2>
+				<span class="text-gray-500">last purchase</span>
+			</div>
+		</div>
 
-					<div class="col-md-3 col-md-offset-2 col-sm-4 col-sm-offset-0">
-						<div class="heads-up-item">
-							<div class="media-left">
-								<span class="media-object">
-									<i class="fa fa-calendar fa-4x"></i>
-								</span>
-							</div>
-							<div class="media-body">
-								<h2 class="media-heading">
-									@if (is_object($nextBill))
-										<span class="moment">{{ $nextBill->nextDue }}</span>
-									@else
-										<span>N/A</span>
-									@endif
-								</h2>
-								<span class="text-muted">next bill</span>
-							</div>
-						</div>
-					</div>
-				</div>
+		<div class="flex">
+			<div class="mr-6">
+				<font-awesome-icon :icon="['far', 'calendar']" class="fa-4x"></font-awesome-icon>
+			</div>
+			<div class="flex flex-col">
+				<h2 class="text-3xl">
+					@if (is_object($nextBill))
+						<span class="moment">{{ $nextBill->nextDue }}</span>
+					@else
+						<span>N/A</span>
+					@endif
+				</h2>
+				<span class="text-gray-500">next bill</span>
 			</div>
 		</div>
 	</div>

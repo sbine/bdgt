@@ -4,23 +4,21 @@
 	@include('partials.head')
 </head>
 <body>
-	@include('partials.nav')
+	<div class="flex flex-col min-h-screen">
+		<div id="app" class="flex-grow">
+			@include('partials.nav')
 
-	<div id="wrapper">
-		<br><br><!-- No one saw that -->
+			<div class="w-5/6 lg:w-1/2 mx-auto pt-8">
+				@yield('top-content')
 
-		@yield('top-content')
-
-		<div class="container-fluid">
-			<div class="row">
-				<div class="{{ config('layout.grid_class') }}">
+				<div class="row">
 					@yield('content')
 				</div>
 			</div>
 		</div>
-	</div>
 
-	@include('partials.footer')
+		@include('partials.footer')
+	</div>
 
 	@include('partials.scripts')
 </body>

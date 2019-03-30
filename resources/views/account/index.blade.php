@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.accounts.plural') }}</li>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.accounts.plural') }}</div>
 @endsection
 
 @section('breadcrumbs.actions')

@@ -1,10 +1,11 @@
 <div id="{{ $id }}" class="modal fade">
     <div class="modal-dialog">
         <form class="modal-content form-horizontal" method="POST" action="{{ $formAction }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            @csrf
             @if (isset($method))
-                <input type="hidden" name="_method" value="{{ $method }}">
+                @method($method)
             @endif
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="{{ $dismissLabel }}"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">{{ $title }}</h4>

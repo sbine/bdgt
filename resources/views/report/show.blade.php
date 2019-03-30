@@ -5,8 +5,8 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<li><a href="/reports">{{ trans('labels.reports.plural') }}</a></li>
-	<li class="active">{{ $report->name }}</li>
+	<a class="breadcrumb" href="/reports">{{ trans('labels.reports.plural') }}</a>
+	<div class="breadcrumb breadcrumb--active">{{ $report->name }}</div>
 @endsection
 
 @section('sidebar-nav')

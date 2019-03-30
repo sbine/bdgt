@@ -1,8 +1,9 @@
 <div id="editAccountModal" class="modal fade">
 	<div class="modal-dialog">
-		<form class="modal-content form-horizontal" method="POST" action="/accounts/{{ $account->id }}">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="_method" value="PUT">
+		<form class="modal-content form-horizontal" method="POST" action="{{ route('accounts.update', $account->id) }}">
+			@csrf
+			@method('PUT')
+
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.accounts.modals.edit.close_button') }}"><span aria-hidden="true">&times;</span></button>
 				<h3 class="modal-title">{{ trans('labels.accounts.modals.edit.title') }}</h3>

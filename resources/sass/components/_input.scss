@@ -1,0 +1,12 @@
+.input-text {
+    @apply border;
+    @apply border-gray-400;
+    @apply rounded;
+    @apply px-2;
+    @apply py-1;
+}
+
+.input-error {
+    @apply text-red-500;
+    @apply text-sm;
+}

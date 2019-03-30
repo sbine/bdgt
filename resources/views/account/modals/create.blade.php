@@ -1,7 +1,8 @@
 <div id="addAccountModal" class="modal fade">
 	<div class="modal-dialog">
-		<form class="modal-content form-horizontal" method="POST" action="/accounts">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<form class="modal-content form-horizontal" method="POST" action="{{ route('accounts.store') }}">
+			@csrf
+
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.accounts.modals.create.close_button') }}"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">{{ trans('labels.accounts.modals.create.title') }}</h4>

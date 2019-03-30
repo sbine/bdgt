@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">Transactions</li>
+	<div class="breadcrumb breadcrumb--active">Transactions</div>
 @endsection
 
 @section('breadcrumbs.actions')

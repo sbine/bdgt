@@ -4,68 +4,50 @@
 	@include('partials.head')
 </head>
 <body>
-	@include('partials.nav')
+	<div class="flex flex-col min-h-screen">
+		<div id="app" class="flex-grow">
+			@include('partials.nav')
 
-	<div id="wrapper">
+			<div class="w-5/6 lg:w-2/3 mx-auto">
+				<main class="min-h-full py-6">
 
-		@if (Auth::user())
-		<!-- Sidebar -->
-		<div id="sidebar-wrapper">
-			@include('partials.sidebar')
-		</div>
-		@endif
-		<!-- /#sidebar-wrapper -->
+					@section('alerts')
+						@include('alerts')
+					@show
 
-		<!-- Page Content -->
-		<div id="page-content-wrapper">
-
-			@section('alerts')
-				@include('alerts')
-			@show
-
-			<a class="btn btn-lg btn-block btn-success visible-xs-block" href="#addTransactionModal" data-toggle="modal"><i class="fa fa-plus"></i> Add Transaction</a>
-
-			<!-- Breadcrumbs -->
-			@section('breadcrumbs')
-			<div class="container-fluid">
-				<div class="row">
-					<div class="{{ config('layout.grid_class') }}">
-						<ol class="breadcrumb">
-							<li><a href="{{ route('index') }}">Home</a></li>
-							@yield('breadcrumbs.items')
-							<div class="pull-right">
-								@yield('breadcrumbs.actions')
+					<div class="flex justify-between mb-10">
+						@section('breadcrumbs')
+							<div class="flex justify-between">
+								<div class="flex">
+									<a class="link block text-sm py-2" href="{{ route('index') }}">Home</a>
+									@yield('breadcrumbs.items')
+								</div>
+								<div class="flex self-end">
+									@yield('breadcrumbs.actions')
+								</div>
 							</div>
-						</ol>
+						@show
+
+						<a class="button block sm:inline-block" href="#addTransactionModal" data-toggle="modal">
+							<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> Add Transaction
+						</a>
 					</div>
-				</div>
-			</div>
-			@show
-			<!-- /Breadcrumbs -->
 
-			@yield('top-content')
+					@yield('top-content')
 
-			<div class="container-fluid">
-				<div class="row">
-					<div class="{{ config('layout.grid_class') }}">
+					<div class="p-4">
 						@yield('content')
 					</div>
-				</div>
+
+					@auth
+						@include('transaction.modals.create')
+					@endauth
+				</main>
 			</div>
-
-			@if (Auth::user())
-				@include('transaction.modals.create')
-			@endif
 		</div>
+
+		@include('partials.footer')
 	</div>
-	<!-- /#page-content-wrapper -->
-
-	<footer class="footer">
-		<div class="text-center">
-			&copy; {{ date('Y') }} bdgt
-		</div>
-	</footer>
-	@include('partials.footer')
 
 	@include('partials.scripts')
 </body>

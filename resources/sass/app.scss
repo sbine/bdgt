@@ -1,4 +1,10 @@
 @tailwind base;
 @tailwind components;
 
+@import 'components/badge';
+@import 'components/breadcrumb';
+@import 'components/button';
+@import 'components/input';
+@import 'components/link';
+
 @tailwind utilities;

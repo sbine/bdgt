@@ -1,7 +1,7 @@
 @extends('guest')
 
 @section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.auth.register') }}</li>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.auth.register') }}</div>
 @endsection
 
 @section('content')

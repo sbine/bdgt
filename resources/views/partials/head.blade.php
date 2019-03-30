@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="@yield('meta-description', 'big finance tools in a small package')">
 <meta name="keywords" content="budget,bdgt,finance,financial,money">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link rel="icon" type="image/png" href="/favicon.png">
 

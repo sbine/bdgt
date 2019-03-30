@@ -1,8 +1,9 @@
 <div id="deleteAccountModal" class="modal fade">
 	<div class="modal-dialog">
-		<form class="modal-content form-horizontal" method="POST" action="/accounts/{{ $account->id }}">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="_method" value="DELETE">
+		<form class="modal-content form-horizontal" method="POST" action="{{ route('accounts.destroy', $account->id) }}">
+			@csrf
+			@method('DELETE')
+
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.accounts.modals.delete.close_button') }}"><span aria-hidden="true">&times;</span></button>
 				<h3 class="modal-title">{{ trans('labels.accounts.modals.delete.title') }}</h3>
