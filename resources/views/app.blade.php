@@ -8,7 +8,7 @@
 		<div id="app" class="flex-grow">
 			@include('partials.nav')
 
-			<div class="w-5/6 lg:w-2/3 mx-auto">
+			<div class="w-5/6 lg:w-2/3 mx-auto" v-cloak>
 				<main class="min-h-full my-6">
 
 					@section('alerts')
@@ -17,20 +17,14 @@
 
 					<div class="flex justify-between mb-10">
 						@section('breadcrumbs')
-							<div class="flex justify-between">
-								<div class="flex">
-									<a class="link block text-sm py-2" href="{{ route('index') }}">Home</a>
-									@yield('breadcrumbs.items')
-								</div>
-								<div class="flex self-end">
-									@yield('breadcrumbs.actions')
-								</div>
+							<div class="flex">
+								<a class="link block text-sm py-2" href="{{ route('index') }}">Home</a>
+								@yield('breadcrumbs.items')
+							</div>
+							<div class="flex self-end">
+								@yield('breadcrumbs.actions')
 							</div>
 						@show
-
-						<a class="button block sm:inline-block" href="#addTransactionModal" data-toggle="modal">
-							<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> Add Transaction
-						</a>
 					</div>
 
 					@yield('top-content')

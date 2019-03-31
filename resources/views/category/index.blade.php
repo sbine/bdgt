@@ -5,7 +5,9 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addCategoryModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.categories.add_button') }}</a>
+	<a class="button button--success block sm:inline-block" href="#addCategoryModal" data-toggle="modal">
+		<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.categories.add_button') }}
+	</a>
 @endsection
 
 @section('content')

@@ -10,7 +10,11 @@
 @endsection
 
 @section('sidebar-nav')
-	<li class="sidebar-icon hidden-xs"><a href="#addTransactionModal" data-toggle="modal"><button class="btn btn-success btn-md"><i class="fa fa-plus"></i> {{ trans('labels.transactions.add_button') }}</button></a></li>
+	<li class="sidebar-icon hidden-xs">
+		<a href="#addTransactionModal" data-toggle="modal">
+			<button class="button button--success"><font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}</button>
+		</a>
+	</li>
 	<li class="sidebar-divider hidden-xs"></li>
 	<li><a href="{{ route('calculators.debt') }}">{{ trans('labels.calculators.debt.label') }}</a></li>
 @overwrite

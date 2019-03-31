@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<a class="breadcrumb" href="/bills">{{ trans('labels.bills.plural') }}</a>
+	<a class="breadcrumb" href="{{ route('bills.index') }}">{{ trans('labels.bills.plural') }}</a>
 	<div class="breadcrumb breadcrumb--active">{{ $bill->label }}</div>
 @endsection
 
