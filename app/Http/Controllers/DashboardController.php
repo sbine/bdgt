@@ -10,14 +10,12 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $transactions = Transaction::all();
-
         return view('dashboard')->with([
             'ledger' => new Ledger,
             'nextBill' => Bill::all()->sortBy(function ($bill) {
                 return $bill->nextDue;
             })->first(),
-            'transactions' => $transactions,
+            'transactions' => Transaction::with(['account', 'category'])->get(),
         ]);
     }
 }

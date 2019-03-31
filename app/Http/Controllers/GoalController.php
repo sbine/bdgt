@@ -24,9 +24,9 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($goal)
+    public function show(Goal $goal)
     {
-        return view('goal.show', compact('goal'));
+        return view('goal.show')->with('goal', $goal);
     }
 
     /**
@@ -50,7 +50,7 @@ class GoalController extends Controller
      *
      * @return Redirect
      */
-    public function update($goal)
+    public function update(Goal $goal)
     {
         if ($goal->update(Input::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.updated'));
@@ -66,7 +66,7 @@ class GoalController extends Controller
      *
      * @return Redirect
      */
-    public function destroy($goal)
+    public function destroy(Goal $goal)
     {
         if ($goal->delete()) {
             return redirect(route('goals.index'))->with('alerts.success', trans('crud.goals.deleted'));

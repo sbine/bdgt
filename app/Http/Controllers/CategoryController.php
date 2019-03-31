@@ -19,9 +19,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($category)
+    public function show(Category $category)
     {
-        return view('category.show', compact('category'));
+        return view('category.show')->with('category', $category);
     }
 
     /**

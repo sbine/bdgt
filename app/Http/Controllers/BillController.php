@@ -24,9 +24,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($bill)
+    public function show(Bill $bill)
     {
-        return view('bill.show', compact('bill'));
+        return view('bill.show')->with('bill', $bill->load('transactions'));
     }
 
     /**
@@ -50,7 +50,7 @@ class BillController extends Controller
      *
      * @return Redirect
      */
-    public function update($bill)
+    public function update(Bill $bill)
     {
         if ($bill->update(Input::all())) {
             return redirect(route('bills.show', $bill->id))->with('alerts.success', trans('crud.bills.updated'));
@@ -66,7 +66,7 @@ class BillController extends Controller
      *
      * @return Redirect
      */
-    public function destroy($bill)
+    public function destroy(Bill $bill)
     {
         if ($bill->delete()) {
             return redirect(route('bills.index'))->with('alerts.success', trans('crud.bills.deleted'));

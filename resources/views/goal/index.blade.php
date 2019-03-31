@@ -11,30 +11,23 @@
 @endsection
 
 @section('content')
-	<div class="list-group">
+	<div class="w-full">
 		@foreach ($goals as $goal)
-			<a href="/goals/{{ $goal->id }}" class="list-group-item">
-				<h4 class="list-group-item-heading">
+			<a href="{{ route('goals.show', $goal->id) }}" class="block py-4">
+				<h4 class="flex justify-between text-2xl">
 					{{ $goal->label }}
-					<span class="pull-right">@money($goal->amount)</span>
+					<span>@money($goal->amount)</span>
 				</h4>
-				<div class="list-group-item-text">
-					<div class="progress">
-						<div class="progress-bar
-						@if ($goal->achieved)
-							progress-bar-success
-						@elseif ($goal->balance > 0)
-							progress-bar-warning
-						@else
-							progress-bar-danger
-						@endif
-						progress-bar-striped" role="progressbar" aria-valuenow="{{ $goal->progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $goal->progress }}%; min-width: 1%;">
-							{{ $goal->progress }}%
-							<span class="sr-only">{{ $goal->progress }}% Complete</span>
-						</div>
-					</div>
+
+				<div class="py-2">
+					<progress-bar
+						:achieved="{{ $goal->achieved ? 'true' : 'false' }}"
+						:balance="{{ $goal->balance }}"
+						:progress="{{ $goal->progress }}"
+					></progress-bar>
 				</div>
-				<p class="list-group-item-text">@money($goal->balance) saved</p>
+
+				<p><formatter-currency :amount="{{ $goal->balance }}"></formatter-currency> saved</p>
 			</a>
 		@endforeach
 	</div>

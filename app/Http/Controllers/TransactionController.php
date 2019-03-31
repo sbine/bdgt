@@ -36,7 +36,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($transaction)
+    public function show(Transaction $transaction)
     {
         return response()->json($transaction);
     }
@@ -70,7 +70,7 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function update($transaction)
+    public function update(Transaction $transaction)
     {
         request()->validate([
             'date'        => 'required|date',
@@ -94,7 +94,7 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function destroy($transaction)
+    public function destroy(Transaction $transaction)
     {
         if ($transaction->delete()) {
             return redirect(route('transactions.index'))->with('alerts.success', trans('crud.transactions.deleted'));

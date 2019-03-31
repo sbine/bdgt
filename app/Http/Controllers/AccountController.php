@@ -24,7 +24,7 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($account)
+    public function show(Account $account)
     {
         return view('account.show')->with('account', $account);
     }
@@ -50,7 +50,7 @@ class AccountController extends Controller
      *
      * @return Redirect
      */
-    public function update($account)
+    public function update(Account $account)
     {
         if ($account->update(Input::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
@@ -66,7 +66,7 @@ class AccountController extends Controller
      *
      * @return Redirect
      */
-    public function destroy($account)
+    public function destroy(Account $account)
     {
         if ($account->delete()) {
             return redirect(route('accounts.index'))->with('alerts.success', trans('crud.accounts.deleted'));

@@ -8,3 +8,11 @@
     @apply text-white;
     @apply tracking-normal;
 }
+
+.badge--success {
+    @apply bg-green-500;
+}
+
+.badge--danger {
+    @apply bg-red-500;
+}
