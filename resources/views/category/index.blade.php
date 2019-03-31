@@ -13,7 +13,7 @@
 @section('content')
 	<div class="list-group">
 		@foreach ($categories as $category)
-			<a href="/categories/{{ $category->id }}" class="list-group-item">
+			<a href="{{ route('categories.show', $category->id) }}" class="list-group-item">
 				<h4 class="list-group-item-heading">{{ $category->label }}</h4>
 				<div class="list-group-item-text">
 					<div class="progress">

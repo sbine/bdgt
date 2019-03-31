@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-	<div class="w-full -mt-4">
+	<div class="-mt-4">
 		@foreach ($goals as $goal)
 			<a href="{{ route('goals.show', $goal->id) }}" class="block hover:bg-gray-100 p-4">
 				<h4 class="flex justify-between text-2xl">

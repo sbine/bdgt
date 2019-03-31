@@ -10,15 +10,16 @@
 	</a>
 @endsection
 
-
 @section('content')
-	<div class="list-group">
+	<div class="-mt-4">
 		@foreach ($accounts as $account)
-			<a href="/accounts/{{ $account->id }}" class="list-group-item">
-				<span class="badge">{{ $account->transactions->count() }}</span>
-				<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
-				<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
-				<p class="list-group-item-text">@money($account->balance)</p>
+			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 p-4">
+				<h4 class="flex justify-between text-xl">
+					{{ $account->name }}
+					<span class="badge">{{ $account->transactions->count() }}</span>
+				</h4>
+
+				<p><formatter-currency :amount="{{ $account->balance }}"></formatter-currency></p>
 			</a>
 		@endforeach
 	</div>

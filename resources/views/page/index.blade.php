@@ -7,7 +7,7 @@
 			<span class="badge">alpha</span>
 		</h1>
 		@guest
-			<a class="button mt-2" href="/login" role="button">Sign In</a>
+			<a class="button mt-2" href="{{ route('login') }}" role="button">Sign In</a>
 		@endguest
 	</div>
 

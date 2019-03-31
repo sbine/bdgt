@@ -40,7 +40,7 @@
 				</div>
 			@else
 				<div>
-					<form action="/logout" method="POST">
+					<form action="{{ route('logout') }}" method="POST">
 						<button class="text-gray-400 hover:text-white px-6 py-4" type="submit">{{ trans('labels.auth.logout') }}</button>
 						@csrf
 					</form>

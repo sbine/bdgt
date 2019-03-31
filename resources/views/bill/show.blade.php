@@ -19,7 +19,7 @@
 				<span class="badge badge--danger">unpaid</span>
 			@endif
 		</span>
-		<span class="pull-right">
+		<span>
 			@money($bill->amount)
 		</span>
 	</h2>

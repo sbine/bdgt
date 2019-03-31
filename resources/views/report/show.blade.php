@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs.items')
-	<a class="breadcrumb" href="/reports">{{ trans('labels.reports.plural') }}</a>
+	<a class="breadcrumb" href="{{ route('reports.index') }}">{{ trans('labels.reports.plural') }}</a>
 	<div class="breadcrumb breadcrumb--active">{{ $report->name }}</div>
 @endsection
 
