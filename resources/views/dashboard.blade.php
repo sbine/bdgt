@@ -59,20 +59,12 @@
 @endsection
 
 @section('content')
-	<br>
-	<table class="table table-striped">
-		{!! $transactions !!}
-		<tfoot>
-			<tr>
-				<td colspan="5"><b>Total</b></td>
-				<td><b>@money($ledger->totalInflow())</b></td>
-				<td><b>@money($ledger->totalOutflow())</b></td>
-				<td colspan="2"></td>
-			</tr>
-		</tfoot>
-		<tbody>
-		</tbody>
-	</table>
+	<transactions-table class="w-full" :transactions='@json($transactions)'></transactions-table>
+
+	{{--
+		<div>@money($ledger->totalInflow())</div>
+		<div>@money($ledger->totalOutflow())</div>
+	--}}
 
 	@include('transaction.modals.edit')
 	@include('transaction.modals.delete')

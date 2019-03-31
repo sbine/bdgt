@@ -11,17 +11,7 @@
 @endsection
 
 @section('content')
-	<table class="table table-striped">
-		{!! $transactions !!}
-		<tfoot>
-			<tr>
-				<td colspan="5"><b>Total</b></td>
-				<td><b>@money($ledger->totalInflow())</b></td>
-				<td><b>@money($ledger->totalOutflow())</b></td>
-				<td colspan="2"></td>
-			</tr>
-		</tfoot>
-	</table>
+	<transactions-table :transactions='@json($transactions)'></transactions-table>
 
 	@include('transaction.modals.edit')
 	@include('transaction.modals.delete')

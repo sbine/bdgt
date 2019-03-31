@@ -10,27 +10,31 @@
 @endsection
 
 @section('content')
-	<h2>
-		{{ $bill->label }}
-		@if ($bill->total >= $bill->amount)
-			<span class="label label-success">PAID</span>
-		@else
-			<span class="label label-danger">UNPAID</span>
-		@endif
+	<h2 class="flex justify-between text-3xl">
+		<span>
+			{{ $bill->label }}
+			@if ($bill->total >= $bill->amount)
+				<span class="badge badge--success">paid</span>
+			@else
+				<span class="badge badge--danger">unpaid</span>
+			@endif
+		</span>
 		<span class="pull-right">
 			@money($bill->amount)
 		</span>
 	</h2>
-	<p>
-		Due <span class="moment">{{ $bill->nextDue }}</span>
+	<p class="mt-4">
+		Due <formatter-date time="{{ $bill->nextDue }}" :diff="true"></formatter-date>
 		<span class="text-muted">({{ $bill->nextDue }})</span>
 	</p>
-	<p>@money($bill->total) paid since {{ $bill->lastDue }}</p>
-	<br><br>
-	<p class="lead">Payments</p>
-	<table class="table">
-		{!! $transactions !!}
-	</table>
+	<p class="mt-2">
+		<formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since {{ $bill->lastDue }}
+	</p>
+
+	<h3 class="font-light text-2xl mb-4 mt-6">Payments</h3>
+
+	<transactions-table :transactions='@json($bill->transactions)'></transactions-table>
+
 	<a href="#deleteBillModal" data-toggle="modal" class="pull-right">{{ trans('labels.bills.delete_button') }}</a>
 
 	@include('bill.modals.edit')

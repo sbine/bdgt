@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Resources\Account;
 use App\Resources\Category;
 use App\Resources\Ledger;
+use App\Resources\Transaction;
 use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller
@@ -16,17 +17,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $ledger = new Ledger;
-
-        $accounts = Account::all();
-
-        $categories = Category::all();
-
-        return view('transaction.index', compact('ledger', 'accounts', 'categories'))
-            ->nest('transactions', 'transaction._list', [
-                'transactions' => $ledger->transactions(),
-                'actionable' => true
-            ]);
+        return view('transaction.index')
+            ->with('transactions', Transaction::all())
+            ->with('ledger', new Ledger)
+            ->with('accounts', Account::all())
+            ->with('categories', Category::all());
     }
 
     /**

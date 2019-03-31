@@ -1,0 +1,92 @@
+.VueTables {
+    @apply flex;
+    @apply flex-col;
+
+    .table {
+        @apply mb-4;
+        @apply w-full;
+
+        thead th {
+            @apply cursor-pointer;
+            @apply px-3;
+            @apply py-4;
+            @apply text-left;
+            @apply text-sm;
+        }
+
+        tbody tr {
+            @apply rounded;
+
+            td {
+                @apply border-b;
+                @apply border-gray-300;
+                @apply px-3;
+                @apply py-4;
+            }
+        }
+    }
+
+    .table-responsive {
+        @apply overflow-x-scroll;
+    }
+
+    &__heading {
+        @apply text-gray-800;
+    }
+}
+
+.VueTables__search {
+    @apply flex;
+    @apply flex-col;
+    @apply font-light;
+    @apply items-end;
+    @apply mb-8;
+
+    label {
+        @apply mr-4;
+    }
+}
+
+.VueTables__limit-field {
+    @apply font-light;
+
+    label {
+        @apply mr-4;
+    }
+
+    select {
+        @apply appearance-none;
+        @apply bg-white;
+    }
+}
+
+.VuePagination__count {
+    @apply font-light;
+}
+
+.VueTables__no-results {
+    @apply font-light;
+    @apply text-sm;
+}
+
+.VuePagination {
+    a {
+        @apply link;
+
+        &.active {
+            @apply font-semibold;
+            @apply text-blue-900;
+        }
+    }
+
+    li {
+        @apply mx-2;
+    }
+
+    ul {
+        @apply flex;
+        @apply items-center;
+        @apply justify-center;
+        @apply mb-6;
+    }
+}
