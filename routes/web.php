@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      | Bills
      */
-    Route::get('bills/ajax_calendar_events', 'BillController@ajax_calendar_events')
+    Route::get('bills/ajax_calendar_events', BillEventController::class)
         ->name('bills.ajax.calendar.events');
 
     Route::resource('bills', 'BillController');

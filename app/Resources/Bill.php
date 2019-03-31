@@ -28,6 +28,10 @@ class Bill extends Model
         'user_id'
     ];
 
+    protected $dates = [
+        'start_date',
+    ];
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
@@ -54,12 +58,12 @@ class Bill extends Model
         return false;
     }
 
-    public function getDueDatesForInterval($intervalStart, $intervalEnd, $frequency, $initialStart)
+    public function getDueDatesForInterval($intervalStart, $intervalEnd)
     {
         $intervalStart = new DateTime(date('Y-m-d', strtotime($intervalStart)));
         $intervalEnd   = new DateTime(date('Y-m-d', strtotime($intervalEnd)));
-        $initialStart  = new DateTime(date('Y-m-d', strtotime($initialStart)));
-        $frequency     = new DateInterval('P' . $frequency . 'D');
+        $initialStart  = $this->start_date;
+        $frequency     = new DateInterval('P' . $this->frequency . 'D');
 
         $dates = [];
         $date  = $initialStart;
@@ -78,7 +82,7 @@ class Bill extends Model
 
     public function getNextDueAttribute()
     {
-        if (!$this->cachedNextDue) {
+        if (! $this->cachedNextDue) {
             $startDate = new DateTime(date('Y-m-d 23:59:59', strtotime($this->start_date)));
             $currentDate = new DateTime(date('Y-m-d'));
             $frequency = new DateInterval('P' . $this->frequency . 'D');

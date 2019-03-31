@@ -8,6 +8,7 @@ use App\Resources\User;
 use Tests\TestCase;
 use DateInterval;
 use DateTime;
+use Carbon\Carbon;
 
 class BillTest extends TestCase
 {
@@ -36,12 +37,14 @@ class BillTest extends TestCase
 
     public function testGetDueDatesForInterval()
     {
+        $bill = new Bill([
+            'start_date' => new Carbon('2011-01-01'),
+            'frequency' => 30,
+        ]);
         $intervalStart = '2015-01-01';
         $intervalEnd = '2015-12-31';
-        $frequency  = 30;
-        $initialStart = '2011-01-01';
 
-        $dueDates = (new Bill)->getDueDatesForInterval($intervalStart, $intervalEnd, $frequency, $initialStart);
+        $dueDates = $bill->getDueDatesForInterval($intervalStart, $intervalEnd);
 
         $this->assertEquals([
             '2015-01-10',

@@ -17,7 +17,9 @@
 				<font-awesome-icon icon="dollar-sign" class="fa-4x"></font-awesome-icon>
 			</div>
 			<div class="flex flex-col">
-				<h2 class="text-3xl"><span class="money-signed">@number($ledger->balance())</span></h2>
+				<h2 class="text-3xl">
+					<formatter-currency :amount="{{ $ledger->balance() }}"></formatter-currency>
+				</h2>
 				<span class="text-gray-500">current balance</span>
 			</div>
 		</div>
@@ -29,7 +31,7 @@
 			<div class="flex flex-col">
 				<h2 class="text-3xl">
 					@if ($ledger->lastPurchase())
-						<span class="moment">{{ $ledger->lastPurchase() }}</span>
+						<formatter-date time="{{ $ledger->lastPurchase() }}" :diff="true" unit="day"></formatter-date>
 					@else
 						<span>N/A</span>
 					@endif
