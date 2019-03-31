@@ -11,7 +11,7 @@ return [
         'login' => 'Login',
         'logout' => 'Logout',
         'register' => 'Register',
-        'register_button' => 'Register an account',
+        'register_button' => 'Register now',
         'forgot_password' => 'Forgot Your Password?',
         'reset_password' => 'Reset Password',
         'send_password_reset_link' => 'Send Password Reset Link',

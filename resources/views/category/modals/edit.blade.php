@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label class="col-sm-3 control-label">{{ trans('labels.categories.properties.label') }}</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="label" value="{{ $category->label }}" required>
+			<input type="text" class="input-text" name="label" value="{{ $category->label }}" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -17,7 +17,7 @@
 		<div class="col-sm-8">
 			<div class="input-group">
 				<span class="input-group-addon">$</span>
-				<input type="number" class="form-control" name="budgeted" step="0.01" min="0" max="10000000" value="{{ $category->budgeted }}">
+				<input type="number" class="input-text" name="budgeted" step="0.01" min="0" max="10000000" value="{{ $category->budgeted }}">
 			</div>
 		</div>
 	</div>

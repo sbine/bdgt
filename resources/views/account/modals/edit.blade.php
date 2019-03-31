@@ -12,7 +12,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.name') }}</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="name" value="{{ $account->name }}" required>
+						<input type="text" class="input-text" name="name" value="{{ $account->name }}" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -20,7 +20,7 @@
 					<div class="col-sm-8">
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
-							<input type="text" class="form-control" name="balance" value="{{ $account->balance }}">
+							<input type="text" class="input-text" name="balance" value="{{ $account->balance }}">
 						</div>
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.interest') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
-							<input type="text" class="form-control" name="interest" value="{{ $account->interest }}">
+							<input type="text" class="input-text" name="interest" value="{{ $account->interest }}">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.date_opened') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
-							<input type="text" class="form-control datepicker" name="date_opened" value="{{ $account->date_opened }}">
+							<input type="text" class="input-text datepicker" name="date_opened" value="{{ $account->date_opened }}">
 							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 						</div>
 					</div>

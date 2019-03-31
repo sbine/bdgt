@@ -8,7 +8,7 @@
 		<div id="app" class="flex-grow">
 			@include('partials.nav')
 
-			<div class="w-5/6 lg:w-1/2 mx-auto pt-8">
+			<div class="w-5/6 lg:w-1/2 mx-auto mt-8">
 				@yield('top-content')
 
 				<div class="row">

@@ -41,7 +41,7 @@
 				<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
 				<div class="input-group">
 					<span class="input-group-addon">$</span>
-					<input id="currentBalance" type="number" step="0.1" class="form-control" value="2000.0">
+					<input id="currentBalance" type="number" step="0.1" class="input-text" value="2000.0">
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 			<div class="form-group">
 				<label for="interestRate">{{ trans('labels.calculators.debt.properties.interestRate') }}</label>
 				<div class="input-group">
-					<input id="interestRate" type="number" step="0.1" class="form-control" value="5.4">
+					<input id="interestRate" type="number" step="0.1" class="input-text" value="5.4">
 					<span class="input-group-addon">%</span>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
 				<div class="input-group">
 					<span class="input-group-addon">$</span>
-					<input id="minimumPayment" type="number" step="0.1" class="form-control" value="150" min="10">
+					<input id="minimumPayment" type="number" step="0.1" class="input-text" value="150" min="10">
 				</div>
 			</div>
 		</div>

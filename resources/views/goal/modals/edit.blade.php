@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.label') }}</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" name="label" value="{{ $goal->label }}" required>
+			<input type="text" class="input-text" name="label" value="{{ $goal->label }}" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -17,7 +17,7 @@
 		<div class="col-sm-8">
 			<div class="input-group">
 				<span class="input-group-addon">$</span>
-				<input type="number" class="form-control" name="amount" step="0.01" min="0" max="10000000" value="{{ $goal->amount }}" required>
+				<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000000" value="{{ $goal->amount }}" required>
 			</div>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.goal_date') }}</label>
 		<div class="col-sm-8">
 			<div class="input-group">
-				<input type="text" class="form-control datepicker" name="goal_date" value="{{ $goal->goal_date }}">
+				<input type="text" class="input-text datepicker" name="goal_date" value="{{ $goal->goal_date }}">
 				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="col-sm-8">
 			<div class="input-group">
 				<span class="input-group-addon">$</span>
-				<input type="number" class="form-control" name="balance" step="0.01" min="0" max="10000000" value="{{ $goal->balance }}" required>
+				<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000" value="{{ $goal->balance }}" required>
 			</div>
 		</div>
 	</div>

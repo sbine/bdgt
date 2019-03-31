@@ -12,7 +12,7 @@
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.date') }}</label>
 	<div class="col-sm-8">
 		<div class="input-group">
-			<input type="text" class="form-control datepicker" name="date" required>
+			<input type="text" class="input-text datepicker" name="date" required>
 			<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 		</div>
 	</div>
@@ -22,20 +22,20 @@
 	<div class="col-sm-8">
 		<div class="input-group">
 			<span class="input-group-addon">$</span>
-			<input type="number" class="form-control" name="amount" step="0.01" min="0" max="1000000" required>
+			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="1000000" required>
 		</div>
 	</div>
 </div>
 <div class="form-group">
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.payee') }}</label>
 	<div class="col-sm-8">
-		<input type="text" class="form-control" name="payee" required>
+		<input type="text" class="input-text" name="payee" required>
 	</div>
 </div>
 <div class="form-group">
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.account_id') }}</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="account_id" required>
+		<select class="input-text" name="account_id" required>
 			@include('partials.dropdowns.accounts')
 		</select>
 	</div>
@@ -59,7 +59,7 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.category_id') }}</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="category_id">
+		<select class="input-text" name="category_id">
 			@include('partials.dropdowns.categories')
 		</select>
 	</div>
@@ -67,7 +67,7 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.bill_id') }}</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="bill_id">
+		<select class="input-text" name="bill_id">
 			@include('partials.dropdowns.bills')
 		</select>
 	</div>
@@ -87,7 +87,7 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">{{ trans('labels.transactions.properties.flair') }}</label>
 	<div class="col-sm-8">
-		<select class="form-control" name="flair">
+		<select class="input-text" name="flair">
 			@include('partials.dropdowns.flairs')
 		</select>
 	</div>

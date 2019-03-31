@@ -11,7 +11,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.name') }}</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="name" required>
+						<input type="text" class="input-text" name="name" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -19,7 +19,7 @@
 					<div class="col-sm-8">
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
-							<input type="text" class="form-control" name="balance">
+							<input type="text" class="input-text" name="balance">
 						</div>
 					</div>
 				</div>
@@ -27,7 +27,7 @@
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.interest') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
-							<input type="text" class="form-control" name="interest">
+							<input type="text" class="input-text" name="interest">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.date_opened') }}</label>
 					<div class="col-sm-8">
 						<div class="input-group">
-							<input type="text" class="form-control datepicker" name="date_opened">
+							<input type="text" class="input-text datepicker" name="date_opened">
 							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 						</div>
 					</div>

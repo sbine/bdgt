@@ -9,7 +9,7 @@
 			@include('partials.nav')
 
 			<div class="w-5/6 lg:w-2/3 mx-auto">
-				<main class="min-h-full py-6">
+				<main class="min-h-full my-6">
 
 					@section('alerts')
 						@include('alerts')
@@ -35,7 +35,7 @@
 
 					@yield('top-content')
 
-					<div class="p-4">
+					<div class="mt-8">
 						@yield('content')
 					</div>
 
