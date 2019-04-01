@@ -83,7 +83,7 @@ class TransactionController extends Controller
     }
 
     /**
-     * Delete a transaction by ID.
+     * Delete a transaction.
      *
      * @param  Transaction $transaction
      *

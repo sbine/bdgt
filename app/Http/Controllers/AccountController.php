@@ -36,6 +36,13 @@ class AccountController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'date_opened' => 'required|date',
+            'name' => 'required',
+            'balance' => 'required|numeric',
+            'interest' => 'required|numeric',
+        ]);
+
         if ($account = Account::create(Input::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
         } else {

@@ -60,6 +60,7 @@ class Transaction extends Model
     protected $casts = [
         'amount' => 'float',
         'cleared' => 'bool',
+        'inflow' => 'bool',
     ];
 
     public function account()

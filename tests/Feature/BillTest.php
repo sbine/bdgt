@@ -41,11 +41,13 @@ class BillTest extends TestCase
             ->assertSee($bill->label);
     }
 
-    public function testShowWithInvalidIdRedirectsToIndex()
+    public function testCannotViewAnotherUsersBill()
     {
+        $bill = factory(Bill::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->get(route('bills.show', [ 'bill' => -1 ]))
-            ->assertRedirect(route('bills.index'));
+            ->get(route('bills.show', [ 'bill' => $bill->id ]))
+            ->assertNotFound();
     }
 
     public function testStorePersistsNewBillAndRedirects()
@@ -64,7 +66,7 @@ class BillTest extends TestCase
         $this->actingAs(factory(User::class)->create())
             ->post(route('bills.store', []))
             ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->assertSessionHas('errors');
     }
 
     public function testUpdatePersistsChangesAndRedirects()
@@ -77,12 +79,13 @@ class BillTest extends TestCase
             ->assertRedirect(route('bills.show', [ 'bill' => $bill->id ]));
     }
 
-    public function testUnsuccessfulUpdateRedirectsWithError()
+    public function testCannotUpdateAnotherUsersBill()
     {
+        $bill = factory(Bill::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->put(route('bills.update', [ 'bill' => -1 ]), [])
-            ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->put(route('bills.update', [ 'bill' => $bill->id ]), [])
+            ->assertNotFound();
     }
 
     public function testDeleteDeletesAndRedirectsToIndex()
@@ -96,11 +99,12 @@ class BillTest extends TestCase
         $this->assertDatabaseMissing('bills', [ 'id' => $bill->id ]);
     }
 
-    public function testUnsuccessfulDeleteRedirectsWithError()
+    public function testCannotDeleteAnotherUsersBill()
     {
+        $bill = factory(Bill::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('bills.destroy', -1))
-            ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->delete(route('bills.destroy', $bill->id))
+            ->assertNotFound();
     }
 }

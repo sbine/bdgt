@@ -36,6 +36,13 @@ class GoalController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'label' => 'required',
+            'start_date' => 'required|date',
+            'balance' => 'required|numeric',
+            'amount' => 'required|numeric',
+        ]);
+
         if ($goal = Goal::create(Input::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.created'));
         } else {

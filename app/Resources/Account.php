@@ -27,6 +27,10 @@ class Account extends Model
         'user_id'
     ];
 
+    protected $dates = [
+        'date_opened',
+    ];
+
     public function getRunningBalanceAttribute()
     {
         $runningBalance = 0;

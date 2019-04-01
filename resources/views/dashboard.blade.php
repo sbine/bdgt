@@ -47,7 +47,7 @@
 			<div class="flex flex-col">
 				<h2 class="text-3xl">
 					@if (is_object($nextBill))
-						<span class="moment">{{ $nextBill->nextDue }}</span>
+						<formatter-date time="{{ $nextBill->nextDue }}" :diff="true" unit="day"></formatter-date>
 					@else
 						<span>N/A</span>
 					@endif

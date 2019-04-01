@@ -72,7 +72,7 @@
 		</select>
 	</div>
 </div>
-@if (!$useDefaults)
+@if (! $useDefaults)
 <div class="form-group">
 	<div class="col-sm-8 col-sm-offset-3">
 		<div class="checkbox">

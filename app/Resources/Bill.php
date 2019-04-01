@@ -42,7 +42,7 @@ class Bill extends Model
         $total = 0;
         foreach ($this->transactions as $transaction) {
             if ($transaction->date > $this->lastDue && $transaction->date < $this->nextDue) {
-                if (!$transaction->inflow) {
+                if (! $transaction->inflow) {
                     $total += $transaction->amount;
                 }
             }
@@ -101,7 +101,7 @@ class Bill extends Model
 
     public function getLastDueAttribute()
     {
-        if (!$this->cachedLastDue) {
+        if (! $this->cachedLastDue) {
             $startDate = new DateTime(date('Y-m-d', strtotime($this->start_date)));
             $currentDate = new DateTime(date('Y-m-d'));
             $frequency = new DateInterval('P' . $this->frequency . 'D');

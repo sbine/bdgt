@@ -36,6 +36,13 @@ class BillController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'start_date' => 'required|date',
+            'frequency' => 'required|numeric',
+            'label' => 'required|string',
+            'amount' => 'required|numeric',
+        ]);
+
         if ($bill = Bill::create(Input::all())) {
             return redirect(route('bills.show', $bill->id))->with('alerts.success', trans('crud.bills.created'));
         } else {

@@ -44,11 +44,13 @@ class TransactionTest extends TestCase
             ->assertSee(htmlentities($transaction->payee));
     }
 
-    public function testShowWithInvalidIdRedirectsToIndex()
+    public function testCannotViewAnotherUsersTransaction()
     {
+        $transaction = factory(Transaction::class)->states('with_account')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->get(route('transactions.show', [ 'transaction' => -1 ]))
-            ->assertRedirect(route('transactions.index'));
+            ->get(route('transactions.show', [ 'transaction' => $transaction->id ]))
+            ->assertNotFound();
     }
 
     public function testStorePersistsNewTransactionAndRedirects()
@@ -74,6 +76,15 @@ class TransactionTest extends TestCase
         $this->assertDatabaseHas('transactions', $transaction->toArray());
     }
 
+    public function testCannotUpdateAnotherUsersTransaction()
+    {
+        $transaction = factory(Transaction::class)->states('with_account')->create();
+
+        $this->actingAs(factory(User::class)->create())
+            ->put(route('transactions.update', ['transaction' => $transaction->id]), [])
+            ->assertNotFound();
+    }
+
     public function testDeleteDeletesAndRedirectsToIndex()
     {
         $transaction = factory(Transaction::class)->states('with_account')->create();
@@ -85,11 +96,12 @@ class TransactionTest extends TestCase
         $this->assertDatabaseMissing('transactions', [ 'id' => $transaction->id ]);
     }
 
-    public function testUnsuccessfulDeleteRedirectsWithError()
+    public function testCannotDeleteAnotherUsersTransaction()
     {
+        $transaction = factory(Transaction::class)->states('with_account')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('transactions.destroy', -1))
-            ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->delete(route('transactions.destroy', $transaction->id))
+            ->assertNotFound();
     }
 }

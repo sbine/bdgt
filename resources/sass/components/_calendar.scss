@@ -2,6 +2,7 @@
     .vuecal__menu {
         .active {
             @apply border-blue-500;
+            @apply border-b-3;
         }
     }
 

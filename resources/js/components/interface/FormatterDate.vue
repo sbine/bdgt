@@ -18,11 +18,14 @@ export default {
         function diff(value, unit = 'day') {
             const days = dayjs(value).diff(dayjs(), unit)
             const units = Math.abs(days) === 1 ? 'day' : 'days'
-            const suffix = days > 0
-                ? ' from now'
-                : ' ago'
 
-            return Math.abs(days) + ' ' + units + ' ' + suffix
+            if (days === 0) {
+                return 'today'
+            }
+
+            return days > 0
+                ? 'in ' + Math.abs(days) + ' ' + units
+                : Math.abs(days) + ' ' + units + ' ago'
         }
 
         return h('span', {},

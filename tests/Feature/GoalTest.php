@@ -41,11 +41,13 @@ class GoalTest extends TestCase
             ->assertSee(htmlentities($goal->label));
     }
 
-    public function testShowWithInvalidIdRedirectsToIndex()
+    public function testCannotViewAnotherUsersGoal()
     {
+        $goal = factory(Goal::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->get(route('goals.show', [ 'goal' => -1 ]))
-            ->assertRedirect(route('goals.index'));
+            ->get(route('goals.show', [ 'goal' => $goal->id ]))
+            ->assertNotFound();
     }
 
     public function testStorePersistsNewGoalAndRedirects()
@@ -64,7 +66,7 @@ class GoalTest extends TestCase
         $this->actingAs(factory(User::class)->create())
             ->post(route('goals.store', []))
             ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->assertSessionHas('errors');
     }
 
     public function testUpdatePersistsChangesAndRedirects()
@@ -79,12 +81,13 @@ class GoalTest extends TestCase
         $this->assertDatabaseHas('goals', $goal->toArray());
     }
 
-    public function testUnsuccessfulUpdateRedirectsWithError()
+    public function testCannotUpdateAnotherUsersGoal()
     {
+        $goal = factory(Goal::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->put(route('goals.update', [ 'goal' => -1 ]), [])
-            ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->put(route('goals.update', [ 'goal' => $goal->id ]), [])
+            ->assertNotFound();
     }
 
     public function testDeleteDeletesAndRedirectsToIndex()
@@ -98,11 +101,12 @@ class GoalTest extends TestCase
         $this->assertDatabaseMissing('goals', [ 'id' => $goal->id ]);
     }
 
-    public function testUnsuccessfulDeleteRedirectsWithError()
+    public function testCannotDeleteAnotherUsersGoal()
     {
+        $goal = factory(Goal::class)->states('with_user')->create();
+
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('goals.destroy', -1))
-            ->assertStatus(302)
-            ->assertSessionHas('alerts.danger');
+            ->delete(route('goals.destroy', $goal->id))
+            ->assertNotFound();
     }
 }
