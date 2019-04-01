@@ -41,28 +41,28 @@
 	</div>
 	<div class="row">
 		<div class="col-md-2 col-sm-3 col-xs-4">
-			<div class="form-group">
+			<div class="flex items-center">
 				<label for="currentBalance">{{ trans('labels.calculators.debt.properties.currentBalance') }}</label>
-				<div class="input-group">
-					<span class="input-group-addon">$</span>
+				<div class="flex items-center">
+					<span class="input-addon">$</span>
 					<input id="currentBalance" type="number" step="0.1" class="input-text" value="2000.0">
 				</div>
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-4">
-			<div class="form-group">
+			<div class="flex items-center">
 				<label for="interestRate">{{ trans('labels.calculators.debt.properties.interestRate') }}</label>
-				<div class="input-group">
+				<div class="flex items-center">
 					<input id="interestRate" type="number" step="0.1" class="input-text" value="5.4">
-					<span class="input-group-addon">%</span>
+					<span class="input-addon">%</span>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-4">
-			<div class="form-group">
+			<div class="flex items-center">
 				<label for="minimumPayment">{{ trans('labels.calculators.debt.properties.minimumPayment') }}</label>
-				<div class="input-group">
-					<span class="input-group-addon">$</span>
+				<div class="flex items-center">
+					<span class="input-addon">$</span>
 					<input id="minimumPayment" type="number" step="0.1" class="input-text" value="150" min="10">
 				</div>
 			</div>

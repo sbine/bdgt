@@ -6,35 +6,35 @@
 	'dismissLabel' => trans('labels.goals.modals.edit.close_button'),
 	'submitLabel' => trans('labels.goals.modals.edit.save_button')
 ])
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.label') }}</label>
-		<div class="col-sm-8">
+	<div class="flex items-center">
+		<label class="w-1/3 text-right mr-4">{{ trans('labels.goals.properties.label') }}</label>
+		<div class="w-2/3">
 			<input type="text" class="input-text" name="label" value="{{ $goal->label }}" required>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.amount') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
-				<span class="input-group-addon">$</span>
+	<div class="flex items-center">
+		<label class="w-1/3 text-right mr-4">{{ trans('labels.goals.properties.amount') }}</label>
+		<div class="w-2/3">
+			<div class="flex items-center">
+				<span class="input-addon">$</span>
 				<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000000" value="{{ $goal->amount }}" required>
 			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.goal_date') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
+	<div class="flex items-center">
+		<label class="w-1/3 text-right mr-4">{{ trans('labels.goals.properties.goal_date') }}</label>
+		<div class="w-2/3">
+			<div class="flex items-center">
 				<input type="text" class="input-text datepicker" name="goal_date" value="{{ $goal->goal_date }}">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				<span class="input-addon"><i class="fa fa-calendar"></i></span>
 			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.balance') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
-				<span class="input-group-addon">$</span>
+	<div class="flex items-center">
+		<label class="w-1/3 text-right mr-4">{{ trans('labels.goals.properties.balance') }}</label>
+		<div class="w-2/3">
+			<div class="flex items-center">
+				<span class="input-addon">$</span>
 				<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000" value="{{ $goal->balance }}" required>
 			</div>
 		</div>

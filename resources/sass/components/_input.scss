@@ -10,3 +10,9 @@
     @apply text-red-500;
     @apply text-sm;
 }
+
+.input-addon {
+    @apply font-semibold;
+    @apply px-2;
+    @apply py-1;
+}

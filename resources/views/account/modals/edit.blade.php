@@ -9,36 +9,36 @@
 				<h3 class="modal-title">{{ trans('labels.accounts.modals.edit.title') }}</h3>
 			</div>
 			<div class="modal-body">
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.name') }}</label>
-					<div class="col-sm-8">
+				<div class="flex items-center">
+					<label class="w-1/3 text-right mr-4">{{ trans('labels.accounts.properties.name') }}</label>
+					<div class="w-2/3">
 						<input type="text" class="input-text" name="name" value="{{ $account->name }}" required>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.balance') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<span class="input-group-addon">$</span>
+				<div class="flex items-center">
+					<label class="w-1/3 text-right mr-4">{{ trans('labels.accounts.properties.balance') }}</label>
+					<div class="w-2/3">
+						<div class="flex items-center">
+							<span class="input-addon">$</span>
 							<input type="text" class="input-text" name="balance" value="{{ $account->balance }}">
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.interest') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
+				<div class="flex items-center">
+					<label class="w-1/3 text-right mr-4">{{ trans('labels.accounts.properties.interest') }}</label>
+					<div class="w-2/3">
+						<div class="flex items-center">
 							<input type="text" class="input-text" name="interest" value="{{ $account->interest }}">
-							<span class="input-group-addon">%</span>
+							<span class="input-addon">%</span>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.date_opened') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
+				<div class="flex items-center">
+					<label class="w-1/3 text-right mr-4">{{ trans('labels.accounts.properties.date_opened') }}</label>
+					<div class="w-2/3">
+						<div class="flex items-center">
 							<input type="text" class="input-text datepicker" name="date_opened" value="{{ $account->date_opened }}">
-							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							<span class="input-addon"><i class="fa fa-calendar"></i></span>
 						</div>
 					</div>
 				</div>
