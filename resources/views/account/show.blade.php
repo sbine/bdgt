@@ -16,6 +16,7 @@
 				<formatter-currency :amount="{{ $account->running_balance }}"></formatter-currency>
 			</span>
 		</h2>
+
 		<p class="mt-2">
 			@number($account->interest)%
 		</p>

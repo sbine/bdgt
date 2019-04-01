@@ -17,7 +17,6 @@
             }"
         >
             {{ props.progress }}%
-            <span class="sr-only">{{ props.progress }}% Complete</span>
         </div>
     </div>
 </template>
