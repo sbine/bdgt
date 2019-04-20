@@ -15,12 +15,13 @@ export default {
     mixins: [ clickaway ],
 
     props: {
-        closeOnBlur: { type: Boolean },
+        closeOnBlur: Boolean,
+        on: Boolean,
     },
 
     data() {
         return {
-            isOn: false,
+            isOn: !! this.on,
         }
     },
 
