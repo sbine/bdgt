@@ -39,6 +39,4 @@
 			</a>
 		@endforeach
 	</div>
-
-	@include('goal.modals.create')
 @endsection

@@ -20,20 +20,23 @@
 @endsection
 
 @section('content')
-	<h2>
+	<h2 class="flex justify-between text-3xl">
 		{{ $category->label }}
-		<span class="pull-right">
-			@money($category->budgeted - $category->spent)
+		<span>
+			<formatter-currency :amount="{{ $category->budgeted - $category->spent}}"></formatter-currency>
 		</span>
 	</h2>
-	<p class="pull-right">
-		@money($category->budgeted) Budgeted
+
+	<p class="text-right mt-2">
+		<formatter-currency :amount="{{ $category->budgeted}}"></formatter-currency>
+		Budgeted
 	</p>
-	<br><br>
-	<p class="lead">{{ trans('labels.transactions.plural') }}</p>
-	<table class="table">
-		{!! $transactions !!}
-	</table>
+
+	<div class="bg-white rounded shadow p-6 mt-6">
+		<h3 class="font-light text-2xl mb-6">{{ trans('labels.transactions.plural') }}</h3>
+
+		<transactions-table :transactions='@json($category->transactions)'></transactions-table>
+	</div>
 
 	<toggle class="flex justify-end">
 		<template slot-scope="{ isOn, setTo }">

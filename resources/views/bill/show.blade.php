@@ -35,25 +35,27 @@
 	</h2>
 	<p class="mt-4">
 		Due <formatter-date time="{{ $bill->nextDue }}" :diff="true"></formatter-date>
-		<span class="text-muted">({{ $bill->nextDue }})</span>
+		<span class="text-gray-700">({{ $bill->nextDue }})</span>
 	</p>
 	<p class="mt-2">
 		<formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since {{ $bill->lastDue }}
 	</p>
 
-	<h3 class="font-light text-2xl mb-4 mt-6">Payments</h3>
+	<div class="bg-white rounded shadow p-6 mt-6">
+		<h3 class="font-light text-2xl mb-6">Payments</h3>
 
-	<transactions-table :transactions='@json($bill->transactions)'></transactions-table>
+		<transactions-table :transactions='@json($bill->transactions)'></transactions-table>
 
-	<toggle class="flex justify-end">
-		<template slot-scope="{ isOn, setTo }">
-			<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
-				{{ trans('labels.bills.delete_button') }}
-			</a>
+		<toggle class="flex justify-end">
+			<template slot-scope="{ isOn, setTo }">
+				<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+					{{ trans('labels.bills.delete_button') }}
+				</a>
 
-			<modal :value="isOn" @input="setTo(false)">
-				@include('bill.modals.delete')
-			</modal>
-		</template>
-	</toggle>
+				<modal :value="isOn" @input="setTo(false)">
+					@include('bill.modals.delete')
+				</modal>
+			</template>
+		</toggle>
+	</div>
 @endsection

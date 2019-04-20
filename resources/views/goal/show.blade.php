@@ -20,35 +20,37 @@
 @endsection
 
 @section('content')
-	<h2 class="flex justify-between text-3xl">
-		{{ $goal->label }}
-		<span class="pull-right">
-			@money($goal->balance) / @money($goal->amount)
-		</span>
-	</h2>
+	<div class="bg-white rounded shadow p-6">
+		<h2 class="flex justify-between text-3xl">
+			{{ $goal->label }}
+			<span class="pull-right">
+				@money($goal->balance) / @money($goal->amount)
+			</span>
+		</h2>
 
-	<div class="mt-2 py-2">
-		<progress-bar
-			:achieved="{{ $goal->achieved ? 'true' : 'false' }}"
-			:balance="{{ $goal->balance }}"
-			:progress="{{ $goal->progress }}"
-		></progress-bar>
+		<div class="mt-2 py-2">
+			<progress-bar
+				:achieved="{{ $goal->achieved ? 'true' : 'false' }}"
+				:balance="{{ $goal->balance }}"
+				:progress="{{ $goal->progress }}"
+			></progress-bar>
+		</div>
+
+		<p class="mt-2">
+			{{ trans('labels.goals.properties.goal_date') }}: {{ $goal->goal_date }}
+			(<formatter-date time="{{ $goal->goal_date }}" :diff="true"></formatter-date>)
+		</p>
+
+		<toggle class="flex justify-end">
+			<template slot-scope="{ isOn, setTo }">
+				<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+					{{ trans('labels.goals.delete_button') }}
+				</a>
+
+				<modal :value="isOn" @input="setTo(false)">
+					@include('goal.modals.delete')
+				</modal>
+			</template>
+		</toggle>
 	</div>
-
-	<p class="mt-2">
-		{{ trans('labels.goals.properties.goal_date') }}: {{ $goal->goal_date }}
-		(<formatter-date time="{{ $goal->goal_date }}" :diff="true"></formatter-date>)
-	</p>
-
-	<toggle class="flex justify-end">
-		<template slot-scope="{ isOn, setTo }">
-			<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
-				{{ trans('labels.goals.delete_button') }}
-			</a>
-
-			<modal :value="isOn" @input="setTo(false)">
-				@include('goal.modals.delete')
-			</modal>
-		</template>
-	</toggle>
 @endsection
