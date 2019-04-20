@@ -4,7 +4,7 @@
 @overwrite
 
 @section('content')
-	<div class="shadow">
+	<div class="bg-white shadow">
 		<div class="bg-blue-700 rounded-t px-4 py-1"></div>
 
 		<form class="w-3/4 mx-auto px-4 py-10" role="form" method="POST" action="{{ route('login') }}">
@@ -57,7 +57,7 @@
 			</div>
 		</form>
 
-		<div class="bg-gray-300 text-center text-gray-600 text-sm rounded-b p-4">
+		<div class="bg-gray-100 border-t text-center text-gray-600 text-sm rounded-b p-4">
 			Don't have an account yet?
 			<a class="link" href="{{ route('register') }}">{{ trans('labels.auth.register_button') }}</a>
 		</div>

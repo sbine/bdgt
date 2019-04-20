@@ -49,12 +49,12 @@
         </template>
 
         <template slot="actions" slot-scope="{ row }">
-            <button class="button bg-orange-400 px-2 py-1">
-				<font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+            <button class="button button--warning w-8 text-gray-100 p-1">
+				<font-awesome-icon icon="pencil-alt" class="fa-sm"></font-awesome-icon>
             </button>
 
-            <button class="button bg-red-400 px-3 py-1">
-				<font-awesome-icon icon="times"></font-awesome-icon>
+            <button class="button button--danger w-8 p-1">
+				<font-awesome-icon icon="times" class="fa-sm"></font-awesome-icon>
             </button>
         </template>
     </v-client-table>

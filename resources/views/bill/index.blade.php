@@ -12,11 +12,11 @@
 
 @section('content')
 	<div class="lg:flex">
-		<div class="lg:w-2/3 mb-8 lg:mb-0 lg:mr-10">
+		<div class="lg:w-2/3 bg-white shadow rounded mb-8 lg:mb-0 lg:mr-10">
 			<bill-calendar></bill-calendar>
 		</div>
 
-		<div class="lg:w-1/3">
+		<div class="lg:w-1/3 bg-white shadow rounded p-6">
 			@foreach ($bills as $bill)
 				<a href="{{ route('bills.show', $bill->id) }}" class="block py-4">
 					<div class="flex justify-between">
@@ -25,7 +25,7 @@
 						@if ($bill->total >= $bill->amount)
 							<span class="badge badge--success">paid</span>
 						@else
-							<span class="badge badge--success">unpaid</span>
+							<span class="badge badge--danger">unpaid</span>
 						@endif
 					</div>
 					<div class="flex justify-between font-light mt-2">

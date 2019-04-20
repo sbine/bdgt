@@ -11,15 +11,15 @@
 @endsection
 
 @section('content')
-	<div class="-mt-4">
+	<div class="bg-white shadow rounded -mt-4">
 		@foreach ($accounts as $account)
-			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 p-4">
-				<h4 class="flex justify-between text-xl">
+			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 border-b p-6">
+				<h4 class="flex justify-between text-gray-700 text-xl">
 					{{ $account->name }}
 					<span class="badge">{{ $account->transactions->count() }}</span>
 				</h4>
 
-				<p><formatter-currency :amount="{{ $account->balance }}"></formatter-currency></p>
+				<p class="font-semibold"><formatter-currency :amount="{{ $account->balance }}"></formatter-currency></p>
 			</a>
 		@endforeach
 	</div>

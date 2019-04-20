@@ -5,15 +5,13 @@
 </head>
 <body>
 	<div class="flex flex-col min-h-screen">
-		<div id="app" class="flex-grow">
+		<div id="app" class="flex-grow bg-gray-100">
 			@include('partials.nav')
 
 			<div class="w-5/6 lg:w-1/2 mx-auto mt-8">
 				@yield('top-content')
 
-				<div class="row">
-					@yield('content')
-				</div>
+				@yield('content')
 			</div>
 		</div>
 

@@ -21,9 +21,11 @@
 			@number($account->interest)%
 		</p>
 
-		<h3 class="font-light text-2xl mb-4 mt-6">{{ trans('labels.transactions.plural') }}</h3>
+		<div class="bg-white shadow rounded p-6 mt-6">
+			<h3 class="font-light text-2xl mb-6">{{ trans('labels.transactions.plural') }}</h3>
 
-		<transactions-table :transactions='@json($account->transactions)'></transactions-table>
+			<transactions-table :transactions='@json($account->transactions)'></transactions-table>
+		</div>
 
 		<a href="#deleteAccountModal" data-toggle="modal" class="pull-right">{{ trans('labels.accounts.delete_button') }}</a>
 

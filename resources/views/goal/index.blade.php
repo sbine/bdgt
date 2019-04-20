@@ -11,9 +11,9 @@
 @endsection
 
 @section('content')
-	<div class="-mt-4">
+	<div class="bg-white shadow rounded -mt-4">
 		@foreach ($goals as $goal)
-			<a href="{{ route('goals.show', $goal->id) }}" class="block hover:bg-gray-100 p-4">
+			<a href="{{ route('goals.show', $goal->id) }}" class="block hover:bg-gray-100 border-b p-6">
 				<h4 class="flex justify-between text-2xl">
 					{{ $goal->label }}
 					<span>@money($goal->amount)</span>
