@@ -5,9 +5,17 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a class="button button--success block sm:inline-block" href="#addTransactionModal" data-toggle="modal">
-		<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> Add Transaction
-	</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('transaction.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')

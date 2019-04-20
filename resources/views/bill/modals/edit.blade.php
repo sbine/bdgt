@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'editBillModal',
-	'formAction' => '/bills/' . $bill->id,
+	'formAction' => route('bills.update', $bill->id),
 	'method' => 'PUT',
 	'title' => trans('labels.bills.modals.edit.title'),
 	'dismissLabel' => trans('labels.bills.modals.edit.close_button'),

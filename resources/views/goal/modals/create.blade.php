@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'addGoalModal',
-	'formAction' => '/goals',
+	'formAction' => route('goals.store'),
 	'title' => trans('labels.goals.modals.create.title'),
 	'dismissLabel' => trans('labels.goals.modals.create.close_button'),
 	'submitLabel' => trans('labels.goals.modals.create.save_button')

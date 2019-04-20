@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'editCategoryModal',
-	'formAction' => '/categories/' . $category->id,
+	'formAction' => route('categories.edit', $category->id),
 	'method' => 'PUT',
 	'title' => trans('labels.categories.modals.edit.title'),
 	'dismissLabel' => trans('labels.categories.modals.edit.close_button'),

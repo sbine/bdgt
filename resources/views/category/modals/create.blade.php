@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'addCategoryModal',
-	'formAction' => '/categories',
+	'formAction' => route('categories.store'),
 	'title' => trans('labels.categories.modals.create.title'),
 	'dismissLabel' => trans('labels.categories.modals.create.close_button'),
 	'submitLabel' => trans('labels.categories.modals.create.save_button')

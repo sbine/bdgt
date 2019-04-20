@@ -6,29 +6,44 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editCategoryModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.categories.edit_button') }}</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--warning" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="pencil-alt" class="mr-2"></font-awesome-icon> {{ trans('labels.categories.edit_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('category.modals.edit')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
-		<h2>
-			{{ $category->label }}
-			<span class="pull-right">
-				@money($category->budgeted - $category->spent)
-			</span>
-		</h2>
-		<p class="pull-right">
-			@money($category->budgeted) Budgeted
-		</p>
-		<br><br>
-		<p class="lead">{{ trans('labels.transactions.plural') }}</p>
-		<table class="table">
-			{!! $transactions !!}
-		</table>
+	<h2>
+		{{ $category->label }}
+		<span class="pull-right">
+			@money($category->budgeted - $category->spent)
+		</span>
+	</h2>
+	<p class="pull-right">
+		@money($category->budgeted) Budgeted
+	</p>
+	<br><br>
+	<p class="lead">{{ trans('labels.transactions.plural') }}</p>
+	<table class="table">
+		{!! $transactions !!}
+	</table>
 
-		<div class="flex justify-end">
-			<a href="#deleteCategoryModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.categories.delete_button') }}</a>
-		</div>
+	<toggle class="flex justify-end">
+		<template slot-scope="{ isOn, setTo }">
+			<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+				{{ trans('labels.categories.delete_button') }}
+			</a>
 
-	@include('category.modals.edit')
-	@include('category.modals.delete')
+			<modal :value="isOn" @input="setTo(false)">
+				@include('category.modals.delete')
+			</modal>
+		</template>
+	</toggle>
 @endsection

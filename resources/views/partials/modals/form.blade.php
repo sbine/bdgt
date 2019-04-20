@@ -1,22 +1,17 @@
-<div id="{{ $id }}" class="modal fade">
-    <div class="modal-dialog">
-        <form class="modal-content form-horizontal" method="POST" action="{{ $formAction }}">
-            @csrf
-            @if (isset($method))
-                @method($method)
-            @endif
+<div class="modal-dialog">
+    <form class="flex flex-col" method="POST" action="{{ $formAction }}">
+        @csrf
+        @if (isset($method))
+            @method($method)
+        @endif
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="{{ $dismissLabel }}"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{ $title }}</h4>
-            </div>
-            <div class="modal-body">
-                {{ $slot }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="button" data-dismiss="modal">{{ $dismissLabel }}</button>
-                <button type="submit" class="class="button button--primary">{{ $submitLabel }}</button>
-            </div>
-        </form>
-    </div>
+        <h4 class="text-2xl mb-10">{{ $title }}</h4>
+
+        {{ $slot }}
+
+        <div class="flex justify-between mt-10">
+            <button type="button" class="button" data-dismiss="modal">{{ $dismissLabel }}</button>
+            <button type="submit" class="button button--primary">{{ $submitLabel }}</button>
+        </div>
+    </form>
 </div>

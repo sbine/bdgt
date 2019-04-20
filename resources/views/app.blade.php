@@ -11,9 +11,7 @@
 			<div class="w-5/6 xl:w-2/3 mx-auto" v-cloak>
 				<main class="min-h-full my-6">
 
-					@section('alerts')
-						@include('alerts')
-					@show
+					@include('alerts')
 
 					<div class="flex justify-between mb-10">
 						@section('breadcrumbs')
@@ -32,10 +30,6 @@
 					<div class="mt-8">
 						@yield('content')
 					</div>
-
-					@auth
-						@include('transaction.modals.create')
-					@endauth
 				</main>
 			</div>
 		</div>

@@ -1,8 +1,5 @@
 @extends('guest')
 
-@section('alerts')
-@overwrite
-
 @section('content')
 	<div class="bg-white shadow">
 		<div class="bg-blue-700 rounded-t px-4 py-1"></div>

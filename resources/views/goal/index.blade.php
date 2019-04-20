@@ -5,13 +5,21 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a class="button button--success block sm:inline-block" href="#addGoalModal" data-toggle="modal">
-		<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.goals.add_button') }}
-	</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.goals.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('goal.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
-	<div class="bg-white shadow rounded -mt-4">
+	<div class="bg-white rounded shadow -mt-4">
 		@foreach ($goals as $goal)
 			<a href="{{ route('goals.show', $goal->id) }}" class="block hover:bg-gray-100 border-b p-6">
 				<h4 class="flex justify-between text-2xl">

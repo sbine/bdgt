@@ -6,7 +6,17 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editBillModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.bills.edit_button') }}</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--warning" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="pencil-alt" class="mr-2"></font-awesome-icon> {{ trans('labels.bills.edit_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('bill.modals.edit')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
@@ -35,10 +45,15 @@
 
 	<transactions-table :transactions='@json($bill->transactions)'></transactions-table>
 
-	<div class="flex justify-end">
-		<a href="#deleteBillModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.bills.delete_button') }}</a>
-	</div>
+	<toggle class="flex justify-end">
+		<template slot-scope="{ isOn, setTo }">
+			<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+				{{ trans('labels.bills.delete_button') }}
+			</a>
 
-	@include('bill.modals.edit')
-	@include('bill.modals.delete')
+			<modal :value="isOn" @input="setTo(false)">
+				@include('bill.modals.delete')
+			</modal>
+		</template>
+	</toggle>
 @endsection

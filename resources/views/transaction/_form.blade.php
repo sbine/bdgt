@@ -1,5 +1,5 @@
 <?php
-    if (!isset($useDefaults)) {
+    if (! isset($useDefaults)) {
         $useDefaults = false;
     }
 ?>
@@ -41,7 +41,8 @@
 	</div>
 </div>
 <div class="flex items-center">
-	<div class="w-2/3 col-sm-offset-3">
+	<div class="w-1/3 mr-4"></div>
+	<div class="w-2/3">
 		<div class="radio">
 			<label>
 				<input type="radio" name="inflow" value="1" required>

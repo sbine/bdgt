@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'editGoalModal',
-	'formAction' => '/goals/' . $goal->id,
+	'formAction' => route('goals.update', $goal->id),
 	'method' => 'PUT',
 	'title' => trans('labels.goals.modals.edit.title'),
 	'dismissLabel' => trans('labels.goals.modals.edit.close_button'),

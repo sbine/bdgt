@@ -5,9 +5,17 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a class="button button--success block sm:inline-block" href="#addCategoryModal" data-toggle="modal">
-		<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.categories.add_button') }}
-	</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.categories.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('category.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
@@ -36,6 +44,4 @@
 			</a>
 		@endforeach
 	</div>
-
-	@include('category.modals.create')
 @endsection

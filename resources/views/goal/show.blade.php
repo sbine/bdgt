@@ -6,7 +6,17 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editGoalModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.goals.edit_button') }}</a>
+	<toggle>
+		<template slot-scope="{ isOn, setTo }">
+			<a class="button button--warning" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="pencil-alt" class="mr-2"></font-awesome-icon> {{ trans('labels.goals.edit_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('goal.modals.edit')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
@@ -30,10 +40,15 @@
 		(<formatter-date time="{{ $goal->goal_date }}" :diff="true"></formatter-date>)
 	</p>
 
-	<div class="flex justify-end">
-		<a href="#deleteGoalModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.goals.delete_button') }}</a>
-	</div>
+	<toggle class="flex justify-end">
+		<template slot-scope="{ isOn, setTo }">
+			<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+				{{ trans('labels.goals.delete_button') }}
+			</a>
 
-	@include('goal.modals.edit')
-	@include('goal.modals.delete')
+			<modal :value="isOn" @input="setTo(false)">
+				@include('goal.modals.delete')
+			</modal>
+		</template>
+	</toggle>
 @endsection
