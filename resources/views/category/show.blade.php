@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editCategoryModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.categories.edit_button') }}</a>
+	<a href="#editCategoryModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.categories.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -24,7 +24,10 @@
 		<table class="table">
 			{!! $transactions !!}
 		</table>
-		<a href="#deleteCategoryModal" data-toggle="modal" class="pull-right">{{ trans('labels.categories.delete_button') }}</a>
+
+		<div class="flex justify-end">
+			<a href="#deleteCategoryModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.categories.delete_button') }}</a>
+		</div>
 
 	@include('category.modals.edit')
 	@include('category.modals.delete')

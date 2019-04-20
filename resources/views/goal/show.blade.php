@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editGoalModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.goals.edit_button') }}</a>
+	<a href="#editGoalModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.goals.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -30,7 +30,9 @@
 		(<formatter-date time="{{ $goal->goal_date }}" :diff="true"></formatter-date>)
 	</p>
 
-	<a href="#deleteGoalModal" data-toggle="modal" class="pull-right">{{ trans('labels.goals.delete_button') }}</a>
+	<div class="flex justify-end">
+		<a href="#deleteGoalModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.goals.delete_button') }}</a>
+	</div>
 
 	@include('goal.modals.edit')
 	@include('goal.modals.delete')

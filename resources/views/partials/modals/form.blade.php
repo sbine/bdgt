@@ -14,8 +14,8 @@
                 {{ $slot }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{ $dismissLabel }}</button>
-                <button type="submit" class="btn btn-primary">{{ $submitLabel }}</button>
+                <button type="button" class="button" data-dismiss="modal">{{ $dismissLabel }}</button>
+                <button type="submit" class="class="button button--primary">{{ $submitLabel }}</button>
             </div>
         </form>
     </div>

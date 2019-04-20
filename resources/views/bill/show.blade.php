@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editBillModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.bills.edit_button') }}</a>
+	<a href="#editBillModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.bills.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -35,7 +35,9 @@
 
 	<transactions-table :transactions='@json($bill->transactions)'></transactions-table>
 
-	<a href="#deleteBillModal" data-toggle="modal" class="pull-right">{{ trans('labels.bills.delete_button') }}</a>
+	<div class="flex justify-end">
+		<a href="#deleteBillModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.bills.delete_button') }}</a>
+	</div>
 
 	@include('bill.modals.edit')
 	@include('bill.modals.delete')

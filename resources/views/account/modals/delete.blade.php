@@ -12,8 +12,8 @@
 				<p class="text-danger">{{ trans('labels.accounts.modals.delete.text') }}</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('labels.accounts.modals.delete.close_button') }}</button>
-				<button type="submit" class="btn btn-primary">{{ trans('labels.accounts.modals.delete.save_button') }}</button>
+				<button type="button" class="button" data-dismiss="modal">{{ trans('labels.accounts.modals.delete.close_button') }}</button>
+				<button type="submit" class="class="button button--primary">{{ trans('labels.accounts.modals.delete.save_button') }}</button>
 			</div>
 		</form>
 	</div>

@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#editAccountModal" data-toggle="modal" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> {{ trans('labels.accounts.edit_button') }}</a>
+	<a href="#editAccountModal" data-toggle="modal" class="button button--warning"><i class="fa fa-pencil"></i> {{ trans('labels.accounts.edit_button') }}</a>
 @endsection
 
 @section('content')
@@ -27,7 +27,9 @@
 			<transactions-table :transactions='@json($account->transactions)'></transactions-table>
 		</div>
 
-		<a href="#deleteAccountModal" data-toggle="modal" class="pull-right">{{ trans('labels.accounts.delete_button') }}</a>
+		<div class="flex justify-end">
+			<a href="#deleteAccountModal" data-toggle="modal" class="text-red-600 mt-4">{{ trans('labels.accounts.delete_button') }}</a>
+		</div>
 
 	@include('account.modals.edit')
 	@include('account.modals.delete')
