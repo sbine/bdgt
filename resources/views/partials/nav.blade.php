@@ -34,7 +34,7 @@
 								<font-awesome-icon v-else icon="caret-down" class="ml-2"></font-awesome-icon>
 							</a>
 
-							<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1">
+							<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
 								<div {{ (strpos(request()->route()->getName(), 'reports.spending_by_category') !== false ? 'active' : '') }}>
 									<a class="block text-gray-800 hover:text-gray-600 px-6 py-4" href="/reports/categorial">{{ trans('labels.reports.spending_by_category') }}</a>
 								</div>
@@ -54,7 +54,7 @@
 							<font-awesome-icon v-else icon="caret-down" class="ml-2"></font-awesome-icon>
 						</a>
 
-						<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1">
+						<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
 							<div {{ (strpos(request()->route()->getName(), 'calculators.debt') !== false ? 'active' : '') }}>
 								<a class="block text-gray-800 hover:text-gray-600 px-6 py-4" href="{{ route('calculators.debt') }}">Debt Calculator</a>
 							</div>
