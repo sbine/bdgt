@@ -2,6 +2,9 @@ require('./bootstrap')
 
 window.Vue = require('vue')
 
+/**
+ * Font Awesome
+ */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -12,6 +15,15 @@ library.add(fas, far)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
+/**
+ * Portal-Vue
+ */
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
+
+/**
+ * Vue-Tables-2
+ */
 import { ClientTable } from 'vue-tables-2'
 import TailwindTheme from './themes/vue-tables-tailwind-theme'
 Vue.use(ClientTable, {}, false, TailwindTheme)
