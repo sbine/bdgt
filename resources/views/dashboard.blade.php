@@ -72,8 +72,8 @@
 	{{--
 		<div>@money($ledger->totalInflow())</div>
 		<div>@money($ledger->totalOutflow())</div>
-	--}}
 
-	@include('transaction.modals.edit')
-	@include('transaction.modals.delete')
+		@include('transaction.modals.edit')
+		@include('transaction.modals.delete')
+	--}}
 @endsection
