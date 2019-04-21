@@ -20,7 +20,7 @@ export default {
             currency: context.props.currency,
         })
 
-        return h('span', {}, (
+        return h('span', context.data, (
             context.props.signed && amount.indexOf('-') !== 0
             ? '-'
             : ''
