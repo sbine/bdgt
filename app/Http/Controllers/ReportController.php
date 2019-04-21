@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reports\ReportFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
@@ -30,7 +31,7 @@ class ReportController extends Controller
             'url' => '/reports/ajax/' . $type,
         ];
 
-        return view('report.show', compact('report'));
+        return view('report.show')->with('report', $report)->with('type', $type);
     }
 
     /**
@@ -40,9 +41,9 @@ class ReportController extends Controller
      */
     public function ajax_report($type)
     {
-        return \Illuminate\Http\Response()->json(
+        return response()->json(
             ReportFactory::generate($type)
-                           ->forDateRange(Input::get('startDate'), Input::get('endDate'))
+                           ->forDateRange(new Carbon(Input::get('startDate')), new Carbon(Input::get('endDate')))
         );
     }
 }

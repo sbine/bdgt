@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Reports;
-use DateTime;
+use App\Resources\Transaction;
 use DateInterval;
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-use App\Resources\Transaction;
 
 class Spending implements Reportable
 {
