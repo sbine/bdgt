@@ -17,8 +17,6 @@ class AccountTest extends TestCase
 
     public function testIndexDisplaysAllAccounts()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
         $accounts = factory(Account::class, 3)->create([
             'user_id' => $user->id
@@ -35,8 +33,6 @@ class AccountTest extends TestCase
 
     public function testShowDisplaysAssociatedAccount()
     {
-        $this->withoutExceptionHandling();
-
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs($account->user)

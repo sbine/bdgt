@@ -1,7 +1,7 @@
 bdgt
 ====
 
-[![build](https://img.shields.io/circleci/project/github/sbine/bdgt.svg)](https://circleci.com/gh/sbine/bdgt)
+![build](https://img.shields.io/codeship/738ae390-3653-0137-cd44-4aa5b617367c.svg)
 
 ## Big finance tools in a small package
 
