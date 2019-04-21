@@ -38,7 +38,7 @@ export default {
     methods: {
         fetchData() {
             axios.post(this.url, {
-                'startDate': dayjs().subtract(1, 'year').format('YYYY-MM-DD'),
+                'startDate': dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
                 'endDate': dayjs().format('YYYY-MM-DD'),
             }).then(response => {
                 this.datasets = response.data.datasets
@@ -47,16 +47,20 @@ export default {
                 this.chart.data.labels = response.data.labels
 
                 let colors = Object.assign([], this.colors)
+                let backgroundColors = []
 
                 this.chart.data.datasets.forEach(dataset => {
-                    let randomColor = Math.floor(Math.random() * colors.length)
+                    dataset.data.forEach(data => {
+                        let randomColor = Math.floor(Math.random() * colors.length)
+                        backgroundColors.push(colors[randomColor])
+                        colors.splice(randomColor, 1)
 
-                    dataset.backgroundColor = colors[randomColor]
-                    colors.splice(randomColor, 1)
+                        if (! colors.length) {
+                            colors = Object.assign([], this.colors)
+                        }
+                    })
 
-                    if (! colors.length) {
-                        colors = Object.assign([], this.colors)
-                    }
+                    dataset.backgroundColor = backgroundColors
                 })
 
                 this.chart.update()
@@ -64,7 +68,7 @@ export default {
         },
         initialize() {
             this.chart = new Chart(this.$refs.chart.getContext('2d'), {
-                type: 'bar',
+                type: 'pie',
                 data: {
                     labels: this.labels,
                     datasets: this.datasets,
@@ -73,28 +77,15 @@ export default {
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Spending Over Time',
+                        text: 'Spending By Category (This Month)'
                     },
                     tooltips: {
                         mode: 'label',
                         callbacks: {
                             label(tooltipItems, data) {
-                                return data.datasets[tooltipItems.datasetIndex].label +': ' + '$' + tooltipItems.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                                return data.labels[tooltipItems.index] +': ' + '$' + data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             }
                         }
-                    },
-                    scales: {
-                        xAxes: [{
-                            stacked: true,
-                        }],
-                        yAxes: [{
-                            stacked: true,
-                            ticks: {
-                                callback(label) {
-                                    return  '$' + label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                                }
-                            }
-                        }]
                     }
                 }
             })

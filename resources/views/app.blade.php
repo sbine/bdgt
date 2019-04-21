@@ -8,7 +8,7 @@
 		<div id="app" class="flex-grow bg-gray-100">
 			@include('partials.nav')
 
-			<div class="w-5/6 xl:w-2/3 mx-auto" v-cloak>
+			<div class="w-5/6 xl:w-3/4 mx-auto" v-cloak>
 				<main class="min-h-full my-6">
 
 					@include('alerts')
