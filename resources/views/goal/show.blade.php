@@ -7,7 +7,7 @@
 
 @section('breadcrumbs.actions')
 	<toggle>
-		<template slot-scope="{ isOn, setTo }">
+		<template v-slot="{ isOn, setTo }">
 			<a class="button button--warning" href="#" @click.prevent="setTo(true)">
 				<font-awesome-icon icon="pencil-alt" class="mr-2"></font-awesome-icon> {{ trans('labels.goals.edit_button') }}
 			</a>
@@ -42,7 +42,7 @@
 		</p>
 
 		<toggle class="flex justify-end">
-			<template slot-scope="{ isOn, setTo }">
+			<template v-slot="{ isOn, setTo }">
 				<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
 					{{ trans('labels.goals.delete_button') }}
 				</a>

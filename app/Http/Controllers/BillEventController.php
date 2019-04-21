@@ -17,7 +17,7 @@ class BillEventController
                 foreach ($dueDates as $date) {
                     $billsByDate[] = [
                         'title' => $bill->label . ' due',
-                        'url' => route('bills.edit', $bill->id),
+                        'url' => route('bills.show', $bill->id),
                         'paid' => $bill->paid,
                         'start' => $date,
                         'end' => $date,

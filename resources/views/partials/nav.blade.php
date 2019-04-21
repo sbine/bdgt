@@ -27,7 +27,7 @@
 					</div>
 
 					<toggle close-on-blur>
-						<div slot-scope="{ isOn, toggle }">
+						<template v-slot="{ isOn, toggle }">
 							<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click="toggle">
 								Reports
 								<font-awesome-icon v-if="isOn" icon="caret-up" class="ml-2"></font-awesome-icon>
@@ -42,12 +42,12 @@
 									<a class="block text-gray-800 hover:text-gray-600 px-6 py-4" href="/reports/spending">{{ trans('labels.reports.spending_over_time') }}</a>
 								</div>
 							</div>
-						</div>
+						</template>
 					</toggle>
 				@endauth
 
 				<toggle close-on-blur>
-					<div slot-scope="{ isOn, toggle }">
+					<template v-slot="{ isOn, toggle }">
 						<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click="toggle">
 							Calculators
 							<font-awesome-icon v-if="isOn" icon="caret-up" class="ml-2"></font-awesome-icon>
@@ -59,7 +59,7 @@
 								<a class="block text-gray-800 hover:text-gray-600 px-6 py-4" href="{{ route('calculators.debt') }}">Debt Calculator</a>
 							</div>
 						</div>
-					</div>
+					</template>
 				</toggle>
 			</template>
 		</div>

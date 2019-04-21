@@ -10,20 +10,21 @@
     >
         <div slot="no-event"/>
 
-        <div slot="title" slot-scope="{ title }">
+        <template #title="{ title }">
             <h2 class="text-xl">{{ title }}</h2>
-        </div>
+        </template>
 
-        <div slot="event-renderer" slot-scope="{ event }">
-            <div
-                class="vuecal__event-title text-white"
+        <template #event-renderer="{ event }">
+            <a
+                :href="event.url"
+                class="vuecal__event-title block text-white"
                 :class="{
                     'bg-green-500': event.paid,
                     'bg-red-600': ! event.paid,
                 }"
                 v-html="event.title"
             />
-        </div>
+        </template>
     </vue-cal>
 </template>
 

@@ -2,7 +2,7 @@
 	<div>
 		@foreach (session('alerts') as $type => $alert)
 			<toggle on>
-				<template slot-scope="{ isOn, setTo }">
+				<template v-slot="{ isOn, setTo }">
 					<div class="alert alert--{{ $type }} relative mb-6" v-if="isOn">
 						{{ $alert }}
 
@@ -25,7 +25,7 @@
 	<div>
 		@foreach (session('errors')->all() as $alert)
 			<toggle on>
-				<template slot-scope="{ isOn, setTo }">
+				<template v-slot="{ isOn, setTo }">
 					<div class="alert alert--danger relative mb-6" v-if="isOn">
 						{{ $alert }}
 
