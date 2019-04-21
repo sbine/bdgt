@@ -58,6 +58,7 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
+        'date' => 'datetime',
         'amount' => 'float',
         'cleared' => 'bool',
         'inflow' => 'bool',
@@ -76,5 +77,10 @@ class Transaction extends Model
     public function bill()
     {
         return $this->belongsTo(Bill::class);
+    }
+
+    public function scopeOrdered($query)
+    {
+        $query->orderByDesc('date');
     }
 }

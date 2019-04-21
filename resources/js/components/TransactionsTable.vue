@@ -21,7 +21,15 @@
                 filter: 'Search:',
                 filterPlaceholder: '',
                 limit: 'Showing:'
-            }
+            },
+            sortable: [
+                'date',
+                'account',
+                'category',
+                'payee',
+                'amount',
+                'cleared',
+            ]
         }"
     >
         <template slot="flair" slot-scope="{ row }">

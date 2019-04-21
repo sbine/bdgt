@@ -15,7 +15,7 @@ class DashboardController extends Controller
             'nextBill' => Bill::all()->sortBy(function ($bill) {
                 return $bill->nextDue;
             })->first(),
-            'transactions' => Transaction::with(['account', 'category'])->get(),
+            'transactions' => Transaction::with(['account', 'category'])->ordered()->get(),
         ]);
     }
 }

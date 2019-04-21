@@ -5,12 +5,18 @@ window.Vue = require('vue')
 /**
  * Font Awesome
  */
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
 library.add(fas, far)
+
+/**
+ * Ensure vue-tables-2 sorting icons can be replaced with font-awesome chevrons
+ */
+config.autoReplaceSvg = 'nest'
+dom.watch()
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
@@ -26,7 +32,14 @@ Vue.use(PortalVue)
  */
 import { ClientTable } from 'vue-tables-2'
 import TailwindTheme from './themes/vue-tables-tailwind-theme'
-Vue.use(ClientTable, {}, false, TailwindTheme)
+Vue.use(ClientTable, {
+    sortIcon: {
+        is: 'fa-sort',
+        base: 'fas',
+        up: 'fa-sort-up',
+        down: 'fa-sort-down'
+    }
+}, false, TailwindTheme)
 
 /**
  * The following block of code may be used to automatically register your

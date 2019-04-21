@@ -47,6 +47,24 @@
     }
 }
 
+.VueTables__sortable {
+    @apply relative;
+
+    .VueTables__sort-icon {
+        @apply text-gray-400;
+
+        .fa-sort-down {
+            @apply -mt-1;
+            @apply text-gray-900;
+        }
+
+        .fa-sort-up {
+            @apply mt-1;
+            @apply text-gray-900;
+        }
+    }
+}
+
 .VueTables__limit-field {
     @apply font-light;
 
