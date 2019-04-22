@@ -12,7 +12,7 @@ return [
         'logout' => 'Logout',
         'register' => 'Register',
         'register_button' => 'Register now',
-        'forgot_password' => 'Forgot Your Password?',
+        'forgot_password' => 'Forgot your password?',
         'reset_password' => 'Reset Password',
         'send_password_reset_link' => 'Send Password Reset Link',
         'properties' => [
