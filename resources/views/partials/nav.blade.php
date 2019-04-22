@@ -28,7 +28,7 @@
 
 					<toggle close-on-blur>
 						<template v-slot="{ isOn, toggle }">
-							<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click="toggle">
+							<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click.prevent="toggle">
 								Reports
 								<font-awesome-icon v-if="isOn" icon="caret-up" class="ml-2"></font-awesome-icon>
 								<font-awesome-icon v-else icon="caret-down" class="ml-2"></font-awesome-icon>
@@ -48,7 +48,7 @@
 
 				<toggle close-on-blur>
 					<template v-slot="{ isOn, toggle }">
-						<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click="toggle">
+						<a class="block text-gray-400 hover:text-white px-6 py-4" href="#" @click.prevent="toggle">
 							Calculators
 							<font-awesome-icon v-if="isOn" icon="caret-up" class="ml-2"></font-awesome-icon>
 							<font-awesome-icon v-else icon="caret-down" class="ml-2"></font-awesome-icon>

@@ -43,7 +43,7 @@
 
 		<toggle class="flex justify-end">
 			<template v-slot="{ isOn, setTo }">
-				<a class="text-red-600 mt-4" href="#" @click.prevent="setTo(true)">
+				<a class="text-red-700 mt-4" href="#" @click.prevent="setTo(true)">
 					{{ trans('labels.goals.delete_button') }}
 				</a>
 

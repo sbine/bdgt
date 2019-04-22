@@ -1,7 +1,7 @@
 <template>
     <div
         v-show="value"
-        class="fixed left-0 top-0 w-screen h-screen z-50"
+        class="fixed left-0 top-0 w-screen h-screen overflow-y-scroll z-50"
         style="background-color: hsla(0, 0%, 0%, 0.3)"
         @click="hide"
     >

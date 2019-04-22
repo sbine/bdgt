@@ -3,7 +3,6 @@
     @apply flex-col;
 
     .table {
-        @apply mb-4;
         @apply w-full;
 
         thead th {
@@ -18,7 +17,7 @@
             @apply rounded;
 
             td {
-                @apply border-b;
+                @apply border-t;
                 @apply border-gray-300;
                 @apply px-3;
                 @apply py-4;
@@ -88,6 +87,8 @@
 }
 
 .VuePagination {
+    @apply mt-4;
+
     a {
         @apply link;
 

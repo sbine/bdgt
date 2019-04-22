@@ -3,7 +3,7 @@
         <p class="text-2xl">
             Paid off
             <span v-if="interestPaid > -1">
-                <span class="text-green-800">
+                <span class="text-green-700">
                     {{ payoffDateRelative }}
                 </span>
                 on {{ payoffDateFormatted }}
@@ -12,14 +12,14 @@
                 in 80+ years
             </span>
         </p>
-        <p class="text-xl mt-4">
+        <p class="text-xl mt-6">
             Total interest:
             <formatter-currency
                 v-if="interestPaid > -1"
                 class="text-red-700"
                 :amount="interestPaid"
                 :is-inflow="true"
-            ></formatter-currency>
+            />
             <span v-else>N/A</span>
         </p>
 
@@ -28,40 +28,58 @@
         </div>
 
         <div class="mt-6">
-            <p>{{ paymentLabel }}</p>
+            <p>
+                {{ paymentLabel }}:
+                <formatter-currency class="text-green-700" :amount="payment"/>
+            </p>
             <vue-slider v-model="payment" :min="10" :max="1000" :lazy="true" />
         </div>
 
-        <div class="sm:w-2/3 mt-10">
-			<div class="flex items-center">
-				<label class="w-1/3">
+		<div class="sm:w-2/3 mt-10">
+			<div class="form-row">
+				<label class="form-row--label">
                     {{ currentBalanceLabel }}
                 </label>
-				<div class="flex items-center w-2/3">
+				<div class="form-row--input input-addon--start">
 					<span class="input-addon">$</span>
-					<input v-model="currentBalance" class="input-text" type="number" step="0.1">
+					<input
+                        v-model="currentBalance"
+                        class="input-text"
+                        type="number"
+                        step="0.1"
+                        @change="calculate"
+                    >
 				</div>
 			</div>
-		</div>
-		<div class="sm:w-2/3 mt-4">
-			<div class="flex items-center">
-				<label class="w-1/3">
+			<div class="form-row">
+				<label class="form-row--label">
                     {{ interestRateLabel }}
                 </label>
-				<div class="flex items-center w-2/3">
-					<input v-model="interestRate" class="input-text" type="number" step="0.1">
+				<div class="form-row--input input-addon--end">
+					<input
+                        v-model="interestRate"
+                        class="input-text"
+                        type="number"
+                        step="0.1"
+                        @change="calculate"
+                    >
 					<span class="input-addon">%</span>
 				</div>
 			</div>
-		</div>
-		<div class="sm:w-2/3 mt-4">
-			<div class="flex items-center">
-				<label class="w-1/3">
+			<div class="form-row">
+				<label class="form-row--label">
                     {{ minimumPaymentLabel }}
                 </label>
-				<div class="flex items-center w-2/3">
+				<div class="form-row--input input-addon--start">
 					<span class="input-addon">$</span>
-					<input v-model="minimumPayment" class="input-text" type="number" step="0.1" min="10">
+					<input
+                        v-model="minimumPayment"
+                        class="input-text"
+                        type="number"
+                        step="0.1"
+                        min="10"
+                        @change="calculate"
+                    >
 				</div>
 			</div>
 		</div>
