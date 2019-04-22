@@ -21,9 +21,8 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row--label">{{ trans('labels.goals.properties.goal_date') }}</label>
-		<div class="form-row--input input-addon--end">
-			<input type="text" class="input-text datepicker" name="goal_date">
-			<span class="input-addon"><i class="fa fa-calendar"></i></span>
+		<div class="form-row--input">
+			<input-datepicker name="goal_date"></input-datepicker>
 		</div>
 	</div>
 	<div class="form-row">

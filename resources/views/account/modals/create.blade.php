@@ -26,9 +26,8 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row--label">{{ trans('labels.accounts.properties.date_opened') }}</label>
-		<div class="form-row--input input-addon--end">
-			<input type="text" class="input-text datepicker" name="date_opened">
-			<span class="input-addon"><i class="fa fa-calendar"></i></span>
+		<div class="form-row--input">
+			<input-datepicker name="date_opened"></input-datepicker>
 		</div>
 	</div>
 @endcomponent

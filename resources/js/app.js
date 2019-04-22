@@ -28,6 +28,12 @@ import PortalVue from 'portal-vue'
 Vue.use(PortalVue)
 
 /**
+ * V-Calendar
+ */
+import VCalendar from 'v-calendar'
+Vue.use(VCalendar)
+
+/**
  * Vue-Tables-2
  */
 import { ClientTable } from 'vue-tables-2'

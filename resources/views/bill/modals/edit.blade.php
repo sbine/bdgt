@@ -19,9 +19,8 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row--label">{{ trans('labels.bills.properties.start_date') }}</label>
-		<div class="form-row--input input-addon--end">
-			<input type="text" class="input-text datepicker" name="start_date" value="{{ $bill->start_date }}" required>
-			<span class="input-addon"><i class="fa fa-calendar"></i></span>
+		<div class="form-row--input">
+			<input-datepicker name="start_date" value="{{ $bill->start_date }}" required></input-datepicker>
 		</div>
 	</div>
 	<div class="form-row">

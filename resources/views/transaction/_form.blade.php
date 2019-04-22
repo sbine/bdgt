@@ -11,9 +11,8 @@
 <div class="form-row">
 	<label class="form-row--label">{{ trans('labels.transactions.properties.date') }}</label>
 
-	<div class="form-row--input input-addon--end">
-		<input type="text" class="input-text datepicker pr-10" name="date" required>
-		<span class="input-addon"><i class="fa fa-calendar"></i></span>
+	<div class="form-row--input">
+		<input-datepicker name="date" required></input-datepicker>
 	</div>
 </div>
 <div class="form-row">
