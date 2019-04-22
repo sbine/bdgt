@@ -4,6 +4,14 @@
     @apply rounded;
     @apply px-2;
     @apply py-1;
+
+    &:focus {
+        @apply outline-none;
+    }
+}
+
+.input-radio {
+    @apply inline-block;
 }
 
 .input-error {
@@ -12,7 +20,37 @@
 }
 
 .input-addon {
+    @apply absolute;
+    @apply bg-gray-200;
+    @apply border;
+    @apply border-gray-400;
     @apply font-semibold;
-    @apply px-2;
     @apply py-1;
+    @apply text-center;
+    @apply top-0;
+    @apply w-8;
+}
+
+.input-addon--start {
+    @apply relative;
+
+    .input-addon {
+        @apply left-0;
+        @apply rounded-l;
+    }
+    .input-text {
+        @apply pl-10;
+    }
+}
+
+.input-addon--end {
+    @apply relative;
+
+    .input-addon {
+        @apply right-0;
+        @apply rounded-r;
+    }
+    .input-text {
+        @apply pr-10;
+    }
 }
