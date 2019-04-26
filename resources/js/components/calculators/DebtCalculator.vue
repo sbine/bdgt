@@ -32,57 +32,58 @@
                 {{ paymentLabel }}:
                 <formatter-currency class="text-green-700" :amount="payment"/>
             </p>
-            <vue-slider v-model="payment" :min="10" :max="1000" :lazy="true" />
+            <vue-slider v-model="payment" :min="minimumPayment" :max="currentBalance" :lazy="true"/>
         </div>
 
-		<div class="sm:w-2/3 mt-10">
-			<div class="form-row">
-				<label class="form-row--label">
+        <div class="sm:w-2/3 mt-10">
+            <div class="form-row">
+                <label class="form-row--label">
                     {{ currentBalanceLabel }}
                 </label>
-				<div class="form-row--input input-addon--start">
-					<span class="input-addon">$</span>
-					<input
-                        v-model="currentBalance"
+                <div class="form-row--input input-addon--start">
+                    <span class="input-addon">$</span>
+                    <input
+                        v-model.number="currentBalance"
                         class="input-text"
                         type="number"
                         step="0.1"
-                        @change="calculate"
+                        @keyup="calculate"
                     >
-				</div>
-			</div>
-			<div class="form-row">
-				<label class="form-row--label">
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="form-row--label">
                     {{ interestRateLabel }}
                 </label>
-				<div class="form-row--input input-addon--end">
-					<input
-                        v-model="interestRate"
+                <div class="form-row--input input-addon--end">
+                    <input
+                        v-model.number="interestRate"
                         class="input-text"
                         type="number"
                         step="0.1"
-                        @change="calculate"
+                        @keyup="calculate"
                     >
-					<span class="input-addon">%</span>
-				</div>
-			</div>
-			<div class="form-row">
-				<label class="form-row--label">
+                    <span class="input-addon">%</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="form-row--label">
                     {{ minimumPaymentLabel }}
                 </label>
-				<div class="form-row--input input-addon--start">
-					<span class="input-addon">$</span>
-					<input
-                        v-model="minimumPayment"
+                <div class="form-row--input input-addon--start">
+                    <span class="input-addon">$</span>
+                    <input
+                        v-model.number="minimumPayment"
                         class="input-text"
                         type="number"
                         step="0.1"
                         min="10"
-                        @change="calculate"
+                        :max="currentBalance"
+                        @keyup="minimumPaymentChanged"
                     >
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -142,25 +143,45 @@ export default {
             let i = 0
 
             let interestPaid = 0
-            let interestRate = this.interestRate / 100
+            let totalInterestPaid = 0
+            let apr = this.interestRate / 100
             let date = dayjs()
             let currentBalance = this.currentBalance
 
             while (currentBalance > 0) {
                 date = date.add(1, 'M')
-
-                currentBalance -= this.payment
-                currentBalance *= 1 + interestRate
-                interestPaid += currentBalance * interestRate
+                if (this.payment >= this.currentBalance) {
+                    totalInterestPaid = 0
+                    break;
+                }
+                interestPaid = currentBalance * apr / 12
+                currentBalance = currentBalance - this.payment + interestPaid
 
                 if (i > 960 || currentBalance >= Infinity) {
                     this.interestPaid = -1
                     return
                 }
+
+                i++
+                totalInterestPaid += interestPaid
             }
 
             this.payoffDate = date
-            this.interestPaid = interestPaid
+            this.interestPaid = totalInterestPaid
+        },
+
+        minimumPaymentChanged() {
+            if (this.minimumPayment > this.currentBalance) {
+                this.minimumPayment = this.currentBalance
+            }
+
+            if (this.minimumPayment > this.payment) {
+                this.payment = this.minimumPayment
+            }
+
+            if (this.payment > this.currentBalance) {
+                this.payment = this.currentBalance
+            }
         }
     },
 
