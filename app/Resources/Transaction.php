@@ -47,7 +47,6 @@ class Transaction extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
         'user_id',
         'user',
     ];
@@ -58,6 +57,7 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
+        'user_id' => 'integer',
         'date' => 'datetime',
         'amount' => 'float',
         'cleared' => 'bool',
