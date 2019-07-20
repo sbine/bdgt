@@ -24,9 +24,9 @@
 			<bill-calendar></bill-calendar>
 		</div>
 
-		<div class="lg:w-1/3 bg-white rounded shadow p-6">
+		<div class="lg:w-1/3 bg-white rounded shadow py-2">
 			@foreach ($bills as $bill)
-				<a href="{{ route('bills.show', $bill->id) }}" class="block py-4">
+				<a href="{{ route('bills.show', $bill->id) }}" class="block hover:bg-gray-100 px-6 py-4">
 					<div class="flex justify-between">
 						<h4 class="font-semibold text-lg">{{ $bill->label }}</h4>
 

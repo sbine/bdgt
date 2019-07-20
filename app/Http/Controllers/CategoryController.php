@@ -45,7 +45,7 @@ class CategoryController extends Controller
      *
      * @return Redirect
      */
-    public function update($category)
+    public function update(Category $category)
     {
         if ($category->update(Input::all())) {
             return redirect(route('categories.show', $category->id))->with('alerts.success', trans('crud.categories.updated'));
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      *
      * @return Redirect
      */
-    public function destroy($category)
+    public function destroy(Category $category)
     {
         if ($category->delete()) {
             return redirect(route('categories.index'))->with('alerts.success', trans('crud.categories.deleted'));
