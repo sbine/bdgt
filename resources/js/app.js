@@ -3,14 +3,44 @@ require('./bootstrap')
 window.Vue = require('vue')
 
 /**
+ * Vue Internationalization/Translations
+ */
+import languageBundle from '@kirschbaum-development/laravel-translations-loader!@kirschbaum-development/laravel-translations-loader'
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+    locale: window.Locale,
+    messages: languageBundle,
+})
+
+/**
  * Font Awesome
  */
 import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
+import { faCaretDown, faCaretUp, faChartBar, faCheck, faCircle, faDollarSign, faPencilAlt, faPlus, faSort, faSortAlphaDown, faSortAlphaUp, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faCheckSquare, faClock, faEnvelope, faFlag } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
-library.add(fas, far)
+library.add(
+    faCaretDown,
+    faCaretUp,
+    faChartBar,
+    faCheck,
+    faCircle,
+    faDollarSign,
+    faPencilAlt,
+    faPlus,
+    faSort,
+    faSortAlphaDown,
+    faSortAlphaUp,
+    faTimes,
+    faCalendar,
+    faCheckSquare,
+    faClock,
+    faEnvelope,
+    faFlag
+)
 
 /**
  * Ensure vue-tables-2 sorting icons can be replaced with font-awesome chevrons
@@ -20,12 +50,6 @@ dom.watch()
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
-
-/**
- * Portal-Vue
- */
-import PortalVue from 'portal-vue'
-Vue.use(PortalVue)
 
 /**
  * V-Calendar
@@ -59,5 +83,6 @@ const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    i18n,
 })
