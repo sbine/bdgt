@@ -20,7 +20,7 @@
 
 @section('top-content')
 	<div class="flex flex-col lg:flex-row justify-between">
-		<div class="lg:w-1/3 flex items-center bg-white rounded shadow border-t-4 px-10 py-6">
+		<div class="lg:w-1/3 flex items-center bg-white rounded-sm shadow border-t-4 px-10 py-6">
 			<div class="mr-10">
 				<font-awesome-icon icon="dollar-sign" class="fa-2x text-gray-600"></font-awesome-icon>
 			</div>
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<div class="lg:w-1/3 flex items-center bg-white rounded shadow border-t-4 px-10 py-6 my-4 lg:my-0 lg:mx-6">
+		<div class="lg:w-1/3 flex items-center bg-white rounded-sm shadow border-t-4 px-10 py-6 my-4 lg:my-0 lg:mx-6">
 			<div class="mr-10">
 				<font-awesome-icon :icon="['far', 'clock']" class="fa-2x text-gray-600"></font-awesome-icon>
 			</div>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 
-		<div class="lg:w-1/3 flex items-center bg-white rounded shadow border-t-4 px-10 py-6">
+		<div class="lg:w-1/3 flex items-center bg-white rounded-sm shadow border-t-4 px-10 py-6">
 			<div class="mr-10">
 				<font-awesome-icon :icon="['far', 'calendar']" class="fa-2x text-gray-600"></font-awesome-icon>
 			</div>
@@ -70,7 +70,6 @@
 	<toggle>
 		<transactions-table
 			:transactions='{{ json_encode($transactions) }}'
-			class="w-full bg-white rounded shadow p-6"
 			@edit="editModal.setTo(true)"
 			@delete="deleteModal.setTo(true)"
 		></transactions-table>
@@ -79,6 +78,7 @@
 	{{--
 		<div>@money($ledger->totalInflow())</div>
 		<div>@money($ledger->totalOutflow())</div>
+		class="w-full bg-white rounded-sm shadow p-6"
 
 		@include('transaction.modals.edit')
 		@include('transaction.modals.delete')

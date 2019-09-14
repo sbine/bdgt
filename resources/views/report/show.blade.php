@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-	<div class="bg-white rounded shadow p-6 -mt-4">
+	<div class="bg-white rounded-sm shadow p-6 -mt-4">
 		<report-manager
 			type="{{ Str::slug($report->name) }}"
 			url="{{ $report->url }}"

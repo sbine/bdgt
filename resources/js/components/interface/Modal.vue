@@ -6,11 +6,11 @@
         @click="hide"
     >
         <div
-            class="relative w-4/5 xl:w-3/5 bg-white rounded shadow-xl my-8 mx-auto p-6 xl:p-10 text-gray-900"
+            class="relative w-5/6 md:w-4/6 xl:w-3/6 bg-white text-gray-900 rounded-sm shadow-xl mx-auto my-8"
             @click.stop
         >
             <div
-                class="absolute cursor-pointer right-0 top-0 mr-2 xl:mr-4 xl:mt-2"
+                class="absolute cursor-pointer right-0 top-0 mr-2 xl:mr-4"
                 @click="hide"
             >
                 <div class="text-4xl text-gray-600 hover:text-gray-700">
@@ -18,9 +18,7 @@
                 </div>
             </div>
 
-            <div class="-mt-4">
-                <slot/>
-            </div>
+            <slot/>
         </div>
     </div>
 </template>

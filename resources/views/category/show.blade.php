@@ -32,7 +32,7 @@
 		Budgeted
 	</p>
 
-	<div class="bg-white rounded shadow p-6 mt-6">
+	<div class="bg-white rounded-sm shadow p-6 mt-6">
 		<h3 class="font-light text-2xl mb-6">{{ trans('labels.transactions.plural') }}</h3>
 
 		<transactions-table :transactions='@json($category->transactions)'></transactions-table>

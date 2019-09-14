@@ -37,10 +37,10 @@
 
         <div class="sm:w-2/3 mt-10">
             <div class="form-row">
-                <label class="form-row--label">
+                <label class="form-row__label">
                     {{ currentBalanceLabel }}
                 </label>
-                <div class="form-row--input input-addon--start">
+                <div class="form-row__input input-addon--start">
                     <span class="input-addon">$</span>
                     <input
                         v-model.number="currentBalance"
@@ -52,10 +52,10 @@
                 </div>
             </div>
             <div class="form-row">
-                <label class="form-row--label">
+                <label class="form-row__label">
                     {{ interestRateLabel }}
                 </label>
-                <div class="form-row--input input-addon--end">
+                <div class="form-row__input input-addon--end">
                     <input
                         v-model.number="interestRate"
                         class="input-text"
@@ -67,10 +67,10 @@
                 </div>
             </div>
             <div class="form-row">
-                <label class="form-row--label">
+                <label class="form-row__label">
                     {{ minimumPaymentLabel }}
                 </label>
-                <div class="form-row--input input-addon--start">
+                <div class="form-row__input input-addon--start">
                     <span class="input-addon">$</span>
                     <input
                         v-model.number="minimumPayment"

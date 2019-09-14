@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-	<div class="bg-white rounded shadow p-6">
+	<div class="bg-white rounded-sm shadow p-6">
 		<h2 class="flex justify-between text-3xl">
 			{{ $goal->label }}
 			<span class="pull-right">

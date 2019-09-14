@@ -5,28 +5,28 @@
 	'submitLabel' => trans('labels.accounts.modals.create.save_button')
 ])
 	<div class="form-row">
-		<label class="form-row--label">{{ trans('labels.accounts.properties.name') }}</label>
-		<div class="form-row--input">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.name') }}</label>
+		<div class="form-row__input">
 			<input type="text" class="input-text" name="name" required>
 		</div>
 	</div>
 	<div class="form-row">
-		<label class="form-row--label">{{ trans('labels.accounts.properties.balance') }}</label>
-		<div class="form-row--input input-addon--start">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.balance') }}</label>
+		<div class="form-row__input input-addon--start">
 			<span class="input-addon">$</span>
 			<input type="text" class="input-text" name="balance">
 		</div>
 	</div>
 	<div class="form-row">
-		<label class="form-row--label">{{ trans('labels.accounts.properties.interest') }}</label>
-		<div class="form-row--input input-addon--end">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.interest') }}</label>
+		<div class="form-row__input input-addon--end">
 			<input type="text" class="input-text" name="interest">
 			<span class="input-addon">%</span>
 		</div>
 	</div>
 	<div class="form-row">
-		<label class="form-row--label">{{ trans('labels.accounts.properties.date_opened') }}</label>
-		<div class="form-row--input">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.date_opened') }}</label>
+		<div class="form-row__input">
 			<input-datepicker name="date_opened"></input-datepicker>
 		</div>
 	</div>

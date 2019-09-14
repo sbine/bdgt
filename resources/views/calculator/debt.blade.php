@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-	<div class="bg-white rounded shadow p-6 -mt-4">
+	<div class="bg-white rounded-sm shadow p-6 -mt-4">
 		<debt-calculator
 			payment-label="{{ trans('labels.calculators.debt.properties.payment') }}"
 			current-balance-label="{{ trans('labels.calculators.debt.properties.currentBalance') }}"

@@ -20,11 +20,11 @@
 
 @section('content')
 	<div class="lg:flex">
-		<div class="lg:w-2/3 bg-white rounded shadow mb-8 lg:mb-0 lg:mr-10">
+		<div class="lg:w-2/3 bg-white rounded-sm shadow mb-8 lg:mb-0 lg:mr-10">
 			<bill-calendar></bill-calendar>
 		</div>
 
-		<div class="lg:w-1/3 bg-white rounded shadow py-2">
+		<div class="lg:w-1/3 bg-white rounded-sm shadow py-2">
 			@foreach ($bills as $bill)
 				<a href="{{ route('bills.show', $bill->id) }}" class="block hover:bg-gray-100 px-6 py-4">
 					<div class="flex justify-between">

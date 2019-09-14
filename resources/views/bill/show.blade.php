@@ -41,7 +41,7 @@
 		<formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since {{ $bill->lastDue }}
 	</p>
 
-	<div class="bg-white rounded shadow p-6 mt-6">
+	<div class="bg-white rounded-sm shadow p-6 mt-6">
 		<h3 class="font-light text-2xl mb-6">Payments</h3>
 
 		<transactions-table :transactions='@json($bill->transactions)'></transactions-table>

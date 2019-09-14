@@ -1,17 +1,19 @@
-<form class="flex flex-col" method="POST" action="{{ $formAction }}">
+<form method="POST" action="{{ $formAction }}">
     @csrf
     @isset($method)
         @method($method)
     @endisset
 
-    <h4 class="text-2xl mb-10">{{ $title }}</h4>
+    <div class="sm:w-5/6 p-8">
+        <h4 class="text-2xl mb-10">{{ $title }}</h4>
 
-    <div class="form">
-        {{ $slot }}
+        <div>
+            {{ $slot }}
+        </div>
     </div>
 
-    <div class="flex justify-between mt-10">
-        <button type="button" class="button" @click="setTo(false)">{{ $dismissLabel }}</button>
+    <div class="flex justify-end bg-gray-100 border-t px-8 xl:px-10 py-6">
+        <button type="button" class="link mr-6" @click="setTo(false)">{{ $dismissLabel }}</button>
         <button type="submit" class="button button--primary">{{ $submitLabel }}</button>
     </div>
 </form>
