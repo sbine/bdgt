@@ -19,8 +19,8 @@
                 :href="event.url"
                 class="vuecal__event-title block text-white"
                 :class="{
-                    'bg-green-500': event.paid,
-                    'bg-red-600': ! event.paid,
+                    'bg-green-500 border border-green-600': event.paid,
+                    'bg-red-600 border border-red-700': ! event.paid,
                 }"
                 v-html="event.title"
             />

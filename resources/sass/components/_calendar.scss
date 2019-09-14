@@ -1,15 +1,15 @@
 .vuecal--events-on-month-view {
     .vuecal__menu {
         .active {
-            @apply border-blue-500;
+            @apply border-blue-600;
             @apply border-b-3;
+            @apply text-blue-600;
         }
     }
 
-    .vuecal__title {
+    .vuecal__title-bar {
+        @apply bg-blue-800;
         @apply text-white;
-
-        background-color: theme('colors.blue.900') !important;
     }
 
     .vuecal__cell-content {
@@ -17,7 +17,6 @@
     }
 
     .vuecal__event {
-        @apply mx-1;
         @apply rounded-sm;
     }
 }

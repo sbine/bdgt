@@ -12,7 +12,7 @@
         @apply items-center;
     }
 
-    &--label {
+    &__label {
         @apply inline-block;
         @apply mb-1;
 
@@ -24,7 +24,7 @@
         }
     }
 
-    &--input {
+    &__input {
         @screen sm {
             @apply w-3/5;
         }
