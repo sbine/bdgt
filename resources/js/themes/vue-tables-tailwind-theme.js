@@ -28,12 +28,12 @@ module.exports = function() {
             caret: 'caret'
         },
         pagination: {
-            nav: 'table--nav',
+            nav: '',
             count: '',
             wrapper: '',
-            list: 'table--pagination',
-            item: 'table--page-item',
-            link: 'table--page-link',
+            list: '',
+            item: '',
+            link: 'link',
             next: '',
             prev: '',
             active: 'active',
