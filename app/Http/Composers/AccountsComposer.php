@@ -15,6 +15,6 @@ class AccountsComposer
      */
     public function compose(View $view)
     {
-        $view->with(['accounts' => Account::all()]);
+        $view->with('accounts', Account::all());
     }
 }

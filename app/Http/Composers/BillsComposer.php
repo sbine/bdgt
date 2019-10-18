@@ -15,6 +15,6 @@ class BillsComposer
      */
     public function compose(View $view)
     {
-        $view->with(['bills' => Bill::all()]);
+        $view->with('bills', Bill::all());
     }
 }

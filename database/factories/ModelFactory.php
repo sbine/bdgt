@@ -29,9 +29,7 @@ $factory->define(Account::class, function (Faker $faker) {
 });
 $factory->state(Account::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)->lazy()->id,
     ];
 });
 
@@ -46,9 +44,7 @@ $factory->define(Bill::class, function (Faker $faker) {
 });
 $factory->state(Bill::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)->lazy()->id,
     ];
 });
 
@@ -61,9 +57,7 @@ $factory->define(Category::class, function (Faker $faker) {
 });
 $factory->state(Category::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)->lazy()->id,
     ];
 });
 
@@ -80,9 +74,7 @@ $factory->define(Goal::class, function (Faker $faker) {
 });
 $factory->state(Goal::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)->lazy()->id,
     ];
 });
 
@@ -92,7 +84,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
     return [
         'date'    => $faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d H:i:s'),
         'payee'   => $faker->name,
-        'amount'  => ($isInflow ? $faker->biasedNumberBetween(50, 2000, function($x) { return cos($x); }) : $faker->randomAmount(2000)),
+        'amount'  => ($isInflow ? $faker->biasedNumberBetween(50, 3000, function($x) { return cos($x); }) : $faker->randomAmount(3000)),
         'inflow'  => $isInflow,
         'cleared' => $faker->boolean(),
         'flair'   => $faker->randomFlair(),
@@ -100,9 +92,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
 });
 $factory->state(Transaction::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)->lazy()->id,
     ];
 });
 

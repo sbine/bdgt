@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Reports;
+
 use App\Resources\Transaction;
 use DateInterval;
 use DateTime;

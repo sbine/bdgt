@@ -3,7 +3,7 @@
 <head>
 	@include('partials.head')
 </head>
-<body>
+<body class="leading-normal">
 	<div class="flex flex-col min-h-screen">
 		<div id="app" class="flex-grow bg-gray-100">
 			@include('partials.nav')

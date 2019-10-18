@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Composers\AccountsComposer;
+use App\Http\Composers\BillsComposer;
+use App\Http\Composers\CategoriesComposer;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -13,25 +16,11 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(
-            'partials.sidebar',
-            'App\Http\Composers\AccountsComposer'
-        );
+        view()->composer('partials.dropdowns.accounts', AccountsComposer::class);
 
-        view()->composer(
-            'partials.dropdowns.accounts',
-            'App\Http\Composers\AccountsComposer'
-        );
+        view()->composer('partials.dropdowns.categories', CategoriesComposer::class);
 
-        view()->composer(
-            'partials.dropdowns.categories',
-            'App\Http\Composers\CategoriesComposer'
-        );
-
-        view()->composer(
-            'partials.dropdowns.bills',
-            'App\Http\Composers\BillsComposer'
-        );
+        view()->composer('partials.dropdowns.bills', BillsComposer::class);
     }
 
     /**

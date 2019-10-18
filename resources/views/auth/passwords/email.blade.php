@@ -1,7 +1,7 @@
 @extends('guest')
 
 @section('content')
-	<div class="bg-white rounded-sm shadow">
+	<div class="max-w-xl bg-white rounded-sm shadow mx-auto">
 		<div class="bg-blue-700 rounded-t px-4 py-1"></div>
 
 		<form class="form py-8" role="form" method="POST" action="{{ route('password.email') }}">

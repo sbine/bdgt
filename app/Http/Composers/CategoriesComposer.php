@@ -15,6 +15,6 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $view->with(['categories' => Category::all()]);
+        $view->with('categories', Category::all());
     }
 }
