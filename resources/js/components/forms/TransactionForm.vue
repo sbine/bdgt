@@ -31,11 +31,11 @@
                         <div class="form-row__label"></div>
                         <div class="form-row__input">
                             <label class="input-radio mr-4">
-                                <input v-model="transaction.inflow" class="mr-1" type="radio" name="inflow" value="true" required>
+                                <input v-model="transaction.inflow" class="mr-1" type="radio" name="inflow" :value="true" required>
                                 {{ $t('labels.transactions.properties.inflow') }}
                             </label>
                             <label class="input-radio">
-                                <input v-model="transaction.inflow" :checked="creating" class="mr-1" type="radio" name="inflow" value="false" required>
+                                <input v-model="transaction.inflow" :checked="creating" class="mr-1" type="radio" name="inflow" :value="false" required>
                                 {{ $t('labels.transactions.properties.outflow') }}
                             </label>
                         </div>
