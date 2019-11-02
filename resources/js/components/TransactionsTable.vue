@@ -57,11 +57,11 @@
         </template>
 
         <template #actions="{ row }">
-            <button class="button button--warning w-8 text-gray-100 p-1" @click="$emit('edit', row.id)">
+            <button class="button button--warning w-8 text-gray-100 p-1" @click="$root.$emit('editTransaction', row.id)">
                 <font-awesome-icon icon="pencil-alt" class="fa-sm"/>
             </button>
 
-            <button class="button button--danger w-8 p-1" @click="$emit('delete', row.id)">
+            <button class="button button--danger w-8 p-1" @click="$root.$emit('deleteTransaction', row.id)">
                 <font-awesome-icon icon="times" class="fa-sm"/>
             </button>
         </template>

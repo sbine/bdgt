@@ -2,20 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Transaction;
 use App\Resources\Bill;
 use App\Resources\Ledger;
+use App\Resources\Transaction;
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
+        $bills = Bill::all()->sortBy('nextDue');
+        $transactions = Transaction::with(['account', 'category'])->ordered()->get();
+
         return view('dashboard')->with([
             'ledger' => new Ledger,
-            'nextBill' => Bill::all()->sortBy(function ($bill) {
-                return $bill->nextDue;
-            })->first(),
-            'transactions' => Transaction::with(['account', 'category'])->ordered()->get(),
+            'nextBill' => $bills->first(),
+            'transactions' => $transactions,
+            'accounts' => $transactions
+                ->map(function ($transaction) {
+                    return $transaction->account->only(['id', 'name']);
+                })
+                ->unique()
+                ->sortBy('name')
+                ->values(),
+            'bills' => $bills
+                ->map
+                ->only(['id', 'label'])
+                ->sortBy('label')
+                ->values(),
+            'categories' => $transactions
+                ->map(function ($transaction) {
+                    return $transaction->category->only(['id', 'label']);
+                })
+                ->unique()
+                ->sortBy('label')
+                ->values(),
+            'flairs' => $transactions
+                ->map
+                ->flair
+                ->unique()
+                ->sort()
+                ->values()
         ]);
     }
 }

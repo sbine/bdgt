@@ -67,20 +67,15 @@
 @endsection
 
 @section('content')
-	<toggle>
-		<transactions-table
-			:transactions='{{ json_encode($transactions) }}'
-			@edit="editModal.setTo(true)"
-			@delete="deleteModal.setTo(true)"
-		></transactions-table>
-	</toggle>
-
-	{{--
-		<div>@money($ledger->totalInflow())</div>
-		<div>@money($ledger->totalOutflow())</div>
+	<transactions-table
+		:transactions='{{ json_encode($transactions) }}'
 		class="w-full bg-white rounded-sm shadow p-6"
+	></transactions-table>
 
-		@include('transaction.modals.edit')
-		@include('transaction.modals.delete')
-	--}}
+	<transaction-form
+		:accounts='{{ json_encode($accounts) }}'
+		:bills='{{ json_encode($bills) }}'
+		:categories='{{ json_encode($categories) }}'
+		:flairs='{{ json_encode($flairs) }}'
+	></transaction-form>
 @endsection

@@ -16,7 +16,9 @@
                     v-bind="inputProps"
                     v-on="inputEvents"
                 >
-                <span class="input-addon cursor-pointer"><i class="fa fa-calendar"></i></span>
+                <span class="input-addon cursor-pointer">
+                    <font-awesome-icon :icon="['far', 'calendar']"/>
+                </span>
             </div>
         </template>
     </v-date-picker>
@@ -38,15 +40,34 @@ export default {
 
     data() {
         return {
-            date: new Date(this.value) || null,
+            mutableValue: null
         }
     },
 
     computed: {
+        date: {
+            get() {
+                if (! this.mutableValue) {
+                    return null
+                }
+
+                return new Date(this.mutableValue)
+            },
+            set(value) {
+                this.mutableValue = value
+                this.$emit('change', value)
+            }
+        },
         timestamp() {
             return this.date
                 ? dayjs(this.date).format('YYYY-MM-DD')
                 : null
+        }
+    },
+
+    watch: {
+        value(value) {
+            this.mutableValue = value
         }
     }
 }
