@@ -14,7 +14,7 @@
 	<div class="form-row">
 		<label class="form-row__label">{{ trans('labels.bills.properties.amount') }}</label>
 		<div class="form-row__input">
-			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000" value="{{ $bill->amount }}">
+			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000" value="{{ round($bill->amount, 2) }}">
 		</div>
 	</div>
 	<div class="form-row">

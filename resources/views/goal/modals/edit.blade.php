@@ -15,7 +15,7 @@
 		<label class="form-row__label">{{ trans('labels.goals.properties.amount') }}</label>
 		<div class="form-row__input input-addon--start">
 			<span class="input-addon">$</span>
-			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000000" value="{{ $goal->amount }}" required>
+			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000000" value="{{ round($goal->amount, 2) }}" required>
 		</div>
 	</div>
 	<div class="form-row">
@@ -28,7 +28,7 @@
 		<label class="form-row__label">{{ trans('labels.goals.properties.balance') }}</label>
 		<div class="form-row__input input-addon--start">
 			<span class="input-addon">$</span>
-			<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000" value="{{ $goal->balance }}" required>
+			<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000" value="{{ round($goal->balance, 2) }}" required>
 		</div>
 	</div>
 @endcomponent

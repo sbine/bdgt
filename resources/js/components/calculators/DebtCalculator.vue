@@ -18,7 +18,6 @@
                 v-if="interestPaid > -1"
                 class="text-red-700"
                 :amount="interestPaid"
-                :is-inflow="true"
             />
             <span v-else>N/A</span>
         </p>
