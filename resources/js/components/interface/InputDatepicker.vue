@@ -40,7 +40,7 @@ export default {
 
     data() {
         return {
-            mutableValue: null
+            mutableValue: this.value || null
         }
     },
 
@@ -55,7 +55,7 @@ export default {
             },
             set(value) {
                 this.mutableValue = value
-                this.$emit('change', value)
+                this.$emit('input', value)
             }
         },
         timestamp() {

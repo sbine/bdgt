@@ -28,8 +28,8 @@ class Bill extends Model
         'user_id'
     ];
 
-    protected $dates = [
-        'start_date',
+    protected $casts = [
+        'start_date' => 'date',
     ];
 
     public function transactions()

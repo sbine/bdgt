@@ -27,8 +27,8 @@ class Account extends Model
         'user_id'
     ];
 
-    protected $dates = [
-        'date_opened',
+    protected $casts = [
+        'date_opened' => 'date',
     ];
 
     public function getRunningBalanceAttribute()
