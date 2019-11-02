@@ -1,36 +1,35 @@
 @extends('guest')
 
 @section('content')
-	<div class="max-w-xl bg-white rounded-sm shadow mx-auto">
-		<div class="bg-blue-700 rounded-t px-4 py-1"></div>
+	<div class="max-w-xl mx-auto">
+        @component('components.panel')
+            <form class="form" role="form" method="POST" action="{{ route('password.email') }}">
+                @csrf
 
-		<form class="form py-8" role="form" method="POST" action="{{ route('password.email') }}">
-            @csrf
+                <h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.reset_password') }}</h2>
 
-            <h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.reset_password') }}</h2>
+                <div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
+                    <div class="form-row__input">
+                        <input type="email" class="input-text" name="email" value="{{ old('email') }}" required autofocus>
 
-            <div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
-                <div class="form-row__input">
-                    <input type="email" class="input-text" name="email" value="{{ old('email') }}" required autofocus>
-
-                    @if ($errors->has('email'))
-                        <span class="input-error">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
+                        @if ($errors->has('email'))
+                            <span class="input-error">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
-            </div>
 
-			<div class="form-row">
-                <div class="form-row__label"></div>
-				<div class="form-row__input">
-                    <button type="submit" class="button button--primary">
-                        {{ trans('labels.auth.send_password_reset_link') }}
-                    </button>
-				</div>
-			</div>
-        </form>
+                <div class="form-row">
+                    <div class="form-row__label"></div>
+                    <div class="form-row__input">
+                        <button type="submit" class="button button--primary">
+                            {{ trans('labels.auth.send_password_reset_link') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        @endcomponent
     </div>
-</div>
 @endsection
