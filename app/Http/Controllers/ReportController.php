@@ -39,7 +39,7 @@ class ReportController extends Controller
      * @param  string $type
      * @return \Illuminate\Http\Response
      */
-    public function ajax_report($type)
+    public function ajax($type)
     {
         return response()->json(
             ReportFactory::generate($type)

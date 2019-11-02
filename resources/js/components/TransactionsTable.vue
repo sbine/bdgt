@@ -49,7 +49,7 @@
         </template>
 
         <template #amount="{ row }">
-            <formatter-currency :amount="row.amount" :is-inflow="row.inflow"/>
+            <formatter-currency :amount="row.amount" :negative="! row.inflow"/>
         </template>
 
         <template #cleared="{ row }">

@@ -8,7 +8,7 @@ export default {
             type: String,
             default: 'USD',
         },
-        signed: {
+        negative: {
             type: Boolean,
             default: false,
         },
@@ -21,7 +21,7 @@ export default {
         })
 
         return h('span', context.data, (
-            context.props.signed && amount.indexOf('-') !== 0
+            context.props.negative && amount.indexOf('-') !== 0
             ? '-'
             : ''
         ) + amount)

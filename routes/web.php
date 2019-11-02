@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('{type}', 'ReportController@show')->name('reports.show');
 
-        Route::post('ajax/{type}', 'ReportController@ajax_report')->name('reports.ajax.report');
+        Route::post('ajax/{type}', 'ReportController@ajax')->name('reports.ajax.report');
     });
 
     Route::prefix('api')->name('api.')->namespace('Api')->group(function () {
