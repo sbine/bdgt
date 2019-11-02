@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Resources\Goal;
-use App\Resources\User;
+use App\Models\Goal;
+use App\Models\User;
 use Tests\TestCase;
 
 class GoalTest extends TestCase

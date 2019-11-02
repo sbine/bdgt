@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Resources\Account;
-use App\Resources\Transaction;
-use App\Resources\User;
+use App\Models\Account;
+use App\Models\Transaction;
+use App\Models\User;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase

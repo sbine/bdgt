@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Resources\Account;
+use App\Models\Account;
 
 class AccountSeeder extends Seeder
 {

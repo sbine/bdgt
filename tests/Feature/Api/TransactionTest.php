@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use App\Resources\Transaction;
-use App\Resources\User;
+use App\Models\Transaction;
+use App\Models\User;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase

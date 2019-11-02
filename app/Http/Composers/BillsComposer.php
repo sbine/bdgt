@@ -2,7 +2,7 @@
 
 namespace App\Http\Composers;
 
-use App\Resources\Bill;
+use App\Models\Bill;
 use Illuminate\Contracts\View\View;
 
 class BillsComposer

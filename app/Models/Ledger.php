@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Resources;
+namespace App\Models;
 
-use App\Resources\Transaction;
+use App\Models\Transaction;
 
 class Ledger
 {

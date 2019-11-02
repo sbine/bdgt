@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Account;
+use App\Models\Account;
 use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Resources\Bill;
-use App\Resources\User;
+use App\Models\Bill;
+use App\Models\User;
 use Tests\TestCase;
 
 class BillTest extends TestCase

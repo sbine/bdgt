@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Account;
-use App\Resources\Category;
-use App\Resources\Ledger;
-use App\Resources\Transaction;
+use App\Models\Account;
+use App\Models\Category;
+use App\Models\Ledger;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller

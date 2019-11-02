@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Policies\TransactionPolicy;
-use App\Resources\Transaction;
+use App\Models\Transaction;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

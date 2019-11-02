@@ -2,7 +2,7 @@
 
 namespace App\Reports;
 
-use App\Resources\Transaction;
+use App\Models\Transaction;
 use DateInterval;
 use DateTime;
 use Illuminate\Database\Eloquent\Collection;

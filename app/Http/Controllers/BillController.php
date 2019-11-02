@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Bill;
+use App\Models\Bill;
 use Illuminate\Support\Facades\Input;
 
 class BillController extends Controller

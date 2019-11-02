@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Resources;
 
-use App\Resources\Bill;
-use App\Resources\Transaction;
-use App\Resources\User;
+use App\Models\Bill;
+use App\Models\Transaction;
+use App\Models\User;
 use Tests\TestCase;
 use DateInterval;
 use DateTime;

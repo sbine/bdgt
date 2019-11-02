@@ -2,7 +2,7 @@
 
 namespace App\Http\Composers;
 
-use App\Resources\Account;
+use App\Models\Account;
 use Illuminate\Contracts\View\View;
 
 class AccountsComposer

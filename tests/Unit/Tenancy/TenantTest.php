@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Tenancy;
 
-use App\Resources\User;
+use App\Models\User;
 use App\Tenancy\Tenant;
 use Tests\TestCase;
 

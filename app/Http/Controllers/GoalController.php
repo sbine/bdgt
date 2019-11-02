@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Goal;
+use App\Models\Goal;
 use Illuminate\Support\Facades\Input;
 
 class GoalController extends Controller

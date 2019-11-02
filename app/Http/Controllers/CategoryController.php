@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Category;
+use App\Models\Category;
 use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller

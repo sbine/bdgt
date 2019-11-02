@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Scopes;
 
-use App\Resources\User;
+use App\Models\User;
 use App\Tenancy\TenancyScope;
 use Tests\TestCase;
 use DomainException;

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Resources\Bill;
-use App\Resources\Ledger;
-use App\Resources\Transaction;
+use App\Models\Bill;
+use App\Models\Ledger;
+use App\Models\Transaction;
 
 class DashboardController extends Controller
 {

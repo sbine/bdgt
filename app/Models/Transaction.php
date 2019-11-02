@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Resources;
+namespace App\Models;
 
-use App\Resources\Model;
+use App\Models\Model;
 use Illuminate\Support\Carbon;
 
 class Transaction extends Model

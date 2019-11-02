@@ -1,11 +1,11 @@
 <?php
 
-use App\Resources\Account;
-use App\Resources\Bill;
-use App\Resources\Category;
-use App\Resources\Goal;
-use App\Resources\Transaction;
-use App\Resources\User;
+use App\Models\Account;
+use App\Models\Bill;
+use App\Models\Category;
+use App\Models\Goal;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

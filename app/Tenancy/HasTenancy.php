@@ -2,7 +2,7 @@
 
 namespace App\Tenancy;
 
-use App\Resources\User;
+use App\Models\User;
 
 trait HasTenancy
 {

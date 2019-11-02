@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Resources\Goal;
+use App\Models\Goal;
 
 class GoalSeeder extends Seeder
 {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
-use App\Resources\Bill;
+use App\Models\Bill;
 
 class BillEventController
 {

@@ -4,7 +4,7 @@ namespace Tests\Feature\Resources;
 
 use App\Tenancy\TenancyScope;
 use Tests\TestCase;
-use App\Resources\Model;
+use App\Models\Model;
 
 class ModelTest extends TestCase
 {
