@@ -29,7 +29,7 @@ $factory->define(Account::class, function (Faker $faker) {
 });
 $factory->state(Account::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => factory(User::class)->lazy()->id,
+        'user_id' => factory(User::class)->lazy(),
     ];
 });
 
@@ -44,7 +44,7 @@ $factory->define(Bill::class, function (Faker $faker) {
 });
 $factory->state(Bill::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => factory(User::class)->lazy()->id,
+        'user_id' => factory(User::class)->lazy(),
     ];
 });
 
@@ -57,7 +57,7 @@ $factory->define(Category::class, function (Faker $faker) {
 });
 $factory->state(Category::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => factory(User::class)->lazy()->id,
+        'user_id' => factory(User::class)->lazy(),
     ];
 });
 
@@ -74,7 +74,7 @@ $factory->define(Goal::class, function (Faker $faker) {
 });
 $factory->state(Goal::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => factory(User::class)->lazy()->id,
+        'user_id' => factory(User::class)->lazy(),
     ];
 });
 
@@ -92,7 +92,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
 });
 $factory->state(Transaction::class, 'with_user', function (Faker $faker) {
     return [
-        'user_id' => factory(User::class)->lazy()->id,
+        'user_id' => factory(User::class)->lazy(),
     ];
 });
 
