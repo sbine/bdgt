@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use App\Models\Bill;
 
 class BillEventController
@@ -10,9 +10,9 @@ class BillEventController
     public function __invoke()
     {
         $billsByDate = [];
-        if (Input::has(['start', 'end'])) {
+        if (Request::has(['start', 'end'])) {
             Bill::all()->each(function ($bill) use (&$billsByDate) {
-                $dueDates = $bill->getDueDatesForInterval(Input::get('start'), Input::get('end'));
+                $dueDates = $bill->getDueDatesForInterval(Request::get('start'), Request::get('end'));
 
                 foreach ($dueDates as $date) {
                     $billsByDate[] = [

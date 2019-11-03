@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reports\ReportFactory;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class ReportController extends Controller
 {
@@ -43,7 +43,7 @@ class ReportController extends Controller
     {
         return response()->json(
             ReportFactory::generate($type)
-                           ->forDateRange(new Carbon(Input::get('startDate')), new Carbon(Input::get('endDate')))
+                           ->forDateRange(new Carbon(Request::get('startDate')), new Carbon(Request::get('endDate')))
         );
     }
 }
