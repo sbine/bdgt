@@ -6,7 +6,7 @@
         @click="hide"
     >
         <div
-            class="relative w-5/6 md:w-4/6 xl:w-3/6 bg-white text-gray-900 rounded-sm shadow-xl mx-auto my-8"
+            class="relative w-11/12 max-w-2xl bg-white text-gray-900 rounded-sm shadow-xl mx-auto my-8"
             @click.stop
         >
             <div
