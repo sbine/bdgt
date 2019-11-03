@@ -93,7 +93,11 @@
     }
 
     li {
-        @apply mx-2;
+        @apply mx-1;
+
+        @screen lg {
+            @apply mx-2;
+        }
     }
 
     ul {

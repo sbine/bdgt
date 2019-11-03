@@ -5,9 +5,13 @@
     @apply text-sm;
 
     &::before {
-        @apply px-4;
+        @apply px-3;
         @apply text-gray-500;
 
         content: "/\00a0";
+
+        @screen lg {
+            @apply px-4;
+        }
     }
 }
