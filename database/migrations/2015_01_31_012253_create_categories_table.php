@@ -2,23 +2,18 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        //Schema::dropIfExists('categories');
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('label', 128);
             $table->decimal('budgeted', 12, 3);
-            $table->integer('parent_category_id')->unsigned()->nullable();
+            $table->bigInteger('parent_category_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
@@ -32,13 +27,8 @@ class CreateCategoriesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::dropIfExists('categories');
     }
 }

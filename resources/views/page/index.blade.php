@@ -1,64 +1,65 @@
 @extends('guest')
 
 @section('content')
-	<div class="row">
-		<div class="col-xs-12 text-center">
-			<div class="jumbotron">
-				<h1>bdgt
-					<span class="badge">alpha</span></h1>
-			</div>
-			@if (!Auth::user())
-			<p><a class="btn btn-success btn-lg" href="/login" role="button">Sign In</a></p>
-			@endif
-		</div>
+	<div class="text-center mb-16 mt-10">
+		<h1 class="font-light text-5xl tracking-tight">
+			bdgt
+			<span class="badge">alpha</span>
+		</h1>
+		@guest
+			<a class="button button--success mt-2" href="{{ route('login') }}" role="button">Sign In</a>
+		@endguest
 	</div>
-	<br><br>
-	<div class="row">
-		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-4">
-			<h3>Planned Features</h3>
-			<div class="media">
-				<div class="media-left">
-					<span class="media-object">
-						<i class="fa fa-envelope-o fa-4x"></i>
-					</span>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">Zero-based Budgeting</h4>
-					Budget to zero using the envelope method to keep your spending in check. Consult your categories to help guide purchasing decisions.
-				</div>
+
+	<div class="max-w-4xl mx-auto p-2">
+		<h3 class="font-semibold text-gray-600 text-xl tracking-wide uppercase mb-4">Planned Features</h3>
+
+		<div class="flex items-center py-6">
+			<div class="mr-8">
+				<font-awesome-layers class="fa-5x">
+					<font-awesome-icon icon="circle" class="text-gray-300"></font-awesome-icon>
+					<font-awesome-icon :icon="['far', 'envelope']" transform="shrink-8" class="text-blue-900"></font-awesome-icon>
+				</font-awesome-layers>
 			</div>
-			<div class="media">
-				<div class="media-body">
-					<h4 class="media-heading">Automatic Bill Reminders</h4>
-					Receive email and push notifications when due dates approach for unpaid bills. Never miss a payment again.
-				</div>
-				<div class="media-right">
-					<span class="media-object">
-						<i class="fa fa-calendar-o fa-4x"></i>
-					</span>
-				</div>
+			<div class="flex flex-col w-full">
+				<h4 class="font-semibold text-xl">Zero-based Budgeting</h4>
+				<p class="text-sm">Budget to zero using the envelope method to keep your spending in check. Consult your categories to help guide purchasing decisions.</p>
 			</div>
-			<div class="media">
-				<div class="media-left">
-					<span class="media-object">
-						<i class="fa fa-check-square-o fa-4x"></i>
-					</span>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">Goal Tracking</h4>
-					Achieve your goals with bdgt goal tracking. Painlessly save your way to every milestone.
-				</div>
+		</div>
+		<div class="flex items-center py-6">
+			<div class="flex flex-col w-full">
+				<h4 class="font-semibold text-xl">Automatic Bill Reminders</h4>
+				<p class="text-sm">Receive email and push notifications when due dates approach for unpaid bills. Never miss a payment again.</p>
 			</div>
-			<div class="media">
-				<div class="media-body">
-					<h4 class="media-heading">Interactive Reports</h4>
-					 Access your historical data at any time through bdgt's comprehensive reports. Knowledge is power -- analyze past trends to better plan for your future.
-				</div>
-				<div class="media-right">
-					<span class="media-object">
-						<i class="fa fa-bar-chart fa-4x"></i>
-					</span>
-				</div>
+			<div class="ml-8">
+				<font-awesome-layers class="fa-5x">
+					<font-awesome-icon icon="circle" class="text-gray-300"></font-awesome-icon>
+					<font-awesome-icon :icon="['far', 'calendar']" transform="shrink-8" class="text-blue-900"></font-awesome-icon>
+				</font-awesome-layers>
+			</div>
+		</div>
+		<div class="flex items-center py-6">
+			<div class="mr-8">
+				<font-awesome-layers class="fa-5x">
+					<font-awesome-icon icon="circle" class="text-gray-300"></font-awesome-icon>
+					<font-awesome-icon :icon="['far', 'check-square']" transform="shrink-8" class="text-blue-900"></font-awesome-icon>
+				</font-awesome-layers>
+			</div>
+			<div class="flex flex-col w-full">
+				<h4 class="font-semibold text-xl">Goal Tracking</h4>
+				<p class="text-sm">Achieve your goals with bdgt goal tracking. Painlessly save your way to every milestone.</p>
+			</div>
+		</div>
+		<div class="flex items-center py-6">
+			<div class="flex flex-col w-full">
+				<h4 class="font-semibold text-xl">Interactive Reports</h4>
+					<p class="text-sm">Access your historical data at any time through bdgt's comprehensive reports. Knowledge is power&mdash;analyze past trends to better plan for your future.</p>
+			</div>
+			<div class="ml-8">
+				<font-awesome-layers class="fa-5x">
+					<font-awesome-icon icon="circle" class="text-gray-300"></font-awesome-icon>
+					<font-awesome-icon icon="chart-bar" transform="shrink-8" class="text-blue-900"></font-awesome-icon>
+				</font-awesome-layers>
 			</div>
 		</div>
 	</div>

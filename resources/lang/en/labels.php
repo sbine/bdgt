@@ -2,7 +2,7 @@
 
 return [
     'modals' => [
-        'button_close' => 'Close'
+        'button_close' => 'Cancel'
     ],
     'emails' => [
         'forgot_password_text' => 'Click here to reset your password:',
@@ -11,8 +11,8 @@ return [
         'login' => 'Login',
         'logout' => 'Logout',
         'register' => 'Register',
-        'register_button' => 'Register an account',
-        'forgot_password' => 'Forgot Your Password?',
+        'register_button' => 'Register now',
+        'forgot_password' => 'Forgot your password?',
         'reset_password' => 'Reset Password',
         'send_password_reset_link' => 'Send Password Reset Link',
         'properties' => [
@@ -39,18 +39,18 @@ return [
         'modals' => [
             'create' => [
                 'title' => 'Add an Account',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Save',
             ],
             'edit' => [
                 'title' => 'Edit Account',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Edit',
 
             ],
             'delete' => [
                 'title' => 'Delete Account',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Delete',
                 'text' => 'Are you sure you want to delete this account? This operation cannot be undone.',
             ],
@@ -71,18 +71,18 @@ return [
         'modals' => [
             'create' => [
                 'title' => 'Add a Bill',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Save',
             ],
             'edit' => [
                 'title' => 'Edit Bill',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Edit',
 
             ],
             'delete' => [
                 'title' => 'Delete Bill',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Delete',
                 'text' => 'Are you sure you want to delete this bill? This operation cannot be undone.',
             ],
@@ -114,18 +114,18 @@ return [
         'modals' => [
             'create' => [
                 'title' => 'Add a Category',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Save',
             ],
             'edit' => [
                 'title' => 'Edit Category',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Edit',
 
             ],
             'delete' => [
                 'title' => 'Delete Category',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Delete',
                 'text' => 'Are you sure you want to delete this category? This operation cannot be undone.',
             ],
@@ -146,18 +146,18 @@ return [
         'modals' => [
             'create' => [
                 'title' => 'Add a Goal',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Save',
             ],
             'edit' => [
                 'title' => 'Edit Goal',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Edit',
 
             ],
             'delete' => [
                 'title' => 'Delete Goal',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Delete',
                 'text' => 'Are you sure you want to delete this goal? This operation cannot be undone.',
             ],
@@ -190,18 +190,18 @@ return [
         'modals' => [
             'create' => [
                 'title' => 'Add a Transaction',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Save',
             ],
             'edit' => [
                 'title' => 'Edit Transaction',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Edit',
 
             ],
             'delete' => [
                 'title' => 'Delete Transaction',
-                'close_button' => 'Close',
+                'close_button' => 'Cancel',
                 'save_button' => 'Delete',
                 'text' => 'Are you sure you want to delete this transaction? This operation cannot be undone.',
             ],

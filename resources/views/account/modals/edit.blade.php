@@ -1,51 +1,34 @@
-<div id="editAccountModal" class="modal fade">
-	<div class="modal-dialog">
-		<form class="modal-content form-horizontal" method="POST" action="/accounts/{{ $account->id }}">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="_method" value="PUT">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('labels.accounts.modals.edit.close_button') }}"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title">{{ trans('labels.accounts.modals.edit.title') }}</h3>
-			</div>
-			<div class="modal-body">
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.name') }}</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" name="name" value="{{ $account->name }}" required>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.balance') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<span class="input-group-addon">$</span>
-							<input type="text" class="form-control" name="balance" value="{{ $account->balance }}">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.interest') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" class="form-control" name="interest" value="{{ $account->interest }}">
-							<span class="input-group-addon">%</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">{{ trans('labels.accounts.properties.date_opened') }}</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" class="form-control datepicker" name="date_opened" value="{{ $account->date_opened }}">
-							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('labels.accounts.modals.edit.close_button') }}</button>
-				<button type="submit" class="btn btn-primary">{{ trans('labels.accounts.modals.edit.save_button') }}</button>
-			</div>
-		</form>
+@component('partials.modals.form', [
+	'formAction' => route('accounts.update', $account->id),
+	'method' => 'PUT',
+	'title' => trans('labels.accounts.modals.edit.title'),
+	'dismissLabel' => trans('labels.accounts.modals.edit.close_button'),
+	'submitLabel' => trans('labels.accounts.modals.edit.save_button')
+])
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.name') }}</label>
+		<div class="form-row__input">
+			<input type="text" class="input-text" name="name" value="{{ $account->name }}" required>
+		</div>
 	</div>
-</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.balance') }}</label>
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
+			<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000" value="{{ $account->balance }}" required>
+		</div>
+	</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.interest') }}</label>
+		<div class="form-row__input input-addon--end">
+			<input type="number" class="input-text" name="interest" step="0.01" min="0" max="100" value="{{ $account->interest }}" required>
+			<span class="input-addon">%</span>
+		</div>
+	</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.accounts.properties.date_opened') }}</label>
+		<div class="form-row__input">
+			<input-datepicker name="date_opened" value="{{ $account->date_opened }}" required></input-datepicker>
+		</div>
+	</div>
+@endcomponent

@@ -1,8 +1,9 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Reports\ReportFactory;
+use App\Reports\ReportFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
@@ -10,7 +11,7 @@ class ReportController extends Controller
     /**
      * Show the default report to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +22,7 @@ class ReportController extends Controller
      * Show an individual report to the user.
      *
      * @param $type
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show($type)
     {
@@ -30,19 +31,19 @@ class ReportController extends Controller
             'url' => '/reports/ajax/' . $type,
         ];
 
-        return view('report.show', compact('report'));
+        return view('report.show')->with('report', $report)->with('type', $type);
     }
 
     /**
      * Retrieve report data based on type
      * @param  string $type
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function ajax_report($type)
+    public function ajax($type)
     {
         return response()->json(
             ReportFactory::generate($type)
-                           ->forDateRange(Input::get('startDate'), Input::get('endDate'))
+                           ->forDateRange(new Carbon(Input::get('startDate')), new Carbon(Input::get('endDate')))
         );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Reports;
+namespace App\Reports;
 
 interface Reportable
 {

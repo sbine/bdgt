@@ -1,24 +1,12 @@
 <?php
 
-namespace Bdgt\Http\Composers;
+namespace App\Http\Composers;
 
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
-use Bdgt\Repositories\Contracts\CategoryRepositoryInterface;
 
 class CategoriesComposer
 {
-    protected $categoryRepository;
-
-    /**
-     * Create a new composer.
-     *
-     * @return void
-     */
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
     /**
      * Bind data to the view.
      *
@@ -27,8 +15,6 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $categories = $this->categoryRepository->all();
-
-        $view->with(['categories' => $categories]);
+        $view->with('categories', Category::all());
     }
 }

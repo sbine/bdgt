@@ -1,0 +1,21 @@
+.alert {
+    @apply bg-blue-200;
+    @apply p-6;
+    @apply rounded;
+    @apply text-blue-900;
+
+    &--success {
+        @apply bg-green-200;
+        @apply text-green-900;
+    }
+
+    &--warning {
+        @apply bg-orange-300;
+        @apply text-orange-900;
+    }
+
+    &--danger {
+        @apply bg-red-200;
+        @apply text-red-900;
+    }
+}

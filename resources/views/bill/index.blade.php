@@ -1,60 +1,50 @@
 @extends('app')
 
-@section('css')
-	<link href="/css/fullcalendar.min.css" rel="stylesheet">
-@endsection
-
-@section('js')
-	<script src="/js/fullcalendar.min.js"></script>
-@endsection
-
 @section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.bills.plural') }}</li>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.bills.plural') }}</div>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addBillModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.bills.add_button') }}</a>
+	<toggle>
+		<template v-slot="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.bills.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('bill.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
-	<div class="row">
-		<div class="col-sm-5 col-sm-push-7">
-			<div class="list-group">
-				@foreach ($bills as $bill)
-					<a href="/bills/{{ $bill->id }}" class="list-group-item">
+	<div class="lg:flex">
+		<div class="lg:w-2/3 bg-white rounded-sm shadow mb-8 lg:mb-0 lg:mr-10">
+			<bill-calendar></bill-calendar>
+		</div>
+
+		<div class="lg:w-1/3 bg-white rounded-sm shadow py-2">
+			@foreach ($bills as $bill)
+				<a href="{{ route('bills.show', $bill->id) }}" class="block hover:bg-gray-100 px-6 py-4">
+					<div class="flex justify-between">
+						<h4 class="font-semibold text-lg">{{ $bill->label }}</h4>
 
 						@if ($bill->total >= $bill->amount)
-							<span class="pull-right label label-success">PAID</span>
+							<span class="badge badge--success">paid</span>
 						@else
-							<span class="pull-right label label-danger">UNPAID</span>
+							<span class="badge badge--danger">unpaid</span>
 						@endif
-
-						<h4 class="list-group-item-heading">{{ $bill->label }}</h4>
-						<p class="list-group-item-text pull-right">Due <span class="moment">{{ $bill->nextDue }}</span><span class="hide">{{ $bill->nextDue }}</span></p>
-						<p class="list-group-item-text">@money($bill->amount)</p>
-					</a>
-				@endforeach
-			</div>
-		</div>
-		<div class="col-sm-7 col-sm-pull-5">
-			<div id="calendar"></div>
+					</div>
+					<div class="flex justify-between font-light mt-2">
+						<p>
+							Due <formatter-date time="{{ $bill->nextDue }}" :diff="true" unit="day"></formatter-date>
+							<span class="hidden">{{ $bill->nextDue }}</span>
+						</p>
+						<formatter-currency :amount="{{ $bill->amount }}"></formatter-currency>
+					</div>
+				</a>
+			@endforeach
 		</div>
 	</div>
-	@include('bill.modals.create')
-@endsection
-
-@section('scripts')
-<script>
-	$('#calendar').fullCalendar({
-		events: '/bills/ajax_calendar_events',
-		eventRender: function(event, element, view) {
-			if (event.paid === true) {
-				element.css('background-color', '#5cb85c').css('border-color', '#5cb85c');
-			} else {
-				element.css('background-color', '#d9534f').css('border-color', '#d9534f');
-			}
-		}
-	});
-	$('.fc-button').addClass('btn btn-default').removeClass('fc-state-default');
-</script>
 @endsection

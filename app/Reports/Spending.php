@@ -1,20 +1,15 @@
 <?php
 
-namespace Bdgt\Reports;
+namespace App\Reports;
 
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use DateTime;
+use App\Models\Transaction;
 use DateInterval;
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class Spending implements Reportable
 {
-    public function __construct(TransactionRepositoryInterface $transactionRepository)
-    {
-        $this->transactionRepository = $transactionRepository;
-    }
-
     public function name()
     {
         return 'Spending Over Time';
@@ -28,11 +23,11 @@ class Spending implements Reportable
     public function forDateRange($startDate = null, $endDate = null)
     {
         // If no start date, initialize to 1 year ago
-        if (!$startDate) {
+        if (! $startDate) {
             $startDate = $this->getOneYearAgoDate();
         }
         // If no end date, initialize to now
-        if (!$endDate) {
+        if (! $endDate) {
             $endDate = new DateTime(date('Y-m-d'));
         }
 
@@ -43,6 +38,7 @@ class Spending implements Reportable
         $labels = [];
         $labelsInitialized = false;
         $monthInterval = new DateInterval('P1M');
+
         foreach ($results as $result) {
             $data = [];
             // Retrieve totals for every month
@@ -50,7 +46,7 @@ class Spending implements Reportable
             while ($date <= $endDate) {
                 $key = 'total_' . $date->format('Y_m');
                 $data[] = (float)$result->$key;
-                if (!$labelsInitialized) {
+                if (! $labelsInitialized) {
                     $labels[] = $date->format('F');
                 }
                 $date->add($monthInterval);
@@ -62,6 +58,7 @@ class Spending implements Reportable
                 'label' => $result->category,
             ];
         }
+
         return [
             'datasets' => $dataSets,
             'labels' => $labels,
@@ -77,6 +74,7 @@ class Spending implements Reportable
         $yearInterval = new DateInterval('P1Y');
         $yearInterval->invert = 1;
         $startDate->add($yearInterval);
+
         return $startDate;
     }
 
@@ -89,8 +87,7 @@ class Spending implements Reportable
     {
         $monthInterval = new DateInterval('P1M');
 
-        $query = $this->transactionRepository->model()
-            ->whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d')])
+        $query = Transaction::whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d')])
             ->addSelect('date')
             ->addSelect(DB::raw('categories.label AS category'))
             ->groupBy('category')
@@ -99,7 +96,7 @@ class Spending implements Reportable
         $date = new DateTime($startDate->format('Y-m-d'));
         while ($date <= $endDate) {
             // Select totals for every month
-            $query = $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
+            $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
             $date->add($monthInterval);
         }
 

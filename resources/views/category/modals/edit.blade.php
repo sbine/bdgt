@@ -1,24 +1,21 @@
 @component('partials.modals.form', [
-	'id' => 'editCategoryModal',
-	'formAction' => '/categories/' . $category->id,
+	'formAction' => route('categories.update', $category->id),
 	'method' => 'PUT',
 	'title' => trans('labels.categories.modals.edit.title'),
 	'dismissLabel' => trans('labels.categories.modals.edit.close_button'),
 	'submitLabel' => trans('labels.categories.modals.edit.save_button')
 ])
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.categories.properties.label') }}</label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="label" value="{{ $category->label }}" required>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.categories.properties.label') }}</label>
+		<div class="form-row__input">
+			<input type="text" class="input-text" name="label" value="{{ $category->label }}" required>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.categories.properties.budgeted') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
-				<span class="input-group-addon">$</span>
-				<input type="number" class="form-control" name="budgeted" step="0.01" min="0" max="10000000" value="{{ $category->budgeted }}">
-			</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.categories.properties.budgeted') }}</label>
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
+			<input type="number" class="input-text" name="budgeted" step="0.01" min="0" max="10000000" value="{{ round($category->budgeted, 2) }}">
 		</div>
 	</div>
 @endcomponent

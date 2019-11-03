@@ -1,7 +1,10 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
+use App\Http\Composers\AccountsComposer;
+use App\Http\Composers\BillsComposer;
+use App\Http\Composers\CategoriesComposer;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -13,25 +16,11 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(
-            'partials.sidebar',
-            'Bdgt\Http\Composers\AccountsComposer'
-        );
+        view()->composer('partials.dropdowns.accounts', AccountsComposer::class);
 
-        view()->composer(
-            'partials.dropdowns.accounts',
-            'Bdgt\Http\Composers\AccountsComposer'
-        );
+        view()->composer('partials.dropdowns.categories', CategoriesComposer::class);
 
-        view()->composer(
-            'partials.dropdowns.categories',
-            'Bdgt\Http\Composers\CategoriesComposer'
-        );
-
-        view()->composer(
-            'partials.dropdowns.bills',
-            'Bdgt\Http\Composers\BillsComposer'
-        );
+        view()->composer('partials.dropdowns.bills', BillsComposer::class);
     }
 
     /**

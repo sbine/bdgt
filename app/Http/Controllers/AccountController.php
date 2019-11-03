@@ -1,51 +1,32 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Account;
 use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @param AccountRepositoryInterface $accountRepository
-     */
-    public function __construct(AccountRepositoryInterface $accountRepository)
-    {
-        $this->repository = $accountRepository;
-    }
-
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
     public function index()
     {
-        $accounts = $this->repository->all(['name' => 'asc']);
-
-        return view('account.index', compact('accounts'));
+        return view('account.index')->with(
+            'accounts',
+            Account::all()->sortBy(function ($account) {
+                return $account->name;
+            })
+        );
     }
 
     /**
      * Show an individual account to the user.
      *
-     * @param  int $id
+     * @param  Account $account
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Account $account)
     {
-        try {
-            $account = $this->repository->find($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect(route('accounts.index'));
-        }
-
-        return view('account.show', compact('account'))->nest('transactions', 'transaction._list', [ 'transactions' => $account->transactions ]);
+        return view('account.show')->with('account', $account->load('transactions'));
     }
 
     /**
@@ -55,7 +36,14 @@ class AccountController extends Controller
      */
     public function store()
     {
-        if ($account = $this->repository->create(Input::except(['_token', '_method']))) {
+        request()->validate([
+            'date_opened' => 'required|date',
+            'name' => 'required',
+            'balance' => 'required|numeric',
+            'interest' => 'required|numeric',
+        ]);
+
+        if ($account = Account::create(Input::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
@@ -65,29 +53,29 @@ class AccountController extends Controller
     /**
      * Update an existing account with new data.
      *
-     * @param  int $id
+     * @param  Account $account
      *
      * @return Redirect
      */
-    public function update($id)
+    public function update(Account $account)
     {
-        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
-            return redirect(route('accounts.show', $id))->with('alerts.success', trans('crud.accounts.updated'));
+        if ($account->update(Input::all())) {
+            return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
     }
 
     /**
-     * Delete an account by ID.
+     * Delete a account.
      *
-     * @param  int $id
+     * @param  Account $account
      *
      * @return Redirect
      */
-    public function destroy($id)
+    public function destroy(Account $account)
     {
-        if ($this->repository->delete($id)) {
+        if ($account->delete()) {
             return redirect(route('accounts.index'))->with('alerts.success', trans('crud.accounts.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));

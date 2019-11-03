@@ -1,64 +1,39 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Bdgt\Http\Requests\StoreTransactionRequest;
-use Bdgt\Http\Requests\UpdateTransactionRequest;
-use Bdgt\Repositories\Contracts\TransactionRepositoryInterface;
-use Bdgt\Resources\Account;
-use Bdgt\Resources\Category;
-use Bdgt\Resources\Ledger;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Account;
+use App\Models\Category;
+use App\Models\Ledger;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Input;
 
 class TransactionController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(TransactionRepositoryInterface $transactionRepository)
-    {
-        $this->repository = $transactionRepository;
-    }
-
-    /**
      * Show the application dashboard to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $ledger = new Ledger($this->repository);
-
-        $accounts = Account::all();
-
-        $categories = Category::all();
-
-        return view('transaction.index', compact('ledger', 'accounts', 'categories'))
-            ->nest('transactions', 'transaction._list', [
-                'transactions' => $ledger->transactions(),
-                'actionable' => true
-            ]);
+        return view('transaction.index')
+            ->with('transactions', Transaction::all())
+            ->with('ledger', new Ledger)
+            ->with('accounts', Account::all())
+            ->with('categories', Category::all());
     }
 
     /**
      * Show an individual transaction to the user.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        try {
-            $transaction = $this->repository->find($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect(route('transactions.index'));
-        }
-
-        return response()->json($transaction->toArray());
+        return response()->json($transaction);
     }
 
     /**
@@ -66,9 +41,18 @@ class TransactionController extends Controller
      *
      * @return Redirect
      */
-    public function store(StoreTransactionRequest $request)
+    public function store()
     {
-        if ($this->repository->create(Input::except(['_token', '_method']))) {
+        request()->validate([
+            'date'        => 'required|date',
+            'amount'      => 'required',
+            'payee'       => 'required',
+            'account_id'  => 'required|numeric',
+            'inflow'      => 'required',
+            'category_id' => 'nullable|numeric',
+        ]);
+
+        if (Transaction::create(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
@@ -77,28 +61,37 @@ class TransactionController extends Controller
     /**
      * Update an existing transaction with new data.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
      * @return Redirect
      */
-    public function update(UpdateTransactionRequest $request, $id)
+    public function update(Transaction $transaction)
     {
-        if ($this->repository->update(Input::except(['_token', '_method']), $id)) {
+        request()->validate([
+            'date'        => 'required|date',
+            'amount'      => 'required',
+            'payee'       => 'required',
+            'account_id'  => 'required|numeric',
+            'inflow'      => 'required',
+            'category_id' => 'nullable|numeric',
+        ]);
+
+        if ($transaction->update(Input::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
     /**
-     * Delete a transaction by ID.
+     * Delete a transaction.
      *
-     * @param  int $id
+     * @param  Transaction $transaction
      *
      * @return Redirect
      */
-    public function destroy($id)
+    public function destroy(Transaction $transaction)
     {
-        if ($this->repository->delete($id)) {
+        if ($transaction->delete()) {
             return redirect(route('transactions.index'))->with('alerts.success', trans('crud.transactions.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));

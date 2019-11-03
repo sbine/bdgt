@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Tenancy;
+namespace App\Tenancy;
 
 class TenancyObserver
 {

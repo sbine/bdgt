@@ -1,43 +1,35 @@
 @extends('guest')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('labels.auth.reset_password') }}</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+	<div class="max-w-xl mx-auto">
+        @component('components.panel')
+            <form class="form" role="form" method="POST" action="{{ route('password.email') }}">
+                @csrf
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
+                <h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.reset_password') }}</h2>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('labels.auth.properties.email') }}</label>
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                <div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
+                    <div class="form-row__input">
+                        <input type="email" class="input-text" name="email" value="{{ old('email') }}" required autofocus>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ trans('labels.auth.send_password_reset_link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        @if ($errors->has('email'))
+                            <span class="input-error">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
-            </div>
-        </div>
+
+                <div class="form-row">
+                    <div class="form-row__label"></div>
+                    <div class="form-row__input">
+                        <button type="submit" class="button button--primary">
+                            {{ trans('labels.auth.send_password_reset_link') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        @endcomponent
     </div>
 @endsection

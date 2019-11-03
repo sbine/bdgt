@@ -1,25 +1,34 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.accounts.plural') }}</li>
+	<div class="breadcrumb breadcrumb--active">{{ trans('labels.accounts.plural') }}</div>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addAccountModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> {{ trans('labels.accounts.add_button') }}</a>
+	<toggle>
+		<template v-slot="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.accounts.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('account.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
-
 @section('content')
-	<div class="list-group">
+	<div class="bg-white rounded-sm shadow -mt-4">
 		@foreach ($accounts as $account)
-			<a href="/accounts/{{ $account->id }}" class="list-group-item">
-				<span class="badge">{{ $account->transactions->count() }}</span>
-				<i class="fa fa-cc-{{ strtolower($account->name) }} fa-3x pull-left"></i>
-				<h4 class="list-group-item-heading"> {{ $account->name }}</h4>
-				<p class="list-group-item-text">@money($account->balance)</p>
+			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 border-b p-6">
+				<h4 class="flex justify-between text-gray-700 text-xl">
+					{{ $account->name }}
+					<span class="badge">{{ $account->transactions->count() }}</span>
+				</h4>
+
+				<p class="font-semibold"><formatter-currency :amount="{{ $account->balance }}"></formatter-currency></p>
 			</a>
 		@endforeach
 	</div>
-
-	@include('account.modals.create')
 @endsection

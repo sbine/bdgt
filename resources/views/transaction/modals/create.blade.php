@@ -1,6 +1,5 @@
 @component('partials.modals.form', [
-	'id' => 'addTransactionModal',
-	'formAction' => '/transactions',
+	'formAction' => route('transactions.store'),
 	'title' => trans('labels.transactions.modals.create.title'),
 	'dismissLabel' => trans('labels.transactions.modals.create.close_button'),
 	'submitLabel' => trans('labels.transactions.modals.create.save_button')

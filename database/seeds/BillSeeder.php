@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Bdgt\Resources\Bill;
+use App\Models\Bill;
 
 class BillSeeder extends Seeder
 {

@@ -1,0 +1,18 @@
+.badge {
+    @apply bg-gray-600;
+    @apply font-semibold;
+    @apply px-2;
+    @apply py-1;
+    @apply rounded-full;
+    @apply text-sm;
+    @apply text-white;
+    @apply tracking-normal;
+}
+
+.badge--success {
+    @apply bg-green-500;
+}
+
+.badge--danger {
+    @apply bg-red-500;
+}

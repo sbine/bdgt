@@ -1,27 +1,26 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<li class="active">Transactions</li>
+	<div class="breadcrumb breadcrumb--active">Transactions</div>
 @endsection
 
 @section('breadcrumbs.actions')
-	<a href="#addTransactionModal" data-toggle="modal" class="{{ config('layout.create_button_class') }}"><i class="fa fa-plus"></i> Add Transaction</a>
+	<toggle>
+		<template v-slot="{ isOn, setTo }">
+			<a class="button button--success" href="#" @click.prevent="setTo(true)">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
+			</a>
+
+			<modal :value="isOn" @input="setTo(false)">
+				@include('transaction.modals.create')
+			</modal>
+		</template>
+	</toggle>
 @endsection
 
 @section('content')
-	<table class="table table-striped">
-		{!! $transactions !!}
-		<tfoot>
-			<tr>
-				<td colspan="5"><b>Total</b></td>
-				<td><b>@money($ledger->totalInflow())</b></td>
-				<td><b>@money($ledger->totalOutflow())</b></td>
-				<td colspan="2"></td>
-			</tr>
-		</tfoot>
-	</table>
+	<transactions-table :transactions='@json($transactions)'></transactions-table>
 
 	@include('transaction.modals.edit')
 	@include('transaction.modals.delete')
 @endsection
-

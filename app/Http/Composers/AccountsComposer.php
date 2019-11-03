@@ -1,24 +1,12 @@
 <?php
 
-namespace Bdgt\Http\Composers;
+namespace App\Http\Composers;
 
+use App\Models\Account;
 use Illuminate\Contracts\View\View;
-use Bdgt\Repositories\Contracts\AccountRepositoryInterface;
 
 class AccountsComposer
 {
-    protected $accountRepository;
-
-    /**
-     * Create a new composer.
-     *
-     * @return void
-     */
-    public function __construct(AccountRepositoryInterface $accountRepository)
-    {
-        $this->accountRepository = $accountRepository;
-    }
-
     /**
      * Bind data to the view.
      *
@@ -27,8 +15,6 @@ class AccountsComposer
      */
     public function compose(View $view)
     {
-        $accounts = $this->accountRepository->all();
-
-        $view->with(['accounts' => $accounts]);
+        $view->with('accounts', Account::all());
     }
 }

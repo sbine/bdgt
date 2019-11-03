@@ -1,0 +1,22 @@
+.vuecal--events-on-month-view {
+    .vuecal__menu {
+        .active {
+            @apply border-blue-600;
+            @apply border-b-3;
+            @apply text-blue-600;
+        }
+    }
+
+    .vuecal__title-bar {
+        @apply bg-blue-800;
+        @apply text-white;
+    }
+
+    .vuecal__cell-content {
+        @apply h-full;
+    }
+
+    .vuecal__event {
+        @apply rounded-sm;
+    }
+}

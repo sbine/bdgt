@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Bdgt\Resources\Transaction;
+use App\Models\Transaction;
 
 class TransactionSeeder extends Seeder
 {

@@ -2,27 +2,21 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
 Auth::routes();
 
-Route::get('/', [
-    'as' => 'index',
-    'uses' => 'PageController@index',
-]);
+Route::get('/', 'PageController@index')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [
-        'as' => 'dashboard',
-        'uses' => 'LedgerController@index',
-    ]);
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     /*
      | Accounts
@@ -42,10 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      | Bills
      */
-    Route::get('bills/ajax_calendar_events', [
-        'as' => 'bills.ajax.calendar.events',
-        'uses' => 'BillController@ajax_calendar_events'
-    ]);
+    Route::get('bills/ajax_calendar_events', BillEventController::class)
+        ->name('bills.ajax.calendar.events');
 
     Route::resource('bills', 'BillController');
 
@@ -60,33 +52,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reports', 'ReportController');
 
     Route::group(['prefix' => 'reports'], function () {
-        Route::get('/', [
-            'as' => 'reports.index',
-            'uses' => 'ReportController@index'
-        ]);
+        Route::get('/', 'ReportController@index')->name('reports.index');
 
-        Route::get('/{type}', [
-            'as' => 'reports.show',
-            'uses' => 'ReportController@show'
-        ]);
+        Route::get('{type}', 'ReportController@show')->name('reports.show');
 
-        Route::get('ajax/{type}', [
-            'as' => 'reports.ajax.report',
-            'uses' => 'ReportController@ajax_report'
-        ]);
+        Route::post('ajax/{type}', 'ReportController@ajax')->name('reports.ajax.report');
+    });
 
+    Route::prefix('api')->name('api.')->namespace('Api')->group(function () {
+        Route::resource('transactions', 'TransactionController');
     });
 });
 
 /*
  | Calculators
  */
-Route::get('/calculators/debt', [
-    'as' => 'calculators.debt',
-    'uses' => 'CalculatorController@debt'
-]);
+Route::get('calculators/debt', 'CalculatorController@debt')->name('calculators.debt');
 
-Route::get('/calculators/savings', [
-    'as' => 'calculators.savings',
-    'uses' => 'CalculatorController@savings'
-]);
+Route::get('calculators/savings', 'CalculatorController@savings')->name('calculators.savings');

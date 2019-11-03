@@ -1,13 +1,13 @@
 <?php
 
-namespace Bdgt\Http\Controllers;
+namespace App\Http\Controllers;
 
 class PageController extends Controller
 {
     /**
      * Show the index page to the user.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {

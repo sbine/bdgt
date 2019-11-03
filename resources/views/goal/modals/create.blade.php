@@ -1,40 +1,35 @@
 @component('partials.modals.form', [
-	'id' => 'addGoalModal',
-	'formAction' => '/goals',
+	'formAction' => route('goals.store'),
 	'title' => trans('labels.goals.modals.create.title'),
 	'dismissLabel' => trans('labels.goals.modals.create.close_button'),
 	'submitLabel' => trans('labels.goals.modals.create.save_button')
 ])
 	<input type="hidden" name="start_date" value="{{ date('Y-m-d') }}">
 	<input type="hidden" name="balance" value="0">
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.label') }}</label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="label" required>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.goals.properties.label') }}</label>
+		<div class="form-row__input">
+			<input type="text" class="input-text" name="label" required>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.amount') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
-				<span class="input-group-addon">$</span>
-				<input type="number" class="form-control" name="amount" step="0.01" min="0" max="10000000" required>
-			</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.goals.properties.amount') }}</label>
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
+			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000000" required>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.goal_date') }}</label>
-		<div class="col-sm-8">
-			<div class="input-group">
-				<input type="text" class="form-control datepicker" name="goal_date">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-			</div>
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.goals.properties.goal_date') }}</label>
+		<div class="form-row__input">
+			<input-datepicker name="goal_date"></input-datepicker>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">{{ trans('labels.goals.properties.balance') }}</label>
-		<div class="col-sm-8">
-			<input type="number" class="form-control" name="balance" step="0.01" min="0" max="10000000">
+	<div class="form-row">
+		<label class="form-row__label">{{ trans('labels.goals.properties.balance') }}</label>
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
+			<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000">
 		</div>
 	</div>
 @endcomponent

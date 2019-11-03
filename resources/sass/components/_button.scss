@@ -1,0 +1,48 @@
+.button {
+    @apply bg-gray-300;
+    @apply inline-block;
+    @apply px-4;
+    @apply py-2;
+    @apply rounded;
+    @apply text-gray-700;
+
+    &:hover {
+        @apply bg-gray-400;
+    }
+
+    &--primary {
+        @apply bg-blue-600;
+        @apply text-gray-100;
+
+        &:hover {
+            @apply bg-blue-700;
+        }
+    }
+
+    &--success {
+        @apply bg-green-600;
+        @apply text-gray-100;
+
+        &:hover {
+            @apply bg-green-700;
+        }
+    }
+
+    &--warning {
+        @apply bg-orange-400;
+        @apply text-gray-800;
+
+        &:hover {
+            @apply bg-orange-500;
+        }
+    }
+
+    &--danger {
+        @apply bg-red-400;
+        @apply text-gray-100;
+
+        &:hover {
+            @apply bg-red-500;
+        }
+    }
+}

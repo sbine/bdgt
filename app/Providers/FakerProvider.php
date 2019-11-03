@@ -1,6 +1,6 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
 use Faker\Provider\Base;
 use OverflowException;

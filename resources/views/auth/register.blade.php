@@ -1,80 +1,79 @@
 @extends('guest')
 
-@section('breadcrumbs.items')
-	<li class="active">{{ trans('labels.auth.register') }}</li>
-@endsection
-
 @section('content')
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">{{ trans('labels.auth.register') }}</div>
-				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-						{{ csrf_field() }}
+	<div class="max-w-xl mx-auto">
+		@component('components.panel')
+			<form class="form" role="form" method="POST" action="{{ route('register') }}">
+				@csrf
 
-						<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-							<label class="col-md-4 control-label">{{ trans('labels.auth.properties.username') }}</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+				<h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.register') }}</h2>
 
-								@if ($errors->has('username'))
-									<span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-								@endif
-							</div>
-						</div>
+				<div class="form-row {{ $errors->has('username') ? 'has-error' : '' }}">
+					<label class="form-row__label">{{ trans('labels.auth.properties.username') }}</label>
+					<div class="form-row__input">
+						<input type="text" class="input-text" name="username" value="{{ old('username') }}" required autofocus>
 
-						<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-							<label class="col-md-4 control-label">{{ trans('labels.auth.properties.email') }}</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-								@if ($errors->has('email'))
-									<span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-								@endif
-							</div>
-						</div>
-
-						<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-							<label class="col-md-4 control-label">{{ trans('labels.auth.properties.password') }}</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password" required>
-
-								@if ($errors->has('password'))
-									<span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-								@endif
-							</div>
-						</div>
-
-						<div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-							<label class="col-md-4 control-label">{{ trans('labels.auth.properties.password_confirmation') }}</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation" required>
-
-								@if ($errors->has('password_confirmation'))
-									<span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-								@endif
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									{{ trans('labels.auth.register') }}
-								</button>
-							</div>
-						</div>
-					</form>
+						@if ($errors->has('username'))
+							<span class="input-error">
+								<strong>{{ $errors->first('username') }}</strong>
+							</span>
+						@endif
+					</div>
 				</div>
-			</div>
-		</div>
+
+				<div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
+					<label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
+					<div class="form-row__input">
+						<input type="email" class="input-text" name="email" value="{{ old('email') }}" required>
+
+						@if ($errors->has('email'))
+							<span class="input-error">
+								<strong>{{ $errors->first('email') }}</strong>
+							</span>
+						@endif
+					</div>
+				</div>
+
+				<div class="form-row {{ $errors->has('password') ? 'has-error' : '' }}">
+					<label class="form-row__label">{{ trans('labels.auth.properties.password') }}</label>
+					<div class="form-row__input">
+						<input type="password" class="input-text" name="password" required>
+
+						@if ($errors->has('password'))
+							<span class="input-error">
+								<strong>{{ $errors->first('password') }}</strong>
+							</span>
+						@endif
+					</div>
+				</div>
+
+				<div class="form-row {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
+					<label class="form-row__label">{{ trans('labels.auth.properties.password_confirmation') }}</label>
+					<div class="form-row__input">
+						<input type="password" class="input-text" name="password_confirmation" required>
+
+						@if ($errors->has('password_confirmation'))
+							<span class="input-error">
+								<strong>{{ $errors->first('password_confirmation') }}</strong>
+							</span>
+						@endif
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-row__label"></div>
+					<div class="form-row__input">
+						<button type="submit" class="button button--primary mt-6">
+							{{ trans('labels.auth.register') }}
+						</button>
+					</div>
+				</div>
+			</form>
+
+			@slot('footer')
+				Already have an account?
+				<a class="link" href="{{ route('login') }}">{{ trans('labels.auth.login') }}</a>
+			@endslot
+		@endcomponent
 	</div>
 @endsection

@@ -2,20 +2,15 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateGoalsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        //Schema::dropIfExists('goals');
         Schema::create('goals', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('label', 128);
             $table->date('start_date');
             $table->date('goal_date');
@@ -30,13 +25,8 @@ class CreateGoalsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::drop('goals');
+        Schema::dropIfExists('goals');
     }
 }

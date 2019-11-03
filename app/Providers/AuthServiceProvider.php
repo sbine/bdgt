@@ -1,9 +1,11 @@
 <?php
 
-namespace Bdgt\Providers;
+namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Policies\TransactionPolicy;
+use App\Models\Transaction;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Bdgt\Model' => 'Bdgt\Policies\ModelPolicy',
+        Transaction::class => TransactionPolicy::class,
     ];
 
     /**
