@@ -12,8 +12,9 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row__label">{{ trans('labels.bills.properties.amount') }}</label>
-		<div class="form-row__input">
-			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000">
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
+			<input type="number" class="input-text" name="amount" step="0.01" min="0" max="10000" required>
 		</div>
 	</div>
 	<div class="form-row">

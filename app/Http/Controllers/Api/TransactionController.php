@@ -29,20 +29,32 @@ class TransactionController extends Controller
 
     public function update(Transaction $transaction)
     {
-        $transaction->update(request()->all());
+        if ($transaction->update(request()->all())) {
+            session()->flash('alerts.success', trans('crud.transactions.updated'));
+
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+
+        session()->flash('alerts.danger', trans('crud.transactions.error'));
 
         return response()->json([
-            'success' => true,
+            'success' => false,
         ]);
     }
 
     public function destroy(Transaction $transaction)
     {
         if ($transaction->delete()) {
+            session()->flash('alerts.success', trans('crud.transactions.deleted'));
+
             return response()->json([
                 'success' => true,
             ]);
         }
+
+        session()->flash('alerts.danger', trans('crud.transactions.error'));
 
         return response()->json([
             'success' => false,

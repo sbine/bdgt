@@ -30,6 +30,9 @@ class DashboardController extends Controller
                 ->sortBy('label')
                 ->values(),
             'categories' => $transactions
+                ->filter(function ($transaction) {
+                    return !! $transaction->category;
+                })
                 ->map(function ($transaction) {
                     return $transaction->category->only(['id', 'label']);
                 })

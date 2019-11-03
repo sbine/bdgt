@@ -27,7 +27,8 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row__label">{{ trans('labels.goals.properties.balance') }}</label>
-		<div class="form-row__input">
+		<div class="form-row__input input-addon--start">
+			<span class="input-addon">$</span>
 			<input type="number" class="input-text" name="balance" step="0.01" min="0" max="10000000">
 		</div>
 	</div>

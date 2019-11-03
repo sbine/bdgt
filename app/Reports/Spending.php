@@ -96,7 +96,7 @@ class Spending implements Reportable
         $date = new DateTime($startDate->format('Y-m-d'));
         while ($date <= $endDate) {
             // Select totals for every month
-            $query = $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
+            $query->addSelect(DB::raw('SUM(IF(DATE_FORMAT(date, "%Y-%m") = "' . $date->format('Y-m') . '",amount,0)) as total_' . $date->format('Y_m')));
             $date->add($monthInterval);
         }
 

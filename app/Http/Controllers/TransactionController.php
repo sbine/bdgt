@@ -49,7 +49,7 @@ class TransactionController extends Controller
             'payee'       => 'required',
             'account_id'  => 'required|numeric',
             'inflow'      => 'required',
-            'category_id' => 'numeric',
+            'category_id' => 'nullable|numeric',
         ]);
 
         if (Transaction::create(Input::all())) {
@@ -73,7 +73,7 @@ class TransactionController extends Controller
             'payee'       => 'required',
             'account_id'  => 'required|numeric',
             'inflow'      => 'required',
-            'category_id' => 'numeric',
+            'category_id' => 'nullable|numeric',
         ]);
 
         if ($transaction->update(Input::all())) {

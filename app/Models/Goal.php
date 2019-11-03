@@ -35,6 +35,7 @@ class Goal extends Model
     protected $casts = [
         'amount' => 'float',
         'balance' => 'float',
+        'goal_date' => 'date',
     ];
 
     public function getAchievedAttribute(): bool
@@ -45,7 +46,7 @@ class Goal extends Model
         return false;
     }
 
-    public function getProgressAttribute(): float
+    public function getProgressAttribute()
     {
         return sprintf('%0.0f', ($this->balance / $this->amount) * 100);
     }
