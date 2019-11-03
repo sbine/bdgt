@@ -1,13 +1,9 @@
 @extends('app')
 
-@section('breadcrumbs.items')
-	<div class="breadcrumb breadcrumb--active">Dashboard</div>
-@endsection
-
-@section('breadcrumbs.actions')
-	<toggle>
+@section('breadcrumbs')
+	<toggle class="w-full flex justify-end">
 		<template v-slot="{ isOn, setTo }">
-			<a class="button button--success block sm:inline-block" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
+			<a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
 				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
 			</a>
 

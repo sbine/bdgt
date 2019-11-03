@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-	<div class="bg-white rounded-sm shadow -mt-4">
+	<div class="bg-white rounded-sm shadow">
 		@foreach ($accounts as $account)
 			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 border-b p-6">
 				<h4 class="flex justify-between text-gray-700 text-xl">

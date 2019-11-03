@@ -13,10 +13,10 @@
 
 					@include('alerts')
 
-					<div class="flex justify-between mb-10">
+					<div class="flex justify-between mb-8">
 						@section('breadcrumbs')
 							<div class="flex">
-								<a class="link block text-sm py-2" href="{{ route('index') }}">Home</a>
+								<a class="link block text-sm py-2" href="{{ route('dashboard') }}">Home</a>
 								@yield('breadcrumbs.items')
 							</div>
 							<div class="flex self-end">

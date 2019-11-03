@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-	<div class="bg-white rounded-sm shadow -mt-4">
+	<div class="bg-white rounded-sm shadow">
 		@foreach ($categories as $category)
 			<a href="{{ route('categories.show', $category->id) }}" class="block hover:bg-gray-100 border-b p-6">
 				<h4 class="flex justify-between text-2xl">
