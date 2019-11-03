@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
 
         User::create([
             'id' => null,
-            'username' => 'admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('admin')
         ]);
@@ -24,7 +23,6 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 29; $i++) {
             User::create([
                 'id' => null,
-                'username' => $faker->userName(),
                 'email' => $faker->email(),
                 'password' => $faker->md5()
             ]);

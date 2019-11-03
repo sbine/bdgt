@@ -8,19 +8,6 @@
 
 				<h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.register') }}</h2>
 
-				<div class="form-row {{ $errors->has('username') ? 'has-error' : '' }}">
-					<label class="form-row__label">{{ trans('labels.auth.properties.username') }}</label>
-					<div class="form-row__input">
-						<input type="text" class="input-text" name="username" value="{{ old('username') }}" required autofocus>
-
-						@if ($errors->has('username'))
-							<span class="input-error">
-								<strong>{{ $errors->first('username') }}</strong>
-							</span>
-						@endif
-					</div>
-				</div>
-
 				<div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
 					<label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
 					<div class="form-row__input">

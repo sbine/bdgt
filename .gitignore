@@ -9,3 +9,4 @@ Homestead.json
 .env
 *.map
 .idea
+.phpunit.result.cache

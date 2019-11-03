@@ -28,7 +28,6 @@ class DummyDataSeeder extends Seeder
 
         $adminUser = factory(User::class)->create([
             'id'       => 1,
-            'username' => 'admin',
             'email'    => 'admin@example.com',
             'password' => Hash::make('admin')
         ]);
