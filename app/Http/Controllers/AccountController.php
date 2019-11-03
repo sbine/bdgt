@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class AccountController extends Controller
 {
@@ -43,7 +43,7 @@ class AccountController extends Controller
             'interest' => 'required|numeric',
         ]);
 
-        if ($account = Account::create(Input::all())) {
+        if ($account = Account::create(Request::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
@@ -59,7 +59,7 @@ class AccountController extends Controller
      */
     public function update(Account $account)
     {
-        if ($account->update(Input::all())) {
+        if ($account->update(Request::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class GoalController extends Controller
 {
@@ -43,7 +43,7 @@ class GoalController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        if ($goal = Goal::create(Input::all())) {
+        if ($goal = Goal::create(Request::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.created'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
@@ -59,7 +59,7 @@ class GoalController extends Controller
      */
     public function update(Goal $goal)
     {
-        if ($goal->update(Input::all())) {
+        if ($goal->update(Request::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.updated'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));

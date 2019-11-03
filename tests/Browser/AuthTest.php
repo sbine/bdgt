@@ -22,7 +22,6 @@ class AuthTest extends DuskTestCase
             $browser
                 ->visit(route('register'))
                 ->assertSee('Register')
-                ->type('username', $user->username)
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->type('password_confirmation', 'password')

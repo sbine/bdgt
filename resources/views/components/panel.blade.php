@@ -1,7 +1,7 @@
 <div class="bg-white rounded-sm shadow">
     <div class="bg-blue-700 rounded-t px-4 py-1"></div>
 
-    <div class="py-8">
+    <div class="px-6 py-8">
         {{ $slot }}
     </div>
 

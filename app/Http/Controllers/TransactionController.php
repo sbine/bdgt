@@ -6,7 +6,7 @@ use App\Models\Account;
 use App\Models\Category;
 use App\Models\Ledger;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class TransactionController extends Controller
 {
@@ -52,7 +52,7 @@ class TransactionController extends Controller
             'category_id' => 'nullable|numeric',
         ]);
 
-        if (Transaction::create(Input::all())) {
+        if (Transaction::create(Request::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
@@ -76,7 +76,7 @@ class TransactionController extends Controller
             'category_id' => 'nullable|numeric',
         ]);
 
-        if ($transaction->update(Input::all())) {
+        if ($transaction->update(Request::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
