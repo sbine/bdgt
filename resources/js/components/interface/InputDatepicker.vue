@@ -5,6 +5,7 @@
         :from-date="date"
         :mode="mode"
         :popover="{ placement: 'bottom', visibility: 'click' }"
+        dusk="datepicker"
     >
         <template v-slot="{ inputProps, inputEvents }">
             <div class="input-addon--end">

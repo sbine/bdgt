@@ -7,7 +7,7 @@
 @section('breadcrumbs.actions')
 	<toggle>
 		<template v-slot="{ isOn, setTo }">
-			<a class="button button--success block sm:inline-block" href="#" @click.prevent="setTo(true)">
+			<a class="button button--success block sm:inline-block" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
 				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
 			</a>
 

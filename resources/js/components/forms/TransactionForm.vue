@@ -1,6 +1,6 @@
 <template>
 	<modal :value="creating || editing || deleting" @input="reset">
-        <form ref="form" :method="formMethod" :action="formAction" @submit.prevent="save">
+        <form ref="form" :method="formMethod" :action="formAction" @submit.prevent="save" dusk="transaction-form">
             <div class="sm:w-5/6 p-8">
                 <template v-if="deleting">
                     <h4 class="text-2xl mb-10">{{ $t('labels.transactions.modals.delete.title') }}</h4>
