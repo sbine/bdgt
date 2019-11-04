@@ -92,7 +92,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         if ($transaction->delete()) {
-            return redirect(route('transactions.index'))->with('alerts.success', trans('crud.transactions.deleted'));
+            return redirect(route('dashboard'))->with('alerts.success', trans('crud.transactions.deleted'));
         } else {
             return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
         }

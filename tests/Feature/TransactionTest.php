@@ -26,7 +26,7 @@ class TransactionTest extends TestCase
         ]);
 
         $self = $this->actingAs($account->user)
-            ->get(route('transactions.index'))
+            ->get(route('dashboard'))
             ->assertStatus(200);
 
         $transactions->each(function ($transaction) use ($self) {
@@ -91,7 +91,7 @@ class TransactionTest extends TestCase
 
         $this->actingAs($transaction->user)
             ->delete(route('transactions.destroy', $transaction->id))
-            ->assertRedirect(route('transactions.index'));
+            ->assertRedirect(route('dashboard'));
 
         $this->assertDatabaseMissing('transactions', [ 'id' => $transaction->id ]);
     }
