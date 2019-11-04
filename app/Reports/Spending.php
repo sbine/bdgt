@@ -87,7 +87,7 @@ class Spending implements Reportable
     {
         $monthInterval = new DateInterval('P1M');
 
-        $query = Transaction::whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d')])
+        $query = Transaction::whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d 23:59:59')])
             ->addSelect('date')
             ->addSelect(DB::raw('categories.label AS category'))
             ->groupBy('category')
