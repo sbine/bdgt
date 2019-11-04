@@ -37,7 +37,7 @@
 		</div>
 
 		<p class="mt-2">
-			{{ trans('labels.goals.properties.goal_date') }}: {{ $goal->goal_date }}
+			{{ trans('labels.goals.properties.goal_date') }}: @date($goal->goal_date)
 			(<formatter-date time="{{ $goal->goal_date }}" :diff="true"></formatter-date>)
 		</p>
 

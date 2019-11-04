@@ -12,7 +12,7 @@
             aria-valuemin="0"
             aria-valuemax="100"
             :style="{
-                width: props.progress + '%',
+                width: Math.min(Math.max(parseInt(props.progress), 0), 100) + '%',
                 minWidth: '1%'
             }"
         >

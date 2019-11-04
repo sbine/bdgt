@@ -1,7 +1,7 @@
 <nav class="bg-blue-900 py-3">
 	<toggle class="w-11/12 xl:w-3/4 mx-auto flex flex-wrap items-center justify-between">
 		<template v-slot="{ isOn, toggle }">
-			<a class="block flex flex-auto flex-shrink-0 items-center font-light text-gray-400 hover:text-white text-xl p-2" href="{{ route('index') }}">
+			<a class="block flex flex-shrink-0 items-center font-light text-gray-400 hover:text-white text-xl mr-16 p-2" href="{{ route('index') }}">
 				<img class="h-6 mr-2 -ml-2" alt="bdgt" src="/favicon.png">
 				<span class="font-semibold text-xl tracking-tight">bdgt</span>
 			</a>

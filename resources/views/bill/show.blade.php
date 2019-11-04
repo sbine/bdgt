@@ -38,7 +38,7 @@
 		<span class="text-gray-700">({{ $bill->nextDue }})</span>
 	</p>
 	<p class="mt-2">
-		<formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since {{ $bill->lastDue }}
+		<formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since @date($bill->lastDue)
 	</p>
 
 	<div class="bg-white rounded-sm shadow p-6 mt-6">

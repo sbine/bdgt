@@ -56,7 +56,7 @@
             <font-awesome-icon icon="check" :class="row.cleared ? 'text-black' : 'text-gray-300'"/>
         </template>
 
-        <template #actions="{ row }">
+        <template #actions="{ row }" v-if="showActions">
             <button class="button button--warning w-8 text-gray-100 p-1" @click="$root.$emit('editTransaction', row.id)" dusk="edit-transaction">
                 <font-awesome-icon icon="pencil-alt" class="fa-sm"/>
             </button>
@@ -76,6 +76,9 @@ export default {
         transactions: {
             type: Array,
             required: true,
+        },
+        showActions: {
+            type: Boolean,
         }
     },
 

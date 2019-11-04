@@ -65,6 +65,7 @@
 @section('content')
 	<transactions-table
 		:transactions='{{ json_encode($transactions) }}'
+		:show-actions="true"
 		class="w-full bg-white rounded-sm shadow p-6"
 	></transactions-table>
 

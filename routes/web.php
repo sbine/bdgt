@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      | Transactions
      */
-    Route::resource('transactions', 'TransactionController');
+    Route::resource('transactions', 'TransactionController')->except('index');
 
     /*
      | Categories

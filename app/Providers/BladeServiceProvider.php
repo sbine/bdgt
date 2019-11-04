@@ -21,6 +21,10 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('number', function ($expression) {
             return "<?php echo number_format({$expression}, 2); ?>";
         });
+
+        Blade::directive('date', function ($expression) {
+            return "<?php echo (new Illuminate\Support\Carbon({$expression}))->format('F j, Y') ?>";
+        });
     }
 
     /**

@@ -35,7 +35,10 @@
 					></progress-bar>
 				</div>
 
-				<p><formatter-currency :amount="{{ $goal->balance }}"></formatter-currency> saved</p>
+				<div class="flex justify-between">
+					<p><formatter-currency :amount="{{ $goal->balance }}"></formatter-currency> saved</p>
+					<p><formatter-currency :amount="{{ $goal->amount - $goal->balance }}"></formatter-currency> remaining</p>
+				</div>
 			</a>
 		@endforeach
 	</div>
