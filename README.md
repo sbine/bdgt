@@ -29,8 +29,10 @@ A demo application is available at [https://bdgt.it](https://bdgt.it)
 
 ## Installation
 
+This project requires a PHP environment and a MySQL database.  
+For local development you can use PHP on your host machine (`php artisan serve`), [Laravel Valet](https://laravel.com/docs/master/valet), or [Laravel Homestead](https://laravel.com/docs/master/homestead).
+
 `cp .env.example .env`  
-`vagrant up` -- requires [Vagrant](https://www.vagrantup.com/)  
 `composer install` -- requires [Composer](https://getcomposer.org/)  
 `php artisan key:generate`  
 `php artisan migrate`  
@@ -39,3 +41,10 @@ A demo application is available at [https://bdgt.it](https://bdgt.it)
 A dummy account will be created with the following credentials which can be used to login and preview the app:  
 Email: admin@example.com  
 Password: admin
+
+### Building the frontend assets
+If you make changes to JS or SCSS files, you'll need to recompile the frontend assets.
+
+`npm install` -- requires [NPM](https://www.npmjs.com/)  
+`npm run watch` -- to automatically compile changes  
+`npm run prod` -- before submitting a PR  
