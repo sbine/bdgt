@@ -27,7 +27,7 @@ class Model extends EloquentModel
         });
     }
 
-    // http://laravel-tricks.com/tricks/setting-null-values-only-on-certain-fields
+    // https://laravel-tricks.com/tricks/setting-null-values-only-on-certain-fields
     protected static function setNullables($model)
     {
         array_map(function ($property) use ($model) {

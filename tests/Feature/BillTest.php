@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Bill;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class BillTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -19,7 +22,7 @@ class BillTest extends TestCase
     {
         $user = factory(User::class)->create();
         $bills = factory(Bill::class, 3)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $self = $this->actingAs($user)

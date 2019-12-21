@@ -28,10 +28,11 @@ class TenancyProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Tenant::class, function() {
+        $this->app->singleton(Tenant::class, function () {
             if (! Auth::check()) {
                 throw new DomainException('Unable to apply tenancy: no authenticated user found');
             }
+
             return new Tenant(Auth::user());
         });
     }

@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Goal;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GoalTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -19,7 +22,7 @@ class GoalTest extends TestCase
     {
         $user = factory(User::class)->create();
         $goals = factory(Goal::class, 3)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $self = $this->actingAs($user)

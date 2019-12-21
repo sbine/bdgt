@@ -5,10 +5,13 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -22,7 +25,7 @@ class TransactionTest extends TestCase
         $account = factory(Account::class)->states('with_user')->create();
         $transactions = factory(Transaction::class, 3)->create([
             'user_id' => $account->user->id,
-            'account_id' => $account->id
+            'account_id' => $account->id,
         ]);
 
         $self = $this->actingAs($account->user)

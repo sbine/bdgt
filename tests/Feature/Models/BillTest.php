@@ -1,17 +1,20 @@
 <?php
 
-namespace Tests\Feature\Resources;
+namespace Tests\Feature\Models;
 
 use App\Models\Bill;
 use App\Models\Transaction;
 use App\Models\User;
-use Tests\TestCase;
+use Carbon\Carbon;
 use DateInterval;
 use DateTime;
-use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class BillTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();

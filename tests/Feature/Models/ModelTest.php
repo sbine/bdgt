@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature\Resources;
+namespace Tests\Feature\Models;
 
+use App\Models\Model;
 use App\Tenancy\TenancyScope;
 use Tests\TestCase;
-use App\Models\Model;
 
 class ModelTest extends TestCase
 {

@@ -4,10 +4,13 @@ namespace Tests\Feature\Api;
 
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     function user_can_create_a_transaction()
     {

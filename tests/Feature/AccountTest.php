@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AccountTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -19,7 +22,7 @@ class AccountTest extends TestCase
     {
         $user = factory(User::class)->create();
         $accounts = factory(Account::class, 3)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $self = $this->actingAs($user)
