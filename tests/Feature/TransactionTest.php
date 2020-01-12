@@ -33,7 +33,7 @@ class TransactionTest extends TestCase
             ->assertStatus(200);
 
         $transactions->each(function ($transaction) use ($self) {
-            $self->assertSee(htmlentities($transaction->payee));
+            $self->assertSee(e($transaction->payee));
         });
     }
 

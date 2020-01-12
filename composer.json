@@ -9,6 +9,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "moneyphp/money": "^3.0",
+        "sbine/simple-tenancy": "*",
         "simshaun/recurr": "^1.0"
     },
     "require-dev": {

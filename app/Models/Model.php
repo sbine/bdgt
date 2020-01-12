@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Tenancy\HasTenancy;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Sbine\Tenancy\HasTenancy;
 
 class Model extends EloquentModel
 {
-    use HasTenancy;
+    use HasTenancy, BelongsToUser;
 
     protected $nullable = [];
 
