@@ -44,7 +44,7 @@ class DashboardController extends Controller
                 ->flair
                 ->unique()
                 ->sort()
-                ->values()
+                ->values(),
         ]);
     }
 }

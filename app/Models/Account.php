@@ -2,29 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Model;
-
 class Account extends Model
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'accounts';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'date_opened',
         'name',
         'balance',
         'interest',
         'interest_period',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
@@ -41,6 +29,7 @@ class Account extends Model
                 $runningBalance -= $transaction->amount;
             }
         }
+
         return $runningBalance;
     }
 

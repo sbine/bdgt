@@ -33,9 +33,9 @@ class CategoryController extends Controller
     {
         if ($category = Category::create(Request::all())) {
             return redirect(route('categories.show', $category->id))->with('alerts.success', trans('crud.categories.created'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
     }
 
     /**
@@ -49,9 +49,9 @@ class CategoryController extends Controller
     {
         if ($category->update(Request::all())) {
             return redirect(route('categories.show', $category->id))->with('alerts.success', trans('crud.categories.updated'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
     }
 
     /**
@@ -65,8 +65,8 @@ class CategoryController extends Controller
     {
         if ($category->delete()) {
             return redirect(route('categories.index'))->with('alerts.success', trans('crud.categories.deleted'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
     }
 }

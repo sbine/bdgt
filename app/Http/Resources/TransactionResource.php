@@ -31,7 +31,7 @@ class TransactionResource extends Resource
                 'flair' => $this->flair,
                 'created_at' => $this->created_at->toDateTimeString(),
                 'updated_at' => $this->updated_at->toDateTimeString(),
-            ])
+            ]),
         ];
     }
 }

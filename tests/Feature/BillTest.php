@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @group bill */
 class BillTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,7 +19,8 @@ class BillTest extends TestCase
         Bill::flushEventListeners();
     }
 
-    public function testIndexDisplaysAllBills()
+    /** @test */
+    public function index_displays_all_bills()
     {
         $user = factory(User::class)->create();
         $bills = factory(Bill::class, 3)->create([
@@ -34,26 +36,29 @@ class BillTest extends TestCase
         });
     }
 
-    public function testShowDisplaysAssociatedBill()
+    /** @test */
+    public function show_displays_associated_bill()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
 
         $this->actingAs($bill->user)
-            ->get(route('bills.show', [ 'bill' => $bill->id ]))
+            ->get(route('bills.show', $bill))
             ->assertStatus(200)
             ->assertSee($bill->label);
     }
 
-    public function testCannotViewAnotherUsersBill()
+    /** @test */
+    public function cannot_view_another_users_bill()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->get(route('bills.show', [ 'bill' => $bill->id ]))
+            ->get(route('bills.show', $bill))
             ->assertNotFound();
     }
 
-    public function testStorePersistsNewBillAndRedirects()
+    /** @test */
+    public function store_persists_new_bill_and_redirects()
     {
         $bill = factory(Bill::class)->make();
 
@@ -64,7 +69,8 @@ class BillTest extends TestCase
         $this->assertDatabaseHas('bills', $bill->toArray());
     }
 
-    public function testUnsuccessfulStoreRedirectsWithError()
+    /** @test */
+    public function unsuccessful_store_redirects_with_error()
     {
         $this->actingAs(factory(User::class)->create())
             ->post(route('bills.store', []))
@@ -72,42 +78,48 @@ class BillTest extends TestCase
             ->assertSessionHas('errors');
     }
 
-    public function testUpdatePersistsChangesAndRedirects()
+    /** @test */
+    public function update_persists_changes_and_redirects()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
         $bill->amount = 500;
 
         $this->actingAs($bill->user)
-            ->put(route('bills.update', [ 'bill' => $bill->id ]), $bill->toArray())
-            ->assertRedirect(route('bills.show', [ 'bill' => $bill->id ]));
+            ->put(route('bills.update', $bill), $bill->toArray())
+            ->assertRedirect(route('bills.show', $bill));
     }
 
-    public function testCannotUpdateAnotherUsersBill()
+    /** @test */
+    public function cannot_update_another_users_bill()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->put(route('bills.update', [ 'bill' => $bill->id ]), [])
+            ->put(route('bills.update', $bill), [])
             ->assertNotFound();
     }
 
-    public function testDeleteDeletesAndRedirectsToIndex()
+    /** @test */
+    public function delete_deletes_and_redirects_to_index()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
 
         $this->actingAs($bill->user)
-            ->delete(route('bills.destroy', $bill->id))
+            ->delete(route('bills.destroy', $bill))
             ->assertRedirect(route('bills.index'));
 
-        $this->assertDatabaseMissing('bills', [ 'id' => $bill->id ]);
+        $this->assertDatabaseMissing('bills', ['id' => $bill->id]);
     }
 
-    public function testCannotDeleteAnotherUsersBill()
+    /** @test */
+    public function cannot_delete_another_users_bill()
     {
         $bill = factory(Bill::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('bills.destroy', $bill->id))
+            ->delete(route('bills.destroy', $bill))
             ->assertNotFound();
+
+        $this->assertDatabaseHas('bills', ['id' => $bill->id]);
     }
 }

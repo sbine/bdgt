@@ -2,7 +2,7 @@
 
 return [
     'modals' => [
-        'button_close' => 'Cancel'
+        'button_close' => 'Cancel',
     ],
     'emails' => [
         'forgot_password_text' => 'Click here to reset your password:',
@@ -21,7 +21,7 @@ return [
             'password' => 'Password',
             'password_confirmation' => 'Confirm Password',
             'remember' => 'Remember Me',
-        ]
+        ],
     ],
     'accounts' => [
         'singular' => 'Account',
@@ -99,7 +99,7 @@ return [
                 'interestRate' => 'Interest Rate',
                 'minimumPayment' => 'Minimum Payment',
             ],
-        ]
+        ],
     ],
     'categories' => [
         'singular' => 'Category',
@@ -167,7 +167,7 @@ return [
         'singular' => 'Report',
         'plural' => 'Reports',
         'spending_by_category' => 'Spending By Category',
-        'spending_over_time' => 'Spending Over Time'
+        'spending_over_time' => 'Spending Over Time',
     ],
     'transactions' => [
         'singular' => 'Transaction',

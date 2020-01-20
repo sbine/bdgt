@@ -2,23 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Model;
 use Illuminate\Support\Carbon;
 
 class Transaction extends Model
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'transactions';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'date',
         'account_id',
@@ -32,33 +21,7 @@ class Transaction extends Model
         'user_id',
     ];
 
-    /**
-     * The attributes that accept null as a value.
-     *
-     * @var array
-     */
-    protected $nullable = [
-        'bill_id',
-        'category_id',
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_id',
-        'user',
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
     protected $casts = [
-        'user_id' => 'integer',
         'date' => 'datetime',
         'amount' => 'float',
         'cleared' => 'bool',
@@ -67,7 +30,7 @@ class Transaction extends Model
 
     /**
      * Explicitly parse provided datetime strings to avoid
-     * the Carbon exception "Unexpected data found. Trailing data"
+     * the Carbon exception "Unexpected data found. Trailing data".
      */
     public function setDateAttribute($value)
     {

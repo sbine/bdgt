@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Transaction;
-
 class Ledger
 {
     protected $transactions;
@@ -16,7 +14,7 @@ class Ledger
     {
         $this->transactions = Transaction::all()->sortByDesc('date');
 
-        if (!$this->transactions->isEmpty()) {
+        if (! $this->transactions->isEmpty()) {
             $this->lastPurchase = $this->transactions->first()->date;
 
             foreach ($this->transactions as $t) {

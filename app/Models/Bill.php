@@ -2,30 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Model;
 use DateInterval;
 use DateTime;
 
 class Bill extends Model
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'bills';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'label',
         'start_date',
         'frequency',
         'amount',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
@@ -47,6 +36,7 @@ class Bill extends Model
                 }
             }
         }
+
         return $total;
     }
 
@@ -55,18 +45,19 @@ class Bill extends Model
         if ($this->total >= $this->amount) {
             return true;
         }
+
         return false;
     }
 
     public function getDueDatesForInterval($intervalStart, $intervalEnd)
     {
         $intervalStart = new DateTime(date('Y-m-d', strtotime($intervalStart)));
-        $intervalEnd   = new DateTime(date('Y-m-d', strtotime($intervalEnd)));
-        $initialStart  = $this->start_date;
-        $frequency     = new DateInterval('P' . $this->frequency . 'D');
+        $intervalEnd = new DateTime(date('Y-m-d', strtotime($intervalEnd)));
+        $initialStart = $this->start_date;
+        $frequency = new DateInterval('P' . $this->frequency . 'D');
 
         $dates = [];
-        $date  = $initialStart;
+        $date = $initialStart;
 
         while ($date < $intervalStart) {
             $date->add($frequency);

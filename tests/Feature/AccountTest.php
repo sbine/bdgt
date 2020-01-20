@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @group account */
 class AccountTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,7 +19,8 @@ class AccountTest extends TestCase
         Account::flushEventListeners();
     }
 
-    public function testIndexDisplaysAllAccounts()
+    /** @test */
+    public function index_displays_all_accounts()
     {
         $user = factory(User::class)->create();
         $accounts = factory(Account::class, 3)->create([
@@ -34,26 +36,29 @@ class AccountTest extends TestCase
         });
     }
 
-    public function testShowDisplaysAssociatedAccount()
+    /** @test */
+    public function show_displays_associated_account()
     {
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs($account->user)
-            ->get(route('accounts.show', [ 'account' => $account->id ]))
+            ->get(route('accounts.show', $account))
             ->assertStatus(200)
             ->assertSee($account->name);
     }
 
-    public function testCannotViewAnotherUsersAccount()
+    /** @test */
+    public function cannot_view_another_users_account()
     {
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->get(route('accounts.show', [ 'account' => $account->id ]))
+            ->get(route('accounts.show', $account))
             ->assertNotFound();
     }
 
-    public function testStorePersistsNewAccountAndRedirects()
+    /** @test */
+    public function store_persists_new_account_and_redirects()
     {
         $account = factory(Account::class)->make();
 
@@ -64,7 +69,8 @@ class AccountTest extends TestCase
         $this->assertDatabaseHas('accounts', $account->toArray());
     }
 
-    public function testUnsuccessfulStoreRedirectsWithError()
+    /** @test */
+    public function unsuccessful_store_redirects_with_error()
     {
         $this->actingAs(factory(User::class)->create())
             ->post(route('accounts.store', []))
@@ -72,44 +78,50 @@ class AccountTest extends TestCase
             ->assertSessionHas('errors');
     }
 
-    public function testUpdatePersistsChangesAndRedirects()
+    /** @test */
+    public function update_persists_changes_and_redirects()
     {
         $account = factory(Account::class)->states('with_user')->create();
         $account->balance = 500;
 
         $this->actingAs($account->user)
-            ->put(route('accounts.update', [ 'account' => $account->id ]), $account->toArray())
-            ->assertRedirect(route('accounts.show', [ 'account' => $account->id ]));
+            ->put(route('accounts.update', $account), $account->toArray())
+            ->assertRedirect(route('accounts.show', $account));
 
         $this->assertDatabaseHas('accounts', $account->toArray());
     }
 
-    public function testCannotUpdateAnotherUsersAccount()
+    /** @test */
+    public function cannot_update_another_users_account()
     {
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->put(route('accounts.update', [ 'account' => $account->id ]), [])
+            ->put(route('accounts.update', $account), [])
             ->assertNotFound();
     }
 
-    public function testDeleteDeletesAndRedirectsToIndex()
+    /** @test */
+    public function delete_deletes_and_redirects_to_index()
     {
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs($account->user)
-            ->delete(route('accounts.destroy', $account->id))
+            ->delete(route('accounts.destroy', $account))
             ->assertRedirect(route('accounts.index'));
 
-        $this->assertDatabaseMissing('accounts', [ 'id' => $account->id ]);
+        $this->assertDatabaseMissing('accounts', ['id' => $account->id]);
     }
 
-    public function testCannotDeleteAnotherUsersAccount()
+    /** @test */
+    public function cannot_delete_another_users_account()
     {
         $account = factory(Account::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('accounts.destroy', $account->id))
+            ->delete(route('accounts.destroy', $account))
             ->assertNotFound();
+
+        $this->assertDatabaseHas('accounts', ['id' => $account->id]);
     }
 }

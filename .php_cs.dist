@@ -1,0 +1,85 @@
+<?php
+
+use PhpCsFixer\Config;
+
+/**
+ * Specify the project's configuration for php-cs-fixer
+ * https://github.com/FriendsOfPHP/PHP-CS-Fixer
+ *
+ * For examples of any rule, use the CLI tool:
+ * php vendor/bin/php-cs-fixer describe <rule_name>
+ */
+return Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        // Use [] instead of array()
+        'array_syntax' => ['syntax' => 'short'],
+        // Control alignment of => and =
+        'binary_operator_spaces' => ['default' => 'single_space'],
+        'blank_line_after_opening_tag' => true,
+        'blank_line_before_return' => true,
+        'combine_consecutive_issets' => true,
+        'combine_consecutive_unsets' => true,
+        // Spaces around . concat . operators (makes changes in out-of-the-box Laravel files)
+        // 'concat_space' => ['spacing' => 'one'],
+        // Ensure single space between function's argument and its typehint.
+        'function_typehint_space' => true,
+        'lowercase_cast' => true,
+        'lowercase_static_reference' => true,
+        // Risky rule: risky if any of the functions intval, floatval, doubleval, strval or boolval are overridden.
+        // 'modernize_types_casting' => true,
+        'native_function_casing' => true,
+        'no_blank_lines_after_phpdoc' => true,
+        // Don't allow empty comment lines (makes changes in out-of-the-box Laravel files)
+        // 'no_empty_comment' => true,
+        'no_empty_phpdoc' => true,
+        'no_empty_statement' => true,
+        'no_extra_blank_lines' => true,
+        'no_leading_import_slash' => true,
+        'no_leading_namespace_whitespace' => true,
+        'no_multiline_whitespace_around_double_arrow' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_spaces_around_offset' => true,
+        'no_trailing_comma_in_singleline_array' => true,
+        'no_unused_imports' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'no_whitespace_before_comma_in_array' => true,
+        'no_whitespace_in_blank_line' => true,
+        'normalize_index_brace' => true,
+        // Add a space after !
+        'not_operator_with_successor_space' => true,
+        // No space before or after ->
+        'object_operator_without_whitespace' => true,
+        'ordered_imports' => true,
+        'phpdoc_order' => true,
+        // Use short scalar types, e.g. bool
+        'phpdoc_scalar' => true,
+        // Add a line break between declaractions of different types, e.g. @param @return (makes changes in out-of-the-box Laravel files)
+        // 'phpdoc_separation' => true,
+        // Add punctuation to the end of the first docblock line
+        'phpdoc_summary' => true,
+        'phpdoc_trim_consecutive_blank_line_separation' => true,
+        'php_unit_method_casing' => ['case' => 'snake_case'],
+        // Risky rule: may change the name of your tests, and could cause incompatibility with abstract classes or interfaces.
+        // 'php_unit_test_annotation' => ['style' => 'annotation'],
+        'return_type_declaration' => true,
+        'semicolon_after_instruction' => true,
+        // Use short scalar types, e.g. (bool)
+        'short_scalar_cast' => true,
+        'single_blank_line_before_namespace' => true,
+        // One-line comments should always use //
+        'single_line_comment_style' => true,
+        'single_quote' => true,
+        // Add a space after semicolon in e.g. for loops
+        'space_after_semicolon' => true,
+        'standardize_increment' => true,
+        // Replace <> with !=
+        'standardize_not_equals' => true,
+        'ternary_operator_spaces' => true,
+        // Replace ternary statements with null coalesce where possible
+        'ternary_to_null_coalescing' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'trim_array_spaces' => true,
+        'whitespace_after_comma_in_array' => true,
+    ]);

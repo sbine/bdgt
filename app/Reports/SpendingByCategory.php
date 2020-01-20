@@ -38,12 +38,13 @@ class SpendingByCategory implements Reportable
             $labels[] = $result->category;
             $dataSets[] = $result->total;
         }
+
         return [
             'labels' => $labels,
             'datasets' => [
                 [
                     'data' => $dataSets,
-                ]
+                ],
             ],
         ];
     }

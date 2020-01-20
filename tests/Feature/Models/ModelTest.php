@@ -8,7 +8,8 @@ use Tests\TestCase;
 
 class ModelTest extends TestCase
 {
-    public function testTenancyScopeIsApplied()
+    /** @test */
+    public function tenancy_scope_is_applied()
     {
         // Assert that we are applying the TenancyScope in Model::boot
         $this->assertTrue((new Model)->hasGlobalScope(TenancyScope::class));

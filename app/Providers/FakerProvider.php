@@ -26,7 +26,7 @@ class FakerProvider extends Base
     {
         $categories = [
             'Fuel',
-            'Groceries' ,
+            'Groceries',
             'Restaurants',
             'Fast Food',
             'Entertainment',
@@ -93,7 +93,7 @@ class FakerProvider extends Base
             'yellow',
             'green',
             'blue',
-            'purple'
+            'purple',
         ];
 
         return $this->randomElement($flairs);
@@ -106,7 +106,9 @@ class FakerProvider extends Base
             return $this->generator->biasedNumberBetween(0, 50) . '.' . $this->numberBetween(0, 99);
         }
 
-        return $this->generator->biasedNumberBetween(0, $max, function($x) { return 1 - pow($x, 4); }) . '.' . $this->numberBetween(0, 99);
+        return $this->generator->biasedNumberBetween(0, $max, function ($x) {
+            return 1 - pow($x, 4);
+        }) . '.' . $this->numberBetween(0, 99);
     }
 
     private function randomMostlyUnique($elements)
@@ -116,6 +118,7 @@ class FakerProvider extends Base
             return $this->unique()->randomElement($elements);
         } catch (OverflowException $e) {
             $this->unique(true);
+
             return $this->randomElement($elements);
         }
     }

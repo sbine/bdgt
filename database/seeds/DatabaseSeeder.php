@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Sbine\Tenancy\SuperAdmin;
+use Sbine\Tenancy\Tenant;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,12 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('DummyDataSeeder');
-        //$this->call('UserSeeder');
-        //$this->call('AccountSeeder');
-        //$this->call('TransactionSeeder');
-        //$this->call('CategorySeeder');
-        //$this->call('BillSeeder');
-        //$this->call('GoalSeeder');
+        app()->singleton(Tenant::class, SuperAdmin::class);
+
+        // $this->call(DummyDataSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(AccountSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(BillSeeder::class);
+        $this->call(TransactionSeeder::class);
+        $this->call(GoalSeeder::class);
     }
 }

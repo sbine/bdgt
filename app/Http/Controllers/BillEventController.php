@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
 use App\Models\Bill;
+use Illuminate\Support\Facades\Request;
 
 class BillEventController
 {

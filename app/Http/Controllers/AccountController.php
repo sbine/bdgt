@@ -45,9 +45,9 @@ class AccountController extends Controller
 
         if ($account = Account::create(Request::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
     }
 
     /**
@@ -61,9 +61,9 @@ class AccountController extends Controller
     {
         if ($account->update(Request::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
     }
 
     /**
@@ -77,8 +77,8 @@ class AccountController extends Controller
     {
         if ($account->delete()) {
             return redirect(route('accounts.index'))->with('alerts.success', trans('crud.accounts.deleted'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
     }
 }

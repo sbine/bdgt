@@ -35,7 +35,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Retrieve report data based on type
+     * Retrieve report data based on type.
      * @param  string $type
      * @return \Illuminate\Http\Response
      */

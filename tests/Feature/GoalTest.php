@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @group goal */
 class GoalTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,7 +19,8 @@ class GoalTest extends TestCase
         Goal::flushEventListeners();
     }
 
-    public function testIndexDisplaysAllGoals()
+    /** @test */
+    public function index_displays_all_goals()
     {
         $user = factory(User::class)->create();
         $goals = factory(Goal::class, 3)->create([
@@ -34,26 +36,29 @@ class GoalTest extends TestCase
         });
     }
 
-    public function testShowDisplaysAssociatedGoal()
+    /** @test */
+    public function show_displays_associated_goal()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
 
         $this->actingAs($goal->user)
-            ->get(route('goals.show', [ 'goal' => $goal->id ]))
+            ->get(route('goals.show', $goal))
             ->assertStatus(200)
             ->assertSee(htmlentities($goal->label));
     }
 
-    public function testCannotViewAnotherUsersGoal()
+    /** @test */
+    public function cannot_view_another_users_goal()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->get(route('goals.show', [ 'goal' => $goal->id ]))
+            ->get(route('goals.show', $goal))
             ->assertNotFound();
     }
 
-    public function testStorePersistsNewGoalAndRedirects()
+    /** @test */
+    public function store_persists_new_goal_and_redirects()
     {
         $goal = factory(Goal::class)->make();
 
@@ -64,7 +69,8 @@ class GoalTest extends TestCase
         $this->assertDatabaseHas('goals', $goal->toArray());
     }
 
-    public function testUnsuccessfulStoreRedirectsWithError()
+    /** @test */
+    public function unsuccessful_store_redirects_with_error()
     {
         $this->actingAs(factory(User::class)->create())
             ->post(route('goals.store', []))
@@ -72,44 +78,50 @@ class GoalTest extends TestCase
             ->assertSessionHas('errors');
     }
 
-    public function testUpdatePersistsChangesAndRedirects()
+    /** @test */
+    public function update_persists_changes_and_redirects()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
         $goal->balance = 500;
 
         $this->actingAs($goal->user)
-            ->put(route('goals.update', [ 'goal' => $goal->id ]), $goal->toArray())
-            ->assertRedirect(route('goals.show', [ 'goal' => $goal->id ]));
+            ->put(route('goals.update', $goal), $goal->toArray())
+            ->assertRedirect(route('goals.show', $goal));
 
         $this->assertDatabaseHas('goals', $goal->toArray());
     }
 
-    public function testCannotUpdateAnotherUsersGoal()
+    /** @test */
+    public function cannot_update_another_users_goal()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->put(route('goals.update', [ 'goal' => $goal->id ]), [])
+            ->put(route('goals.update', $goal), [])
             ->assertNotFound();
     }
 
-    public function testDeleteDeletesAndRedirectsToIndex()
+    /** @test */
+    public function delete_deletes_and_redirects_to_index()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
 
         $this->actingAs($goal->user)
-            ->delete(route('goals.destroy', $goal->id))
+            ->delete(route('goals.destroy', $goal))
             ->assertRedirect(route('goals.index'));
 
-        $this->assertDatabaseMissing('goals', [ 'id' => $goal->id ]);
+        $this->assertDatabaseMissing('goals', ['id' => $goal->id]);
     }
 
-    public function testCannotDeleteAnotherUsersGoal()
+    /** @test */
+    public function cannot_delete_another_users_goal()
     {
         $goal = factory(Goal::class)->states('with_user')->create();
 
         $this->actingAs(factory(User::class)->create())
-            ->delete(route('goals.destroy', $goal->id))
+            ->delete(route('goals.destroy', $goal))
             ->assertNotFound();
+
+        $this->assertDatabaseHas('goals', ['id' => $goal->id]);
     }
 }

@@ -69,7 +69,7 @@ NameVirtualHost *:80
 
 #bdgt
 <VirtualHost *:80>
-    ServerName bdgt.local
+    ServerName bdgt.test
     DocumentRoot /var/www/bdgt/public
     RewriteOptions inherit
 

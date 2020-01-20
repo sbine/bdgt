@@ -45,9 +45,9 @@ class GoalController extends Controller
 
         if ($goal = Goal::create(Request::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.created'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
     }
 
     /**
@@ -61,9 +61,9 @@ class GoalController extends Controller
     {
         if ($goal->update(Request::all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.updated'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
     }
 
     /**
@@ -77,8 +77,8 @@ class GoalController extends Controller
     {
         if ($goal->delete()) {
             return redirect(route('goals.index'))->with('alerts.success', trans('crud.goals.deleted'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
     }
 }

@@ -7,12 +7,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @group transaction */
 class TransactionTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    function user_can_create_a_transaction()
+    public function user_can_create_a_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);
@@ -32,7 +33,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    function user_can_view_their_own_transaction()
+    public function user_can_view_their_own_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);
@@ -48,7 +49,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    function user_cannot_view_another_users_transaction()
+    public function user_cannot_view_another_users_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);
@@ -62,7 +63,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    function user_can_edit_their_own_transaction()
+    public function user_can_edit_their_own_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);
@@ -79,12 +80,12 @@ class TransactionTest extends TestCase
 
         $this->assertDatabaseHas('transactions', array_merge(
             $updatedTransaction,
-            [ 'id' => $transaction->id ]
+            ['id' => $transaction->id]
         ));
     }
 
     /** @test */
-    function user_cannot_edit_another_users_transaction()
+    public function user_cannot_edit_another_users_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);
@@ -99,7 +100,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    function user_can_delete_their_own_transaction()
+    public function user_can_delete_their_own_transaction()
     {
         $user = factory(User::class)->create();
         $this->be($user);

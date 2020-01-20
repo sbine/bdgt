@@ -44,17 +44,18 @@ class TransactionController extends Controller
     public function store()
     {
         request()->validate([
-            'date'        => 'required|date',
-            'amount'      => 'required',
-            'payee'       => 'required',
-            'account_id'  => 'required|numeric',
-            'inflow'      => 'required',
+            'date' => 'required|date',
+            'amount' => 'required',
+            'payee' => 'required',
+            'account_id' => 'required|numeric',
+            'inflow' => 'required',
             'category_id' => 'nullable|numeric',
         ]);
 
         if (Transaction::create(Request::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
+
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
@@ -68,17 +69,18 @@ class TransactionController extends Controller
     public function update(Transaction $transaction)
     {
         request()->validate([
-            'date'        => 'required|date',
-            'amount'      => 'required',
-            'payee'       => 'required',
-            'account_id'  => 'required|numeric',
-            'inflow'      => 'required',
+            'date' => 'required|date',
+            'amount' => 'required',
+            'payee' => 'required',
+            'account_id' => 'required|numeric',
+            'inflow' => 'required',
             'category_id' => 'nullable|numeric',
         ]);
 
         if ($transaction->update(Request::all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.updated'));
         }
+
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
@@ -93,8 +95,8 @@ class TransactionController extends Controller
     {
         if ($transaction->delete()) {
             return redirect(route('dashboard'))->with('alerts.success', trans('crud.transactions.deleted'));
-        } else {
-            return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
         }
+
+        return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 }

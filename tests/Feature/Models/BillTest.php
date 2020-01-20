@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @group bill */
 class BillTest extends TestCase
 {
     use RefreshDatabase;
@@ -22,7 +23,8 @@ class BillTest extends TestCase
         $this->be(factory(User::class)->create());
     }
 
-    public function testPaidAttribute()
+    /** @test */
+    public function paid_attribute()
     {
         $bill = factory(Bill::class)->make([
             'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
@@ -32,13 +34,14 @@ class BillTest extends TestCase
         $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
             'amount' => 60,
             'inflow' => false,
-            'date' => date('Y-m-d H:i:s')
+            'date' => date('Y-m-d H:i:s'),
         ]));
 
         $this->assertTrue($bill->paid);
     }
 
-    public function testGetDueDatesForInterval()
+    /** @test */
+    public function get_due_dates_for_interval()
     {
         $bill = new Bill([
             'start_date' => new Carbon('2011-01-01'),
