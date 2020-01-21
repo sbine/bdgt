@@ -6,6 +6,10 @@
     @apply px-2;
     @apply py-1;
 
+    &[type="number"] {
+        @apply pr-0;
+    }
+
     &:focus {
         @apply outline-none;
     }
@@ -29,7 +33,11 @@
     @apply py-1;
     @apply text-center;
     @apply top-0;
-    @apply w-8;
+    @apply w-6;
+
+    @screen sm {
+        @apply w-8;
+    }
 }
 
 .input-addon--start {
@@ -40,7 +48,11 @@
         @apply rounded-l;
     }
     .input-text {
-        @apply pl-10;
+        @apply pl-8;
+
+        @screen sm {
+            @apply pl-10;
+        }
     }
 }
 
@@ -52,6 +64,10 @@
         @apply rounded-r;
     }
     .input-text {
+        @apply pr-8;
+    }
+
+    @screen sm {
         @apply pr-10;
     }
 }

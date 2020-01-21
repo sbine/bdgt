@@ -13,10 +13,12 @@
 
 Auth::routes();
 
-Route::get('/', 'PageController@index')->name('index');
+Route::view('/', 'page.index')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('dashboard', 'DashboardController')->name('dashboard');
+
+    Route::view('budget', 'budget.index')->name('budget');
 
     /*
      | Accounts
@@ -36,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      | Bills
      */
-    Route::get('bills/ajax_calendar_events', BillEventController::class)
+    Route::get('bills/ajax_calendar_events', 'BillEventController')
         ->name('bills.ajax.calendar.events');
 
     Route::resource('bills', 'BillController');
@@ -59,7 +61,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('ajax/{type}', 'ReportController@ajax')->name('reports.ajax.report');
     });
 
+    /*
+     | "API" for Vue
+     */
     Route::prefix('api')->name('api.')->namespace('Api')->group(function () {
+        Route::get('budget/{year}/{month}', 'BudgetController@index')->name('budget.index');
+        Route::get('budget/{year}/{month}/{category}', 'BudgetController@show')->name('budget.show');
+        Route::post('budget/{year}/{month}/{category}', 'BudgetController@update')->name('budget.update');
+        Route::delete('budget/{year}/{month}/{category}', 'BudgetController@destroy')->name('budget.destroy');
+
         Route::resource('transactions', 'TransactionController');
     });
 });

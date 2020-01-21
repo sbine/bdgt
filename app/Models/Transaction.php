@@ -52,6 +52,13 @@ class Transaction extends Model
         return $this->belongsTo(Bill::class);
     }
 
+    public function scopeForMonth($query, $date)
+    {
+        $query
+            ->where('date', '>=', (new Carbon)->parse($date)->startOfMonth())
+            ->where('date', '<=', (new Carbon)->parse($date)->endOfMonth());
+    }
+
     public function scopeOrdered($query)
     {
         $query->orderByDesc('date');

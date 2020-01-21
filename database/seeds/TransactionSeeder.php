@@ -8,7 +8,7 @@ class TransactionSeeder extends Seeder
 {
     public function run()
     {
-        User::all()->each(function (User $user) {
+        User::with(['accounts', 'categories', 'bills'])->get()->each(function (User $user) {
             $user->transactions()->saveMany(
                 factory(Transaction::class, 30)->make([
                     'account_id' => function () use ($user) {
