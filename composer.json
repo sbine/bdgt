@@ -7,23 +7,21 @@
         "php": "^7.2",
         "asgrim/ofxparser": "^1.2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.0",
+        "laravel/framework": "^6.2",
         "moneyphp/money": "^3.0",
-        "sbine/simple-tenancy": "*",
-        "simshaun/recurr": "^1.0"
+        "sbine/simple-tenancy": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "fzaninotto/faker": "^1.6",
-        "laravel/dusk": "^5.6",
+        "fzaninotto/faker": "^1.9",
+        "laravel/dusk": "^5.9",
         "laravel/telescope": "^2.1",
-        "laravel/tinker": "^1.0",
+        "laravel/tinker": "^2.0",
         "mockery/mockery": "^1.0",
-        "phploc/phploc": "^4.0.1",
-        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit": "^8.0",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.4"
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "config": {
         "optimize-autoloader": true,

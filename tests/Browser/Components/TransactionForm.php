@@ -5,7 +5,6 @@ namespace Tests\Browser\Components;
 use App\Models\Transaction;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Component as BaseComponent;
-use Tests\Browser\Components\Datepicker;
 
 class TransactionForm extends BaseComponent
 {
@@ -49,6 +48,7 @@ class TransactionForm extends BaseComponent
             ->within(new Datepicker, function ($browser) use ($transaction) {
                 $browser->selectDate($transaction->date);
             })
+            ->clear('amount')
             ->type('amount', $transaction->amount)
             ->type('payee', $transaction->payee)
             ->press('@save-button');

@@ -1,9 +1,12 @@
-name: Run tests
+name: Dusk tests
 
-on: push
+on:
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  phpunit:
+  dusk:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,10 +26,19 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-suggest --no-progress --prefer-dist
+        run: composer install --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
 
       - name: Generate application key
         run: php artisan key:generate
 
-      - name: Run PHPUnit tests
-        run: php vendor/bin/phpunit
+      - name: Upgrade Chrome driver
+        run: php artisan dusk:chrome-driver
+
+      - name: Start Chrome driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+      - name: Run Laravel server
+        run: php artisan serve &
+
+      - name: Run Dusk tests
+        run: php artisan dusk
