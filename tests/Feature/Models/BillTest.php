@@ -5,8 +5,6 @@ namespace Tests\Feature\Models;
 use App\Models\Bill;
 use App\Models\Transaction;
 use Carbon\Carbon;
-use DateInterval;
-use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,15 +16,15 @@ class BillTest extends TestCase
     /** @test */
     public function total_attribute_returns_total_outflows()
     {
-        $bill = factory(Bill::class)->make();
+        $bill = factory(Bill::class)->make(['start_date' => Carbon::yesterday()]);
         $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
             'amount' => 60,
             'inflow' => false,
-            'date' => date('Y-m-d H:i:s'),
+            'date' => Carbon::now(),
         ])->mergeRecursive(factory(Transaction::class, 2)->make([
             'amount' => 20,
             'inflow' => true,
-            'date' => date('Y-m-d H:i:s'),
+            'date' => Carbon::now(),
         ])));
 
         $this->assertEquals(180, $bill->total);
@@ -36,14 +34,14 @@ class BillTest extends TestCase
     public function paid_attribute_returns_true_when_bill_is_paid()
     {
         $bill = factory(Bill::class)->make([
-            'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
+            'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
             'frequency' => 30,
             'amount' => 140,
         ]);
         $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
             'amount' => 60,
             'inflow' => false,
-            'date' => date('Y-m-d H:i:s'),
+            'date' => Carbon::now(),
         ]));
 
         $this->assertTrue($bill->paid);
@@ -53,7 +51,7 @@ class BillTest extends TestCase
     public function paid_attribute_returns_false_when_bill_is_unpaid()
     {
         $bill = factory(Bill::class)->make([
-            'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
+            'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
             'frequency' => 30,
             'amount' => 140,
         ]);
