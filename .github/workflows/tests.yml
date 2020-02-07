@@ -13,8 +13,8 @@ jobs:
             - name: Copy .env file
               run: cp .env.example .env
 
-            - name: Install dependencies
-              run: composer install --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+            - name: Install Composer dependencies
+              run: composer install --no-interaction --no-suggest --no-progress --prefer-dist
 
             - name: Generate app key
               run: php artisan key:generate
