@@ -36,14 +36,14 @@ class BudgetController extends Controller
 
         $this->authorize('view', $budget);
 
-        return new BudgetResource($budget->load('category'));
+        return new BudgetResource($budget->load('category.transactions'));
     }
 
     public function update(string $year, string $month, Category $category)
     {
         $this->authorize('view', $category);
 
-        $budget = Budget::with('category')->firstOrCreate([
+        $budget = Budget::with('category.transactions')->firstOrCreate([
             'year' => $year,
             'month' => $month,
             'category_id' => $category->id,
@@ -59,7 +59,7 @@ class BudgetController extends Controller
 
         return response()->json([
             'success' => $budget->save(),
-            'data' => new BudgetResource($budget->load('category')),
+            'data' => new BudgetResource($budget->load('category.transactions')),
         ]);
     }
 

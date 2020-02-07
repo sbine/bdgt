@@ -4,7 +4,6 @@ namespace Tests\Feature\Models;
 
 use App\Models\Bill;
 use App\Models\Transaction;
-use App\Models\User;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -16,15 +15,25 @@ class BillTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
+    /** @test */
+    public function total_attribute_returns_total_outflows()
     {
-        parent::setUp();
+        $bill = factory(Bill::class)->make();
+        $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
+            'amount' => 60,
+            'inflow' => false,
+            'date' => date('Y-m-d H:i:s'),
+        ])->mergeRecursive(factory(Transaction::class, 2)->make([
+            'amount' => 20,
+            'inflow' => true,
+            'date' => date('Y-m-d H:i:s'),
+        ])));
 
-        $this->be(factory(User::class)->create());
+        $this->assertEquals(180, $bill->total);
     }
 
     /** @test */
-    public function paid_attribute()
+    public function paid_attribute_returns_true_when_bill_is_paid()
     {
         $bill = factory(Bill::class)->make([
             'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
@@ -41,7 +50,19 @@ class BillTest extends TestCase
     }
 
     /** @test */
-    public function get_due_dates_for_interval()
+    public function paid_attribute_returns_false_when_bill_is_unpaid()
+    {
+        $bill = factory(Bill::class)->make([
+            'start_date' => (new DateTime)->sub(new DateInterval('P45D'))->format('Y-m-d'),
+            'frequency' => 30,
+            'amount' => 140,
+        ]);
+
+        $this->assertFalse($bill->paid);
+    }
+
+    /** @test */
+    public function get_due_dates_for_interval_returns_expected_dates()
     {
         $bill = new Bill([
             'start_date' => new Carbon('2011-01-01'),

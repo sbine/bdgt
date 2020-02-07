@@ -60,12 +60,16 @@ class GoalTest extends TestCase
     /** @test */
     public function store_persists_new_goal_and_redirects()
     {
+        $user = factory(User::class)->create();
+        $this->be($user);
+
         $goal = factory(Goal::class)->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this
             ->post(route('goals.store', $goal->toArray()))
             ->assertStatus(302);
 
+        $this->assertEquals($user->id, $goal->user_id);
         $this->assertDatabaseHas('goals', $goal->toArray());
     }
 

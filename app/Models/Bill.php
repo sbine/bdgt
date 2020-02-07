@@ -28,16 +28,15 @@ class Bill extends Model
 
     public function getTotalAttribute()
     {
-        $total = 0;
-        foreach ($this->transactions as $transaction) {
-            if ($transaction->date > $this->lastDue && $transaction->date < $this->nextDue) {
-                if (! $transaction->inflow) {
-                    $total += $transaction->amount;
-                }
-            }
-        }
-
-        return $total;
+        return $this->transactions->sum(function ($transaction) {
+            return (
+                ! $transaction->inflow
+                && $transaction->date > $this->lastDue
+                && $transaction->date <= $this->nextDue
+            )
+                ? $transaction->amount
+                : 0;
+        });
     }
 
     public function getPaidAttribute()

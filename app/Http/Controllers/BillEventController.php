@@ -11,7 +11,7 @@ class BillEventController
     {
         $billsByDate = [];
         if (Request::has(['start', 'end'])) {
-            Bill::all()->each(function ($bill) use (&$billsByDate) {
+            Bill::with('transactions')->get()->each(function ($bill) use (&$billsByDate) {
                 $dueDates = $bill->getDueDatesForInterval(Request::get('start'), Request::get('end'));
 
                 foreach ($dueDates as $date) {

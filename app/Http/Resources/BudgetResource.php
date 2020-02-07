@@ -16,7 +16,6 @@ class BudgetResource extends Resource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             $this->mergeWhen(auth()->user()->id === $this->user_id, [
                 'date' => $this->date->format('Y-m-d'),
                 'category_id' => $this->category->id,

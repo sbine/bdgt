@@ -60,12 +60,16 @@ class BillTest extends TestCase
     /** @test */
     public function store_persists_new_bill_and_redirects()
     {
+        $user = factory(User::class)->create();
+        $this->be($user);
+
         $bill = factory(Bill::class)->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this
             ->post(route('bills.store', $bill->toArray()))
             ->assertStatus(302);
 
+        $this->assertEquals($user->id, $bill->user_id);
         $this->assertDatabaseHas('bills', $bill->toArray());
     }
 

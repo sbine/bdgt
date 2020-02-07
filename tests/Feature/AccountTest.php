@@ -60,12 +60,16 @@ class AccountTest extends TestCase
     /** @test */
     public function store_persists_new_account_and_redirects()
     {
+        $user = factory(User::class)->create();
+        $this->be($user);
+
         $account = factory(Account::class)->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this
             ->post(route('accounts.store', $account->toArray()))
             ->assertStatus(302);
 
+        $this->assertEquals($user->id, $account->user_id);
         $this->assertDatabaseHas('accounts', $account->toArray());
     }
 
