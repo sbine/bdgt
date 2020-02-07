@@ -31,8 +31,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Generate application key
-        run: php artisan key:generate
+      - name: Configure Laravel environment
+        run: |
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan migrate
 
       - name: Upgrade Chrome driver
         run: php artisan dusk:chrome-driver
