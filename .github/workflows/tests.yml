@@ -21,5 +21,3 @@ jobs:
 
             - name: Run PHPUnit tests
               run: php vendor/bin/phpunit
-              env:
-                APP_ENV: testing
