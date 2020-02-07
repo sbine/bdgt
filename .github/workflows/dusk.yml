@@ -35,7 +35,6 @@ jobs:
         run: |
           php artisan key:generate
           touch database/database.sqlite
-          php artisan migrate
 
       - name: Upgrade Chrome driver
         run: php artisan dusk:chrome-driver
