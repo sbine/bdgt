@@ -46,4 +46,18 @@ jobs:
         run: php artisan serve &
 
       - name: Run Dusk tests
-        run: php artisan dusk
+        run: php artisan dusk --stop-on-failure
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
+
+      - name: Upload failure screenshots
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Screenshots
+          path: ./tests/Browser/screenshots
