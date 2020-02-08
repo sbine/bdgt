@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->isLocal()) {
+        if ($this->app->environment('local')) {
             $this->app->register(TelescopeServiceProvider::class);
         }
     }
@@ -28,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        if (! $this->app->environment('testing')) {
+            Schema::defaultStringLength(191);
+        }
 
         $this->app->singleton(Tenant::class, function () {
             // Throw an AuthenticatedException if no auth user is found

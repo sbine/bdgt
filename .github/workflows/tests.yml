@@ -30,3 +30,10 @@ jobs:
 
       - name: Run PHPUnit tests
         run: php vendor/bin/phpunit
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
