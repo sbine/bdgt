@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Copy .env file
-        run: cp .env.testing .env
+        run: cp .env.dusk.testing .env
 
       - name: Configure Composer cache
         id: composer-cache
