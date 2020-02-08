@@ -1,4 +1,4 @@
-name: Run tests
+name: PHP tests
 
 on: push
 

@@ -1,7 +1,7 @@
 bdgt
 ====
 
-![build status](https://img.shields.io/github/workflow/status/sbine/bdgt/Run%20tests)
+![build status](https://img.shields.io/github/workflow/status/sbine/bdgt/PHP%20tests)
 
 ## Big finance tools in a small package
 
