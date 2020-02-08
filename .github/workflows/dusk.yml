@@ -37,7 +37,7 @@ jobs:
           touch database/database.sqlite
 
       - name: Upgrade Chrome driver
-        run: php artisan dusk:chrome-driver
+        run: php artisan dusk:chrome-driver 78
 
       - name: Start Chrome driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
