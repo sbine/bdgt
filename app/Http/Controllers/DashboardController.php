@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Bill;
+use App\Models\Category;
 use App\Models\Ledger;
 use App\Models\Transaction;
 
@@ -17,34 +19,26 @@ class DashboardController extends Controller
             'ledger' => new Ledger,
             'nextBill' => $bills->first(),
             'transactions' => $transactions,
-            'accounts' => $transactions
-                ->map(function ($transaction) {
-                    return $transaction->account->only(['id', 'name']);
-                })
-                ->unique()
-                ->sortBy('name')
-                ->values(),
+            'accounts' => Account::select('id', 'name')
+                ->orderBy('name')
+                ->get(),
             'bills' => $bills
                 ->map
                 ->only(['id', 'label'])
                 ->sortBy('label')
                 ->values(),
-            'categories' => $transactions
-                ->filter(function ($transaction) {
-                    return !! $transaction->category;
-                })
-                ->map(function ($transaction) {
-                    return $transaction->category->only(['id', 'label']);
-                })
-                ->unique()
-                ->sortBy('label')
-                ->values(),
-            'flairs' => $transactions
-                ->map
-                ->flair
-                ->unique()
-                ->sort()
-                ->values(),
+            'categories' => Category::select('id', 'label')
+                ->orderBy('label')
+                ->get(),
+            'flairs' => [
+                'lightgray',
+                'red',
+                'orange',
+                'yellow',
+                'green',
+                'blue',
+                'purple',
+            ],
         ]);
     }
 }
