@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Services;
+namespace Tests\Feature\Reports;
 
 use App\Reports\Reportable;
 use App\Reports\ReportFactory;

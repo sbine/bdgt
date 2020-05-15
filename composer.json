@@ -6,6 +6,7 @@
     "require": {
         "php": "^7.2",
         "asgrim/ofxparser": "^1.2",
+        "beyondcode/laravel-server-timing": "^1.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "moneyphp/money": "^3.0",

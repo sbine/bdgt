@@ -20,37 +20,25 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::view('budget', 'budget.index')->name('budget');
 
-    /*
-     | Accounts
-     */
+    // Accounts
     Route::resource('accounts', 'AccountController');
 
-    /*
-     | Transactions
-     */
+    // Transactions
     Route::resource('transactions', 'TransactionController')->except('index');
 
-    /*
-     | Categories
-     */
+    // Categories
     Route::resource('categories', 'CategoryController');
 
-    /*
-     | Bills
-     */
+    // Bills
     Route::get('bills/ajax_calendar_events', 'BillEventController')
         ->name('bills.ajax.calendar.events');
 
     Route::resource('bills', 'BillController');
 
-    /*
-     | Goals
-     */
+    // Goals
     Route::resource('goals', 'GoalController');
 
-    /*
-     | Reports
-     */
+    // Reports
     Route::resource('reports', 'ReportController');
 
     Route::group(['prefix' => 'reports'], function () {
@@ -61,9 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('ajax/{type}', 'ReportController@ajax')->name('reports.ajax.report');
     });
 
-    /*
-     | "API" for Vue
-     */
+    // "API" for Vue
     Route::prefix('api')->name('api.')->namespace('Api')->group(function () {
         Route::get('budget/{year}/{month}', 'BudgetController@index')->name('budget.index');
         Route::get('budget/{year}/{month}/{category}', 'BudgetController@show')->name('budget.show');
@@ -74,9 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-/*
- | Calculators
- */
+// Calculators
 Route::get('calculators/debt', 'CalculatorController@debt')->name('calculators.debt');
 
 Route::get('calculators/savings', 'CalculatorController@savings')->name('calculators.savings');
