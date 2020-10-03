@@ -12,23 +12,6 @@ class CategoryController extends Controller
         return view('category.index')->with('categories', Category::all());
     }
 
-    /**
-     * Show an individual category to the user.
-     *
-     * @param  Category $category
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        return view('category.show')->with('category', $category);
-    }
-
-    /**
-     * Create and store a new category.
-     *
-     * @return Redirect
-     */
     public function store()
     {
         if ($category = Category::create(Request::all())) {
@@ -38,13 +21,11 @@ class CategoryController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
     }
 
-    /**
-     * Update an existing category with new data.
-     *
-     * @param  Category $category
-     *
-     * @return Redirect
-     */
+    public function show(Category $category)
+    {
+        return view('category.show')->with('category', $category);
+    }
+
     public function update(Category $category)
     {
         if ($category->update(Request::all())) {
@@ -54,13 +35,6 @@ class CategoryController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.categories.error'));
     }
 
-    /**
-     * Delete a category.
-     *
-     * @param  Category $category
-     *
-     * @return Redirect
-     */
     public function destroy(Category $category)
     {
         if ($category->delete()) {

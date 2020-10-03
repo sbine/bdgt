@@ -21,11 +21,11 @@ class TransactionTest extends DuskTestCase
     /** @test */
     public function user_can_create_a_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         // Authenticate to establish tenancy before seeding
         $this->be($user);
-        $transaction = factory(Transaction::class)->states('with_account')->make();
-        $category = factory(Category::class)->create();
+        $transaction = Transaction::factory()->forAccount()->make();
+        $category = Category::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $transaction, $category) {
             $browser
@@ -51,9 +51,9 @@ class TransactionTest extends DuskTestCase
     /** @test */
     public function user_can_edit_a_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
         $transaction->date = Carbon::now();
         $transaction->payee = 'Foo bar';
@@ -80,9 +80,9 @@ class TransactionTest extends DuskTestCase
     /** @test */
     public function user_can_delete_a_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
         $this->browse(function (Browser $browser) use ($user, $transaction) {
             $browser

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +63,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Calculators
-Route::get('calculators/debt', 'CalculatorController@debt')->name('calculators.debt');
+Route::view('calculators/debt', 'calculator.debt')->name('calculators.debt');
 
-Route::get('calculators/savings', 'CalculatorController@savings')->name('calculators.savings');
+Route::view('calculators/savings', 'errors.coming_soon')->name('calculators.savings');

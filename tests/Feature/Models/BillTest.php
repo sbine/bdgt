@@ -16,12 +16,12 @@ class BillTest extends TestCase
     /** @test */
     public function total_attribute_returns_total_outflows()
     {
-        $bill = factory(Bill::class)->make(['start_date' => Carbon::yesterday()]);
-        $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
+        $bill = Bill::factory()->make(['start_date' => Carbon::yesterday()]);
+        $bill->setRelation('transactions', Transaction::factory()->count(3)->make([
             'amount' => 60,
             'inflow' => false,
             'date' => Carbon::now(),
-        ])->mergeRecursive(factory(Transaction::class, 2)->make([
+        ])->mergeRecursive(Transaction::factory()->count(2)->make([
             'amount' => 20,
             'inflow' => true,
             'date' => Carbon::now(),
@@ -33,12 +33,12 @@ class BillTest extends TestCase
     /** @test */
     public function paid_attribute_returns_true_when_bill_is_paid()
     {
-        $bill = factory(Bill::class)->make([
+        $bill = Bill::factory()->make([
             'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
             'frequency' => 30,
             'amount' => 140,
         ]);
-        $bill->setRelation('transactions', factory(Transaction::class, 3)->make([
+        $bill->setRelation('transactions', Transaction::factory()->count(3)->make([
             'amount' => 60,
             'inflow' => false,
             'date' => Carbon::now(),
@@ -50,7 +50,7 @@ class BillTest extends TestCase
     /** @test */
     public function paid_attribute_returns_false_when_bill_is_unpaid()
     {
-        $bill = factory(Bill::class)->make([
+        $bill = Bill::factory()->make([
             'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
             'frequency' => 30,
             'amount' => 140,

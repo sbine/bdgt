@@ -18,8 +18,8 @@ class GoalTest extends DuskTestCase
     /** @test */
     public function user_can_create_a_goal()
     {
-        $user = factory(User::class)->create();
-        $goal = factory(Goal::class)->make();
+        $user = User::factory()->create();
+        $goal = Goal::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $goal) {
             $browser
@@ -45,9 +45,9 @@ class GoalTest extends DuskTestCase
     /** @test */
     public function user_can_edit_a_goal()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $goal = factory(Goal::class)->create();
+        $goal = Goal::factory()->create();
 
         $goal->goal_date = Carbon::now();
         $goal->label = 'Foo bar';
@@ -77,9 +77,9 @@ class GoalTest extends DuskTestCase
     /** @test */
     public function user_can_delete_a_goal()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $goal = factory(Goal::class)->create();
+        $goal = Goal::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $goal) {
             $browser

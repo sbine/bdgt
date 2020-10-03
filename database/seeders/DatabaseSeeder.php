@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Sbine\Tenancy\SuperAdmin;
 use Sbine\Tenancy\Tenant;
@@ -15,7 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         app()->singleton(Tenant::class, SuperAdmin::class);
 
-        // $this->call(DummyDataSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(AccountSeeder::class);
         $this->call(CategorySeeder::class);

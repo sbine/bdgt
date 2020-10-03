@@ -18,8 +18,8 @@ class BillTest extends DuskTestCase
     /** @test */
     public function user_can_create_a_bill()
     {
-        $user = factory(User::class)->create();
-        $bill = factory(Bill::class)->make();
+        $user = User::factory()->create();
+        $bill = Bill::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $bill) {
             $browser
@@ -44,9 +44,9 @@ class BillTest extends DuskTestCase
     /** @test */
     public function user_can_edit_a_bill()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $bill = factory(Bill::class)->create();
+        $bill = Bill::factory()->create();
 
         $bill->start_date = Carbon::now();
         $bill->label = 'Foo bar';
@@ -77,9 +77,9 @@ class BillTest extends DuskTestCase
     /** @test */
     public function user_can_delete_a_bill()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $bill = factory(Bill::class)->create();
+        $bill = Bill::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $bill) {
             $browser

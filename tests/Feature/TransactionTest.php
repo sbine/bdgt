@@ -24,8 +24,8 @@ class TransactionTest extends TestCase
     /** @test */
     public function index_displays_all_transactions()
     {
-        $account = factory(Account::class)->states('with_user')->create();
-        $transactions = factory(Transaction::class, 3)->create([
+        $account = Account::factory()->forUser()->create();
+        $transactions = Transaction::factory()->count(3)->create([
             'user_id' => $account->user->id,
             'account_id' => $account->id,
         ]);
@@ -35,27 +35,27 @@ class TransactionTest extends TestCase
             ->assertStatus(200);
 
         $transactions->each(function ($transaction) use ($self) {
-            $self->assertSee(e($transaction->payee));
+            $self->assertSee($transaction->payee, false);
         });
     }
 
     /** @test */
     public function show_displays_associated_transaction()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forUser()->forAccount()->create();
 
         $this->actingAs($transaction->user)
             ->get(route('transactions.show', $transaction))
             ->assertStatus(200)
-            ->assertSee(htmlentities($transaction->payee));
+            ->assertSee($transaction->payee, false);
     }
 
     /** @test */
     public function cannot_view_another_users_transaction()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->get(route('transactions.show', $transaction))
             ->assertNotFound();
     }
@@ -63,34 +63,34 @@ class TransactionTest extends TestCase
     /** @test */
     public function store_persists_new_transaction_and_redirects()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->make();
+        $transaction = Transaction::factory()->forAccount()->make();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->post(route('transactions.store', $transaction->toArray()))
             ->assertStatus(302);
 
-        $this->assertDatabaseHas('transactions', $transaction->toArray());
+        $this->assertDatabaseHas('transactions', $transaction->getAttributes());
     }
 
     /** @test */
     public function update_persists_changes_and_redirects()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forUser()->forAccount()->create();
         $transaction->amount = 500;
 
         $this->actingAs($transaction->user)
             ->put(route('transactions.update', $transaction), $transaction->toArray())
             ->assertStatus(302);
 
-        $this->assertDatabaseHas('transactions', $transaction->toArray());
+        $this->assertDatabaseHas('transactions', $transaction->getAttributes());
     }
 
     /** @test */
     public function cannot_update_another_users_transaction()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->put(route('transactions.update', $transaction), [])
             ->assertNotFound();
     }
@@ -98,7 +98,7 @@ class TransactionTest extends TestCase
     /** @test */
     public function delete_deletes_and_redirects_to_index()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forUser()->forAccount()->create();
 
         $this->actingAs($transaction->user)
             ->delete(route('transactions.destroy', $transaction))
@@ -110,9 +110,9 @@ class TransactionTest extends TestCase
     /** @test */
     public function cannot_delete_another_users_transaction()
     {
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->delete(route('transactions.destroy', $transaction))
             ->assertNotFound();
 

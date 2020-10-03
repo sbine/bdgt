@@ -15,10 +15,10 @@ class BudgetTest extends TestCase
     /** @test */
     public function user_can_view_their_budget()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budgets = factory(Budget::class, 3)->states('with_category')->create([
+        $budgets = Budget::factory()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
@@ -27,8 +27,8 @@ class BudgetTest extends TestCase
             ->assertStatus(200);
 
         $budgets->each(function ($budget) use ($self) {
-            $self->assertSee(htmlentities($budget->category));
-            $self->assertSee(htmlentities($budget->spent));
+            $self->assertSee(e($budget->category->name));
+            $self->assertSee(e($budget->spent));
         });
     }
 }

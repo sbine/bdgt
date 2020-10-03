@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Account extends Model
 {
+    use HasFactory;
+
     protected $table = 'accounts';
 
     protected $fillable = [
@@ -16,7 +20,7 @@ class Account extends Model
     ];
 
     protected $casts = [
-        'date_opened' => 'date',
+        'date_opened' => 'datetime',
     ];
 
     public function getRunningBalanceAttribute()

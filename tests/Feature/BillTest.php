@@ -22,8 +22,8 @@ class BillTest extends TestCase
     /** @test */
     public function index_displays_all_bills()
     {
-        $user = factory(User::class)->create();
-        $bills = factory(Bill::class, 3)->create([
+        $user = User::factory()->create();
+        $bills = Bill::factory()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
@@ -39,7 +39,7 @@ class BillTest extends TestCase
     /** @test */
     public function show_displays_associated_bill()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
 
         $this->actingAs($bill->user)
             ->get(route('bills.show', $bill))
@@ -50,9 +50,9 @@ class BillTest extends TestCase
     /** @test */
     public function cannot_view_another_users_bill()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->get(route('bills.show', $bill))
             ->assertNotFound();
     }
@@ -60,23 +60,23 @@ class BillTest extends TestCase
     /** @test */
     public function store_persists_new_bill_and_redirects()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $bill = factory(Bill::class)->make();
+        $bill = Bill::factory()->make();
 
         $this
             ->post(route('bills.store', $bill->toArray()))
             ->assertStatus(302);
 
         $this->assertEquals($user->id, $bill->user_id);
-        $this->assertDatabaseHas('bills', $bill->toArray());
+        $this->assertDatabaseHas('bills', $bill->getAttributes());
     }
 
     /** @test */
     public function unsuccessful_store_redirects_with_error()
     {
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->post(route('bills.store', []))
             ->assertStatus(302)
             ->assertSessionHas('errors');
@@ -85,7 +85,7 @@ class BillTest extends TestCase
     /** @test */
     public function update_persists_changes_and_redirects()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
         $bill->amount = 500;
 
         $this->actingAs($bill->user)
@@ -96,9 +96,9 @@ class BillTest extends TestCase
     /** @test */
     public function cannot_update_another_users_bill()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->put(route('bills.update', $bill), [])
             ->assertNotFound();
     }
@@ -106,7 +106,7 @@ class BillTest extends TestCase
     /** @test */
     public function delete_deletes_and_redirects_to_index()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
 
         $this->actingAs($bill->user)
             ->delete(route('bills.destroy', $bill))
@@ -118,9 +118,9 @@ class BillTest extends TestCase
     /** @test */
     public function cannot_delete_another_users_bill()
     {
-        $bill = factory(Bill::class)->states('with_user')->create();
+        $bill = Bill::factory()->forUser()->create();
 
-        $this->actingAs(factory(User::class)->create())
+        $this->actingAs(User::factory()->create())
             ->delete(route('bills.destroy', $bill))
             ->assertNotFound();
 

@@ -16,7 +16,7 @@ class AuthTest extends DuskTestCase
     /** @test */
     public function user_can_register()
     {
-        $user = factory(User::class)->make(['password' => bcrypt('password')]);
+        $user = User::factory()->make(['password' => bcrypt('password')]);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser
@@ -35,7 +35,7 @@ class AuthTest extends DuskTestCase
     /** @test */
     public function user_can_login()
     {
-        $user = factory(User::class)->create(['password' => bcrypt('password')]);
+        $user = User::factory()->create(['password' => bcrypt('password')]);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser
@@ -53,7 +53,7 @@ class AuthTest extends DuskTestCase
     /** @test */
     public function user_can_logout()
     {
-        $user = factory(User::class)->create(['password' => bcrypt('password')]);
+        $user = User::factory()->create(['password' => bcrypt('password')]);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser
@@ -69,7 +69,7 @@ class AuthTest extends DuskTestCase
     /** @test */
     public function user_can_initiate_a_password_reset()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser

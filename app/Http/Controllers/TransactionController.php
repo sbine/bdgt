@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Request;
 
 class TransactionController extends Controller
 {
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('transaction.index')
@@ -24,23 +19,6 @@ class TransactionController extends Controller
             ->with('categories', Category::all());
     }
 
-    /**
-     * Show an individual transaction to the user.
-     *
-     * @param  Transaction $transaction
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaction $transaction)
-    {
-        return response()->json($transaction);
-    }
-
-    /**
-     * Create and store a new transaction.
-     *
-     * @return Redirect
-     */
     public function store()
     {
         request()->validate([
@@ -59,13 +37,11 @@ class TransactionController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
-    /**
-     * Update an existing transaction with new data.
-     *
-     * @param  Transaction $transaction
-     *
-     * @return Redirect
-     */
+    public function show(Transaction $transaction)
+    {
+        return response()->json($transaction);
+    }
+
     public function update(Transaction $transaction)
     {
         request()->validate([
@@ -84,13 +60,6 @@ class TransactionController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
     }
 
-    /**
-     * Delete a transaction.
-     *
-     * @param  Transaction $transaction
-     *
-     * @return Redirect
-     */
     public function destroy(Transaction $transaction)
     {
         if ($transaction->delete()) {

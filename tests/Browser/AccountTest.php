@@ -18,8 +18,8 @@ class AccountTest extends DuskTestCase
     /** @test */
     public function user_can_create_a_account()
     {
-        $user = factory(User::class)->create();
-        $account = factory(Account::class)->make();
+        $user = User::factory()->create();
+        $account = Account::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $account) {
             $browser
@@ -44,9 +44,9 @@ class AccountTest extends DuskTestCase
     /** @test */
     public function user_can_edit_a_account()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $account = factory(Account::class)->create();
+        $account = Account::factory()->create();
 
         $account->date_opened = Carbon::now();
         $account->name = 'Foo bar';
@@ -78,9 +78,9 @@ class AccountTest extends DuskTestCase
     /** @test */
     public function user_can_delete_a_account()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $account = factory(Account::class)->create();
+        $account = Account::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user, $account) {
             $browser

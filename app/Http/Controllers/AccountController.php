@@ -17,23 +17,6 @@ class AccountController extends Controller
         );
     }
 
-    /**
-     * Show an individual account to the user.
-     *
-     * @param  Account $account
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Account $account)
-    {
-        return view('account.show')->with('account', $account->load('transactions'));
-    }
-
-    /**
-     * Create and store a new account.
-     *
-     * @return Redirect
-     */
     public function store()
     {
         request()->validate([
@@ -50,13 +33,11 @@ class AccountController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
     }
 
-    /**
-     * Update an existing account with new data.
-     *
-     * @param  Account $account
-     *
-     * @return Redirect
-     */
+    public function show(Account $account)
+    {
+        return view('account.show')->with('account', $account->load('transactions'));
+    }
+
     public function update(Account $account)
     {
         if ($account->update(Request::all())) {
@@ -66,13 +47,6 @@ class AccountController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
     }
 
-    /**
-     * Delete a account.
-     *
-     * @param  Account $account
-     *
-     * @return Redirect
-     */
     public function destroy(Account $account)
     {
         if ($account->delete()) {

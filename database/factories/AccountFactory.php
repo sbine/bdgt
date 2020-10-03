@@ -1,23 +1,25 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Account;
 use App\Models\User;
 use App\Providers\FakerProvider;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Account::class, function (Faker $faker) {
-    $faker->addProvider(new FakerProvider($faker));
+class AccountFactory extends Factory
+{
+    protected $model = Account::class;
 
-    return [
-        'date_opened' => $faker->dateTimeThisDecade()->format('Y-m-d H:i:s'),
-        'name'        => $faker->randomAccount(),
-        'balance'     => $faker->randomFloat(2, 0, 10000),
-        'interest'    => $faker->numberBetween(0, 20),
-    ];
-});
+    public function definition()
+    {
+        $this->faker->addProvider(new FakerProvider($this->faker));
 
-$factory->state(Account::class, 'with_user', function () {
-    return [
-        'user_id' => factory(User::class)->lazy(),
-    ];
-});
+        return [
+            'date_opened' => $this->faker->dateTimeThisDecade()->format('Y-m-d H:i:s'),
+            'name' => $this->faker->randomAccount(),
+            'balance' => $this->faker->randomFloat(2, 0, 10000),
+            'interest' => $this->faker->numberBetween(0, 20),
+        ];
+    }
+}

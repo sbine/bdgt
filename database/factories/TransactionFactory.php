@@ -1,29 +1,29 @@
 <?php
 
-use App\Models\Account;
+namespace Database\Factories;
+
 use App\Models\Transaction;
 use App\Providers\FakerProvider;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Transaction::class, function (Faker $faker) {
-    $faker->addProvider(new FakerProvider($faker));
-    $isInflow = $faker->optional(0.3, 0)->boolean();
+class TransactionFactory extends Factory
+{
+    protected $model = Transaction::class;
 
-    return [
-        'date'    => $faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d H:i:s'),
-        'payee'   => $faker->name,
-        'amount'  => ($isInflow ? $faker->biasedNumberBetween(50, 3000, function ($x) { return cos($x); }) : $faker->randomAmount(3000)),
-        'inflow'  => $isInflow,
-        'cleared' => $faker->boolean(),
-        'flair'   => $faker->randomFlair(),
-    ];
-});
+    public function definition()
+    {
+        $this->faker->addProvider(new FakerProvider($this->faker));
+        $isInflow = $this->faker->optional(0.3, 0)->boolean();
 
-$factory->state(Transaction::class, 'with_account', function () {
-    $account = factory(Account::class)->states('with_user')->create();
-
-    return [
-        'account_id' => $account->id,
-        'user_id' => $account->user->id,
-    ];
-});
+        return [
+            'date' => $this->faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d H:i:s'),
+            'payee' => $this->faker->name,
+            'amount' => ($isInflow ? $this->faker->biasedNumberBetween(50, 3000, function ($x) {
+                return cos($x);
+            }) : $this->faker->randomAmount(3000)),
+            'inflow' => $isInflow,
+            'cleared' => $this->faker->boolean(),
+            'flair' => $this->faker->randomFlair(),
+        ];
+    }
+}
