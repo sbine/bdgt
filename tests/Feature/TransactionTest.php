@@ -35,7 +35,7 @@ class TransactionTest extends TestCase
             ->assertStatus(200);
 
         $transactions->each(function ($transaction) use ($self) {
-            $self->assertSee(e($transaction->payee));
+            $self->assertSee($transaction->payee, false);
         });
     }
 
@@ -47,7 +47,7 @@ class TransactionTest extends TestCase
         $this->actingAs($transaction->user)
             ->get(route('transactions.show', $transaction))
             ->assertStatus(200)
-            ->assertSee(e($transaction->payee));
+            ->assertSee($transaction->payee, false);
     }
 
     /** @test */
