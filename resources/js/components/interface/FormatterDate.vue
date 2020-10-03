@@ -23,6 +23,10 @@ export default {
                 return 'today'
             }
 
+            if (isNaN(days)) {
+                return 'N/A'
+            }
+
             return days > 0
                 ? 'in ' + Math.abs(days) + ' ' + units
                 : Math.abs(days) + ' ' + units + ' ago'
