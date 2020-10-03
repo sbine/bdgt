@@ -1,25 +1,26 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Goal;
-use App\Models\User;
 use App\Providers\FakerProvider;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Goal::class, function (Faker $faker) {
-    $faker->addProvider(new FakerProvider($faker));
-    $amount = $faker->randomFloat(2, 0, 200);
+class GoalFactory extends Factory
+{
+    protected $model = Goal::class;
 
-    return [
-        'label'      => $faker->randomGoal(),
-        'start_date' => $faker->dateTimeThisDecade()->format('Y-m-d'),
-        'goal_date'  => $faker->dateTimeBetween('now', '+10 years')->format('Y-m-d'),
-        'balance'    => $faker->randomFloat(2, 0, $amount),
-        'amount'     => $amount,
-    ];
-});
+    public function definition()
+    {
+        $this->faker->addProvider(new FakerProvider($this->faker));
+        $amount = $this->faker->randomFloat(2, 0, 200);
 
-$factory->state(Goal::class, 'with_user', function () {
-    return [
-        'user_id' => factory(User::class)->lazy(),
-    ];
-});
+        return [
+            'label' => $this->faker->randomGoal(),
+            'start_date' => $this->faker->dateTimeThisDecade()->format('Y-m-d'),
+            'goal_date' => $this->faker->dateTimeBetween('now', '+10 years')->format('Y-m-d'),
+            'balance' => $this->faker->randomFloat(2, 0, $amount),
+            'amount' => $amount,
+        ];
+    }
+}

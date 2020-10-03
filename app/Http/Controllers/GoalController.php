@@ -17,23 +17,6 @@ class GoalController extends Controller
         );
     }
 
-    /**
-     * Show an individual goal to the user.
-     *
-     * @param  Goal $goal
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Goal $goal)
-    {
-        return view('goal.show')->with('goal', $goal);
-    }
-
-    /**
-     * Create and store a new goal.
-     *
-     * @return Redirect
-     */
     public function store()
     {
         request()->validate([
@@ -50,13 +33,11 @@ class GoalController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
     }
 
-    /**
-     * Update an existing goal with new data.
-     *
-     * @param  Goal $goal
-     *
-     * @return Redirect
-     */
+    public function show(Goal $goal)
+    {
+        return view('goal.show')->with('goal', $goal);
+    }
+
     public function update(Goal $goal)
     {
         if ($goal->update(Request::all())) {
@@ -66,13 +47,6 @@ class GoalController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.goals.error'));
     }
 
-    /**
-     * Delete a goal.
-     *
-     * @param  Goal $goal
-     *
-     * @return Redirect
-     */
     public function destroy(Goal $goal)
     {
         if ($goal->delete()) {

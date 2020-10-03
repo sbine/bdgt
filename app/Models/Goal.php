@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Goal extends Model
 {
+    use HasFactory;
+
     protected $table = 'goals';
 
     protected $fillable = [

@@ -15,10 +15,10 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_can_create_a_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->make()->toArray();
+        $transaction = Transaction::factory()->forAccount()->make()->getAttributes();
 
         $this
             ->post(route('api.transactions.store'), $transaction)
@@ -35,10 +35,10 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_can_view_their_own_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
         $this
             ->get(route('api.transactions.show', $transaction->id))
@@ -51,13 +51,13 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_cannot_view_another_users_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
         $this
-            ->actingAs(factory(User::class)->create())
+            ->actingAs(User::factory()->create())
             ->get(route('api.transactions.show', $transaction->id))
             ->assertForbidden();
     }
@@ -65,11 +65,11 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_can_edit_their_own_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->create();
-        $updatedTransaction = factory(Transaction::class)->states('with_account')->make()->toArray();
+        $transaction = Transaction::factory()->forAccount()->create();
+        $updatedTransaction = Transaction::factory()->forAccount()->make()->getAttributes();
 
         $this
             ->put(route('api.transactions.update', $transaction->id), $updatedTransaction)
@@ -87,14 +87,14 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_cannot_edit_another_users_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->create();
-        $updatedTransaction = factory(Transaction::class)->states('with_account')->make()->toArray();
+        $transaction = Transaction::factory()->forAccount()->create();
+        $updatedTransaction = Transaction::factory()->forAccount()->make()->toArray();
 
         $this
-            ->actingAs(factory(User::class)->create())
+            ->actingAs(User::factory()->create())
             ->put(route('api.transactions.update', $transaction->id), $updatedTransaction)
             ->assertForbidden();
     }
@@ -102,10 +102,10 @@ class TransactionTest extends TestCase
     /** @test */
     public function user_can_delete_their_own_transaction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $transaction = factory(Transaction::class)->states('with_account')->create();
+        $transaction = Transaction::factory()->forAccount()->create();
 
         $this
             ->delete(route('api.transactions.destroy', $transaction->id))
@@ -114,6 +114,6 @@ class TransactionTest extends TestCase
                 'success' => true,
             ]);
 
-        $this->assertDatabaseMissing('transactions', $transaction->toArray());
+        $this->assertDatabaseMissing('transactions', $transaction->getAttributes());
     }
 }

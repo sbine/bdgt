@@ -18,11 +18,11 @@ class ReportTest extends DuskTestCase
     /** @test */
     public function user_can_view_spending_by_category_report()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        factory(Category::class)->create()
+        Category::factory()->create()
             ->transactions()->saveMany(
-                factory(Transaction::class, 2)->states('with_account')->create([
+                Transaction::factory()->count(2)->forAccount()->create([
                     'date' => Carbon::now()->startOfMonth(),
                 ])
             );
@@ -42,11 +42,11 @@ class ReportTest extends DuskTestCase
     /** @test */
     public function user_can_view_spending_over_time_report()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        factory(Category::class)->create()
+        Category::factory()->create()
             ->transactions()->saveMany(
-                factory(Transaction::class, 2)->states('with_account')->create([
+                Transaction::factory()->count(2)->forAccount()->create([
                     'date' => Carbon::now()->startOfMonth(),
                 ])
             );

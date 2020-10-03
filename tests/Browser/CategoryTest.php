@@ -16,8 +16,8 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function user_can_create_a_category()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->make();
+        $user = User::factory()->create();
+        $category = Category::factory()->make();
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser
@@ -38,9 +38,9 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function user_can_edit_a_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $category->label = 'Foo bar';
         $category->budgeted = 123.45;
@@ -66,9 +66,9 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function user_can_delete_a_category()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
-        $category = factory(Category::class)->create(['label' => 'My Category']);
+        $category = Category::factory()->create(['label' => 'My Category']);
 
         $this->browse(function (Browser $browser) use ($user, $category) {
             $browser

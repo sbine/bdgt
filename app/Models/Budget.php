@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 class Budget extends Model
 {
     use HasCompositeKey;
+    use HasFactory;
 
     public $incrementing = false;
 

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 class Transaction extends Model
 {
+    use HasFactory;
+
     protected $table = 'transactions';
 
     protected $fillable = [
@@ -27,15 +30,6 @@ class Transaction extends Model
         'cleared' => 'bool',
         'inflow' => 'bool',
     ];
-
-    /**
-     * Explicitly parse provided datetime strings to avoid
-     * the Carbon exception "Unexpected data found. Trailing data".
-     */
-    public function setDateAttribute($value)
-    {
-        $this->attributes['date'] = Carbon::parse($value)->toDateTimeString();
-    }
 
     public function account()
     {

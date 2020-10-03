@@ -15,10 +15,10 @@ class BudgetTest extends TestCase
     /** @test */
     public function user_can_list_their_own_budgets()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budget = factory(Budget::class)->states('with_category')->create();
+        $budget = Budget::factory()->create();
 
         $this
             ->get(route('api.budget.index', ['year' => $budget->year, 'month' => $budget->month]))
@@ -30,10 +30,10 @@ class BudgetTest extends TestCase
     /** @test */
     public function user_can_view_their_own_budget()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budget = factory(Budget::class)->states('with_category')->create()->load('category');
+        $budget = Budget::factory()->create()->load('category');
 
         $this
             ->get(route('api.budget.show', [
@@ -50,11 +50,11 @@ class BudgetTest extends TestCase
     /** @test */
     public function user_can_edit_their_own_budget()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budget = factory(Budget::class)->states('with_category')->create();
-        $updatedBudget = factory(Budget::class)->states('with_category')->make()->toArray();
+        $budget = Budget::factory()->create();
+        $updatedBudget = Budget::factory()->make()->getAttributes();
 
         $this
             ->post(route('api.budget.update', [
@@ -81,10 +81,10 @@ class BudgetTest extends TestCase
     /** @test */
     public function user_can_delete_their_own_budget()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budget = factory(Budget::class)->states('with_category')->create();
+        $budget = Budget::factory()->create();
 
         $this
             ->delete(route('api.budget.destroy', [
@@ -97,16 +97,16 @@ class BudgetTest extends TestCase
                 'success' => true,
             ]);
 
-        $this->assertDatabaseMissing('budgets', $budget->toArray());
+        $this->assertDatabaseMissing('budgets', $budget->getAttributes());
     }
 
     /** @test */
     public function deleting_a_non_existent_budget_doesnt_throw_an_error()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->be($user);
 
-        $budget = factory(Budget::class)->states('with_category')->make();
+        $budget = Budget::factory()->make();
 
         $this
             ->delete(route('api.budget.destroy', [
@@ -119,6 +119,6 @@ class BudgetTest extends TestCase
                 'success' => true,
             ]);
 
-        $this->assertDatabaseMissing('budgets', $budget->toArray());
+        $this->assertDatabaseMissing('budgets', $budget->getAttributes());
     }
 }

@@ -17,23 +17,6 @@ class BillController extends Controller
         );
     }
 
-    /**
-     * Show an individual bill to the user.
-     *
-     * @param  Bill $bill
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bill $bill)
-    {
-        return view('bill.show')->with('bill', $bill->load('transactions'));
-    }
-
-    /**
-     * Create and store a new bill.
-     *
-     * @return Redirect
-     */
     public function store()
     {
         request()->validate([
@@ -50,13 +33,11 @@ class BillController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
     }
 
-    /**
-     * Update an existing bill with new data.
-     *
-     * @param  Bill $bill
-     *
-     * @return Redirect
-     */
+    public function show(Bill $bill)
+    {
+        return view('bill.show')->with('bill', $bill->load('transactions'));
+    }
+
     public function update(Bill $bill)
     {
         if ($bill->update(Request::all())) {
@@ -66,13 +47,6 @@ class BillController extends Controller
         return redirect()->back()->with('alerts.danger', trans('crud.bills.error'));
     }
 
-    /**
-     * Delete a bill.
-     *
-     * @param  Bill $bill
-     *
-     * @return Redirect
-     */
     public function destroy(Bill $bill)
     {
         if ($bill->delete()) {

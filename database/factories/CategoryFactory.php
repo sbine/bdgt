@@ -1,21 +1,22 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Category;
-use App\Models\User;
 use App\Providers\FakerProvider;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Category::class, function (Faker $faker) {
-    $faker->addProvider(new FakerProvider($faker));
+class CategoryFactory extends Factory
+{
+    protected $model = Category::class;
 
-    return [
-        'label'    => $faker->randomCategory(),
-        'budgeted' => $faker->randomFloat(2, 0, 5000),
-    ];
-});
+    public function definition()
+    {
+        $this->faker->addProvider(new FakerProvider($this->faker));
 
-$factory->state(Category::class, 'with_user', function () {
-    return [
-        'user_id' => factory(User::class)->lazy(),
-    ];
-});
+        return [
+            'label' => $this->faker->randomCategory(),
+            'budgeted' => $this->faker->randomFloat(2, 0, 5000),
+        ];
+    }
+}
