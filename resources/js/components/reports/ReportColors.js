@@ -3,7 +3,6 @@
 */
 const ReportColors = [
     '#FFB067', // Orange
-    '#104210', // Forest green
     '#FF7077', // Coral
     '#ACEEF3', // Cyan
     '#FF4500', // Red orange
