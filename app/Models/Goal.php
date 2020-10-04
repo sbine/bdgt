@@ -36,6 +36,9 @@ class Goal extends Model
 
     public function getProgressAttribute()
     {
-        return sprintf('%0.0f', ($this->balance / $this->amount) * 100);
+        return sprintf('%0.0f', ($this->balance / $this->amount) * 100 <= 100
+            ? ($this->balance / $this->amount) * 100
+            : 100
+        );
     }
 }

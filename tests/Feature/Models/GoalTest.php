@@ -3,8 +3,6 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Goal;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,9 +16,8 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 0.5,
-            'amount' => 1
+            'amount' => 1,
         ]);
-
 
         $this->assertFalse($goal->getAchievedAttribute());
     }
@@ -30,9 +27,8 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 1,
-            'amount' => 1
+            'amount' => 1,
         ]);
-
 
         $this->assertTrue($goal->getAchievedAttribute());
     }
@@ -42,7 +38,7 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 3,
-            'amount' => 1
+            'amount' => 1,
         ]);
 
         $this->assertTrue($goal->getAchievedAttribute());
@@ -53,11 +49,11 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 3,
-            'amount' => 1
+            'amount' => 1,
         ]);
 
         $this->assertIsString($goal->getProgressAttribute());
-        $this->assertEquals(300, $goal->getProgressAttribute());
+        $this->assertEquals(100, $goal->getProgressAttribute());
     }
 
     /** @test */
@@ -65,7 +61,7 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 1,
-            'amount' => 1
+            'amount' => 1,
         ]);
 
         $this->assertIsString($goal->getProgressAttribute());
@@ -77,7 +73,7 @@ class GoalTest extends TestCase
     {
         $goal = Goal::factory()->make([
             'balance' => 0,
-            'amount' => 1
+            'amount' => 1,
         ]);
 
         $this->assertIsString($goal->getProgressAttribute());
