@@ -33,6 +33,10 @@ class Category extends Model
 
     public function getProgressAttribute()
     {
+        if ($this->budgeted == 0) {
+            // no progress with no budget
+            return 0;
+        }
         return round(($this->spent / $this->budgeted) * 100);
     }
 
