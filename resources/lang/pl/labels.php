@@ -2,7 +2,7 @@
 
 return [
     'modals' => [
-        'button_close' => 'Zamknij'
+        'button_close' => 'Zamknij',
     ],
     'emails' => [
         'forgot_password_text' => 'Kliknij aby zresetować hasło:',
@@ -21,7 +21,7 @@ return [
             'password' => 'Hasło',
             'password_confirmation' => 'Powtórz hasło',
             'remember' => 'Zapamiętaj mnie',
-        ]
+        ],
     ],
     'accounts' => [
         'singular' => 'Konto',
@@ -99,7 +99,7 @@ return [
                 'interestRate' => 'Oprocentowanie',
                 'minimumPayment' => 'Minimalna płatność',
             ],
-        ]
+        ],
     ],
     'categories' => [
         'singular' => 'Kategoria',
@@ -167,7 +167,7 @@ return [
         'singular' => 'Raport',
         'plural' => 'Raporty',
         'spending_by_category' => 'Wydatki z podziałem na kategorie',
-        'spending_over_time' => 'Wydatki w czasie'
+        'spending_over_time' => 'Wydatki w czasie',
     ],
     'transactions' => [
         'singular' => 'Transakcja',
