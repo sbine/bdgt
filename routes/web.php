@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('goals', 'GoalController');
 
     // Reports
-    Route::resource('reports', 'ReportController');
+    Route::resource('reports', 'ReportController')->except(['index', 'show']);
 
     Route::group(['prefix' => 'reports'], function () {
         Route::get('/', 'ReportController@index')->name('reports.index');
