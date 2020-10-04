@@ -16,16 +16,19 @@ export default {
             chart: null,
             datasets: [],
             labels: [],
-            colors: [
-                '#4D4D4D',
-                '#5DA5DA',
-                '#FAA43A',
-                '#60BD68',
-                '#F17CB0',
-                '#B2912F',
-                '#B276B2',
-                '#DECF3F',
-                '#F15854',
+            colors: [ // 11 colours total
+                '#AECDE1',
+                '#3A77AF',
+                '#BBDD93',
+                '#549D3F',
+                '#EE9F9B',
+                '#D1352B',
+                '#F5C07B',
+                '#F08532',
+                '#C6B4D3',
+                '#926BB7',
+                '#F1A0F9',
+                '#F19FCA'
             ],
         }
     },
@@ -49,10 +52,8 @@ export default {
                 let colors = Object.assign([], this.colors)
 
                 this.chart.data.datasets.forEach(dataset => {
-                    let randomColor = Math.floor(Math.random() * colors.length)
-
-                    dataset.backgroundColor = colors[randomColor]
-                    colors.splice(randomColor, 1)
+                    dataset.backgroundColor = colors[0]
+                    colors.splice(colors[0], 1)
 
                     if (! colors.length) {
                         colors = Object.assign([], this.colors)
