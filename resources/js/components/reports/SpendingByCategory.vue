@@ -16,7 +16,7 @@ export default {
             chart: null,
             datasets: [],
             labels: [],
-            colors: [ // 11 colours total
+            colors: [ // 12 colours total
                 '#AECDE1',
                 '#3A77AF',
                 '#BBDD93',
