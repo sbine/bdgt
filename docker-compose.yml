@@ -1,0 +1,21 @@
+version: "3.4"
+services:
+  mariadb:
+    image: mariadb:10
+    environment:
+      - MYSQL_ROOT_PASSWORD="password"
+      - MYSQL_DATABASE="bdgt"
+      - MYSQL_USER="bdgt@localhost"
+      - MYSQL_PASSWORD="password"
+    ports:
+      - "3306:3306"
+    restart: always
+
+  php:
+    image: php:7.0-apache
+    links:
+      - mariadb
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/var/www/html
