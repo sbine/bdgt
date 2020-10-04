@@ -18,4 +18,5 @@ services:
     ports:
       - "80:80"
     volumes:
+      - .:/app
       - ./public:/var/www/html
