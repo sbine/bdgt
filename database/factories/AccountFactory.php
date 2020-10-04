@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Account;
-use App\Models\User;
 use App\Providers\FakerProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

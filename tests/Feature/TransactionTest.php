@@ -25,7 +25,7 @@ class TransactionTest extends TestCase
     public function index_displays_all_transactions()
     {
         $account = Account::factory()->forUser()->create();
-        $transactions = Transaction::factory()->count(3)->create([
+        $transactions = Transaction::factory()->withSpecialChars()->count(3)->create([
             'user_id' => $account->user->id,
             'account_id' => $account->id,
         ]);
@@ -35,14 +35,14 @@ class TransactionTest extends TestCase
             ->assertStatus(200);
 
         $transactions->each(function ($transaction) use ($self) {
-            $self->assertSee($transaction->payee, false);
+            $self->assertSee($transaction->payee);
         });
     }
 
     /** @test */
     public function show_displays_associated_transaction()
     {
-        $transaction = Transaction::factory()->forUser()->forAccount()->create();
+        $transaction = Transaction::factory()->forUser()->forAccount()->withSpecialChars()->create();
 
         $this->actingAs($transaction->user)
             ->get(route('transactions.show', $transaction))

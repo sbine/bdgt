@@ -27,8 +27,8 @@ class BudgetTest extends TestCase
             ->assertStatus(200);
 
         $budgets->each(function ($budget) use ($self) {
-            $self->assertSee(e($budget->category->name));
-            $self->assertSee(e($budget->spent));
+            $self->assertSee($budget->category->name);
+            $self->assertSee($budget->spent);
         });
     }
 }

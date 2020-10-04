@@ -32,7 +32,7 @@ class AccountTest extends TestCase
             ->assertStatus(200);
 
         $accounts->each(function ($account) use ($self) {
-            $self->assertSee(e($account->name));
+            $self->assertSee($account->name);
         });
     }
 
