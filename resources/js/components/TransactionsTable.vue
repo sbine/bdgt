@@ -29,7 +29,19 @@
                 'payee',
                 'amount',
                 'cleared',
-            ]
+            ],
+            customSorting: {
+                amount: function (ascending) {
+                    return function (a, b) {
+                        var aAmount = a.inflow ? a.amount : -a.amount;
+                        var bAmount = b.inflow ? b.amount : -b.amount;
+                        if (ascending) {
+                            return aAmount >= bAmount ? 1 : -1;
+                        }
+                        return aAmount <= bAmount ? 1 : -1;
+                    }
+                }
+            }
         }"
     >
         <template #flair="{ row }">
