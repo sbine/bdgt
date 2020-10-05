@@ -2,14 +2,18 @@
 * Colors for all reports
 */
 const ReportColors = [
-    '#FFB067', // Orange
-    '#FF7077', // Coral
-    '#ACEEF3', // Cyan
-    '#FF4500', // Red orange
-    '#FF8300', // Darker orange
-    '#DF362D', // Medium red
-    '#B7AC44', // Olive green
-    '#7A871E', // Darker olive green
+    '#AECDE1',
+    '#3A77AF',
+    '#BBDD93',
+    '#549D3F',
+    '#EE9F9B',
+    '#D1352B',
+    '#F5C07B',
+    '#F08532',
+    '#C6B4D3',
+    '#926BB7',
+    '#F1A0F9',
+    '#F19FCA'
 ];
 
-export default ReportColors; 
+export default ReportColors;

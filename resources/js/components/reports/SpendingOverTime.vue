@@ -40,10 +40,8 @@ export default {
                 let colors = Object.assign([], this.colors)
 
                 this.chart.data.datasets.forEach(dataset => {
-                    let randomColor = Math.floor(Math.random() * colors.length)
-
-                    dataset.backgroundColor = colors[randomColor]
-                    colors.splice(randomColor, 1)
+                    dataset.backgroundColor = colors[0]
+                    colors.splice(colors[0], 1)
 
                     if (! colors.length) {
                         colors = Object.assign([], this.colors)
