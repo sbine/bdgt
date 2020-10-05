@@ -1,17 +1,17 @@
-<? php
+<?php
 
 return [
 
-    / *
-    | ------------------------------------------------- -------------------------
-    | validation language lines
-    | ------------------------------------------------- -------------------------
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Language Lines
+    |--------------------------------------------------------------------------
     |
-    | the following language lines contain the default error messages used by
-    | the validator class. some of these rules have multiple versions such
-    | as the size rules. feel free to tweak each of these messages here.
+    | The following language lines contain the default error messages used by
+    | the validator class. Some of these rules have multiple versions such
+    | as the size rules. Feel free to tweak each of these messages here.
     |
-    * /
+    */
 
     'accepted' => 'поле :attribute має бути зазначено.',
     'active_url' => 'поле :attribute - невалидность посилання.',
@@ -94,13 +94,13 @@ return [
     'numeric' => 'поле :attribute має бути числом.',
     'present' => 'поле :attribute має бути в майбутньому.',
     'regex' => 'поле :attribute має невалідний формат.',
-    'required' => 'поле :attribute є обов'язковим.',
-    'required_if' => 'поле :attribute є обов'язковим коли у поля :other значення :value.',
-    'required_unless' => 'поле :attribute є обов'язковим якщо тільки :other має значення :values.',
-    'required_with' => 'поле :attribute є обов'язковим якщо :values.',
-    'required_with_all' => 'поле :attribute є обов'язковим якщо :values.',
-    'required_without' => 'поле :attribute є обов'язковим коли ні :values.',
-    'required_without_all' => 'поле :attribute явзяется обов'язковим якщо не :values.',
+    'required' => 'поле :attribute є обов язковим.',
+    'required_if' => 'поле :attribute є обов язковим коли у поля :other значення :value.',
+    'required_unless' => 'поле :attribute є обов язковим якщо тільки :other має значення :values.',
+    'required_with' => 'поле :attribute є обов язковим якщо :values.',
+    'required_with_all' => 'поле :attribute є обов язковим якщо :values.',
+    'required_without' => 'поле :attribute є обов язковим коли ні :values.',
+    'required_without_all' => 'поле :attribute явзяется обов язковим якщо не :values.',
     'same' => 'поля :attribute і :other повинні збігатися.',
     'size' => [
         'numeric' => 'поле :attribute має бути розміру :size.',
@@ -116,16 +116,16 @@ return [
     'url' => 'поле :attribute має невалідний формат.',
     'uuid' => 'поле :attribute має бути дійсним uuid.',
 
-    / *
-    | ------------------------------------------------- -------------------------
-    | custom validation language lines
-    | ------------------------------------------------- -------------------------
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Language Lines
+    |--------------------------------------------------------------------------
     |
-    | here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. this makes it quick to
+    | Here you may specify custom validation messages for attributes using the
+    | convention "attribute.rule" to name the lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
-    * /
+    */
 
     'custom' => [
         'attribute-name' => [
@@ -133,17 +133,17 @@ return [
         ],
     ],
 
-    / *
-    | ------------------------------------------------- -------------------------
-    | custom validation attributes
-    | ------------------------------------------------- -------------------------
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Attributes
+    |--------------------------------------------------------------------------
     |
-    | the following language lines are used to swap our attribute placeholder
-    | with something more reader friendly such as "e-mail address" instead
-    | of "email". this simply helps us make our message more expressive.
+    | The following language lines are used to swap our attribute placeholder
+    | with something more reader friendly such as "E-Mail Address" instead
+    | of "email". This simply helps us make our message more expressive.
     |
-    * /
+    */
 
     'attributes' => [],
 
-];
+    ];

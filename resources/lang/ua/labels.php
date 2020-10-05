@@ -1,4 +1,4 @@
-<? php
+<?php
 
 return [
     'modals' => [
@@ -20,7 +20,7 @@ return [
             'email' => 'пошта',
             'password' => 'пароль',
             'password_confirmation' => 'підтвердіть пароль',
-            'remember' => 'запам'ятати мене',
+            'remember' => 'запам ятати мене',
         ],
     ],
     'accounts' => [
