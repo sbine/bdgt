@@ -62,6 +62,7 @@ export default {
                 },
                 options: {
                     responsive: true,
+                    aspectRatio: window.innerWidth <= 500 ? 1 : 2,
                     title: {
                         display: true,
                         text: 'Spending Over Time',
