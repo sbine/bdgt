@@ -37,7 +37,13 @@
 
 				<div class="flex justify-between">
 					<p><formatter-currency :amount="{{ $goal->balance }}"></formatter-currency> saved</p>
-					<p><formatter-currency :amount="{{ $goal->amount - $goal->balance }}"></formatter-currency> remaining</p>
+					@if ($goal->amount > $goal->balance)
+						<p><formatter-currency :amount="{{ $goal->amount - $goal->balance }}"></formatter-currency> remaining</p>
+					@elseif ($goal->amount == $goal->balance)
+						<p>Goal reached!</p>
+					@elseif($goal->amount < $goal->balance)
+						<p>Goal reached! (<formatter-currency :amount="{{ $goal->balance - $goal->amount}}"></formatter-currency> extra balance)</p>
+					@endif
 				</div>
 			</a>
 		@endforeach

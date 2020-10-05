@@ -5,6 +5,7 @@
 <script>
 import Chart from 'chart.js'
 import dayjs from 'dayjs'
+import colors from './ReportColors.js'
 
 export default {
     props: {
@@ -16,20 +17,7 @@ export default {
             chart: null,
             datasets: [],
             labels: [],
-            colors: [ // 12 colours total
-                '#AECDE1',
-                '#3A77AF',
-                '#BBDD93',
-                '#549D3F',
-                '#EE9F9B',
-                '#D1352B',
-                '#F5C07B',
-                '#F08532',
-                '#C6B4D3',
-                '#926BB7',
-                '#F1A0F9',
-                '#F19FCA'
-            ],
+            colors: colors
         }
     },
 

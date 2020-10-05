@@ -12,7 +12,7 @@
 	<label class="form-row__label">{{ trans('labels.transactions.properties.date') }}</label>
 
 	<div class="form-row__input">
-		<input-datepicker name="date" required></input-datepicker>
+		<input-datepicker name="date" value="{{ date('m/d/Y') }}" required></input-datepicker>
 	</div>
 </div>
 <div class="form-row">

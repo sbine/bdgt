@@ -32,7 +32,7 @@ class GoalTest extends TestCase
             ->assertStatus(200);
 
         $goals->each(function ($goal) use ($self) {
-            $self->assertSee(e($goal->label));
+            $self->assertSee($goal->label);
         });
     }
 
@@ -44,7 +44,7 @@ class GoalTest extends TestCase
         $this->actingAs($goal->user)
             ->get(route('goals.show', $goal))
             ->assertStatus(200)
-            ->assertSee(e($goal->label));
+            ->assertSee($goal->label);
     }
 
     /** @test */

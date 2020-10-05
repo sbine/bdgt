@@ -29,9 +29,9 @@
 
 				<div class="py-2">
 					<progress-bar
-						:achieved="{{ $category->spent < $category->budgeted ? 'true' : 'false' }}"
+						:achieved="{{ $category->spent <= $category->budgeted ? 'true' : 'false' }}"
 						:balance="{{ $category->spent }}"
-						:progress="{{ min($category->progress, 100) }}"
+						:progress="{{ $category->progress }}"
 					></progress-bar>
 				</div>
 

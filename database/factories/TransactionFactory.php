@@ -26,4 +26,13 @@ class TransactionFactory extends Factory
             'flair' => $this->faker->randomFlair(),
         ];
     }
+
+    public function withSpecialChars()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'payee' => $attributes['payee'] . '\'&^%$#@!&*<>(){}[]:;-_|',
+            ];
+        });
+    }
 }
