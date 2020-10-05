@@ -1,16 +1,7 @@
 <template>
     <v-client-table
         :data="transactions"
-        :columns="[
-            'flair',
-            'date',
-            'account',
-            'category',
-            'payee',
-            'amount',
-            'cleared',
-            'actions',
-        ]"
+        :columns="tableHeaders"
         :options="{
             headings: {
                 flair: '',
@@ -91,13 +82,40 @@ export default {
         },
         showActions: {
             type: Boolean,
+        },
+        columns: {
+            type: Array,
         }
     },
-
+    data() {
+        return {
+            defaultColumns: [
+                'flair',
+                'date',
+                'account',
+                'category',
+                'payee',
+                'amount',
+                'cleared'
+            ],
+        }
+    },
+    computed: {
+        tableHeaders() {
+            let cols = this.defaultColumns
+            if (this.columns) {
+                cols = this.columns
+            }
+            if (this.showActions) {
+                cols.push("actions")
+            }
+            return cols
+        }
+    },
     methods: {
         formatDate(date) {
             return dayjs(date).format('MM/DD/YYYY');
         }
-    },
+    }
 }
 </script>

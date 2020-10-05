@@ -5,6 +5,9 @@
 /public/coverage
 /public/storage
 /public/vendor/telescope
+/public/mix-manifest.json
+/public/css
+/public/js
 Homestead.yaml
 Homestead.json
 .env

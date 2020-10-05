@@ -20,10 +20,10 @@ jobs:
         id: composer-cache
         run: |
           echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
@@ -31,6 +31,24 @@ jobs:
 
       - name: Generate application key
         run: php artisan key:generate
+
+      - name: Configure NPM cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-npm-
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install NPM dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Compile NPM dependencies
+        run: npm run prod
 
       - name: Run PHPUnit tests
         run: php vendor/bin/phpunit

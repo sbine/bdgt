@@ -59,6 +59,7 @@ export default {
         initialize() {
             this.chart = new Chart(this.$refs.chart.getContext('2d'), {
                 type: 'pie',
+                aspectRatio: window.innerWidth <= 500 ? 1 : 2,
                 data: {
                     labels: this.labels,
                     datasets: this.datasets,
