@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return view('category.show')->with('category', $category);
+        return view('category.show')->with('category', $category->load('transactions', 'transactions.category', 'transactions.account'));
     }
 
     public function update(Category $category)

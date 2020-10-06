@@ -35,7 +35,7 @@ class AccountController extends Controller
 
     public function show(Account $account)
     {
-        return view('account.show')->with('account', $account->load('transactions'));
+        return view('account.show')->with('account', $account->load('transactions', 'transactions.category', 'transactions.account'));
     }
 
     public function update(Account $account)
