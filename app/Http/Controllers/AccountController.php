@@ -42,10 +42,11 @@ class AccountController extends Controller
     {
         if ($account->update(Request::all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
-        }
+        }else{
 
         return redirect()->back()->with('alerts.danger', trans('crud.accounts.error'));
-    }
+        }
+        }
 
     public function destroy(Account $account)
     {
