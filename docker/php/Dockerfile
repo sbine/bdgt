@@ -18,10 +18,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml zip
 #RUN a2enmod ssl
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/composer && \
-    composer self-update
+RUN curl -sS https://getcomposer.org/installer \
+    | php -- --install-dir=/usr/local/bin --filename=composer
 
 #RUN service apache2 restart
 

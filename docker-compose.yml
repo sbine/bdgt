@@ -6,17 +6,17 @@ services:
         container_name: bdgt_nginx
         volumes:
             - .:/var/www/html/
-            - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
+            - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "80:80"
             - "443:443"
         depends_on:
             - php
+        restart: unless-stopped
 
     mysql:
-        container_name: bdgt_mysql
         image: mysql
-        restart: always
+        container_name: bdgt_mysql
         environment:
             MYSQL_ROOT_USER: root
             MYSQL_ROOT_PASSWORD: secret
@@ -29,12 +29,14 @@ services:
             - mysql-volume:/var/lib/mysql
         depends_on:
             - php
+        restart: unless-stopped
 
     php:
-      build: .
+      build: ./docker/php
       container_name: bdgt_php
       volumes:
-          - .:/var/www/html/
+          - .:/var/www/html
+      restart: unless-stopped
 
 volumes:
   mysql-volume:
