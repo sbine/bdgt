@@ -31,8 +31,8 @@ class DashboardController extends Controller
                 ->orderBy('label')
                 ->get(),
             'flairs' => [
-                'lightgray',
-                'red',
+                'lightgreen',
+                'cyan',
                 'orange',
                 'yellow',
                 'green',
