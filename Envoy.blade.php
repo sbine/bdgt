@@ -1,0 +1,42 @@
+@servers(['local' => '127.0.0.1', 'prod' => 'bdgt'])
+
+@setup
+    $env ??= 'local';
+    $root = [
+        'local' => '.',
+        'prod' => '/var/www/bdgt',
+    ][$env];
+
+    function output($message) {
+        return "echo '\033[32m" . $message . "\033[0m';";
+    }
+@endsetup
+
+@story('setup')
+    composer
+    database
+@endstory
+
+@story('deploy')
+    composer
+    artisan
+@endstory
+
+@task('composer', ['on' => $env])
+    {{ output('🚚 Installing dependencies...') }}
+    cd {{ $root }}
+    composer install --no-interaction --prefer-dist {{ $env === 'prod' ? ' --optimize-autoloader --no-dev' : '' }}
+@endtask
+
+@task('database', ['on' => 'local'])
+    {{ output('✨ Migrating and seeding the DB...') }}
+    php artisan migrate --seed
+    {{ $env === 'prod' ? 'php artisan optimize' : '' }}
+@endtask
+
+@task('artisan', ['on' => 'prod'])
+    {{ output('✨ Migrating and optimizing...') }}
+    cd {{ $root }}
+    php artisan migrate --force
+    php artisan optimize
+@endtask

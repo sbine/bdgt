@@ -19,6 +19,7 @@
         "friendsofphp/php-cs-fixer": "^2.14",
         "fzaninotto/faker": "^1.9",
         "laravel/dusk": "^6.0",
+        "laravel/envoy": "^2.3",
         "laravel/telescope": "^4.0",
         "laravel/tinker": "^2.0",
         "mockery/mockery": "^1.3",
