@@ -19,10 +19,10 @@ services:
         container_name: bdgt_mysql
         environment:
             MYSQL_ROOT_USER: root
-            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD:-secret}"
-            MYSQL_USER: "${DB_USERNAME:-bdgt}"
-            MYSQL_PASSWORD: "${DB_PASSWORD:-secret}"
-            MYSQL_DATABASE: "${DB_DATABASE:-bdgt}"
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
+            MYSQL_USER: ${DB_USERNAME:-bdgt}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+            MYSQL_DATABASE: ${DB_DATABASE:-bdgt}
         ports:
             - "${HOST_DB_PORT:-3306}:3306"
         volumes:
