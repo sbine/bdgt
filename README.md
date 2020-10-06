@@ -41,7 +41,7 @@ A Docker config is provided with all required dependencies: `docker-compose up -
 `composer install` — requires [Composer](https://getcomposer.org/)  
 `php artisan key:generate`  
 `php artisan migrate`  
-`php artisan db:seed`
+`php artisan db:seed`  
 `npm install` — requires [NPM](https://www.npmjs.com/)  
 `npm run dev`
 
