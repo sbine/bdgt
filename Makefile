@@ -29,7 +29,7 @@ vendor-composer: ## installs composer dependencies
 	@make -s composer install
 
 vendor-npm: ## install node modules
-	@make -s npm
+	@make -s npm install
 
 ## Docker booting
 #################################
