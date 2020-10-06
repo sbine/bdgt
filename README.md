@@ -30,10 +30,10 @@ A demo application is available at [https://bdgt.it](https://bdgt.it)
 ## Installation
 
 This project requires a PHP environment and a MySQL database.  
-For local development you can use PHP on your host machine (`php artisan serve`), [Laravel Valet](https://laravel.com/docs/master/valet), or [Laravel Homestead](https://laravel.com/docs/master/homestead).
+For local development you can use PHP on your host machine (`php artisan serve`), [Laravel Valet](https://laravel.com/docs/master/valet), or [Laravel Homestead](https://laravel.com/docs/master/homestead), and for MySQL in Docker [Takeout](https://github.com/tighten/takeout) is recommended.
 
-`cp .env.example .env`  
-`composer install` -- requires [Composer](https://getcomposer.org/)  
+`cp .env.example .env` — edit the values in .env to suit your environment  
+`composer install` — requires [Composer](https://getcomposer.org/)  
 `php artisan key:generate`  
 `php artisan migrate`  
 `php artisan db:seed`
@@ -45,6 +45,5 @@ Password: admin
 ### Building the frontend assets
 If you make changes to JS or SCSS files, you'll need to recompile the frontend assets.
 
-`npm install` -- requires [NPM](https://www.npmjs.com/)  
-`npm run watch` -- to automatically compile changes  
-`npm run prod` -- before submitting a PR  
+`npm install` — requires [NPM](https://www.npmjs.com/)  
+`npm run watch` — to automatically compile changes  
