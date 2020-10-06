@@ -1,11 +1,16 @@
 @extends('app')
 
 @section('breadcrumbs')
-	<toggle class="w-full flex justify-end">
+	<toggle class="w-full">
 		<template v-slot="{ isOn, setTo }">
-			<a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
-				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
-			</a>
+			<div class="sm:float-right">
+				<a class="button button--success block sm:inline-block w-full sm:w-auto text-center mb-2 sm:mb-0" download href="{{ route('transactions.export') }}" dusk="export-transaction">
+					<font-awesome-icon icon="file-csv" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.export_button') }}
+				</a>
+				<a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
+					<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
+				</a>
+			</div>
 
 			<modal :value="isOn" @input="setTo(false)">
 				@include('transaction.modals.create')
