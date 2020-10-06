@@ -35,6 +35,21 @@ A Docker config is provided with all required dependencies: `docker-compose up -
 
 > If you already have PHP installed, you can use `php artisan serve` or [Laravel Valet](https://laravel.com/docs/master/valet) paired with an installed version of MySQL, or a tool like [Takeout](https://github.com/tighten/takeout).
 
+### Makefile
+`Make` is required to run make commands.  
+linux debian based - `sudo apt-get install make`  
+mac - `brew install make`  
+windows - `choco install make`
+ 
+`make` - show all make commands  
+`make init` - init all (will perform all commands defined in next section `Configuring the environment`)  
+`make up` - boot and install composer  
+`make down` - shutdown docker
+`make art` - forward artisan command  
+`make assets` - build assets (run npm command)
+`make assets-watch` - watch for changes and build assets
+`make assets-production` - build production assets
+
 ### Configuring the environment
 
 `cp .env.example .env` — edit the values in .env to suit your environment  
