@@ -22,12 +22,17 @@
 	<div class="bg-white rounded-sm shadow">
 		@foreach ($accounts as $account)
 			<a href="{{ route('accounts.show', $account->id) }}" class="block hover:bg-gray-100 border-b p-6">
-				<h4 class="flex justify-between text-gray-700 text-xl">
-					{{ $account->name }}
-					<span class="badge">{{ $account->transactions->count() }}</span>
-				</h4>
-
-				<p class="font-semibold"><formatter-currency :amount="{{ $account->balance }}"></formatter-currency></p>
+				<div class="flex justify-between items-center">
+					<div>
+						<h4 class="text-gray-700 text-xl">
+							{{ $account->name }}
+						</h4>
+						<p class="font-semibold">
+							<formatter-currency :amount="{{ $account->balance }}"></formatter-currency>
+						</p>
+					</div>
+					<div class="badge h-8">{{ $account->transactions->count() }}</div>
+				</div>
 			</a>
 		@endforeach
 	</div>
