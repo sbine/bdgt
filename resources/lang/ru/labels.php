@@ -23,6 +23,14 @@ return [
             'remember' => 'Запомнить меня',
         ],
     ],
+    'dashboard' => [
+        'singular' => 'Dashboard',
+        'properties' => [
+            'current_balance' => 'Уже выплачено',
+            'last_purchase' => 'Last Purchase',
+            'next_bill' => 'Next Bill',
+        ]
+    ],
     'accounts' => [
         'singular' => 'Счет',
         'plural' => 'Счета',

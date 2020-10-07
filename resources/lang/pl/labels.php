@@ -23,6 +23,14 @@ return [
             'remember' => 'Zapamiętaj mnie',
         ],
     ],
+    'dashboard' => [
+        'singular' => 'Dashboard',
+        'properties' => [
+            'current_balance' => 'Aktualne saldo',
+            'last_purchase' => 'Last Purchase',
+            'next_bill' => 'Next Bill',
+        ]
+    ],
     'accounts' => [
         'singular' => 'Konto',
         'plural' => 'Konta',

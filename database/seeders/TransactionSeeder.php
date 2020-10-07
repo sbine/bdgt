@@ -23,6 +23,8 @@ class TransactionSeeder extends Seeder
                     'bill_id' => function () use ($user) {
                         return $user->bills->random();
                     },
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ])->toArray()
             );
         });
