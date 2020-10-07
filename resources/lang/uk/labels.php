@@ -8,6 +8,7 @@ return [
         'forgot_password_text' => 'натисніть тут щоб змінити свій пароль:',
     ],
     'auth' => [
+        'sign_in' => 'Увійти',
         'login' => 'ввійти',
         'logout' => 'вийти',
         'register' => 'реєстрація',
@@ -29,6 +30,23 @@ return [
             'current_balance' => 'вже виплачено',
             'last_purchase' => 'Last Purchase',
             'next_bill' => 'Next Bill',
+            'planned_features' => 'Planned Features',
+            'zero_based_budgeting' => [
+                'title' => 'Zero-based Budgeting',
+                'description' => 'Budget to zero using the envelope method to keep your spending in check. Consult your categories to help guide purchasing decisions.'
+            ],
+            'automatic_bill_reminders' => [
+                'title' => 'Automatic Bill Reminders',
+                'description' => 'Receive email and push notifications when due dates approach for unpaid bills. Never miss a payment again.'
+            ],
+            'goal_tracking' => [
+                'title' => 'Goal Tracking',
+                'description' => 'Achieve your goals with bdgt goal tracking. Painlessly save your way to every milestone.'
+            ],
+            'interactive_reports' => [
+                'title' => 'Interactive Reports',
+                'description' => "Access your historical data at any time through bdgt's comprehensive reports. Knowledge is power—analyze past trends to better plan for your future."
+            ],
         ]
     ],
     'accounts' => [

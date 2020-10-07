@@ -90,7 +90,7 @@
 					<toggle close-on-blur>
 						<template v-slot="{ isOn, toggle }">
 							<a class="nav-item mr-4" href="#" @click.prevent="toggle">
-								{{ strtoupper(LaravelLocalization::getCurrentLocale()) }}
+								<span class="uppercase">{{ LaravelLocalization::getCurrentLocale() }}</span>
 								<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
 							</a>
 
