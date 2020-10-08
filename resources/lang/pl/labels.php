@@ -173,7 +173,7 @@ return [
         'singular' => 'Transakcja',
         'plural' => 'Transakcje',
         'add_button' => 'Dodaj transakcję',
-        'export_button' => 'Transakcja eksportowa',
+        'export_button' => 'Eksportuj transakcję',
         'edit_button' => 'Edytuj transakcję',
         'delete_button' => 'Usuń transakcję',
         'properties' => [
