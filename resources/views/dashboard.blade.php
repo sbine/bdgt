@@ -1,9 +1,9 @@
 @extends('app')
 
 @section('breadcrumbs')
-	<toggle class="w-full flex justify-end">
+    <toggle class="w-full flex justify-end">
 		<template v-slot="{ isOn, setTo }">
-			<a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
+            <a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
 				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
 			</a>
 
@@ -63,11 +63,18 @@
 @endsection
 
 @section('content')
-	<transactions-table
-		:transactions='{{ json_encode($transactions) }}'
-		:show-actions="true"
-		class="w-full bg-white rounded-sm shadow p-6"
-	></transactions-table>
+    <div class="w-full bg-white rounded-sm p-6">
+        <transactions-table
+            :transactions='{{ json_encode($transactions) }}'
+            :show-actions="true"
+        ></transactions-table>
+
+        <div class="sm:flex flex-col items-end">
+            <a class="link block sm:inline-block text-center mt-4 p-1" download href="{{ route('transactions.export') }}" dusk="export-transaction">
+                {{ trans('labels.transactions.export_button') }}
+            </a>
+        </div>
+    </div>
 
 	<transaction-form
 		:accounts='{{ json_encode($accounts) }}'

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Exports\TransactionsExport;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\User;
+use Excel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -117,5 +119,19 @@ class TransactionTest extends TestCase
             ->assertNotFound();
 
         $this->assertDatabaseHas('transactions', ['id' => $transaction->id]);
+    }
+
+    /** @test */
+    public function user_can_download_transactions_export()
+    {
+        Excel::fake();
+
+        $this->actingAs(User::factory()->create())
+            ->get(route('transactions.export'));
+
+        Excel::assertDownloaded('transaction-report.csv', function (TransactionsExport $export) {
+            // Assert that the correct export is downloaded.
+            return true;
+        });
     }
 }
