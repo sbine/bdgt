@@ -15,9 +15,17 @@ bdgt is a one-stop personal finance management app. Planned features:
 - Debt and savings calculators
 - Interactive reports
 
-## Demo
+> **Demo at [https://bdgt.it](https://bdgt.it)**
 
-A demo application is available at [https://bdgt.it](https://bdgt.it)
+**Index**
+
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+  - [Using PHP on your machine](#using-php-on-your-machine)
+  - [Using Docker](#using-docker)
+  - [Using Makefile](#using-makefile)
+- [Configuring the app](#configuring-the-app)
+- [Building the frontend assets](#building-the-frontend-assets)
 
 ## Screenshots
 
@@ -31,26 +39,37 @@ A demo application is available at [https://bdgt.it](https://bdgt.it)
 
 This project requires PHP and a MySQL database.
 
+### Using PHP on your machine
+
+If you already have PHP installed, you can use `php artisan serve` or [Laravel Valet](https://laravel.com/docs/master/valet) paired with an installed version of MySQL, or a tool like [Takeout](https://github.com/tighten/takeout).
+
+### Using Docker
+
 A Docker config is provided with all required dependencies: `docker-compose up -d`
 
-> If you already have PHP installed, you can use `php artisan serve` or [Laravel Valet](https://laravel.com/docs/master/valet) paired with an installed version of MySQL, or a tool like [Takeout](https://github.com/tighten/takeout).
+### Using Makefile
 
-### Makefile
+<details>
+<summary>Click to expand</summary>
+
 `Make` is required to run make commands.  
-linux debian based - `sudo apt-get install make`  
-mac - `brew install make`  
-windows - `choco install make`
+Linux Debian based - `sudo apt-get install make`  
+macOS - `brew install make`  
+Windows - `choco install make`
  
 `make` - show all make commands  
-`make init` - init all (will perform all commands defined in next section `Configuring the environment`)  
-`make up` - boot and install composer  
-`make down` - shutdown docker
-`make art` - forward artisan command  
-`make assets` - build assets (run npm command)
+`make init` - performs all commands defined in the section `Configuring the environment`  
+`make up` - boot and install Composer  
+`make down` - shutdown Docker  
+`make art` - forward Artisan command  
+`make assets` - build assets (run npm command)  
 `make assets-watch` - watch for changes and build assets
 `make assets-production` - build production assets
+</details>
 
-### Configuring the environment
+<br>
+
+## Configuring the environment
 
 `cp .env.example .env` — edit the values in .env to suit your environment  
 `composer install` — requires [Composer](https://getcomposer.org/)  
@@ -64,7 +83,7 @@ A dummy account will be created with the following credentials which can be used
 Email: admin@example.com  
 Password: admin
 
-### Building the frontend assets
+## Building the frontend assets
 If you make changes to JS or SCSS files, you'll need to recompile the frontend assets.
 
 `npm run watch` — to automatically compile changes  
