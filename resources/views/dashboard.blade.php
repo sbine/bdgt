@@ -1,13 +1,11 @@
 @extends('app')
 
 @section('breadcrumbs')
-	<toggle class="w-full">
+    <toggle class="w-full flex justify-end">
 		<template v-slot="{ isOn, setTo }">
-			<div class="sm:float-right">
-				<a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
-					<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
-                </a>
-			</div>
+            <a class="button button--success block sm:inline-block w-full sm:w-auto text-center" href="#" @click.prevent="setTo(true)" dusk="add-transaction">
+				<font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon> {{ trans('labels.transactions.add_button') }}
+			</a>
 
 			<modal :value="isOn" @input="setTo(false)">
 				@include('transaction.modals.create')
