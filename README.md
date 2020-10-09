@@ -57,17 +57,15 @@ Linux Debian based - `sudo apt-get install make`
 macOS - `brew install make`  
 Windows - `choco install make`
  
-`make` - show all make commands  
-`make init` - performs all commands defined in the section `Configuring the environment`  
-`make up` - boot and install Composer  
-`make down` - shutdown Docker  
-`make art` - forward Artisan command  
-`make assets` - build assets (run npm command)  
-`make assets-watch` - watch for changes and build assets
-`make assets-production` - build production assets
+- `make` - show all make commands
+- `make init` - performs all commands defined in the section `Configuring the environment`
+- `make up` - boot and install Composer
+- `make down` - shutdown Docker
+- `make art` - forward Artisan command
+- `make assets` - build assets (run npm command)
+- `make assets-watch` - watch for changes and build assets
+- `make assets-production` - build production assets
 </details>
-
-<br>
 
 ## Configuring the environment
 
