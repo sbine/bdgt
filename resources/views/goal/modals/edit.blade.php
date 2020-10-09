@@ -20,7 +20,7 @@
 	</div>
 	<div class="form-row">
 		<label class="form-row__label">{{ trans('labels.goals.properties.goal_date') }}</label>
-		<div class="form-row__input input-addon--end">
+		<div class="form-row__input">
 			<input-datepicker name="goal_date" value="{{ $goal->goal_date }}"></input-datepicker>
 		</div>
 	</div>
