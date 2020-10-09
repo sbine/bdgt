@@ -7,8 +7,6 @@ use App\Models\Category;
 use App\Models\Ledger;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Request;
-use App\Exports\TransactionsExport;
-use Excel;
 
 class TransactionController extends Controller
 {
@@ -69,10 +67,5 @@ class TransactionController extends Controller
         }
 
         return redirect()->back()->with('alerts.danger', trans('crud.transactions.error'));
-    }
-
-    public function export()
-    {
-        return Excel::download(new TransactionsExport, "transaction-report.csv");
     }
 }
