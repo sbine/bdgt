@@ -4,19 +4,20 @@ namespace App\Exports;
 
 use App\Models\Transaction;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
 class TransactionsExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting
 {
     public function map($transaction): array
     {
         $amount = $transaction->amount;
-        if (!$transaction->inflow) {
+        if (! $transaction->inflow) {
             $amount *= -1;
         }
+
         return [
             $transaction->date,
             $transaction->account->name,
@@ -24,7 +25,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
             $transaction->bill->label,
             $transaction->payee,
             $amount,
-            $transaction->cleared ? "Yes" : "No"
+            $transaction->cleared ? 'Yes' : 'No',
         ];
     }
 
@@ -34,15 +35,15 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
     public function collection()
     {
         $transactions = Transaction::with([
-            'account' => function($query) {
-                $query->select("id", "name");
-            }, 
-            'category' => function($query) {
-                $query->select("id", "label");
+            'account' => function ($query) {
+                $query->select('id', 'name');
             },
-            'bill' => function($query) {
-                $query->select("id", "label");
-            }
+            'category' => function ($query) {
+                $query->select('id', 'label');
+            },
+            'bill' => function ($query) {
+                $query->select('id', 'label');
+            },
         ])->ordered()
           ->get();
 
@@ -58,7 +59,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
             'Bill',
             'Payee',
             'Amount',
-            'Cleared'
+            'Cleared',
         ];
     }
 
