@@ -1,5 +1,14 @@
 FROM php:7.4-fpm-alpine
 
+# userid of www-data (linux support file permissions)
+ARG DOCKER_WWW_USER_ID=1000
+ARG DOCKER_WWW_GROUP_ID=1000
+ENV DOCKER_WWW_USER_ID $DOCKER_WWW_USER_ID
+ENV DOCKER_WWW_GROUP_ID $DOCKER_WWW_GROUP_ID
+RUN apk add shadow \
+    && usermod --non-unique --uid ${DOCKER_WWW_USER_ID} www-data \
+    && groupmod --gid ${DOCKER_WWW_GROUP_ID} www-data
+
 # Install Packages
 RUN apk update
 RUN apk add bash openssl npm wget curl git zip unzip libpng-dev libzip-dev supervisor grep libmemcached-dev libmcrypt-dev \
@@ -10,13 +19,6 @@ RUN apk add bash openssl npm wget curl git zip unzip libpng-dev libzip-dev super
 # Install Docker Packages
 RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml zip
 
-# Apache Config
-#ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-#RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-#RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-#RUN a2enmod rewrite
-#RUN a2enmod ssl
-
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer \
     | php -- --install-dir=/usr/local/bin --filename=composer
@@ -26,3 +28,5 @@ RUN curl -sS https://getcomposer.org/installer \
 WORKDIR /var/www/html
 
 EXPOSE 80 443
+
+USER www-data

@@ -26,7 +26,7 @@
     }
 
     .table-responsive {
-        @apply overflow-x-scroll;
+        @apply overflow-x-auto;
     }
 
     &__heading {

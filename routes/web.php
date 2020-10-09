@@ -28,6 +28,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('accounts', 'AccountController');
 
         // Transactions
+        Route::get('transactions/export', 'TransactionExportController')->name('transactions.export');
         Route::resource('transactions', 'TransactionController')->except('index');
 
         // Categories
