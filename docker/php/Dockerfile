@@ -17,7 +17,7 @@ RUN apk add bash openssl npm wget curl git zip unzip libpng-dev libzip-dev super
 #libgsasl-dev build-base cyrus-sasl-dev pcre-dev imagemagick-dev
 
 # Install Docker Packages
-RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml zip
+RUN docker-php-ext-install gd mysqli pdo pdo_mysql tokenizer xml zip
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer \

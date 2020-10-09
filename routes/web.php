@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('accounts', 'AccountController');
 
     // Transactions
-    Route::get('transactions/export', 'TransactionExportController')->name('transactions.export');
+    Route::get('transactions/export', 'TransactionExportController')
+        ->name('transactions.export')
+        ->middleware('throttle:exports');
     Route::resource('transactions', 'TransactionController')->except('index');
 
     // Categories
