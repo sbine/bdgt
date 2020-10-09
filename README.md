@@ -17,7 +17,7 @@ bdgt is a one-stop personal finance management app. Planned features:
 
 > **Demo at [https://bdgt.it](https://bdgt.it)**
 
-**Index**
+## Index
 
 - [Screenshots](#screenshots)
 - [Installation](#installation)
