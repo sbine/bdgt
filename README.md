@@ -67,7 +67,7 @@ Windows - `choco install make`
 - `make assets-production` - build production assets
 </details>
 
-## Configuring the environment
+## Configuring the app
 
 `cp .env.example .env` — edit the values in .env to suit your environment  
 `composer install` — requires [Composer](https://getcomposer.org/)  
