@@ -64,6 +64,7 @@
             "@php artisan key:generate --ansi"
         ],
         "coverage": "php vendor/bin/phpunit --coverage-html=public/coverage",
+        "lint-fix": "php vendor/bin/php-cs-fixer fix",
         "test": "php vendor/bin/phpunit"
     }
 }

@@ -37,6 +37,7 @@ class Category extends Model
             // no progress with no budget
             return 0;
         }
+
         return round(($this->spent / $this->budgeted) * 100);
     }
 

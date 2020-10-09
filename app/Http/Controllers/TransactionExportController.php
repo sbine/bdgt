@@ -9,6 +9,8 @@ class TransactionExportController
 {
     public function __invoke()
     {
-        return Excel::download(new TransactionsExport, 'transaction-report.csv');
+        return Excel::download(new TransactionsExport, 'bdgt-transactions.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
     }
 }

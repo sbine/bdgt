@@ -74,7 +74,9 @@ export default {
                         mode: 'label',
                         callbacks: {
                             label(tooltipItems, data) {
-                                return data.labels[tooltipItems.index] +': ' + '$' + data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                                return data.labels[tooltipItems.index]
+                                    + ': $'
+                                    + data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             }
                         }
                     }
