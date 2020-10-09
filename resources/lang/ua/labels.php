@@ -171,7 +171,7 @@ return [
         'singular' => 'транзакція',
         'plural' => 'транзакції',
         'add_button' => 'додати транзакцію',
-        'export_button' => 'Export Transaction',    
+        'export_button' => 'Export CSV',
         'edit_button' => 'редагувати транзакцію',
         'delete_button' => 'видалити транзакцію',
         'properties' => [

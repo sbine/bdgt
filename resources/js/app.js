@@ -18,7 +18,7 @@ const i18n = new VueI18n({
  * Font Awesome
  */
 import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
-import { faCaretDown, faCaretUp, faChartBar, faCheck, faChevronLeft, faChevronRight, faCircle, faDollarSign, faPencilAlt, faPlus, faSort, faSortDown, faSortUp, faTimes, faFileCsv } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faCaretUp, faChartBar, faCheck, faChevronLeft, faChevronRight, faCircle, faDollarSign, faPencilAlt, faPlus, faSort, faSortDown, faSortUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faCalendar, faCheckSquare, faClock, faEnvelope, faFlag } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
@@ -41,8 +41,7 @@ library.add(
     faCheckSquare,
     faClock,
     faEnvelope,
-    faFlag,
-    faFileCsv
+    faFlag
 )
 
 /**
