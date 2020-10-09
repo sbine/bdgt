@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::resource('accounts', 'AccountController');
 
         // Transactions
-        Route::get('transactions/export', 'TransactionExportController')->name('transactions.export');
+        Route::get('transactions/export', 'TransactionExportController')
+             ->name('transactions.export')
+             ->middleware('throttle:exports');
         Route::resource('transactions', 'TransactionController')->except('index');
 
         // Categories

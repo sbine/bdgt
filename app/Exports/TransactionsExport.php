@@ -21,8 +21,8 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
         return [
             $transaction->date,
             $transaction->account->name,
-            $transaction->category->label,
-            $transaction->bill->label,
+            optional($transaction->category)->label,
+            optional($transaction->bill)->label,
             $transaction->payee,
             $amount,
             $transaction->cleared ? 'Yes' : 'No',

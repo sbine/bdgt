@@ -18,9 +18,16 @@
 @endstory
 
 @story('deploy')
+    git
     composer
     artisan
 @endstory
+
+@task('git', ['on' => $env])
+    {{ output('🌀 Updating code...') }}
+    cd {{ $root }}
+    git pull
+@endtask
 
 @task('composer', ['on' => $env])
     {{ output('🚚 Installing dependencies...') }}

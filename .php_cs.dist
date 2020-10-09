@@ -1,6 +1,7 @@
 <?php
 
 use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
 
 /**
  * Specify the project's configuration for php-cs-fixer
@@ -9,15 +10,24 @@ use PhpCsFixer\Config;
  * For examples of any rule, use the CLI tool:
  * php vendor/bin/php-cs-fixer describe <rule_name>
  */
+
 return Config::create()
-    ->setRules([
+    ->setFinder(
+        Finder::create()
+            ->exclude('bootstrap')
+            ->exclude('config')
+            ->exclude('resources/lang')
+            ->exclude('storage')
+            ->notPath('server.php')
+            ->in(__DIR__)
+    )->setRules([
         '@PSR2' => true,
         // Use [] instead of array()
         'array_syntax' => ['syntax' => 'short'],
         // Control alignment of => and =
         'binary_operator_spaces' => ['default' => 'single_space'],
         'blank_line_after_opening_tag' => true,
-        'blank_line_before_return' => true,
+        'blank_line_before_statement' => true,
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
         // Spaces around . concat . operators (makes changes in out-of-the-box Laravel files)
