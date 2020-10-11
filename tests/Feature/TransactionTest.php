@@ -84,7 +84,7 @@ class TransactionTest extends TestCase
             ->put(route('transactions.update', $transaction), $transaction->toArray())
             ->assertStatus(302);
 
-        $this->assertDatabaseHas('transactions', $transaction->getAttributes());
+        $this->assertDatabaseHas('transactions', $transaction->makeHidden('updated_at')->getAttributes());
     }
 
     /** @test */

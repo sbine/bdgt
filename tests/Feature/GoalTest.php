@@ -92,7 +92,7 @@ class GoalTest extends TestCase
             ->put(route('goals.update', $goal), $goal->toArray())
             ->assertRedirect(route('goals.show', $goal));
 
-        $this->assertDatabaseHas('goals', $goal->getAttributes());
+        $this->assertDatabaseHas('goals', $goal->makeHidden('updated_at')->getAttributes());
     }
 
     /** @test */
