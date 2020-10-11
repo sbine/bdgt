@@ -3,6 +3,8 @@
 @section('content')
 	<div class="max-w-xl mx-auto">
         @component('components.panel')
+            @include('alerts')
+
             <form class="form" role="form" method="POST" action="{{ route('password.email') }}">
                 @csrf
 
@@ -12,12 +14,6 @@
                     <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
                     <div class="form-row__input">
                         <input type="email" class="input-text" name="email" value="{{ old('email') }}" required autofocus>
-
-                        @if ($errors->has('email'))
-                            <span class="input-error">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
 

@@ -3,6 +3,8 @@
 @section('content')
 	<div class="max-w-xl mx-auto">
         @component('components.panel')
+            @include('alerts')
+
             <form class="form" role="form" method="POST" action="{{ route('password.request') }}">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
@@ -13,12 +15,6 @@
                     <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
                     <div class="form-row__input">
                         <input type="email" class="input-text" name="email" value="{{ old('email', $email) }}" required autofocus>
-
-                        @if ($errors->has('email'))
-                            <span class="input-error">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
 
@@ -26,12 +22,6 @@
                     <label class="form-row__label">{{ trans('labels.auth.properties.password') }}</label>
                     <div class="form-row__input">
                         <input type="password" class="input-text" name="password" required>
-
-                        @if ($errors->has('password'))
-                            <span class="input-error">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
 
@@ -39,16 +29,10 @@
                     <label class="form-row__label">{{ trans('labels.auth.properties.password_confirmation') }}</label>
                     <div class="form-row__input">
                         <input type="password" class="input-text" name="password_confirmation">
-
-                        @if ($errors->has('password_confirmation'))
-                            <span class="input-error">
-                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
 
-                <div class="flex flex-col items-end mt-8">
+                <div class="form-row">
                     <div class="form-row__label"></div>
                     <div class="form-row__input">
                         <button type="submit" class="button button--primary mt-8">
