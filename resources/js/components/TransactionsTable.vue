@@ -60,11 +60,11 @@
         </template>
 
         <template #actions="{ row }" v-if="showActions">
-            <button class="button button--warning w-8 text-gray-100 p-1" @click="$root.$emit('editTransaction', row.id)" dusk="edit-transaction">
+            <button aria-label="Edit transaction" class="button button--warning w-8 text-gray-100 p-1" @click="$root.$emit('editTransaction', row.id)" dusk="edit-transaction">
                 <font-awesome-icon icon="pencil-alt" class="fa-sm"/>
             </button>
 
-            <button class="button button--danger w-8 p-1" @click="$root.$emit('deleteTransaction', row.id)" dusk="delete-transaction">
+            <button aria-label="Delete transaction" class="button button--danger w-8 p-1" @click="$root.$emit('deleteTransaction', row.id)" dusk="delete-transaction">
                 <font-awesome-icon icon="times" class="fa-sm"/>
             </button>
         </template>

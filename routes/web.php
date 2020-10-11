@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
     Route::view('/', 'page.index')->name('index');
 
-    Route::group(['middleware' => ['auth']], function () {
+    Route::middleware('auth')->group(function () {
         Route::get('dashboard', 'DashboardController')->name('dashboard');
 
         Route::view('budget', 'budget.index')->name('budget');
@@ -48,7 +49,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
         // Reports
         Route::resource('reports', 'ReportController')->except(['index', 'show']);
 
-        Route::group(['prefix' => 'reports'], function () {
+        Route::prefix('reports')->group(function () {
             Route::get('/', 'ReportController@index')->name('reports.index');
 
             Route::get('{type}', 'ReportController@show')->name('reports.show');

@@ -24,7 +24,7 @@
 				<h2 class="font-semibold text-xl text-gray-800">
 					<formatter-currency :amount="{{ $ledger->balance() }}"></formatter-currency>
 				</h2>
-				<span class="text-gray-600">{{ trans('labels.dashboard.properties.current_balance') }}</span>
+				<span class="text-gray-600 lowercase">{{ trans('labels.dashboard.properties.current_balance') }}</span>
 			</div>
 		</div>
 
@@ -40,7 +40,7 @@
 						<span>N/A</span>
 					@endif
 				</h2>
-				<span class="text-gray-600">{{ trans('labels.dashboard.properties.last_purchase') }}</span>
+				<span class="text-gray-600 lowercase">{{ trans('labels.dashboard.properties.last_purchase') }}</span>
 			</div>
 		</div>
 
@@ -56,7 +56,7 @@
 						<span>N/A</span>
 					@endif
 				</h2>
-				<span class="text-gray-600">{{ trans('labels.dashboard.properties.next_bill') }}</span>
+				<span class="text-gray-600 lowercase">{{ trans('labels.dashboard.properties.next_bill') }}</span>
 			</div>
 		</div>
 	</div>

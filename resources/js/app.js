@@ -54,12 +54,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
 /**
- * V-Calendar
- */
-import VCalendar from 'v-calendar'
-Vue.use(VCalendar)
-
-/**
  * Vue-Tables-2
  */
 import { ClientTable } from 'vue-tables-2'

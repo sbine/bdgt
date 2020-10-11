@@ -7,7 +7,7 @@
 			</a>
 
 			<div class="block lg:hidden">
-				<button class="flex items-center border border-gray-400 hover:border-white rounded text-gray-200 hover:text-white px-3 py-2" @click="toggle">
+				<button aria-label="Toggle menu" class="flex items-center border border-gray-400 hover:border-white rounded text-gray-200 hover:text-white px-3 py-2" @click="toggle">
 					<svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 						<title>Menu</title>
 						<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>

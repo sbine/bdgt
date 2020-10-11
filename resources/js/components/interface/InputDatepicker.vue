@@ -26,9 +26,12 @@
 </template>
 
 <script>
+import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import dayjs from 'dayjs'
 
 export default {
+    components: { 'v-date-picker': DatePicker },
+
     props: {
         mode: {
             type: String,
