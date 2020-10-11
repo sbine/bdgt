@@ -49,6 +49,9 @@ export default {
                         },
                     }
                 }],
+                chart: {
+                    fontFamily: null,
+                },
                 dataLabels: {
                     enabled: false,
                     dropShadow: {

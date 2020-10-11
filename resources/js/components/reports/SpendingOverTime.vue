@@ -37,6 +37,7 @@ export default {
                     }
                 }],
                 chart: {
+                    fontFamily: null,
                     stacked: true,
                 },
                 dataLabels: {
