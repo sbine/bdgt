@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [
     './resources/views/**/*.blade.php',
@@ -9,6 +11,10 @@ module.exports = {
     extend: {
       borderWidth: {
         '3': '3px',
+      },
+      screens: {
+        ...defaultTheme.screens,
+        xl: '1450px',
       },
     },
   },

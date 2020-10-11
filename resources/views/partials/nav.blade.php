@@ -72,6 +72,25 @@
 				</div>
 
 				<div class="lg:flex items-center -mr-2">
+					<toggle close-on-blur>
+						<template v-slot="{ isOn, toggle }">
+							<a class="nav-item mr-4" href="#" @click.prevent="toggle">
+								<span>{{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }}</span>
+								<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
+							</a>
+
+							<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
+								@foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $locale)
+								<div class="{{ $localeCode == LaravelLocalization::getCurrentLocale() ? 'active' : '' }}">
+									<a class="block text-gray-800 hover:text-gray-600 p-4" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+										{{ $locale['native'] }}
+									</a>
+								</div>
+								@endforeach
+							</div>
+						</template>
+					</toggle>
+
 					@guest
 					<div>
 						<a class="nav-item mr-4" href="{{ route('login') }}">{{ trans('labels.auth.login') }}</a>
@@ -87,24 +106,6 @@
 						</form>
 					</div>
 					@endguest
-					<toggle close-on-blur>
-						<template v-slot="{ isOn, toggle }">
-							<a class="nav-item mr-4" href="#" @click.prevent="toggle">
-								<span class="uppercase">{{ LaravelLocalization::getCurrentLocale() }}</span>
-								<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
-							</a>
-
-							<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
-								@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $locale)
-								<div class="{{ $localeCode == LaravelLocalization::getCurrentLocale() ? 'active' : '' }}">
-									<a class="block text-gray-800 hover:text-gray-600 p-4" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-										{{ $locale['native'] }}
-									</a>
-								</div>
-								@endforeach
-							</div>
-						</template>
-					</toggle>
 				</div>
 			</div>
 		</template>
