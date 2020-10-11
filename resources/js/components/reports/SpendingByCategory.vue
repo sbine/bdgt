@@ -1,8 +1,11 @@
 <template>
     <div class="w-full max-w-5xl mx-auto">
-        <h1 class="w-full text-center text-gray-800 text-xl mb-6">
-            Spending by Category (This Month)
+        <h1 class="w-full text-center text-gray-800 text-xl mb-1">
+            {{ $t('labels.reports.spending_by_category') }} (This Month)
         </h1>
+
+        <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
+
         <apexchart type="pie" :options="chartOptions" :series="datasets" />
     </div>
 </template>
@@ -81,6 +84,14 @@ export default {
                     },
                 }
             }
+        }
+    },
+
+    computed: {
+        total() {
+            return formatMoney(!! this.datasets.length
+                ? this.datasets.reduce((a, b) => a + b)
+                : 0)
         }
     },
 

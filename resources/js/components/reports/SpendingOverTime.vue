@@ -1,7 +1,7 @@
 <template>
     <div class="w-full max-w-6xl mx-auto">
         <h1 class="w-full text-center text-gray-800 text-xl mb-6">
-            Spending Over Time
+            {{ $t('labels.reports.spending_over_time') }}
         </h1>
         <apexchart type="bar" :options="chartOptions" :series="datasets" />
     </div>
