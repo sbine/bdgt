@@ -23,7 +23,6 @@ export default {
     data() {
         return {
             datasets: [],
-            labels: [],
             chartOptions: {
                 colors: colors,
                 responsive: [{
@@ -52,8 +51,7 @@ export default {
                 states: {
                     active: {
                         filter: {
-                            type: 'darken',
-                            value: 0.75,
+                            type: 'none',
                         }
                     },
                     hover: {

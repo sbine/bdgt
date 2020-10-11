@@ -23,7 +23,6 @@ export default {
     data() {
         return {
             datasets: [],
-            labels: [],
             chartOptions: {
                 colors: colors,
                 responsive: [{
