@@ -7,12 +7,12 @@
 			<span class="badge">alpha</span>
 		</h1>
 		@guest
-			<a class="button button--success mt-2" href="{{ route('login') }}" role="button">Sign In</a>
+			<a class="button button--success mt-2" href="{{ route('login') }}" role="button">{{ trans('labels.auth.sign_in') }}</a>
 		@endguest
 	</div>
 
 	<div class="max-w-4xl mx-auto p-2">
-		<h3 class="font-semibold text-gray-600 text-xl tracking-wide uppercase mb-4">Planned Features</h3>
+		<h3 class="font-semibold text-gray-600 text-xl tracking-wide uppercase mb-4">{{ trans('labels.dashboard.properties.planned_features') }}</h3>
 
 		<div class="flex items-center py-6">
 			<div class="mr-8">
@@ -22,14 +22,14 @@
 				</font-awesome-layers>
 			</div>
 			<div class="flex flex-col w-full">
-				<h4 class="font-semibold text-xl">Zero-based Budgeting</h4>
-				<p class="text-sm">Budget to zero using the envelope method to keep your spending in check. Consult your categories to help guide purchasing decisions.</p>
+				<h4 class="font-semibold text-xl">{{ trans('labels.dashboard.properties.zero_based_budgeting.title') }}</h4>
+				<p class="text-sm">{{ trans('labels.dashboard.properties.zero_based_budgeting.description') }}</p>
 			</div>
 		</div>
 		<div class="flex items-center py-6">
 			<div class="flex flex-col w-full">
-				<h4 class="font-semibold text-xl">Automatic Bill Reminders</h4>
-				<p class="text-sm">Receive email and push notifications when due dates approach for unpaid bills. Never miss a payment again.</p>
+				<h4 class="font-semibold text-xl">{{ trans('labels.dashboard.properties.automatic_bill_reminders.title') }}</h4>
+				<p class="text-sm">{{ trans('labels.dashboard.properties.automatic_bill_reminders.description') }}</p>
 			</div>
 			<div class="ml-8">
 				<font-awesome-layers class="fa-5x">
@@ -46,14 +46,14 @@
 				</font-awesome-layers>
 			</div>
 			<div class="flex flex-col w-full">
-				<h4 class="font-semibold text-xl">Goal Tracking</h4>
-				<p class="text-sm">Achieve your goals with bdgt goal tracking. Painlessly save your way to every milestone.</p>
+				<h4 class="font-semibold text-xl">{{ trans('labels.dashboard.properties.goal_tracking.title') }}</h4>
+				<p class="text-sm">{{ trans('labels.dashboard.properties.goal_tracking.description') }}</p>
 			</div>
 		</div>
 		<div class="flex items-center py-6">
 			<div class="flex flex-col w-full">
-				<h4 class="font-semibold text-xl">Interactive Reports</h4>
-					<p class="text-sm">Access your historical data at any time through bdgt's comprehensive reports. Knowledge is power&mdash;analyze past trends to better plan for your future.</p>
+				<h4 class="font-semibold text-xl">{{ trans('labels.dashboard.properties.interactive_reports.title') }}</h4>
+					<p class="text-sm">{{ trans('labels.dashboard.properties.interactive_reports.description') }}</p>
 			</div>
 			<div class="ml-8">
 				<font-awesome-layers class="fa-5x">

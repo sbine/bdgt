@@ -20,7 +20,7 @@
 					<template v-cloak>
 						@auth
 						<div class="{{ (request()->route()->getName() == 'dashboard' ? 'active' : '') }}">
-							<a class="nav-item mr-4" href="{{ route('dashboard') }}">Dashboard</a>
+							<a class="nav-item mr-4" href="{{ route('dashboard') }}">{{ trans('labels.dashboard.singular') }}</a>
 						</div>
 						<div class="{{ (strpos(request()->route()->getName(), 'accounts') !== false ? 'active' : '') }}">
 							<a class="nav-item mr-4" href="{{ route('accounts.index') }}">{{ trans('labels.accounts.plural') }}</a>
@@ -38,7 +38,7 @@
 						<toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
 							<template v-slot="{ isOn, toggle }">
 								<a class="nav-item mr-4" href="#" @click.prevent="toggle">
-									Reports
+									{{ trans('labels.reports.plural') }}
 									<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
 								</a>
 
@@ -57,13 +57,13 @@
 						<toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'calculators') !== false ? 'active' : '') }}">
 							<template v-slot="{ isOn, toggle }">
 								<a class="nav-item mr-4" href="#" @click.prevent="toggle">
-									Calculators
+									{{ trans('labels.calculators.plural') }}
 									<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
 								</a>
 
 								<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
 									<div {{ (strpos(request()->route()->getName(), 'calculators.debt') !== false ? 'active' : '') }}>
-										<a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('calculators.debt') }}">Debt Calculator</a>
+										<a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('calculators.debt') }}">{{ trans('labels.calculators.debt.label') }}</a>
 									</div>
 								</div>
 							</template>
@@ -72,6 +72,25 @@
 				</div>
 
 				<div class="lg:flex items-center -mr-2">
+					<toggle close-on-blur>
+						<template v-slot="{ isOn, toggle }">
+							<a class="nav-item mr-4" href="#" @click.prevent="toggle">
+								<span>{{ LaravelLocalization::getSupportedLocales()[LaravelLocalization::getCurrentLocale()]['native'] }}</span>
+								<font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
+							</a>
+
+							<div v-if="isOn" class="absolute bg-white shadow-md rounded mt-1 z-30">
+								@foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $locale)
+								<div class="{{ $localeCode == LaravelLocalization::getCurrentLocale() ? 'active' : '' }}">
+									<a class="block text-gray-800 hover:text-gray-600 p-4" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+										{{ $locale['native'] }}
+									</a>
+								</div>
+								@endforeach
+							</div>
+						</template>
+					</toggle>
+
 					@guest
 					<div>
 						<a class="nav-item mr-4" href="{{ route('login') }}">{{ trans('labels.auth.login') }}</a>
