@@ -1,0 +1,108 @@
+// Legend
+.apexcharts-legend-series {
+    @apply m-0 #{!important};
+
+    @apply flex;
+
+    @apply items-center;
+
+    @apply text-left;
+
+    @apply w-full;
+
+    .apexcharts-legend-amount {
+        @apply pl-8;
+    }
+
+    .apexcharts-legend-marker {
+        @apply h-6 #{!important};
+
+        @apply w-6 #{!important};
+
+        @apply flex-shrink-0;
+
+        @apply rounded-full #{!important};
+    }
+
+    .apexcharts-legend-text {
+        @apply text-gray-700 #{!important};
+
+        @apply text-lg #{!important};
+
+        @apply flex;
+
+        @apply items-center;
+
+        @apply justify-between;
+
+        @apply leading-normal;
+
+        @apply px-2;
+
+        @apply py-2;
+
+        @apply w-full;
+    }
+}
+
+// Data
+.apexcharts-series {
+    @apply cursor-pointer;
+}
+
+// Download button on bar chart
+.apexcharts-toolbar {
+    @apply -mt-12;
+}
+
+// Bar chart tooltips
+.apexcharts-tooltip.apexcharts-theme-light {
+    @apply text-gray-900 #{!important};
+
+    .apexcharts-tooltip-marker {
+        @apply flex-shrink-0;
+    }
+
+    .apexcharts-tooltip-text {
+        @apply text-sm #{!important};
+
+        @apply w-full;
+    }
+
+    .apexcharts-tooltip-title {
+        @apply font-semibold;
+
+        @apply pl-3;
+
+        @apply text-base  #{!important};
+    }
+
+    .apexcharts-tooltip-y-group {
+        @apply p-0 #{!important};
+
+        @apply w-full;
+
+        @apply flex;
+
+        @apply justify-between;
+
+        .apexcharts-tooltip-text-value {
+            @apply pl-4;
+        }
+    }
+}
+
+// Pie chart tooltips
+.apexcharts-tooltip.apexcharts-theme-dark {
+    @apply text-gray-900 #{!important};
+
+    .apexcharts-tooltip-series-group {
+        @apply bg-gray-100 #{!important};
+
+        @apply shadow-lg;
+    }
+
+    .apexcharts-tooltip-text {
+        @apply text-base #{!important};
+    }
+}
