@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Route::prefix(LaravelLocalization::setLocale())->group(function () {
+    Auth::routes();
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
-{
     Route::view('/', 'page.index')->name('index');
 
     Route::group(['middleware' => ['auth']], function () {
