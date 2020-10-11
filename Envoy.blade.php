@@ -36,14 +36,16 @@
 @endtask
 
 @task('database', ['on' => 'local'])
-    {{ output('✨ Migrating and seeding the DB...') }}
+    {{ output('🔨 Migrating and seeding the DB...') }}
     php artisan migrate --seed
-    {{ $env === 'prod' ? 'php artisan optimize' : '' }}
 @endtask
 
 @task('artisan', ['on' => 'prod'])
     {{ output('✨ Migrating and optimizing...') }}
     cd {{ $root }}
     php artisan migrate --force
-    php artisan optimize
+
+    php artisan config:cache
+    php artisan route:trans:cache
+    php artisan view:cache
 @endtask
