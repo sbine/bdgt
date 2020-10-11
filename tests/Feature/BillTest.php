@@ -91,6 +91,8 @@ class BillTest extends TestCase
         $this->actingAs($bill->user)
             ->put(route('bills.update', $bill), $bill->toArray())
             ->assertRedirect(route('bills.show', $bill));
+
+        $this->assertDatabaseHas('bills', $bill->makeHidden('updated_at')->getAttributes());
     }
 
     /** @test */

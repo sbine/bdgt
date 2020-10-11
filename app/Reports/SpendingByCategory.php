@@ -30,22 +30,15 @@ class SpendingByCategory implements Reportable
         $results = Transaction::selectRaw('SUM(amount) AS total, categories.label AS category')
                         ->whereBetween('date', [$startDate->format('Y-m-01'), $endDate->format('Y-m-d 23:59:59')])
                         ->groupBy('transactions.category_id')
-                        ->join('categories', 'category_id', '=', 'categories.id')->get();
-
-        $dataSets = [];
-        $labels = [];
-        foreach ($results as $result) {
-            $labels[] = $result->category;
-            $dataSets[] = $result->total;
-        }
+                        ->join('categories', 'category_id', '=', 'categories.id')
+                        ->orderByDesc('total')
+                        ->get();
 
         return [
-            'labels' => $labels,
-            'datasets' => [
-                [
-                    'data' => $dataSets,
-                ],
-            ],
+            'labels' => $results->pluck('category'),
+            'datasets' => $results->pluck('total')->map(function ($total) {
+                return (float)$total;
+            }),
         ];
     }
 }

@@ -1,28 +1,90 @@
 <template>
-    <canvas ref="chart"/>
+    <div class="w-full max-w-5xl mx-auto">
+        <h1 class="w-full text-center text-gray-800 text-xl mb-6">
+            Spending by Category (This Month)
+        </h1>
+        <apexchart type="pie" :options="chartOptions" :series="datasets" />
+    </div>
 </template>
 
 <script>
-import Chart from 'chart.js'
+import VueApexCharts from 'vue-apexcharts'
 import dayjs from 'dayjs'
-import colors from './ReportColors.js'
+import colors from './ReportColors'
+import { formatMoney } from '../../utils'
 
 export default {
+    components: { apexchart: VueApexCharts },
+
     props: {
         url: String,
     },
 
     data() {
         return {
-            chart: null,
             datasets: [],
-            labels: [],
-            colors: colors
+            chartOptions: {
+                colors: colors,
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            height: 700,
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }, {
+                    breakpoint: 680,
+                    options: {
+                        chart: {
+                            height: 800,
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }],
+                dataLabels: {
+                    enabled: false,
+                    dropShadow: {
+                        enabled: false,
+                    },
+                },
+                legend: {
+                    formatter: (seriesName, options) => {
+                        return ['<span>' + seriesName + '</span>', ' ', '<b class="apexcharts-legend-amount">$' + options.w.globals.series[options.seriesIndex]?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '</b>']
+                    },
+                    position: 'right',
+                },
+                states: {
+                    active: {
+                        filter: {
+                            type: 'darken',
+                            value: 0.75,
+                        }
+                    },
+                    hover: {
+                        filter: {
+                            type: 'darken',
+                            value: 0.85,
+                        }
+                    },
+                },
+                tooltip: {
+                    onDatasetHover: {
+                        highlightDataSeries: false,
+                    },
+                    y: {
+                        formatter: (value) => formatMoney(value)
+                    },
+                }
+            }
         }
     },
 
     mounted() {
-        this.initialize()
         this.fetchData()
     },
 
@@ -33,56 +95,14 @@ export default {
                 'endDate': dayjs().format('YYYY-MM-DD'),
             }).then(response => {
                 this.datasets = response.data.datasets
-                this.labels = response.data.labels
-                this.chart.data.datasets = response.data.datasets
-                this.chart.data.labels = response.data.labels
 
-                let colors = Object.assign([], this.colors)
-                let backgroundColors = []
-
-                this.chart.data.datasets.forEach(dataset => {
-                    dataset.data.forEach(data => {
-                        backgroundColors.push(colors[0])
-                        colors.splice(colors[0], 1)
-
-                        if (! colors.length) {
-                            colors = Object.assign([], this.colors)
-                        }
-                    })
-
-                    dataset.backgroundColor = backgroundColors
-                })
-
-                this.chart.update()
-            })
-        },
-        initialize() {
-            this.chart = new Chart(this.$refs.chart.getContext('2d'), {
-                type: 'pie',
-                aspectRatio: window.innerWidth <= 500 ? 1 : 2,
-                data: {
-                    labels: this.labels,
-                    datasets: this.datasets,
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Spending By Category (This Month)'
-                    },
-                    tooltips: {
-                        mode: 'label',
-                        callbacks: {
-                            label(tooltipItems, data) {
-                                return data.labels[tooltipItems.index]
-                                    + ': $'
-                                    + data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                            }
-                        }
+                this.chartOptions = {
+                    ...this.chartOptions, ...{
+                        labels: response.data.labels,
                     }
                 }
             })
-        }
+        },
     }
 }
 </script>

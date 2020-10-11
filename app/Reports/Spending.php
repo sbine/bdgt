@@ -55,7 +55,7 @@ class Spending implements Reportable
 
             $dataSets[] = [
                 'data' => $data,
-                'label' => $result->category,
+                'name' => $result->category,
             ];
         }
 

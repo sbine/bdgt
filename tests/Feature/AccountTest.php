@@ -93,7 +93,7 @@ class AccountTest extends TestCase
             ->put(route('accounts.update', $account), $account->toArray())
             ->assertRedirect(route('accounts.show', $account));
 
-        $this->assertDatabaseHas('accounts', $account->getAttributes());
+        $this->assertDatabaseHas('accounts', $account->makeHidden('updated_at')->getAttributes());
     }
 
     /** @test */
