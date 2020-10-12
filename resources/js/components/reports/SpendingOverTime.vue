@@ -1,8 +1,11 @@
 <template>
     <div class="w-full max-w-6xl mx-auto">
-        <h1 class="w-full text-center text-gray-800 text-xl mb-6">
+        <h1 class="w-full text-center text-gray-800 text-xl mb-1">
             {{ $t('labels.reports.spending_over_time') }}
         </h1>
+
+        <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
+
         <apexchart type="bar" :options="chartOptions" :series="datasets" />
     </div>
 </template>
@@ -23,6 +26,7 @@ export default {
     data() {
         return {
             datasets: [],
+            total: 0,
             chartOptions: {
                 colors: colors,
                 responsive: [{
@@ -47,6 +51,9 @@ export default {
                     },
                 },
                 legend: {
+                    formatter: (seriesName, options) => {
+                        return ['<span>' + seriesName + '</span>', ' ', '<b class="apexcharts-legend-amount">' + formatMoney(options.w.globals.series[options.seriesIndex].reduce((a, b) => a + b)) + '</b>']
+                    },
                     position: 'right',
                 },
                 states: {
@@ -91,6 +98,7 @@ export default {
                 'endDate': dayjs().format('YYYY-MM-DD'),
             }).then(response => {
                 this.datasets = response.data.datasets
+                this.total = formatMoney(response.data.total)
 
                 this.chartOptions = {
                     ...this.chartOptions, ...{

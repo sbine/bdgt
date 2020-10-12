@@ -38,6 +38,7 @@ class Spending implements Reportable
         $labels = [];
         $labelsInitialized = false;
         $monthInterval = new DateInterval('P1M');
+        $total = 0;
 
         foreach ($results as $result) {
             $data = [];
@@ -52,6 +53,7 @@ class Spending implements Reportable
                 $date->add($monthInterval);
             }
             $labelsInitialized = true;
+            $total += array_sum($data);
 
             $dataSets[] = [
                 'data' => $data,
@@ -62,6 +64,7 @@ class Spending implements Reportable
         return [
             'datasets' => $dataSets,
             'labels' => $labels,
+            'total' => $total,
         ];
     }
 

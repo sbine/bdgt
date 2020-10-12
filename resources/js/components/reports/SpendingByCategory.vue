@@ -60,7 +60,7 @@ export default {
                 },
                 legend: {
                     formatter: (seriesName, options) => {
-                        return ['<span>' + seriesName + '</span>', ' ', '<b class="apexcharts-legend-amount">$' + options.w.globals.series[options.seriesIndex]?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '</b>']
+                        return ['<span>' + seriesName + '</span>', ' ', '<b class="apexcharts-legend-amount">' + formatMoney(options.w.globals.series[options.seriesIndex]) + '</b>']
                     },
                     position: 'right',
                 },
