@@ -1,5 +1,3 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-
 module.exports = {
   future: {
     purgeLayersByDefault: true,
@@ -16,8 +14,11 @@ module.exports = {
       borderWidth: {
         '3': '3px',
       },
+      maxWidth: {
+        '5xl': '66rem',
+        '6xl': '76rem',
+      },
       screens: {
-        ...defaultTheme.screens,
         xl: '1450px',
       },
     },

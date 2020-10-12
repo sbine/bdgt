@@ -1,21 +1,20 @@
 <template>
     <div class="w-full max-w-5xl mx-auto">
-        <h1 class="w-full text-center text-gray-800 text-xl mb-1">
-            {{ $t('labels.reports.spending_by_category') }} (This Month)
+        <v-date-picker
+            class="absolute right-0 md:mr-6"
+            style="min-width: 220px;"
+            mode="range"
+            v-model="range"
+            @input="fetchData"
+            :popover="{ placement: 'bottom', visibility: 'click' }"
+        />
+
+        <h1 class="w-full md:text-center text-gray-800 text-xl mb-1">
+            {{ $t('labels.reports.spending_by_category') }}
         </h1>
 
-        <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
-        <div class="flex justify-end">
-            <span style="min-width: 220px;">
-                <v-date-picker
-                    mode='range'
-                    v-model='range'
-                    @input="fetchData"
-                    :popover="{ placement: 'bottom', visibility: 'click' }"
-                >
-                </v-date-picker>
-            </span>
-        </div>
+        <h2 class="w-full md:text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
+
         <apexchart type="pie" :options="chartOptions" :series="datasets" />
     </div>
 </template>
@@ -23,11 +22,12 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
+import dayjs from 'dayjs'
 import colors from './ReportColors'
 import { formatMoney } from '../../utils'
-let currentDate= new Date();
+
 export default {
-    components: { apexchart: VueApexCharts , 'v-date-picker': DatePicker },
+    components: { apexchart: VueApexCharts, 'v-date-picker': DatePicker },
 
     props: {
         url: String,
@@ -97,12 +97,10 @@ export default {
                     },
                 }
             },
-            currentDate : new Date(),
             range: {
-                start: new Date(currentDate.getFullYear(), 0, 1), //starting date of the current year
-                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0) //ending date of the current month
+                start: dayjs().startOf('year').toDate(),
+                end: dayjs().endOf('month').toDate(),
             },
-            maxDate: null
         }
     },
 
@@ -124,15 +122,23 @@ export default {
                 'startDate': this.range.start,
                 'endDate':  this.range.end,
             }).then(response => {
-                this.datasets = response.data.chart.datasets
-
-                this.chartOptions = {
-                    ...this.chartOptions, ...{
-                        labels: response.data.chart.labels,
+                const startDate = new Date(response.data.startDate)
+                const endDate = new Date(response.data.endDate)
+                // If dates have changed, overwrite them
+                if (this.range.end > endDate || this.range.end < endDate) {
+                    this.range = {
+                        start: startDate,
+                        end: endDate,
                     }
                 }
 
-                this.range.end = response.data.endDate;
+                this.datasets = response.data.data.datasets
+
+                this.chartOptions = {
+                    ...this.chartOptions, ...{
+                        labels: response.data.data.labels,
+                    }
+                }
             })
         },
     }

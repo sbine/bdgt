@@ -25,18 +25,18 @@ class ReportController extends Controller
 
     public function ajax($type)
     {
-        $start_date = new Carbon(Request::input('startDate'));
-        $end_date = new Carbon(Request::input('endDate'));
-        $difference = $start_date->diffInYears($end_date);
-        if ($difference > 0) {
-            $end_date = $start_date->addYear();
+        $startDate = new Carbon(Request::input('startDate'));
+        $endDate = new Carbon(Request::input('endDate'));
+        $difference = $startDate->diffInDays($endDate);
+        if ($difference > 366) {
+            $endDate = (clone $startDate)->addYear();
         }
+
         return response()->json(
             [
-                'chart' => ReportFactory::generate($type)
-                    ->forDateRange($start_date, $end_date),
-                'startDate' => $start_date,
-                'endDate' => $end_date,
+                'data' => ReportFactory::generate($type)->forDateRange($startDate, $endDate),
+                'startDate' => $startDate,
+                'endDate' => $endDate,
             ]
         );
     }

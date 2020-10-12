@@ -1,10 +1,19 @@
 <template>
     <div class="w-full max-w-6xl mx-auto">
-        <h1 class="w-full text-center text-gray-800 text-xl mb-1">
+        <v-date-picker
+            class="absolute right-0 mr-6"
+            style="min-width: 210px;"
+            mode="range"
+            v-model="range"
+            @input="fetchData"
+            :popover="{ placement: 'bottom', visibility: 'click' }"
+        />
+
+        <h1 class="w-full md:text-center text-gray-800 text-xl mb-1">
             {{ $t('labels.reports.spending_over_time') }}
         </h1>
 
-        <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
+        <h2 class="w-full md:text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
 
         <apexchart type="bar" :options="chartOptions" :series="datasets" />
     </div>
@@ -12,12 +21,13 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
+import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import dayjs from 'dayjs'
 import colors from './ReportColors'
 import { formatMoney } from '../../utils'
 
 export default {
-    components: { apexchart: VueApexCharts },
+    components: { apexchart: VueApexCharts, 'v-date-picker': DatePicker },
 
     props: {
         url: String,
@@ -83,7 +93,11 @@ export default {
                         formatter: (value) => formatMoney(value)
                     }
                 }
-            }
+            },
+            range: {
+                start: dayjs().subtract(1, 'year').toDate(),
+                end: dayjs().toDate(),
+            },
         }
     },
 
@@ -94,15 +108,25 @@ export default {
     methods: {
         fetchData() {
             axios.post(this.url, {
-                'startDate': dayjs().subtract(1, 'year').format('YYYY-MM-DD'),
-                'endDate': dayjs().format('YYYY-MM-DD'),
+                'startDate': this.range.start,
+                'endDate': this.range.end,
             }).then(response => {
-                this.datasets = response.data.datasets
-                this.total = formatMoney(response.data.total)
+                const startDate = new Date(response.data.startDate)
+                const endDate = new Date(response.data.endDate)
+                // If dates have changed, overwrite them
+                if (this.range.end > endDate || this.range.end < endDate) {
+                    this.range = {
+                        start: startDate,
+                        end: endDate,
+                    }
+                }
+
+                this.datasets = response.data.data.datasets
+                this.total = formatMoney(response.data.data.total)
 
                 this.chartOptions = {
                     ...this.chartOptions, ...{
-                        labels: response.data.labels,
+                        labels: response.data.data.labels,
                     }
                 }
             })

@@ -6,6 +6,10 @@
     @apply text-left;
     @apply w-full;
 
+    @screen md {
+        @apply pl-8;
+    }
+
     .apexcharts-legend-amount {
         @apply pl-8;
     }
@@ -36,7 +40,8 @@
 
 // Download button on bar chart
 .apexcharts-toolbar {
-    @apply -mt-12;
+    @apply -mt-20;
+    @apply -mr-4;
 }
 
 // Bar chart tooltips
