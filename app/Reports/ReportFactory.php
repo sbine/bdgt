@@ -10,15 +10,15 @@ class ReportFactory
     {
         switch ($reportType) {
             case 'categorial':
-                $report = app()->make(SpendingByCategory::class);
+                $report = app(SpendingByCategory::class);
 
                 break;
             case 'spending':
-                $report = app()->make(Spending::class);
+                $report = app(Spending::class);
 
                 break;
             default:
-                throw new InvalidArgumentException('Invalid report type');
+                throw new InvalidArgumentException('Invalid report type', 404);
 
                 break;
         }

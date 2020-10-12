@@ -11,7 +11,7 @@ class AccountController extends Controller
     {
         return view('account.index')->with(
             'accounts',
-            Account::all()->sortBy(function ($account) {
+            Account::withCount('transactions')->get()->sortBy(function ($account) {
                 return $account->name;
             })
         );

@@ -151,7 +151,7 @@ export default {
                 date = date.add(1, 'M')
                 if (this.payment >= this.currentBalance) {
                     totalInterestPaid = 0
-                    break;
+                    break
                 }
                 interestPaid = currentBalance * apr / 12
                 currentBalance = currentBalance - this.payment + interestPaid

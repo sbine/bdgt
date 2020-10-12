@@ -44,7 +44,7 @@ class TransactionTest extends TestCase
             ->get(route('api.transactions.show', $transaction->id))
             ->assertJsonFragment([
                 'id' => $transaction->id,
-                'account' => $transaction->account->name,
+                'account_id' => $transaction->account_id,
             ]);
     }
 
@@ -115,5 +115,19 @@ class TransactionTest extends TestCase
             ]);
 
         $this->assertDatabaseMissing('transactions', $transaction->getAttributes());
+    }
+
+    /** @test */
+    public function user_cannot_delete_another_users_transaction()
+    {
+        $user = User::factory()->create();
+        $this->be($user);
+
+        $transaction = Transaction::factory()->forAccount()->create();
+
+        $this
+            ->actingAs(User::factory()->create())
+            ->delete(route('api.transactions.destroy', $transaction->id))
+            ->assertForbidden();
     }
 }
