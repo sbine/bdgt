@@ -5,19 +5,24 @@
         </h1>
 
         <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
-
+        <v-date-picker
+            mode='range'
+            v-model='range'
+            @input="fetchData"
+        >
+        </v-date-picker>
         <apexchart type="pie" :options="chartOptions" :series="datasets" />
     </div>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
-import dayjs from 'dayjs'
+import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import colors from './ReportColors'
 import { formatMoney } from '../../utils'
-
+let currentDate= new Date();
 export default {
-    components: { apexchart: VueApexCharts },
+    components: { apexchart: VueApexCharts , 'v-date-picker': DatePicker },
 
     props: {
         url: String,
@@ -86,6 +91,11 @@ export default {
                         formatter: (value) => formatMoney(value)
                     },
                 }
+            },
+            currentDate : new Date(),
+            range: {
+                start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
             }
         }
     },
@@ -99,14 +109,15 @@ export default {
     },
 
     mounted() {
+        console.log('test')
         this.fetchData()
     },
 
     methods: {
         fetchData() {
             axios.post(this.url, {
-                'startDate': dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-                'endDate': dayjs().format('YYYY-MM-DD'),
+                'startDate': this.range.start,
+                'endDate':  this.range.end,
             }).then(response => {
                 this.datasets = response.data.datasets
 
