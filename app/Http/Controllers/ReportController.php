@@ -27,9 +27,8 @@ class ReportController extends Controller
     {
         $startDate = new Carbon(Request::input('startDate'));
         $endDate = new Carbon(Request::input('endDate'));
-        $difference = $startDate->diffInDays($endDate);
-        if ($difference > 366) {
-            $endDate = (clone $startDate)->addYear();
+        if ($startDate->diffInDays($endDate) > 366) {
+            $endDate = $startDate->copy()->addYear();
         }
 
         return response()->json(
