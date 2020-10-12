@@ -1,4 +1,4 @@
-export function formatMoney(amount, currency = 'USD') {
+export function formatMoney(amount = 0, currency = 'USD') {
     return amount.toLocaleString(undefined, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
