@@ -29,6 +29,9 @@ class Transaction extends Model
         'amount' => 'float',
         'cleared' => 'bool',
         'inflow' => 'bool',
+        'account_id' => 'int',
+        'category_id' => 'int',
+        'bill_id' => 'int',
     ];
 
     public function account()

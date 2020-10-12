@@ -31,7 +31,7 @@
 							<formatter-currency :amount="{{ $account->balance }}"></formatter-currency>
 						</p>
 					</div>
-					<div class="badge h-8">{{ $account->transactions->count() }}</div>
+					<div class="badge h-8">{{ $account->transactions_count }}</div>
 				</div>
 			</a>
 		@endforeach

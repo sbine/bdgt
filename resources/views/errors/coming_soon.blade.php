@@ -1,7 +1,8 @@
 @extends('app')
 
 @section('content')
-	<br>
-	<p>This feature is coming soon!</p>
+    <div class="w-full flex flex-col items-center">
+        <p class="text-lg">This feature is coming soon!</p>
+    </div>
 @endsection
 
