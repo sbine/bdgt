@@ -5,12 +5,17 @@
         </h1>
 
         <h2 class="w-full text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
-        <v-date-picker
-            mode='range'
-            v-model='range'
-            @input="fetchData"
-        >
-        </v-date-picker>
+        <div class="flex justify-end">
+            <span style="min-width: 220px;">
+                <v-date-picker
+                    mode='range'
+                    v-model='range'
+                    @input="fetchData"
+                    :popover="{ placement: 'bottom', visibility: 'click' }"
+                >
+                </v-date-picker>
+            </span>
+        </div>
         <apexchart type="pie" :options="chartOptions" :series="datasets" />
     </div>
 </template>
@@ -94,9 +99,10 @@ export default {
             },
             currentDate : new Date(),
             range: {
-                start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
-                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
-            }
+                start: new Date(currentDate.getFullYear(), 0, 1), //starting date of the current year
+                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0) //ending date of the current month
+            },
+            maxDate: null
         }
     },
 
@@ -109,7 +115,6 @@ export default {
     },
 
     mounted() {
-        console.log('test')
         this.fetchData()
     },
 
@@ -119,13 +124,15 @@ export default {
                 'startDate': this.range.start,
                 'endDate':  this.range.end,
             }).then(response => {
-                this.datasets = response.data.datasets
+                this.datasets = response.data.chart.datasets
 
                 this.chartOptions = {
                     ...this.chartOptions, ...{
-                        labels: response.data.labels,
+                        labels: response.data.chart.labels,
                     }
                 }
+
+                this.range.end = response.data.endDate;
             })
         },
     }
