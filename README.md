@@ -15,7 +15,8 @@ bdgt is a one-stop personal finance management app. Planned features:
 - Debt and savings calculators
 - Interactive reports
 
-> **Demo at [https://bdgt.it](https://bdgt.it)**
+> **Demo at [https://bdgt.it](https://bdgt.it)**  
+> `admin@example.com` / `admin`
 
 ## Index
 
@@ -80,7 +81,7 @@ Windows - `choco install make`
 `npm install` — requires [NPM](https://www.npmjs.com/)  
 `npm run dev`
 
-A dummy account will be created with the following credentials which can be used to login and preview the app:  
+A dummy account will be created with the following credentials which can be used to log in and preview the app:  
 Email: admin@example.com  
 Password: admin
 
