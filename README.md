@@ -23,7 +23,6 @@ bdgt is a one-stop personal finance management app. Planned features:
 - [Installation](#installation)
   - [Using PHP on your machine](#using-php-on-your-machine)
   - [Using Docker](#using-docker)
-  - [Using Makefile](#using-makefile)
 - [Configuring the app](#configuring-the-app)
 - [Building the frontend assets](#building-the-frontend-assets)
 
@@ -37,7 +36,7 @@ bdgt is a one-stop personal finance management app. Planned features:
 
 ## Installation
 
-This project requires PHP and a MySQL database.
+This project requires PHP 7.3+ and a MySQL database.
 
 ### Using PHP on your machine
 
@@ -45,12 +44,16 @@ If you already have PHP installed, you can use `php artisan serve` or [Laravel V
 
 ### Using Docker
 
-A Docker config is provided with all required dependencies: `docker-compose up -d`
+A Docker config is provided with all required dependencies. You can start the containers with docker-compose:
 
-### Using Makefile
+```bash
+docker-compose up -d
+```
+
+Or you can use the included Makefile:
 
 <details>
-<summary>Click to expand</summary>
+<summary>Click to toggle Makefile instructions</summary>
 
 `Make` is required to run make commands.  
 Linux Debian based - `sudo apt-get install make`  
@@ -58,11 +61,11 @@ macOS - `brew install make`
 Windows - `choco install make`
  
 - `make` - show all make commands
-- `make init` - performs all commands defined in the section `Configuring the environment`
+- `make init` - perform all commands defined in the section `Configuring the environment`
 - `make up` - boot and install Composer
-- `make down` - shutdown Docker
+- `make down` - shut down Docker containers
 - `make art` - forward Artisan command
-- `make assets` - build assets (run npm command)
+- `make assets` - build frontend assets (NPM)
 - `make assets-watch` - watch for changes and build assets
 - `make assets-production` - build production assets
 </details>
