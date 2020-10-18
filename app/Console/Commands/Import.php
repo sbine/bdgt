@@ -10,22 +10,10 @@ use OfxParser\Parser;
 
 class Import extends Command
 {
-    /**
-     * The console command name.
-     * @var string
-     */
     protected $signature = 'import {user} {path}';
 
-    /**
-     * The console command description.
-     * @var string
-     */
     protected $description = "Imports a user's OFX file into the system";
 
-    /**
-     * Execute the console command.
-     * @return int
-     */
     public function handle()
     {
         $userArg = $this->argument('user');
@@ -34,7 +22,7 @@ class Import extends Command
         // Ensure the user is valid
         $user = is_numeric($userArg) ? User::find($userArg) : User::where('email', $userArg)->first();
         if (! $user) {
-            $this->error(sprintf('Invalid User: %s', $userArg));
+            $this->error(sprintf('User not found: %s', $userArg));
 
             return 1;
         }
@@ -46,40 +34,48 @@ class Import extends Command
             return 1;
         }
 
+        if (! $this->confirm(sprintf('Import %s for user %s?', $pathArg, $user->email))) {
+            return 1;
+        }
+
         $ofx = (new Parser)->loadFromFile($pathArg);
 
         foreach ($ofx->bankAccounts as $accountData) {
             $value = (string) $accountData->accountType;
             $matchingAccount = $user->accounts()->where('name', 'like', $value)->first();
 
-            if ($matchingAccount) {
-                foreach ($accountData->statement->transactions as $ofxEntity) {
-                    $ofxEntityArr = [
-                        'user_id' => $user->id,
-                        'date' => $ofxEntity->date,
-                        'amount' => $ofxEntity->amount,
-                        'payee' => $ofxEntity->name,
-                        'account_id' => $matchingAccount->id,
-                        'inflow' => $ofxEntity->type === 'CREDIT',
-                    ];
+            if (! $matchingAccount) {
+                $this->info(sprintf('Skipping missing account: %s', $value));
 
-                    $validator = Validator::make($ofxEntityArr, [
-                        'date' => 'required|date',
-                        'amount' => 'required',
-                        'payee' => 'required',
-                        'account_id' => 'required|numeric',
-                        'inflow' => 'required',
-                        'category_id' => 'nullable|numeric',
-                    ]);
+                continue;
+            }
 
-                    if ($validator->fails()) {
-                        $this->error(sprintf('Invalid file: %s', $pathArg));
+            foreach ($accountData->statement->transactions as $ofxEntity) {
+                $ofxEntityArr = [
+                    'user_id' => $user->id,
+                    'date' => $ofxEntity->date,
+                    'amount' => $ofxEntity->amount,
+                    'payee' => $ofxEntity->name,
+                    'account_id' => $matchingAccount->id,
+                    'inflow' => $ofxEntity->type === 'CREDIT',
+                ];
 
-                        return 2;
-                    }
+                $validator = Validator::make($ofxEntityArr, [
+                    'date' => 'required|date',
+                    'amount' => 'required',
+                    'payee' => 'required',
+                    'account_id' => 'required|numeric',
+                    'inflow' => 'required',
+                    'category_id' => 'nullable|numeric',
+                ]);
 
-                    Transaction::create($ofxEntityArr);
+                if ($validator->fails()) {
+                    $this->error(sprintf('Invalid file: %s', $pathArg));
+
+                    return 2;
                 }
+
+                Transaction::create($ofxEntityArr);
             }
         }
 
