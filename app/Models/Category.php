@@ -38,7 +38,7 @@ class Category extends Model
             return 0;
         }
 
-        return round(($this->spent / $this->budgeted) * 100);
+        return min(0, round(($this->spent / $this->budgeted) * 100));
     }
 
     public function transactions()
