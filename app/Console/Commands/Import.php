@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use OfxParser;
-use App\Models\User;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\Validator;
+use OfxParser\Parser;
 
 class Import extends Command
 {
@@ -21,7 +20,7 @@ class Import extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Imports an OFX file into the system';
+    protected $description = "Imports a user's OFX file into the system";
 
     /**
      * Execute the console command.
@@ -34,19 +33,20 @@ class Import extends Command
 
         // Ensure the user is valid
         $user = is_numeric($userArg) ? User::find($userArg) : User::where('email', $userArg)->first();
-        if (!$user) {
-            $this->output->writeln(sprintf('<error>Invalid User: %s</error>', $userArg));
+        if (! $user) {
+            $this->error(sprintf('Invalid User: %s', $userArg));
+
             return 1;
         }
 
         // Ensure the file path is valid
-        if (!file_exists($pathArg) || pathinfo($pathArg, PATHINFO_EXTENSION) != 'ofx') {
-            $this->output->writeln(sprintf('<error>Invalid file: %s</error>', $pathArg));
+        if (! file_exists($pathArg) || pathinfo($pathArg, PATHINFO_EXTENSION) != 'ofx') {
+            $this->error(sprintf('Invalid file: %s', $pathArg));
+
             return 1;
         }
 
-        $ofxParser = new OfxParser\Parser();
-        $ofx = $ofxParser->loadFromFile($pathArg);
+        $ofx = (new Parser)->loadFromFile($pathArg);
 
         foreach ($ofx->bankAccounts as $accountData) {
             $value = (string) $accountData->accountType;
@@ -60,7 +60,7 @@ class Import extends Command
                         'amount' => $ofxEntity->amount,
                         'payee' => $ofxEntity->name,
                         'account_id' => $matchingAccount->id,
-                        'inflow' => $ofxEntity->type == 'CREDIT'
+                        'inflow' => $ofxEntity->type === 'CREDIT',
                     ];
 
                     $validator = Validator::make($ofxEntityArr, [
@@ -73,7 +73,8 @@ class Import extends Command
                     ]);
 
                     if ($validator->fails()) {
-                        $this->output->writeln(sprintf('<error>Invalid file: %s</error>', $pathArg));
+                        $this->error(sprintf('Invalid file: %s', $pathArg));
+
                         return 2;
                     }
 
@@ -82,7 +83,8 @@ class Import extends Command
             }
         }
 
-        $this->output->writeln('<info>OFX file successfully imported!</info>');
+        $this->info('OFX file successfully imported!');
+
         return 0;
     }
 }
