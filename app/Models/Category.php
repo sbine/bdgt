@@ -38,7 +38,9 @@ class Category extends Model
             return 0;
         }
 
-        return round(($this->spent / $this->budgeted) * 100);
+        $percent = round(($this->spent / $this->budgeted) * 100);
+
+        return $percent > 0 ? $percent : 0;
     }
 
     public function transactions()
