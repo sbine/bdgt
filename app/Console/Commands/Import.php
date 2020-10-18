@@ -41,11 +41,10 @@ class Import extends Command
         $ofx = (new Parser)->loadFromFile($pathArg);
 
         foreach ($ofx->bankAccounts as $accountData) {
-            $value = (string) $accountData->accountType;
-            $matchingAccount = $user->accounts()->where('name', 'like', $value)->first();
+            $matchingAccount = $user->accounts()->where('name', 'LIKE', $accountData->accountType)->first();
 
             if (! $matchingAccount) {
-                $this->info(sprintf('Skipping missing account: %s', $value));
+                $this->info(sprintf('Skipping missing account: %s', $accountData->accountType));
 
                 continue;
             }
@@ -54,10 +53,11 @@ class Import extends Command
                 $ofxEntityArr = [
                     'user_id' => $user->id,
                     'date' => $ofxEntity->date,
-                    'amount' => $ofxEntity->amount,
+                    'amount' => abs($ofxEntity->amount),
                     'payee' => $ofxEntity->name,
                     'account_id' => $matchingAccount->id,
                     'inflow' => $ofxEntity->type === 'CREDIT',
+                    'cleared' => 0,
                 ];
 
                 $validator = Validator::make($ofxEntityArr, [
