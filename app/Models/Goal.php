@@ -38,9 +38,7 @@ class Goal extends Model
     {
         return sprintf(
             '%0.0f',
-            ($this->balance / $this->amount) * 100 <= 100
-            ? ($this->balance / $this->amount) * 100
-            : 100
+            min(($this->balance / $this->amount) * 100, 100)
         );
     }
 }
