@@ -6,21 +6,21 @@
         :mode="mode"
         :popover="{ placement: 'bottom', visibility: 'click' }"
         dusk="datepicker"
-    >   
-        <template v-slot="{ inputProps, inputEvents, hidePopover }" >
+    >
+        <template v-slot="{ inputProps, inputEvents, hidePopover }">
             <div class="input-addon--end" >
-                <input type="hidden" :name="name" :value="timestamp" >
+                <input type="hidden" :name="name" :value="timestamp">
                 <input
                     type="text"
                     class="input-text pr-10"
                     :required="required"
                     v-bind="inputProps"
                     v-on="inputEvents"
-                    @blur="hidePopover" 
+                    @blur="hidePopover"
                 >
-                <span class="input-addon cursor-pointer" >
+                <span class="input-addon cursor-pointer">
                     <!-- Hidden input to apply the blur event and hide calendar -->
-                    <input type="radio" class="cursor-pointer input-addon--blur" @blur="hidePopover">
+                    <input type="radio" tabindex="-1" class="absolute w-full h-full cursor-pointer inset-0 opacity-0" @blur="hidePopover">
                     <font-awesome-icon :icon="['far', 'calendar']"/>
                 </span>
             </div>
@@ -31,10 +31,8 @@
 <script>
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import dayjs from 'dayjs'
-import { mixin as clickaway } from 'vue-clickaway'
 
 export default {
-    mixins: [ clickaway ],
     components: { 'v-date-picker': DatePicker },
 
     props: {
@@ -50,11 +48,6 @@ export default {
     data() {
         return {
             mutableValue: this.value || null
-        }
-    },
-    methods: {
-        test() {
-            console.log("coucou")
         }
     },
     computed: {
