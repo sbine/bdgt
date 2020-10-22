@@ -8,7 +8,7 @@
         dusk="datepicker"
     >
         <template v-slot="{ inputProps, inputEvents, hidePopover }">
-            <div class="input-addon--end" >
+            <div class="input-addon--end">
                 <input type="hidden" :name="name" :value="timestamp">
                 <input
                     type="text"
