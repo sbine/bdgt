@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'main' => [
+        'home' => 'Главная',
+    ],
     'modals' => [
         'button_close' => 'Отменить',
     ],
