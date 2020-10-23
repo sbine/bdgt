@@ -3,10 +3,10 @@
         <div
             class="text-center text-sm px-2 py-1"
             :class="{
-                'text-white': props.achieved,
-                'bg-green-500': props.achieved,
-                'bg-orange-400': props.balance > 0,
-                'bg-red-500': ! props.achieved && ! props.balance
+                'text-white': props.progress > 0,
+                'bg-green-500': props.progress > 0 && props.achieved,
+                'bg-orange-400': props.progress > 0 && props.balance > 0,
+                'bg-red-500': props.progress > 0 && (! props.achieved && ! props.balance)
             }"
             role="progressbar"
             :aria-valuenow="props.progress"
