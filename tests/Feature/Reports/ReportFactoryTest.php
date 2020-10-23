@@ -18,7 +18,7 @@ class ReportFactoryTest extends TestCase
     /** @test */
     public function it_returns_the_report_name()
     {
-        $this->assertEquals('Spending Over Time', ReportFactory::generate('spending')->name());
+        $this->assertEquals('spending_over_time', ReportFactory::generate('spending')->name());
     }
 
     /** @test */
