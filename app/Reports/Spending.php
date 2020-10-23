@@ -12,7 +12,7 @@ class Spending implements Reportable
 {
     public function name()
     {
-        return 'Spending Over Time';
+        return 'spending_over_time';
     }
 
     /**
