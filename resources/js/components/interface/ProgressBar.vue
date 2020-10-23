@@ -1,8 +1,9 @@
 <template functional>
     <div class="bg-gray-200 border rounded-sm">
         <div
-            class="text-center text-sm text-white px-2 py-1"
+            class="text-center text-sm px-2 py-1"
             :class="{
+                'text-white': props.achieved,
                 'bg-green-500': props.achieved,
                 'bg-orange-400': props.balance > 0,
                 'bg-red-500': ! props.achieved && ! props.balance
