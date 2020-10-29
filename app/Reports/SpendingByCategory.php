@@ -10,7 +10,7 @@ class SpendingByCategory implements Reportable
 {
     public function name()
     {
-        return 'Spending By Category';
+        return 'spending_by_category';
     }
 
     public function forDateRange($startDate = null, $endDate = null)
