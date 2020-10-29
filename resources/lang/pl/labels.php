@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'main' => [
+        'home' => 'Home',
+    ],
     'modals' => [
         'button_close' => 'Zamknij',
     ],
