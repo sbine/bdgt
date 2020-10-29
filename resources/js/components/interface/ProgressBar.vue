@@ -1,11 +1,12 @@
 <template functional>
     <div class="bg-gray-200 border rounded-sm">
         <div
-            class="text-center text-sm text-white px-2 py-1"
+            class="text-center text-sm px-2 py-1"
             :class="{
-                'bg-green-500': props.achieved,
-                'bg-orange-400': props.balance > 0,
-                'bg-red-500': ! props.achieved && ! props.balance
+                'text-white': props.progress > 0,
+                'bg-green-500': props.progress > 0 && props.achieved,
+                'bg-orange-400': props.progress > 0 && props.balance > 0,
+                'bg-red-500': props.progress > 0 && (! props.achieved && ! props.balance)
             }"
             role="progressbar"
             :aria-valuenow="props.progress"
