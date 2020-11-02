@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 services:
 
     nginx:
@@ -40,5 +40,15 @@ services:
           - .:/var/www/html
       restart: unless-stopped
 
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      ports :
+        - "8088:80"
+      environment:
+          - MYSQL_USER=${DB_USERNAME:-bdgt}
+          - MYSQL_ROOT_PASSWORD={DB_PASSWORD:-secret}
+          - MYSQL_PASSWORD={DB_PASSWORD:-secret}
+      links:
+        - mysql:db
 volumes:
   mysql-volume:
