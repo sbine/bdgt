@@ -50,7 +50,9 @@ A Docker config is provided with all required dependencies. You can start the co
 ```bash
 docker-compose up -d
 ```
-
+PhpMyAdmin : http://localhost:8088
+    - User : bdgt
+    - Password : password
 Or you can use the included Makefile:
 
 <details>
