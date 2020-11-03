@@ -59,8 +59,10 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
             Route::get('budget/{year}/{month}/{category}', 'BudgetController@show')->name('budget.show');
             Route::post('budget/{year}/{month}/{category}', 'BudgetController@update')->name('budget.update');
             Route::delete('budget/{year}/{month}/{category}', 'BudgetController@destroy')->name('budget.destroy');
-
+            Route::get('budget/{year}/{month}', 'BudgetController@index')->name('budget.index');
             Route::apiResource('transactions', 'TransactionController');
+            Route::get('budget/{year}/{month}', 'BudgetController@index')->name('budget.index');
+            Route::get('me', 'UserController@me');
         });
     });
 

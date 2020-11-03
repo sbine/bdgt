@@ -17,6 +17,11 @@ export default {
     },
 
     render(h, context) {
+
+        axios.get('/api/me').then(response => {
+                this.context.props.currency.default = response.data.currency;
+            });
+
         const amount = formatMoney(context.props.amount, context.props.currency)
 
         return h('span', context.data, (
