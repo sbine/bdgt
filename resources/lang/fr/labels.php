@@ -71,13 +71,13 @@ return [
                 'close_button' => 'Annuler',
                 'save_button' => 'Sauvegarder',
             ],
-            'Éditer' => [
+            'edit' => [
                 'title' => 'Éditer ce compte',
                 'close_button' => 'Annuler',
                 'save_button' => 'Éditer',
 
             ],
-            'Supprimer' => [
+            'delete' => [
                 'title' => 'Supprimer ce compte',
                 'close_button' => 'Annuler',
                 'save_button' => 'Supprimer',
@@ -103,13 +103,13 @@ return [
                 'close_button' => 'Annuler',
                 'save_button' => 'Sauvegarder',
             ],
-            'Éditer' => [
+            'edit' => [
                 'title' => 'Éditer une facture',
                 'close_button' => 'Annuler',
                 'save_button' => 'Éditer',
 
             ],
-            'Supprimer' => [
+            'delete' => [
                 'title' => 'Supprimer une facture',
                 'close_button' => 'Annuler',
                 'save_button' => 'Supprimer',
@@ -118,15 +118,15 @@ return [
         ],
     ],
     'calculators' => [
-        'singular' => 'Calculator',
-        'plural' => 'Calculators',
+        'singular' => 'Calculatrice',
+        'plural' => 'Calculatrices',
         'debt' => [
-            'label' => 'Debt Calculator',
+            'label' => 'Calculateur de débit',
             'properties' => [
-                'payment' => 'Monthly Payment',
-                'currentBalance' => 'Current Balance',
-                'interestRate' => 'Interest Rate',
-                'minimumPayment' => 'Minimum Payment',
+                'payment' => 'Paiement mensuel',
+                'currentBalance' => 'Solde actuel',
+                'interestRate' => 'Taux d\'intérêt',
+                'minimumPayment' => 'Paiement minimum',
             ],
         ],
     ],
@@ -146,13 +146,13 @@ return [
                 'close_button' => 'Annuler',
                 'save_button' => 'Sauvegarder',
             ],
-            'Éditer' => [
+            'edit' => [
                 'title' => 'Éditer une catégorie',
                 'close_button' => 'Annuler',
                 'save_button' => 'Éditer',
 
             ],
-            'Supprimer' => [
+            'delete' => [
                 'title' => 'Supprimer une catégorie',
                 'close_button' => 'Annuler',
                 'save_button' => 'Supprimer',
@@ -178,13 +178,13 @@ return [
                 'close_button' => 'Annuler',
                 'save_button' => 'Sauvegarder',
             ],
-            'Éditer' => [
+            'edit' => [
                 'title' => 'Éditer un objectif',
                 'close_button' => 'Annuler',
                 'save_button' => 'Éditer',
 
             ],
-            'Supprimer' => [
+            'delete' => [
                 'title' => 'Supprimer Objectif',
                 'close_button' => 'Annuler',
                 'save_button' => 'Supprimer',
@@ -223,13 +223,13 @@ return [
                 'close_button' => 'Annuler',
                 'save_button' => 'Sauvegarder',
             ],
-            'Éditer' => [
+            'edit' => [
                 'title' => 'Éditer une transaction',
                 'close_button' => 'Annuler',
                 'save_button' => 'Éditer',
 
             ],
-            'Supprimer' => [
+            'delete' => [
                 'title' => 'Supprimer une transaction',
                 'close_button' => 'Annuler',
                 'save_button' => 'Supprimer',
