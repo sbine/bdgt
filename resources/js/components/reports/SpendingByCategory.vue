@@ -2,7 +2,7 @@
     <div class="w-full max-w-5xl mx-auto">
         <v-date-picker
             class="absolute right-0 md:mr-6"
-            style="min-width: 220px;"
+            style="min-width: 220px"
             mode="range"
             v-model="range"
             @input="fetchData"
@@ -38,6 +38,7 @@ export default {
             datasets: [],
             chartOptions: {
                 colors: colors,
+                /*
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -59,6 +60,7 @@ export default {
                         },
                     }
                 }],
+                */
                 chart: {
                     fontFamily: null,
                 },
@@ -120,7 +122,7 @@ export default {
         fetchData() {
             axios.post(this.url, {
                 'startDate': this.range.start,
-                'endDate':  this.range.end,
+                'endDate': this.range.end,
             }).then(response => {
                 const startDate = new Date(response.data.startDate)
                 const endDate = new Date(response.data.endDate)

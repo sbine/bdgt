@@ -2,7 +2,7 @@
     <div class="w-full max-w-6xl mx-auto">
         <v-date-picker
             class="absolute right-0 mr-6"
-            style="min-width: 210px;"
+            style="min-width: 210px"
             mode="range"
             v-model="range"
             @input="fetchData"
@@ -39,6 +39,7 @@ export default {
             total: 0,
             chartOptions: {
                 colors: colors,
+                /*
                 responsive: [{
                     breakpoint: 788,
                     options: {
@@ -50,6 +51,7 @@ export default {
                         },
                     }
                 }],
+                */
                 chart: {
                     fontFamily: null,
                     stacked: true,
