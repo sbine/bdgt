@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fddf1ea37d202515edbdd9776bcb71b4",
+    "content-hash": "104c2ebe93c150237396cb0a1588673a",
     "packages": [
         {
             "name": "asgrim/ofxparser",
@@ -2784,7 +2784,7 @@
         },
         {
             "name": "sbine/simple-tenancy",
-            "version": "dev-main",
+            "version": "0.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sbine/simple-tenancy.git",
@@ -2803,7 +2803,6 @@
             "require-dev": {
                 "orchestra/testbench": "^4.0 || ^5.0 || ^6.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2836,7 +2835,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sbine/simple-tenancy/issues",
-                "source": "https://github.com/sbine/simple-tenancy/tree/main"
+                "source": "https://github.com/sbine/simple-tenancy/tree/0.0.5"
             },
             "time": "2021-02-23T01:52:19+00:00"
         },
@@ -9356,7 +9355,6 @@
     "stability-flags": {
         "asgrim/ofxparser": 20,
         "beyondcode/laravel-server-timing": 20,
-        "sbine/simple-tenancy": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
