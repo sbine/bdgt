@@ -1,44 +1,94 @@
-version: "3.8"
+# For more information: https://laravel.com/docs/sail
+version: '3'
 services:
-
-    nginx:
-        image: nginx:alpine
-        container_name: bdgt_nginx
-        volumes:
-            - .:/var/www/html/
-            - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    bdgt.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.0/app
         ports:
-            - "${HOST_HTTP_PORT:-80}:80"
-            - "${HOST_HTTPS_PORT:-443}:443"
-        depends_on:
-            - php
-        restart: unless-stopped
-
-    mysql:
-        image: mysql
-        container_name: bdgt_mysql
+            - '${APP_PORT:-80}:80'
         environment:
-            MYSQL_ROOT_USER: root
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
-            MYSQL_USER: ${DB_USERNAME:-bdgt}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
-            MYSQL_DATABASE: ${DB_DATABASE:-bdgt}
-        ports:
-            - "${HOST_DB_PORT:-3306}:3306"
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
         volumes:
-            - mysql-volume:/var/lib/mysql
+            - '.:/var/www/html'
+        networks:
+            - sail
         depends_on:
-            - php
-        restart: unless-stopped
-
-    php:
-      build: ./docker/php
-      container_name: bdgt_php
-      environment:
-          DB_HOST: bdgt_mysql
-      volumes:
-          - .:/var/www/html
-      restart: unless-stopped
-
+            - mysql
+            # - pgsql
+            # - redis
+            - selenium
+    selenium:
+        image: 'selenium/standalone-chrome'
+        volumes:
+            - '/dev/shm:/dev/shm'
+        networks:
+            - sail
+    mysql:
+        image: 'mysql:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'sailmysql:/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+          test: ["CMD", "mysqladmin", "ping"]
+#    pgsql:
+#        image: postgres:13
+#        ports:
+#            - '${FORWARD_DB_PORT:-5432}:5432'
+#        environment:
+#            PGPASSWORD: '${DB_PASSWORD:-secret}'
+#            POSTGRES_DB: '${DB_DATABASE}'
+#            POSTGRES_USER: '${DB_USERNAME}'
+#            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+#        volumes:
+#            - 'sailpostgresql:/var/lib/postgresql/data'
+#        networks:
+#            - sail
+#        healthcheck:
+#          test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+    # redis:
+    #     image: 'redis:alpine'
+    #     ports:
+    #         - '${FORWARD_REDIS_PORT:-6379}:6379'
+    #     volumes:
+    #         - 'sailredis:/data'
+    #     networks:
+    #         - sail
+    #     healthcheck:
+    #       test: ["CMD", "redis-cli", "ping"]
+    # memcached:
+    #     image: 'memcached:alpine'
+    #     ports:
+    #         - '11211:11211'
+    #     networks:
+    #         - sail
+    # mailhog:
+    #     image: 'mailhog/mailhog:latest'
+    #     ports:
+    #         - '${FORWARD_MAILHOG_PORT:-1025}:1025'
+    #         - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+    #     networks:
+    #         - sail
+networks:
+    sail:
+        driver: bridge
 volumes:
-  mysql-volume:
+    sailmysql:
+        driver: local
+#    sailpostgresql:
+#        driver: local
+#    sailredis:
+#        driver: local
