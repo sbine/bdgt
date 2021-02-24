@@ -19,12 +19,12 @@ class CalculatorTest extends DuskTestCase
             $browser
                 ->visit(route('calculators.debt'))
                 ->assertSee('Debt Calculator')
-                ->assertSee(Carbon::now()->addYear()->addDays(61)->format('F jS, Y'))
+                ->assertSee(Carbon::now()->addYear()->addMonths(2)->format('F jS, Y'))
                 ->assertSee('$67.21')
                 ->dragRight('.vue-slider-dot-handle', 40)
                 ->releaseMouse()
                 ->moveMouse(20, 20)
-                ->assertSee(Carbon::now()->addDays(335)->format('F jS, Y'))
+                ->assertSee(Carbon::now()->addYear()->subMonth()->format('F jS, Y'))
                 ->assertSee('$50.33')
                 ->screenshot('features/Debt_Calculator');
         });
