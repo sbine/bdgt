@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "asgrim/ofxparser": "dev-master",
-        "beyondcode/laravel-server-timing": "dev-master",
+        "beyondcode/laravel-server-timing": "^1.3",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "laravel/framework": "^8.0",
