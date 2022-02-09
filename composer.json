@@ -6,7 +6,6 @@
     "require": {
         "php": "^8.0",
         "asgrim/ofxparser": "dev-master",
-        "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "laravel/framework": "^9.0",
         "laravel/ui": "^3.0",

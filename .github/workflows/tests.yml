@@ -31,7 +31,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-suggest --no-progress --prefer-dist
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Generate application key
         run: php artisan key:generate
@@ -44,7 +44,7 @@ jobs:
           restore-keys: ${{ runner.os }}-npm-
 
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 12.x
 
