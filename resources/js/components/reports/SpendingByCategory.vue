@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-5xl mx-auto">
+    <div class="w-full max-w-5xl mx-auto relative">
         <v-date-picker
             class="absolute right-0 md:mr-6"
             style="min-width: 220px"

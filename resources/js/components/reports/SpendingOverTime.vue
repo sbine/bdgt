@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-6xl mx-auto">
+    <div class="w-full max-w-6xl mx-auto relative">
         <v-date-picker
             class="absolute right-0 mr-6"
             style="min-width: 210px"
@@ -82,6 +82,7 @@ export default {
                     },
                 },
                 tooltip: {
+                    intersect: false,
                     shared: true,
                     onDatasetHover: {
                         highlightDataSeries: false,
