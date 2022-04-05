@@ -10,5 +10,5 @@ export default {
       clearTimeout(this.debounceTimer)
       this.debounceTimer = setTimeout(() => callback.apply(this, arguments), delay)
     },
-  }
+  },
 }

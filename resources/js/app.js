@@ -10,38 +10,53 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-    locale: window.Locale,
-    messages: languageBundle,
+  locale: window.Locale,
+  messages: languageBundle,
 })
 
 /**
  * Font Awesome
  */
 import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
-import { faCaretDown, faCaretUp, faChartBar, faCheck, faChevronLeft, faChevronRight, faCircle, faDollarSign, faPencilAlt, faPlus, faSort, faSortDown, faSortUp, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCaretDown,
+  faCaretUp,
+  faChartBar,
+  faCheck,
+  faChevronLeft,
+  faChevronRight,
+  faCircle,
+  faDollarSign,
+  faPencilAlt,
+  faPlus,
+  faSort,
+  faSortDown,
+  faSortUp,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { faCalendar, faCheckSquare, faClock, faEnvelope, faFlag } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
 library.add(
-    faCaretDown,
-    faCaretUp,
-    faChartBar,
-    faCheck,
-    faChevronLeft,
-    faChevronRight,
-    faCircle,
-    faDollarSign,
-    faPencilAlt,
-    faPlus,
-    faSort,
-    faSortDown,
-    faSortUp,
-    faTimes,
-    faCalendar,
-    faCheckSquare,
-    faClock,
-    faEnvelope,
-    faFlag
+  faCaretDown,
+  faCaretUp,
+  faChartBar,
+  faCheck,
+  faChevronLeft,
+  faChevronRight,
+  faCircle,
+  faDollarSign,
+  faPencilAlt,
+  faPlus,
+  faSort,
+  faSortDown,
+  faSortUp,
+  faTimes,
+  faCalendar,
+  faCheckSquare,
+  faClock,
+  faEnvelope,
+  faFlag
 )
 
 /**
@@ -58,14 +73,19 @@ Vue.component('font-awesome-layers', FontAwesomeLayers)
  */
 import { ClientTable } from 'vue-tables-2'
 import TailwindTheme from './themes/vue-tables-tailwind-theme'
-Vue.use(ClientTable, {
+Vue.use(
+  ClientTable,
+  {
     sortIcon: {
-        is: 'fa-sort',
-        base: 'fas',
-        up: 'fa-sort-up',
-        down: 'fa-sort-down'
-    }
-}, false, TailwindTheme)
+      is: 'fa-sort',
+      base: 'fas',
+      up: 'fa-sort-up',
+      down: 'fa-sort-down',
+    },
+  },
+  false,
+  TailwindTheme
+)
 
 /**
  * The following block of code may be used to automatically register your
@@ -75,10 +95,10 @@ Vue.use(ClientTable, {
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map((key) => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const app = new Vue({
-    el: '#app',
-    i18n,
+  el: '#app',
+  i18n,
 })
