@@ -89,13 +89,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .categories {
     @apply pr-2;
 
-    @screen sm {
-        @apply pr-6;
-    }
+    @apply sm:pr-6;
 }
 
 .budgeted {
@@ -103,23 +101,17 @@ export default {
     @apply border-gray-300;
     @apply pl-4;
 
-    @screen sm {
-        @apply pl-6;
-    }
+    @apply sm:pl-6;
 }
 
 .spent {
     @apply pl-4;
 
-    @screen sm {
-        @apply pr-4;
-    }
+    @apply sm:pr-4;
 }
 
 .balance {
-    @screen sm {
-        @apply pr-4;
-    }
+    @apply sm:pr-4;
 }
 
 table {

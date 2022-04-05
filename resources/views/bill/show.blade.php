@@ -34,7 +34,7 @@
 		</span>
 	</h2>
 	<p class="mt-4">
-		Due <formatter-date time="{{ $bill->nextDue }}" :diff="true"></formatter-date>
+		{{ trans('labels.bills.properties.due') }} <formatter-date time="{{ $bill->nextDue }}" :diff="true"></formatter-date>
 		<span class="text-gray-700">({{ $bill->nextDue }})</span>
 	</p>
 	<p class="mt-2">

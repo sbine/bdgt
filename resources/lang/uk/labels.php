@@ -96,6 +96,7 @@ return [
             'amount' => 'сума',
             'start_date' => 'дата',
             'frequency' => 'частота',
+            'due' => 'Due',
         ],
         'modals' => [
             'create' => [

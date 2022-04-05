@@ -96,6 +96,7 @@ return [
             'amount' => 'Kwota',
             'start_date' => 'Data płatności',
             'frequency' => 'Płatność co x dni',
+            'due' => 'Due',
         ],
         'modals' => [
             'create' => [

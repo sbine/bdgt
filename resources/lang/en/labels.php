@@ -96,6 +96,7 @@ return [
             'amount' => 'Amount',
             'start_date' => 'Date',
             'frequency' => 'Frequency',
+            'due' => 'Due',
         ],
         'modals' => [
             'create' => [

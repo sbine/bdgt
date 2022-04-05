@@ -38,7 +38,7 @@
 					</div>
 					<div class="flex justify-between font-light mt-2">
 						<p>
-							Due <formatter-date time="{{ $bill->nextDue }}" :diff="true" unit="day"></formatter-date>
+							{{ trans('labels.bills.properties.due') }} <formatter-date time="{{ $bill->nextDue }}" :diff="true" unit="day"></formatter-date>
 							<span class="hidden">{{ $bill->nextDue }}</span>
 						</p>
 						<formatter-currency :amount="{{ $bill->amount }}"></formatter-currency>
