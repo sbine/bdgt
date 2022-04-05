@@ -11,7 +11,7 @@
     }
 
     &--primary {
-        @apply bg-blue-600;
+        @apply bg-blue-600 !important;
         @apply text-gray-100;
 
         &:hover {

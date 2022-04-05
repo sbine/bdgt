@@ -10,10 +10,10 @@
             @click.stop
         >
             <div
-                class="absolute cursor-pointer right-0 top-0 mr-2 xl:mr-4"
+                class="absolute cursor-pointer right-0 top-0 mt-4 xl:mt-6 mr-4 xl:mr-6"
                 @click="hide"
             >
-                <div class="text-4xl text-gray-600 hover:text-gray-700">
+                <div class="text-2xl text-gray-600 hover:text-gray-700">
                     <font-awesome-icon icon="times" class="pr-2"></font-awesome-icon>
                 </div>
             </div>

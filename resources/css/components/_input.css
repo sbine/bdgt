@@ -35,9 +35,7 @@
     @apply top-0;
     @apply w-6;
 
-    @screen sm {
-        @apply w-8;
-    }
+    @apply sm:w-8;
 }
 
 .input-addon--start {
@@ -50,9 +48,7 @@
     .input-text {
         @apply pl-8;
 
-        @screen sm {
-            @apply pl-10;
-        }
+        @apply sm:pl-10;
     }
 }
 
@@ -67,7 +63,5 @@
         @apply pr-8;
     }
 
-    @screen sm {
-        @apply pr-6;
-    }
+    @apply sm:pr-6;
 }

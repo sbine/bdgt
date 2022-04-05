@@ -1,0 +1,20 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+@import 'components/_alert';
+@import 'components/_badge';
+@import 'components/_breadcrumb';
+@import 'components/_button';
+@import 'components/_calendar';
+@import 'components/_chart';
+@import 'components/_form';
+@import 'components/_input';
+@import 'components/_link';
+@import 'components/_nav';
+@import 'components/_table';
+
+@import 'tailwindcss/utilities';
+
+[v-cloak] {
+    display: none;
+}

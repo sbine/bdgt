@@ -9,7 +9,7 @@
     >
         <template v-slot="{ inputProps, inputEvents, hidePopover }">
             <div class="input-addon--end">
-                <input type="hidden" :name="name" :value="timestamp">
+                <input type="hidden" :name="name" :value="timestamp" />
                 <input
                     type="text"
                     class="input-text pr-10"
@@ -17,11 +17,9 @@
                     v-bind="inputProps"
                     v-on="inputEvents"
                     @blur="hidePopover"
-                >
+                />
                 <span class="input-addon cursor-pointer">
-                    <!-- Hidden input to apply the blur event and hide calendar -->
-                    <input type="radio" tabindex="-1" class="absolute w-full h-full cursor-pointer inset-0 opacity-0" @blur="hidePopover">
-                    <font-awesome-icon :icon="['far', 'calendar']"/>
+                    <font-awesome-icon :icon="['far', 'calendar']" />
                 </span>
             </div>
         </template>

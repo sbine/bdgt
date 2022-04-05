@@ -84,7 +84,7 @@
     @apply mt-4;
 
     a {
-        @apply link;
+        /* @apply link; */
 
         &.active {
             @apply font-semibold;
@@ -95,9 +95,7 @@
     li {
         @apply mx-1;
 
-        @screen lg {
-            @apply mx-2;
-        }
+        @apply lg:mx-2;
     }
 
     ul {

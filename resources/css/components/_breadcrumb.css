@@ -10,8 +10,6 @@
 
         content: "/\00a0";
 
-        @screen lg {
-            @apply px-4;
-        }
+        @apply lg:px-4;
     }
 }
