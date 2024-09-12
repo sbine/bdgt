@@ -1,7 +1,8 @@
 /node_modules
+/public/build
 /public/coverage
 /public/storage
-/public/vendor/telescope
+/public/vendor
 /public/mix-manifest.json
 /public/css
 /public/js
