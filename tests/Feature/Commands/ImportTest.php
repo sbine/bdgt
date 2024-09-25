@@ -8,8 +8,7 @@ use Tests\TestCase;
 /** @group import */
 class ImportTest extends TestCase
 {
-    /** @test */
-    public function can_import_ofx_file_to_existing_account()
+    public function test_can_import_ofx_file_to_existing_account()
     {
         $account = Account::factory()->forUser()->create(['name' => 'CHECKING']);
         $path = base_path('tests/assets/sample.ofx');

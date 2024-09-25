@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "asgrim/ofxparser": "dev-master",
         "laravel/breeze": "*",
         "laravel/framework": "^11.0",

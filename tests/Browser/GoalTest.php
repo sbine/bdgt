@@ -15,8 +15,7 @@ class GoalTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_create_a_goal()
+    public function test_user_can_create_a_goal()
     {
         $user = User::factory()->create();
         $goal = Goal::factory()->make();
@@ -42,8 +41,7 @@ class GoalTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_edit_a_goal()
+    public function test_user_can_edit_a_goal()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -74,8 +72,7 @@ class GoalTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_delete_a_goal()
+    public function test_user_can_delete_a_goal()
     {
         $user = User::factory()->create();
         $this->be($user);

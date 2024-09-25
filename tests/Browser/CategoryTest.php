@@ -13,8 +13,7 @@ class CategoryTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_create_a_category()
+    public function test_user_can_create_a_category()
     {
         $user = User::factory()->create();
         $category = Category::factory()->make();
@@ -35,8 +34,7 @@ class CategoryTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_edit_a_category()
+    public function test_user_can_edit_a_category()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -63,8 +61,7 @@ class CategoryTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_delete_a_category()
+    public function test_user_can_delete_a_category()
     {
         $user = User::factory()->create();
         $this->be($user);

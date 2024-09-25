@@ -12,8 +12,7 @@ class CalculatorTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function unauthenticated_user_can_use_debt_calculator()
+    public function test_unauthenticated_user_can_use_debt_calculator()
     {
         $this->browse(function (Browser $browser) {
             $browser

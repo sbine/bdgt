@@ -14,15 +14,15 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('money', function ($expression) {
+        Blade::directive('money', function (string $expression) {
             return "<?php echo '$ ' . number_format({$expression}, 2); ?>";
         });
 
-        Blade::directive('number', function ($expression) {
+        Blade::directive('number', function (string $expression) {
             return "<?php echo number_format({$expression}, 2); ?>";
         });
 
-        Blade::directive('date', function ($expression) {
+        Blade::directive('date', function (string $expression) {
             return "<?php echo (new Illuminate\Support\Carbon({$expression}))->format('F j, Y') ?>";
         });
     }

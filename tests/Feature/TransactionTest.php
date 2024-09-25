@@ -23,8 +23,7 @@ class TransactionTest extends TestCase
         Account::flushEventListeners();
     }
 
-    /** @test */
-    public function store_persists_new_transaction_and_redirects()
+    public function test_store_persists_new_transaction_and_redirects()
     {
         $transaction = Transaction::factory()->forAccount()->make();
 
@@ -35,8 +34,7 @@ class TransactionTest extends TestCase
         $this->assertDatabaseHas('transactions', $transaction->getAttributes());
     }
 
-    /** @test */
-    public function user_can_download_transactions_export()
+    public function test_user_can_download_transactions_export()
     {
         Excel::fake();
 

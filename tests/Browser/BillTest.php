@@ -15,8 +15,7 @@ class BillTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_create_a_bill()
+    public function test_user_can_create_a_bill()
     {
         $user = User::factory()->create();
         $bill = Bill::factory()->make();
@@ -41,8 +40,7 @@ class BillTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_edit_a_bill()
+    public function test_user_can_edit_a_bill()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -74,8 +72,7 @@ class BillTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_delete_a_bill()
+    public function test_user_can_delete_a_bill()
     {
         $user = User::factory()->create();
         $this->be($user);

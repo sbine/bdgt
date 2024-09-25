@@ -63,7 +63,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
         });
 
         // "API" for Vue
-        Route::prefix('api')->name('api.')->namespace('Api')->group(function () {
+        Route::prefix('api')->name('api.')->group(function () {
             Route::get('budget/{year}/{month}', [ApiBudgetController::class, 'index'])->name('budget.index');
             Route::get('budget/{year}/{month}/{category}', [ApiBudgetController::class, 'show'])->name('budget.show');
             Route::post('budget/{year}/{month}/{category}', [ApiBudgetController::class, 'update'])->name('budget.update');

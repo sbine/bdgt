@@ -13,8 +13,7 @@ class AuthTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_register()
+    public function test_user_can_register()
     {
         $user = User::factory()->make(['password' => bcrypt('password')]);
 
@@ -32,8 +31,7 @@ class AuthTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_login()
+    public function test_user_can_login()
     {
         $user = User::factory()->create(['password' => bcrypt('password')]);
 
@@ -50,8 +48,7 @@ class AuthTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_logout()
+    public function test_user_can_logout()
     {
         $user = User::factory()->create(['password' => bcrypt('password')]);
 
@@ -66,8 +63,7 @@ class AuthTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_initiate_a_password_reset()
+    public function test_user_can_initiate_a_password_reset()
     {
         $user = User::factory()->create();
 
@@ -80,7 +76,7 @@ class AuthTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->screenshot('features/Auth_Forgot_Password')
                 ->press('Send Password Reset Link')
-                ->assertPathIs('/password/reset');
+                ->assertPathIs('/forgot-password');
         });
     }
 }
