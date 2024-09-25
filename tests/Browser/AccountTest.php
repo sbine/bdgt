@@ -15,8 +15,7 @@ class AccountTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_create_a_account()
+    public function test_user_can_create_a_account()
     {
         $user = User::factory()->create();
         $account = Account::factory()->make();
@@ -41,8 +40,7 @@ class AccountTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_edit_a_account()
+    public function test_user_can_edit_a_account()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -75,8 +73,7 @@ class AccountTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_delete_a_account()
+    public function test_user_can_delete_a_account()
     {
         $user = User::factory()->create();
         $this->be($user);

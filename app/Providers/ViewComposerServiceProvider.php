@@ -17,9 +17,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('partials.dropdowns.accounts', AccountsComposer::class);
-
         view()->composer('partials.dropdowns.categories', CategoriesComposer::class);
-
         view()->composer('partials.dropdowns.bills', BillsComposer::class);
     }
 

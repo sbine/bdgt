@@ -98,7 +98,6 @@ class Spending implements Reportable
         }
 
         $query = Transaction::whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d 23:59:59')])
-            ->addSelect('date')
             ->addSelect(DB::raw('categories.label AS category'))
             ->groupBy('category')
             ->join('categories', 'category_id', '=', 'categories.id');

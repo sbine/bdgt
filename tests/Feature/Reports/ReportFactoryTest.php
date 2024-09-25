@@ -15,14 +15,12 @@ class ReportFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_returns_the_report_name()
+    public function test_it_returns_the_report_name()
     {
         $this->assertEquals('spending_over_time', ReportFactory::generate('spending')->name());
     }
 
-    /** @test */
-    public function it_returns_spending_report_data()
+    public function test_it_returns_spending_report_data()
     {
         $reportData = [
             'report',
@@ -37,8 +35,7 @@ class ReportFactoryTest extends TestCase
         $this->assertEquals($reportData, ReportFactory::generate('spending')->get());
     }
 
-    /** @test */
-    public function it_returns_spending_by_category_report_data()
+    public function test_it_returns_spending_by_category_report_data()
     {
         $reportData = [
             'report',
@@ -53,8 +50,7 @@ class ReportFactoryTest extends TestCase
         $this->assertEquals($reportData, ReportFactory::generate('categorial')->get());
     }
 
-    /** @test */
-    public function it_throws_an_exception_for_invalid_reports()
+    public function test_it_throws_an_exception_for_invalid_reports()
     {
         $this->expectException(InvalidArgumentException::class);
 

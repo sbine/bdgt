@@ -13,8 +13,7 @@ class BillTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function total_attribute_returns_total_outflows()
+    public function test_total_attribute_returns_total_outflows()
     {
         $bill = Bill::factory()->make(['start_date' => Carbon::yesterday()]);
         $bill->setRelation('transactions', Transaction::factory()->count(3)->make([
@@ -30,8 +29,7 @@ class BillTest extends TestCase
         $this->assertEquals(180, $bill->total);
     }
 
-    /** @test */
-    public function paid_attribute_returns_true_when_bill_is_paid()
+    public function test_paid_attribute_returns_true_when_bill_is_paid()
     {
         $bill = Bill::factory()->make([
             'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
@@ -47,8 +45,7 @@ class BillTest extends TestCase
         $this->assertTrue($bill->paid);
     }
 
-    /** @test */
-    public function paid_attribute_returns_false_when_bill_is_unpaid()
+    public function test_paid_attribute_returns_false_when_bill_is_unpaid()
     {
         $bill = Bill::factory()->make([
             'start_date' => Carbon::now()->subDays(45)->format('Y-m-d'),
@@ -59,8 +56,7 @@ class BillTest extends TestCase
         $this->assertFalse($bill->paid);
     }
 
-    /** @test */
-    public function get_due_dates_for_interval_returns_expected_dates()
+    public function test_get_due_dates_for_interval_returns_expected_dates()
     {
         $bill = new Bill([
             'start_date' => new Carbon('2011-01-01'),

@@ -15,8 +15,7 @@ class ReportTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_view_spending_by_category_report()
+    public function test_user_can_view_spending_by_category_report()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -39,8 +38,7 @@ class ReportTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_view_spending_over_time_report()
+    public function test_user_can_view_spending_over_time_report()
     {
         $user = User::factory()->create();
         $this->be($user);

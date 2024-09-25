@@ -19,8 +19,7 @@ class BillTest extends TestCase
         Bill::flushEventListeners();
     }
 
-    /** @test */
-    public function index_displays_all_bills()
+    public function test_index_displays_all_bills()
     {
         $user = User::factory()->create();
         $bills = Bill::factory()->count(3)->create([
@@ -36,8 +35,7 @@ class BillTest extends TestCase
         });
     }
 
-    /** @test */
-    public function show_displays_associated_bill()
+    public function test_show_displays_associated_bill()
     {
         $bill = Bill::factory()->forUser()->create();
 
@@ -47,8 +45,7 @@ class BillTest extends TestCase
             ->assertSee($bill->label);
     }
 
-    /** @test */
-    public function cannot_view_another_users_bill()
+    public function test_cannot_view_another_users_bill()
     {
         $bill = Bill::factory()->forUser()->create();
 
@@ -57,8 +54,7 @@ class BillTest extends TestCase
             ->assertNotFound();
     }
 
-    /** @test */
-    public function store_persists_new_bill_and_redirects()
+    public function test_store_persists_new_bill_and_redirects()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -73,8 +69,7 @@ class BillTest extends TestCase
         $this->assertDatabaseHas('bills', $bill->getAttributes());
     }
 
-    /** @test */
-    public function unsuccessful_store_redirects_with_error()
+    public function test_unsuccessful_store_redirects_with_error()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('bills.store', []))
@@ -82,8 +77,7 @@ class BillTest extends TestCase
             ->assertSessionHas('errors');
     }
 
-    /** @test */
-    public function update_persists_changes_and_redirects()
+    public function test_update_persists_changes_and_redirects()
     {
         $bill = Bill::factory()->forUser()->create();
         $bill->amount = 500;
@@ -95,8 +89,7 @@ class BillTest extends TestCase
         $this->assertDatabaseHas('bills', $bill->makeHidden('updated_at')->getAttributes());
     }
 
-    /** @test */
-    public function cannot_update_another_users_bill()
+    public function test_cannot_update_another_users_bill()
     {
         $bill = Bill::factory()->forUser()->create();
 
@@ -105,8 +98,7 @@ class BillTest extends TestCase
             ->assertNotFound();
     }
 
-    /** @test */
-    public function delete_deletes_and_redirects_to_index()
+    public function test_delete_deletes_and_redirects_to_index()
     {
         $bill = Bill::factory()->forUser()->create();
 
@@ -117,8 +109,7 @@ class BillTest extends TestCase
         $this->assertDatabaseMissing('bills', ['id' => $bill->id]);
     }
 
-    /** @test */
-    public function cannot_delete_another_users_bill()
+    public function test_cannot_delete_another_users_bill()
     {
         $bill = Bill::factory()->forUser()->create();
 

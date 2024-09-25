@@ -12,8 +12,7 @@ class BudgetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function user_can_list_their_own_budgets()
+    public function test_user_can_list_their_own_budgets()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -27,8 +26,7 @@ class BudgetTest extends TestCase
             ]);
     }
 
-    /** @test */
-    public function user_can_view_their_own_budget()
+    public function test_user_can_view_their_own_budget()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -47,8 +45,7 @@ class BudgetTest extends TestCase
             ]);
     }
 
-    /** @test */
-    public function user_can_edit_their_own_budget()
+    public function test_user_can_edit_their_own_budget()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -78,8 +75,7 @@ class BudgetTest extends TestCase
         ));
     }
 
-    /** @test */
-    public function user_can_delete_their_own_budget()
+    public function test_user_can_delete_their_own_budget()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -100,8 +96,7 @@ class BudgetTest extends TestCase
         $this->assertDatabaseMissing('budgets', $budget->getAttributes());
     }
 
-    /** @test */
-    public function deleting_a_non_existent_budget_doesnt_throw_an_error()
+    public function test_deleting_a_non_existent_budget_doesnt_throw_an_error()
     {
         $user = User::factory()->create();
         $this->be($user);

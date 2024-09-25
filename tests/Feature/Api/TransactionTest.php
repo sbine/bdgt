@@ -12,8 +12,7 @@ class TransactionTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function user_can_create_a_transaction()
+    public function test_user_can_create_a_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -32,8 +31,7 @@ class TransactionTest extends TestCase
         ]));
     }
 
-    /** @test */
-    public function user_can_view_their_own_transaction()
+    public function test_user_can_view_their_own_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -48,8 +46,7 @@ class TransactionTest extends TestCase
             ]);
     }
 
-    /** @test */
-    public function user_cannot_view_another_users_transaction()
+    public function test_user_cannot_view_another_users_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -62,8 +59,7 @@ class TransactionTest extends TestCase
             ->assertForbidden();
     }
 
-    /** @test */
-    public function user_can_edit_their_own_transaction()
+    public function test_user_can_edit_their_own_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -84,8 +80,7 @@ class TransactionTest extends TestCase
         ));
     }
 
-    /** @test */
-    public function user_cannot_edit_another_users_transaction()
+    public function test_user_cannot_edit_another_users_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -99,8 +94,7 @@ class TransactionTest extends TestCase
             ->assertForbidden();
     }
 
-    /** @test */
-    public function user_can_delete_their_own_transaction()
+    public function test_user_can_delete_their_own_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -117,8 +111,7 @@ class TransactionTest extends TestCase
         $this->assertDatabaseMissing('transactions', $transaction->getAttributes());
     }
 
-    /** @test */
-    public function user_cannot_delete_another_users_transaction()
+    public function test_user_cannot_delete_another_users_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);

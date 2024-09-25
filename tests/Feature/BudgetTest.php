@@ -12,8 +12,7 @@ class BudgetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function user_can_view_their_budget()
+    public function test_user_can_view_their_budget()
     {
         $user = User::factory()->create();
         $this->be($user);

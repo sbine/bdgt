@@ -19,8 +19,7 @@ class AccountTest extends TestCase
         Account::flushEventListeners();
     }
 
-    /** @test */
-    public function index_displays_all_accounts()
+    public function test_index_displays_all_accounts()
     {
         $user = User::factory()->create();
         $accounts = Account::factory()->count(3)->create([
@@ -36,8 +35,7 @@ class AccountTest extends TestCase
         });
     }
 
-    /** @test */
-    public function show_displays_associated_account()
+    public function test_show_displays_associated_account()
     {
         $account = Account::factory()->forUser()->create();
 
@@ -47,8 +45,7 @@ class AccountTest extends TestCase
             ->assertSee($account->name);
     }
 
-    /** @test */
-    public function cannot_view_another_users_account()
+    public function test_cannot_view_another_users_account()
     {
         $account = Account::factory()->create();
 
@@ -57,8 +54,7 @@ class AccountTest extends TestCase
             ->assertNotFound();
     }
 
-    /** @test */
-    public function store_persists_new_account_and_redirects()
+    public function test_store_persists_new_account_and_redirects()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -74,8 +70,7 @@ class AccountTest extends TestCase
         $this->assertDatabaseHas('accounts', $account->getAttributes());
     }
 
-    /** @test */
-    public function unsuccessful_store_redirects_with_error()
+    public function test_unsuccessful_store_redirects_with_error()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('accounts.store', []))
@@ -83,8 +78,7 @@ class AccountTest extends TestCase
             ->assertSessionHas('errors');
     }
 
-    /** @test */
-    public function update_persists_changes_and_redirects()
+    public function test_update_persists_changes_and_redirects()
     {
         $account = Account::factory()->forUser()->create();
         $account->balance = 500;
@@ -96,8 +90,7 @@ class AccountTest extends TestCase
         $this->assertDatabaseHas('accounts', $account->makeHidden('updated_at')->getAttributes());
     }
 
-    /** @test */
-    public function cannot_update_another_users_account()
+    public function test_cannot_update_another_users_account()
     {
         $account = Account::factory()->create();
 
@@ -106,8 +99,7 @@ class AccountTest extends TestCase
             ->assertNotFound();
     }
 
-    /** @test */
-    public function delete_deletes_and_redirects_to_index()
+    public function test_delete_deletes_and_redirects_to_index()
     {
         $account = Account::factory()->forUser()->create();
 
@@ -118,8 +110,7 @@ class AccountTest extends TestCase
         $this->assertDatabaseMissing('accounts', ['id' => $account->id]);
     }
 
-    /** @test */
-    public function cannot_delete_another_users_account()
+    public function test_cannot_delete_another_users_account()
     {
         $account = Account::factory()->create();
 

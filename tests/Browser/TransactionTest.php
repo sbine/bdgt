@@ -18,8 +18,7 @@ class TransactionTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function user_can_create_a_transaction()
+    public function test_user_can_create_a_transaction()
     {
         $user = User::factory()->create();
         // Authenticate to establish tenancy before seeding
@@ -48,8 +47,7 @@ class TransactionTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_edit_a_transaction()
+    public function test_user_can_edit_a_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
@@ -77,8 +75,7 @@ class TransactionTest extends DuskTestCase
         });
     }
 
-    /** @test */
-    public function user_can_delete_a_transaction()
+    public function test_user_can_delete_a_transaction()
     {
         $user = User::factory()->create();
         $this->be($user);
