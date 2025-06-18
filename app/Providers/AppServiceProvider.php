@@ -3,14 +3,18 @@
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
 use Sbine\Tenancy\Tenant;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use LoadsTranslatedCachedRoutes;
+
     /**
      * Register any application services.
      *
@@ -42,5 +46,7 @@ class AppServiceProvider extends ServiceProvider
             // Throw an AuthenticatedException if no auth user is found
             return new Tenant(Auth::authenticate());
         });
+
+        RouteServiceProvider::loadCachedRoutesUsing(fn() => $this->loadCachedRoutes());
     }
 }

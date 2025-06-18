@@ -3945,12 +3945,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sbine/simple-tenancy.git",
-                "reference": "b5635b8f10e8126505fab72b69990f17a53db1c9"
+                "reference": "645aa20acc91456008ed36531a64a40c58260400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sbine/simple-tenancy/zipball/b5635b8f10e8126505fab72b69990f17a53db1c9",
-                "reference": "b5635b8f10e8126505fab72b69990f17a53db1c9",
+                "url": "https://api.github.com/repos/sbine/simple-tenancy/zipball/645aa20acc91456008ed36531a64a40c58260400",
+                "reference": "645aa20acc91456008ed36531a64a40c58260400",
                 "shasum": ""
             },
             "require": {
@@ -3993,9 +3993,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sbine/simple-tenancy/issues",
-                "source": "https://github.com/sbine/simple-tenancy/tree/main"
+                "source": "https://github.com/sbine/simple-tenancy/tree/0.0.7"
             },
-            "time": "2025-06-18T03:28:44+00:00"
+            "time": "2025-06-18T04:04:44+00:00"
         },
         {
             "name": "symfony/clock",
