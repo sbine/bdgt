@@ -7,8 +7,9 @@
         "php": "^8.2",
         "asgrim/ofxparser": "dev-master",
         "laravel/breeze": "*",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/nightwatch": "^1.7",
+        "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^2.0",
         "sbine/simple-tenancy": "dev-main"
     },
