@@ -1,7 +1,7 @@
 @extends('guest')
 
 @section('content')
-	<div class="max-w-xl mx-auto">
+    <div class="max-w-xl mx-auto">
         @component('components.panel')
             @include('alerts')
 

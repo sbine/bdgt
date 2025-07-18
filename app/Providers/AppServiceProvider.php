@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (! $this->app->environment('testing')) {
+            // utf8mb4 max key length
             Schema::defaultStringLength(191);
         }
 

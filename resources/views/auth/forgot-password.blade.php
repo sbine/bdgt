@@ -10,6 +10,8 @@
 
                 <h2 class="font-semibold text-lg text-center pb-8">{{ trans('labels.auth.reset_password') }}</h2>
 
+                @honeypot
+
                 <div class="form-row {{ $errors->has('email') ? 'has-error' : '' }}">
                     <label class="form-row__label">{{ trans('labels.auth.properties.email') }}</label>
                     <div class="form-row__input">
