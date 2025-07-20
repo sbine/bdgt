@@ -38,7 +38,7 @@ bdgt is a one-stop personal finance management app. Planned features:
 
 ### Using PHP on your machine
 
-This project requires PHP 7.4+, a MySQL database, [Composer](https://getcomposer.org/), and [NPM](https://www.npmjs.com/).
+This project requires PHP 8.2+, a MySQL database, [Composer](https://getcomposer.org/), and [NPM](https://www.npmjs.com/).
 
 If you already have PHP installed, you can use `php artisan serve` or [Laravel Valet](https://laravel.com/docs/valet) paired with an installed version of MySQL, or a tool like [Takeout](https://github.com/tighten/takeout).
 
@@ -74,13 +74,14 @@ A Docker config is provided with all required dependencies using [Laravel Sail](
    ```bash
    cp .env.example .env
    ```
-2. If you have Composer installed, run `composer install` to install Laravel Sail. Otherwise, install using the following Docker command (see [the docs](https://laravel.com/docs/8.x/sail#installing-composer-dependencies-for-existing-projects)):
+2. If you have Composer installed, run `composer install` to install Laravel Sail. Otherwise, install using the following Docker command (see [the docs](https://laravel.com/docs/11.x/sail#installing-composer-dependencies-for-existing-projects)):
    ```bash
    docker run --rm \
+       -u "$(id -u):$(id -g)" \
        -v $(pwd):/opt \
        -w /opt \
-       laravelsail/php80-composer:latest \
-       composer install
+       laravelsail/php84-composer:latest \
+       composer install --ignore-platform-reqs
    ```
 
 3. Start the containers:

@@ -11,7 +11,6 @@ use App\Http\Controllers\GoalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionExportController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -76,6 +75,6 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
     // Calculators
     Route::view('calculators/debt', 'calculator.debt')->name('calculators.debt');
     Route::view('calculators/savings', 'errors.coming_soon')->name('calculators.savings');
-});
 
-require __DIR__ . '/auth.php';
+    require __DIR__ . '/auth.php';
+});
