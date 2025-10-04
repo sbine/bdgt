@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="flex justify-end bg-gray-100 border-t px-8 xl:px-10 py-6">
+    <div class="flex justify-end bg-gray-100 border-t border-gray-400 px-8 xl:px-10 py-6">
         <button type="button" class="link mr-6" @click="setTo(false)">{{ $dismissLabel }}</button>
         <button type="submit" class="button button--primary">{{ $submitLabel }}</button>
     </div>

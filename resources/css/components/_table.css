@@ -14,7 +14,7 @@
         }
 
         tbody tr {
-            @apply rounded;
+            @apply rounded-sm;
 
             td {
                 @apply border-t;

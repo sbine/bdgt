@@ -8,7 +8,7 @@
 
 <link rel="icon" type="image/png" href="/favicon.png">
 
-<link href="{{ mix('css/app.css') }}" rel="stylesheet">
+@vite('resources/css/app.css')
 
 @yield('css')
 

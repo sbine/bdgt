@@ -1,5 +1,5 @@
 <template functional>
-  <div class="bg-gray-200 border rounded-sm">
+  <div class="bg-gray-200 border border-gray-400 rounded-xs">
     <div
       class="text-center text-sm px-2 py-1"
       :class="{

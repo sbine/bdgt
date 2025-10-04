@@ -136,7 +136,7 @@
         </template>
       </div>
 
-      <div v-if="action" class="flex justify-end bg-gray-100 border-t px-8 xl:px-10 py-6">
+      <div v-if="action" class="flex justify-end bg-gray-100 border-t border-gray-400 px-8 xl:px-10 py-6">
         <button type="button" class="link mr-6" @click="reset">
           {{ $t(`labels.transactions.modals.${action}.close_button`) }}
         </button>
@@ -149,6 +149,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     accounts: { type: Array, required: true },

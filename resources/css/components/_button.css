@@ -3,7 +3,7 @@
     @apply inline-block;
     @apply px-4;
     @apply py-2;
-    @apply rounded;
+    @apply rounded-sm;
     @apply text-gray-700;
 
     &:hover {
@@ -11,7 +11,7 @@
     }
 
     &--primary {
-        @apply bg-blue-600 !important;
+        @apply bg-blue-600!;
         @apply text-gray-100;
 
         &:hover {

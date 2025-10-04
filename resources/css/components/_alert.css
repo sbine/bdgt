@@ -1,7 +1,7 @@
 .alert {
     @apply bg-blue-200;
     @apply p-6;
-    @apply rounded;
+    @apply rounded-sm;
     @apply text-blue-900;
 
     &--success {

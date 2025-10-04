@@ -14,7 +14,7 @@
       <h2 class="text-xl">{{ title }}</h2>
     </template>
 
-    <template #event-renderer="{ event }">
+    <template #event="{ event }">
       <a
         :href="event.url"
         class="vuecal__event-title block text-white"
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import dayjs from 'dayjs'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'

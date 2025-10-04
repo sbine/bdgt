@@ -1,17 +1,9 @@
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-  },
-  content: [
-    './resources/views/**/*.blade.php',
-    './resources/js/**/*.js',
-    './resources/js/components/**/*.vue',
-  ],
+  content: ['./resources/views/**/*.blade.php', './resources/js/**/*.js', './resources/js/components/**/*.vue'],
   theme: {
     extend: {
       borderWidth: {
-        '3': '3px',
+        3: '3px',
       },
       maxWidth: {
         '5xl': '66rem',
@@ -139,6 +131,6 @@ module.exports = {
         800: '#97266d',
         900: '#702459',
       },
-    }
+    },
   },
 }

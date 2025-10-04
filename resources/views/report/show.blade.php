@@ -1,15 +1,15 @@
 @extends('app')
 
 @section('breadcrumbs.items')
-	<a class="breadcrumb" href="{{ route('reports.index') }}">{{ trans('labels.reports.plural') }}</a>
-	<div class="breadcrumb breadcrumb--active">{{ trans('labels.reports.'.$report->name) }}</div>
+    <a class="breadcrumb" href="{{ route('reports.index') }}">{{ trans('labels.reports.plural') }}</a>
+    <div class="breadcrumb breadcrumb--active">{{ trans('labels.reports.'.$report->name) }}</div>
 @endsection
 
 @section('content')
-	<div class="bg-white rounded-sm shadow p-6">
-		<report-manager
-			type="{{ Str::slug($report->name) }}"
-			url="{{ $report->url }}"
-		></report-manager>
-	</div>
+    <div class="bg-white rounded-xs shadow-sm p-6">
+        <report-manager
+            type="{{ Str::slug($report->name) }}"
+            url="{{ $report->url }}"
+        ></report-manager>
+    </div>
 @endsection

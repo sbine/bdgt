@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import SpendingByCategory from './SpendingByCategory'
-import SpendingOverTime from './SpendingOverTime'
+import SpendingByCategory from './SpendingByCategory.vue'
+import SpendingOverTime from './SpendingOverTime.vue'
 
 export default {
   components: {

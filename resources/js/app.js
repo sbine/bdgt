@@ -1,11 +1,10 @@
-require('./bootstrap')
-
-window.Vue = require('vue')
+import './bootstrap'
+import Vue from 'vue/dist/vue'
 
 /**
  * Vue Internationalization/Translations
  */
-import languageBundle from '@kirschbaum-development/laravel-translations-loader!@kirschbaum-development/laravel-translations-loader'
+import languageBundle from './i18n'
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
@@ -95,8 +94,8 @@ Vue.use(
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map((key) => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = import.meta.glob('./**/*.vue')
+Object.keys(files).map((key) => Vue.component(key.split('/').pop().split('.')[0], files[key]))
 
 const app = new Vue({
   el: '#app',

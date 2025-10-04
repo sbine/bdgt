@@ -8,7 +8,7 @@
     }
 
     .vuecal__title-bar {
-        @apply bg-blue-800;
+        @apply bg-blue-800!;
         @apply text-white;
     }
 
@@ -17,6 +17,6 @@
     }
 
     .vuecal__event {
-        @apply rounded-sm;
+        @apply rounded-xs;
     }
 }

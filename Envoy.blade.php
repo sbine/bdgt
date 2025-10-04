@@ -1,3 +1,5 @@
+{{-- php vendor/bin/envoy run deploy --env=prod  --}}
+
 @servers(['local' => '127.0.0.1', 'prod' => 'bdgt'])
 
 @setup
@@ -40,7 +42,7 @@
     php artisan migrate --seed
 @endtask
 
-@task('artisan', ['on' => 'prod'])
+@task('artisan', ['on' => 'prod', 'confirm' => true])
     {{ output('✨ Migrating and optimizing...') }}
     cd {{ $root }}
     php artisan migrate --force

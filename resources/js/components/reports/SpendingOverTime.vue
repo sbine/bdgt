@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import VueApexCharts from 'vue-apexcharts'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import dayjs from 'dayjs'

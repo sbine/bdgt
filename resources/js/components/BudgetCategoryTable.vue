@@ -8,19 +8,19 @@
         </td>
       </tr>
       <tr>
-        <th v-if="showCategories" class="categories">Categories</th>
-        <th class="budgeted">Budgeted</th>
-        <th class="spent">Spent</th>
-        <th class="balance">Balance</th>
+        <th v-if="showCategories" class="p-1 pb-4 text-left pr-2 sm:pr-6">Categories</th>
+        <th class="p-1 pb-4 text-left border-l-2 border-gray-300 pl-4 sm:pl-6">Budgeted</th>
+        <th class="p-1 pb-4 text-left pl-4 sm:pr-4">Spent</th>
+        <th class="p-1 pb-4 text-left sm:pr-4">Balance</th>
       </tr>
     </thead>
 
     <tbody>
       <tr v-for="(budget, index) in budgets" :key="index">
-        <td v-if="showCategories" class="categories">
+        <td v-if="showCategories" class="p-1 pr-2 sm:pr-6">
           {{ budget.category }}
         </td>
-        <td class="budgeted">
+        <td class="border-l-2 border-gray-300 p-1 pl-4 sm:pl-6">
           <div class="input-addon--start">
             <span class="input-addon">$</span>
             <input
@@ -34,10 +34,10 @@
             />
           </div>
         </td>
-        <td>
-          <formatter-currency :amount="budget.spent || 0" class="spent" />
+        <td class="p-1">
+          <formatter-currency :amount="budget.spent || 0" class="pl-4 sm:pr-4" />
         </td>
-        <td class="balance">
+        <td class="p-1 sm:pr-4">
           <formatter-currency
             :amount="budget.balance || 0"
             class="rounded-lg px-2 py-1"
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     budgets: {
@@ -93,41 +95,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css" scoped>
-.categories {
-  @apply pr-2;
-
-  @apply sm:pr-6;
-}
-
-.budgeted {
-  @apply border-l-2;
-  @apply border-gray-300;
-  @apply pl-4;
-
-  @apply sm:pl-6;
-}
-
-.spent {
-  @apply pl-4;
-
-  @apply sm:pr-4;
-}
-
-.balance {
-  @apply sm:pr-4;
-}
-
-table {
-  th {
-    @apply p-1;
-    @apply pb-4;
-    @apply text-left;
-  }
-
-  td {
-    @apply p-1;
-  }
-}
-</style>

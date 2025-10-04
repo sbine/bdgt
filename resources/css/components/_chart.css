@@ -1,6 +1,6 @@
 /* Legend */
 .apexcharts-legend-series {
-    @apply m-0 !important;
+    @apply m-0!;
     @apply flex;
     @apply items-center;
     @apply text-left;
@@ -13,15 +13,15 @@
     }
 
     .apexcharts-legend-marker {
-        @apply h-6 !important;
-        @apply w-6 !important;
-        @apply rounded-full !important;
+        @apply h-6!;
+        @apply w-6!;
+        @apply rounded-full!;
         @apply flex-shrink-0;
     }
 
     .apexcharts-legend-text {
-        @apply text-gray-700 !important;
-        @apply text-lg !important;
+        @apply text-gray-700!;
+        @apply text-lg!;
         @apply flex;
         @apply items-center;
         @apply justify-between;
@@ -44,25 +44,25 @@
 
 /* Bar chart tooltips */
 .apexcharts-tooltip.apexcharts-theme-light {
-    @apply text-gray-900 !important;
+    @apply text-gray-900!;
 
     .apexcharts-tooltip-marker {
         @apply flex-shrink-0;
     }
 
     .apexcharts-tooltip-text {
-        @apply text-sm !important;
+        @apply text-sm!;
         @apply w-full;
     }
 
     .apexcharts-tooltip-title {
         @apply font-semibold;
         @apply pl-3;
-        @apply text-base  !important;
+        @apply text-base!;
     }
 
     .apexcharts-tooltip-y-group {
-        @apply p-0 !important;
+        @apply p-0!;
         @apply w-full;
         @apply flex;
         @apply justify-between;
@@ -75,14 +75,14 @@
 
 /* Pie chart tooltips */
 .apexcharts-tooltip.apexcharts-theme-dark {
-    @apply text-gray-900 !important;
+    @apply text-gray-900!;
 
     .apexcharts-tooltip-series-group {
-        @apply bg-gray-100 !important;
+        @apply bg-gray-100!;
         @apply shadow-lg;
     }
 
     .apexcharts-tooltip-text {
-        @apply text-base !important;
+        @apply text-base!;
     }
 }

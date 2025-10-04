@@ -2,7 +2,7 @@
     @apply appearance-none;
     @apply border;
     @apply border-gray-400;
-    @apply rounded;
+    @apply rounded-sm;
     @apply px-2;
     @apply py-1;
 
@@ -11,7 +11,7 @@
     }
 
     &:focus {
-        @apply outline-none;
+        @apply outline-hidden;
     }
 }
 
