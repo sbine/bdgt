@@ -6,6 +6,7 @@
         "dev": "vite",
         "build": "vite build",
         "format": "prettier --write 'resources/**/*.{js,vue}'",
+        "i18n": "php artisan vue:translations --path=resources/lang --output=resources/js/i18n.js",
         "prepare": "husky install"
     },
     "prettier": {
