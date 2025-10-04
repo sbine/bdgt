@@ -78,10 +78,10 @@ tinker: ## forward tinker command to container
 
 assets: ## build assets
 	@make -s npm "run dev"
-assets-watch: ## build assets and start watching for file changes
-	@make -s npm "run watch-poll"
+assets-localize: ## build localization files
+	@make -s npm "run i18n"
 assets-production: ## build assets and start watching for file changes
-	@make -s npm "run production"
+	@make -s npm "run build"
 
 # match all unknown tasks
 %:
