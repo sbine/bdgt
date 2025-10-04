@@ -57,7 +57,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: Compile NPM dependencies
-        run: npm run prod
+        run: npm run build
 
       - name: Run PHPUnit tests
         run: php vendor/bin/phpunit

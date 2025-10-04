@@ -111,4 +111,4 @@ Password: admin
 ## Building the frontend assets
 If you make changes to JS or SCSS files, you'll need to recompile the frontend assets.
 
-`npm run watch` — to automatically compile changes  
+`npm run dev` — to automatically compile changes  
