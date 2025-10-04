@@ -54,7 +54,7 @@ jobs:
           node-version: 12.x
 
       - name: Install NPM dependencies
-        run: npm ci --prefer-offline --no-audit
+        run: npm ci
 
       - name: Compile NPM dependencies
         run: npm run build
