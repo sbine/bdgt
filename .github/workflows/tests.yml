@@ -51,10 +51,10 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v4
         with:
-          node-version: 12.x
+          node-version: 20.x
 
       - name: Install NPM dependencies
-        run: npm ci
+        run: npm ci --prefer-offline --no-audit
 
       - name: Compile NPM dependencies
         run: npm run build
