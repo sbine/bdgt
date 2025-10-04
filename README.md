@@ -98,6 +98,7 @@ A Docker config is provided with all required dependencies using [Laravel Sail](
    ./vendor/bin/sail artisan migrate
    ./vendor/bin/sail artisan db:seed
    ./vendor/bin/sail npm install
+   ./vendor/bin/sail npm run i18n
    ./vendor/bin/sail npm run dev
    ```
 
@@ -109,6 +110,7 @@ Password: admin
 </details>
 
 ## Building the frontend assets
-If you make changes to JS or SCSS files, you'll need to recompile the frontend assets.
+If you make changes to JS files, CSS files, or translations, you'll need to recompile the frontend assets.
 
 `npm run dev` — to automatically compile changes  
+`npm run i18n` — to update localization messages  
