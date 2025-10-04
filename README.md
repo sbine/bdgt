@@ -38,7 +38,7 @@ bdgt is a one-stop personal finance management app. Planned features:
 
 ### Using PHP on your machine
 
-This project requires PHP 8.2+, a MySQL database, [Composer](https://getcomposer.org/), and [NPM](https://www.npmjs.com/).
+This project requires PHP 8.3+, a MySQL database, [Composer](https://getcomposer.org/), and [NPM](https://www.npmjs.com/).
 
 If you already have PHP installed, you can use `php artisan serve` or [Laravel Valet](https://laravel.com/docs/valet) paired with an installed version of MySQL, or a tool like [Takeout](https://github.com/tighten/takeout).
 
