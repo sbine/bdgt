@@ -21,84 +21,88 @@
       <budget-category-table
         v-if="!screenXS"
         :budgets="previousBudgets"
+        :setBudgeted="setBudgeted"
         :showCategories="!screenXS"
         :label="previousDate.format('MMMM')"
       />
 
-      <budget-category-table :budgets="budgets" :showCategories="screenXS" :label="month" />
+      <budget-category-table :budgets="budgets" :setBudgeted="setBudgeted" :showCategories="screenXS" :label="month" />
 
-      <budget-category-table v-if="screenLG" :budgets="nextBudgets" :label="nextDate.format('MMMM')" />
+      <budget-category-table
+        v-if="screenLG"
+        :budgets="nextBudgets"
+        :setBudgeted="setBudgeted"
+        :label="nextDate.format('MMMM')"
+      />
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios'
 import dayjs from 'dayjs'
-import Debounce from '../mixins/debounce'
+import { useDebounce } from '../composables/useDebounce'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
-export default {
-  mixins: [Debounce],
+const { debounce } = useDebounce()
+const date = ref(dayjs())
+const previousBudgets = ref([])
+const budgets = ref([])
+const nextBudgets = ref([])
+const windowWidth = ref(window.innerWidth)
 
-  data() {
-    return {
-      date: dayjs(),
-      previousBudgets: [],
-      budgets: [],
-      nextBudgets: [],
-      windowWidth: window.innerWidth,
+const previousDate = computed(() => {
+  return date.value.subtract(1, 'month')
+})
+
+const month = computed(() => {
+  return date.value.format('MMMM')
+})
+const year = computed(() => {
+  return date.value.format('YYYY')
+})
+const nextDate = computed(() => {
+  return date.value.add(1, 'month')
+})
+const screenXS = computed(() => {
+  return windowWidth.value < 640
+})
+const screenLG = computed(() => {
+  return windowWidth.value >= 1024
+})
+
+const fetchBudgets = async (delay = 700) => {
+  debounce(async () => {
+    budgets.value = (await axios.get(`/api/budget/${year.value}/${date.value.format('MM')}`)).data.data
+
+    if (!screenXS.value) {
+      previousBudgets.value = (
+        await axios.get(`/api/budget/${previousDate.value.year()}/${previousDate.value.format('MM')}`)
+      ).data.data
     }
-  },
+    if (screenLG.value) {
+      nextBudgets.value = (
+        await axios.get(`/api/budget/${nextDate.value.year()}/${nextDate.value.format('MM')}`)
+      ).data.data
+    }
+  }, delay)
+}
 
-  computed: {
-    previousDate() {
-      return this.date.subtract(1, 'month')
-    },
-    month() {
-      return this.date.format('MMMM')
-    },
-    year() {
-      return this.date.format('YYYY')
-    },
-    nextDate() {
-      return this.date.add(1, 'month')
-    },
-    screenXS() {
-      return this.windowWidth < 640
-    },
-    screenLG() {
-      return this.windowWidth >= 1024
-    },
-  },
-
-  methods: {
-    async fetchBudgets(delay = 700) {
-      this.debounce(async () => {
-        this.budgets = (await axios.get(`/api/budget/${this.year}/${this.date.format('MM')}`)).data.data
-
-        if (!this.screenXS) {
-          this.previousBudgets = (
-            await axios.get(`/api/budget/${this.previousDate.year()}/${this.previousDate.format('MM')}`)
-          ).data.data
-        }
-        if (this.screenLG) {
-          this.nextBudgets = (
-            await axios.get(`/api/budget/${this.nextDate.year()}/${this.nextDate.format('MM')}`)
-          ).data.data
-        }
-      }, delay)
-    },
-    async setBudgeted(category, amount) {
-      const idx = this.budgets.findIndex((budget) => budget.category_id === category)
-
-      const response = await axios.post(
-        `/api/budget/${this.year}/${this.date.format('MM')}/${category}`,
-        Object.assign({}, this.budgets[idx], {
+const setBudgeted = async (category, amount, budgetDate) => {
+  const budgetMonth = dayjs(budgetDate).month()
+  let idx, response
+  switch (budgetMonth) {
+    case previousDate.value.month():
+      updateAndReplaceBudget(previousBudgets)
+      idx = previousBudgets.value.findIndex((budget) => budget.category_id === category)
+      response = await axios.post(
+        `/api/budget/${year.value}/${budgetMonth}/${category}`,
+        Object.assign({}, previousBudgets.value[idx], {
           budgeted: amount,
         })
       )
 
-      this.budgets = this.budgets.map((budget) => {
+      previousBudgets.value = previousBudgets.value.map((budget) => {
         return budget.category_id === category
           ? Object.assign({}, budget, {
               budgeted: response.data.data.budgeted,
@@ -107,32 +111,65 @@ export default {
             })
           : budget
       })
-    },
-    goForward() {
-      this.date = this.date.add(1, 'month')
-      this.fetchBudgets()
-    },
-    goBack() {
-      this.date = this.date.subtract(1, 'month')
-      this.fetchBudgets()
-    },
-    onResize() {
-      this.windowWidth = window.innerWidth
-    },
-  },
+      break
+    case date.value.month():
+      idx = budgets.value.findIndex((budget) => budget.category_id === category)
+      response = await axios.post(
+        `/api/budget/${year.value}/${budgetMonth}/${category}`,
+        Object.assign({}, budgets.value[idx], {
+          budgeted: amount,
+        })
+      )
 
-  async created() {
-    this.fetchBudgets(0)
-  },
+      budgets.value = budgets.value.map((budget) => {
+        return budget.category_id === category
+          ? Object.assign({}, budget, {
+              budgeted: response.data.data.budgeted,
+              spent: response.data.data.spent,
+              balance: response.data.data.balance,
+            })
+          : budget
+      })
+      break
+    case nextDate.value.month():
+      idx = nextBudgets.value.findIndex((budget) => budget.category_id === category)
+      response = await axios.post(
+        `/api/budget/${year.value}/${budgetMonth}/${category}`,
+        Object.assign({}, nextBudgets.value[idx], {
+          budgeted: amount,
+        })
+      )
 
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
-    })
-  },
-
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onResize)
-  },
+      nextBudgets.value = nextBudgets.value.map((budget) => {
+        return budget.category_id === category
+          ? Object.assign({}, budget, {
+              budgeted: response.data.data.budgeted,
+              spent: response.data.data.spent,
+              balance: response.data.data.balance,
+            })
+          : budget
+      })
+      break
+  }
 }
+const goForward = () => {
+  date.value = date.value.add(1, 'month')
+  fetchBudgets()
+}
+const goBack = () => {
+  date.value = date.value.subtract(1, 'month')
+  fetchBudgets()
+}
+const onResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  fetchBudgets(0)
+  window.addEventListener('resize', onResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
+})
 </script>

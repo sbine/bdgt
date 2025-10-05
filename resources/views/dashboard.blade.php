@@ -63,7 +63,7 @@
 @endsection
 
 @section('content')
-    <div class="w-full bg-white rounded-xs shadow-sm p-6">
+    <div class="w-full bg-white rounded-xs shadow-sm">
         <transactions-table
             :transactions='{{ json_encode($transactions) }}'
             :show-actions="true"

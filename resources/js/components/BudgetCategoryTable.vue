@@ -30,7 +30,7 @@
               min="0"
               max="99999"
               :value="budget.budgeted || 0"
-              @change="setBudgeted(budget.category_id, $event.target.value)"
+              @change="setBudgeted(budget.category_id, $event.target.value, budget.date)"
             />
           </div>
         </td>
@@ -54,8 +54,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   props: {
     budgets: {
@@ -66,31 +64,11 @@ export default {
       type: String,
       default: '',
     },
+    setBudgeted: {
+      type: Function,
+    },
     showCategories: {
       type: Boolean,
-    },
-  },
-
-  methods: {
-    async setBudgeted(category, amount) {
-      const idx = this.budgets.findIndex((budget) => budget.category_id === category)
-
-      const response = await axios.post(
-        `/api/budget/${this.year}/${this.date.format('MM')}/${category}`,
-        Object.assign({}, this.budgets[idx], {
-          budgeted: amount,
-        })
-      )
-
-      this.budgets = this.budgets.map((budget) => {
-        return budget.category_id === category
-          ? Object.assign({}, budget, {
-              budgeted: response.data.data.budgeted,
-              spent: response.data.data.spent,
-              balance: response.data.data.balance,
-            })
-          : budget
-      })
     },
   },
 }

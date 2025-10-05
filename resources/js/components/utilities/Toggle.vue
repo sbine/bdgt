@@ -1,38 +1,34 @@
 <template>
-  <div v-on-clickaway="blur">
+  <div v-clickaway="blur">
     <slot :is-on="isOn" :set-to="setTo" :toggle="toggle" />
   </div>
 </template>
 
-<script>
-import { mixin as clickaway } from 'vue-clickaway'
+<script setup>
+import { ref } from 'vue'
+import clickaway from '../../composables/clickaway'
 
-export default {
-  mixins: [clickaway],
-
-  props: {
-    closeOnBlur: Boolean,
-    on: Boolean,
+const props = defineProps({
+  closeOnBlur: {
+    type: Boolean,
+    default: true,
   },
+  on: Boolean,
+})
 
-  data() {
-    return {
-      isOn: !!this.on,
-    }
-  },
+const vClickaway = clickaway
 
-  methods: {
-    setTo(value) {
-      this.isOn = !!value
-    },
-    toggle() {
-      this.isOn = !this.isOn
-    },
-    blur() {
-      if (this.closeOnBlur) {
-        this.setTo(false)
-      }
-    },
-  },
+const isOn = ref(!!props.on)
+
+const setTo = (value) => {
+  isOn.value = !!value
+}
+const toggle = () => {
+  isOn.value = !isOn.value
+}
+const blur = () => {
+  if (props.closeOnBlur) {
+    setTo(false)
+  }
 }
 </script>

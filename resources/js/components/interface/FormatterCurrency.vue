@@ -1,25 +1,23 @@
 <script>
+import { h } from 'vue'
 import { formatMoney } from '../../utils'
 
-export default {
-  functional: true,
+function FormatterCurrency(props) {
+  const amount = formatMoney(props.amount, props.currency)
 
-  props: {
-    amount: {},
-    currency: {
-      type: String,
-      default: 'USD',
-    },
-    negative: {
-      type: Boolean,
-      default: false,
-    },
+  return h('span', (props.negative && amount.indexOf('-') !== 0 ? '-' : '') + amount)
+}
+
+FormatterCurrency.props = {
+  amount: {},
+  currency: {
+    type: String,
+    default: 'USD',
   },
-
-  render(h, context) {
-    const amount = formatMoney(context.props.amount, context.props.currency)
-
-    return h('span', context.data, (context.props.negative && amount.indexOf('-') !== 0 ? '-' : '') + amount)
+  negative: {
+    type: Boolean,
+    default: false,
   },
 }
+export default FormatterCurrency
 </script>

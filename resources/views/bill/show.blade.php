@@ -41,10 +41,8 @@
         <formatter-currency :amount="{{ $bill->total }}"></formatter-currency> paid since @date($bill->lastDue)
     </p>
 
-    <div class="bg-white rounded-xs shadow-sm p-6 mt-6">
-        <h3 class="font-light text-2xl mb-6">Payments</h3>
-
-        <transactions-table :transactions='@json($bill->transactions)'></transactions-table>
+    <div class="bg-white rounded-xs shadow-sm mt-6">
+        <transactions-table title="Payments" :transactions='@json($bill->transactions)'></transactions-table>
 
         <toggle class="flex justify-end">
             <template v-slot="{ isOn, setTo }">

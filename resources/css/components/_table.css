@@ -1,107 +1,80 @@
-.VueTables {
-    @apply flex;
-    @apply flex-col;
-
-    .table {
-        @apply w-full;
-
-        thead th {
-            @apply cursor-pointer;
-            @apply px-3;
-            @apply py-4;
-            @apply text-left;
-            @apply text-sm;
-        }
-
-        tbody tr {
-            @apply rounded-sm;
-
-            td {
-                @apply border-t;
-                @apply border-gray-300;
-                @apply px-3;
-                @apply py-4;
-            }
-        }
-    }
-
-    .table-responsive {
-        @apply overflow-x-auto;
-    }
-
-    &__heading {
-        @apply text-gray-800;
-    }
+.p-datatable {
+    @apply w-full;
 }
 
-.VueTables__search {
-    @apply flex;
-    @apply flex-col;
-    @apply font-light;
-    @apply items-end;
-    @apply mb-8;
-
-    label {
-        @apply mr-4;
-    }
-}
-
-.VueTables__sortable {
-    @apply relative;
-
-    .VueTables__sort-icon {
-        @apply text-gray-400;
-
-        .fa-sort-down, .fa-sort-up {
-            @apply text-gray-900;
-        }
-    }
-}
-
-.VueTables__limit-field {
-    @apply font-light;
-
-    label {
-        @apply mr-4;
-    }
-
-    select {
-        @apply appearance-none;
+.p-datatable {
+    .p-datatable-thead th {
+        @apply px-3;
+        @apply py-4;
+        @apply text-left;
+        @apply text-sm;
+        @apply font-semibold;
         @apply bg-white;
     }
-}
 
-.VuePagination__count {
-    @apply font-light;
-}
+    .p-datatable-tbody tr {
+        td {
+            @apply border-t;
+            @apply border-gray-200;
+            @apply px-3;
+            @apply py-4;
+        }
 
-.VueTables__no-results {
-    @apply font-light;
-    @apply text-sm;
-}
-
-.VuePagination {
-    @apply mt-4;
-
-    a {
-        /* @apply link; */
-
-        &.active {
-            @apply font-semibold;
-            @apply text-blue-900;
+        &:hover {
+            @apply bg-gray-100;
         }
     }
+}
 
-    li {
-        @apply mx-1;
+.p-paginator {
+    @apply mt-4;
+    @apply py-2;
 
-        @apply lg:mx-2;
-    }
-
-    ul {
+    .p-paginator-content-start,
+    .p-paginator-content-end {
         @apply flex;
         @apply items-center;
-        @apply justify-center;
-        @apply mb-6;
+        @apply gap-2;
+    }
+
+    .p-button {
+        @apply min-w-0;
+        @apply text-blue-700;
+
+        &.p-disabled {
+            @apply text-gray-400;
+            @apply cursor-not-allowed;
+        }
+
+        &.p-active {
+            @apply font-semibold;
+            @apply text-blue-900;
+            @apply bg-blue-100;
+        }
+
+        &:hover:not(.p-disabled) {
+            @apply bg-gray-100;
+        }
+    }
+}
+
+.p-inputtext {
+    @apply px-3;
+    @apply py-2;
+    @apply pl-10!;
+    @apply border;
+    @apply border-gray-300;
+    @apply rounded;
+    @apply w-64;
+
+    &::placeholder {
+        @apply text-gray-400;
+    }
+
+    &:focus {
+        @apply outline-none;
+        @apply border-blue-500;
+        @apply ring-2;
+        @apply ring-blue-200;
     }
 }

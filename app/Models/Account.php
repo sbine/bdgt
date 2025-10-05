@@ -20,7 +20,7 @@ class Account extends Model
     ];
 
     protected $casts = [
-        'date_opened' => 'datetime',
+        'date_opened' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function getRunningBalanceAttribute()
@@ -39,6 +39,6 @@ class Account extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class)->ordered();
     }
 }

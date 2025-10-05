@@ -17,16 +17,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    value: Boolean,
-  },
+<script setup>
+const props = defineProps({
+  value: Boolean,
+})
 
-  methods: {
-    hide() {
-      this.$emit('input', false)
-    },
-  },
+const emit = defineEmits(['input'])
+const hide = () => {
+  emit('input', false)
 }
 </script>

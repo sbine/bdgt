@@ -1,75 +1,57 @@
 <template>
-  <v-date-picker
-    v-model="date"
-    :is-required="required"
-    :from-date="date"
-    :mode="mode"
-    :popover="{ placement: 'bottom', visibility: 'click' }"
-    dusk="datepicker"
-  >
-    <template v-slot="{ inputProps, inputEvents, hidePopover }">
-      <div class="input-addon--end">
-        <input type="hidden" :name="name" :value="timestamp" />
-        <input
-          type="text"
-          class="input-text pr-10"
-          :required="required"
-          v-bind="inputProps"
-          v-on="inputEvents"
-          @blur="hidePopover"
-        />
-        <span class="input-addon cursor-pointer">
-          <font-awesome-icon :icon="['far', 'calendar']" />
-        </span>
-      </div>
-    </template>
-  </v-date-picker>
+  <div dusk="datepicker">
+    <v-date-picker
+      v-model.string="date"
+      :is-required="required"
+      :masks="mode === 'date' ? { modelValue: 'YYYY-MM-DD' } : { modelValue: 'YYYY-MM-DD HH:mm:ss' }"
+      :mode="mode"
+      :popover="{ placement: 'bottom', visibility: 'click' }"
+    >
+      <template v-slot="{ inputValue, inputEvents, togglePopover }">
+        <div class="input-addon--end">
+          <input
+            type="text"
+            class="input-text pr-10"
+            :name="name"
+            :required="required"
+            :value="inputValue"
+            v-on="inputEvents"
+          />
+          <span class="input-addon cursor-pointer" @click="togglePopover">
+            <font-awesome-icon :icon="['far', 'calendar']" />
+          </span>
+        </div>
+      </template>
+    </v-date-picker>
+  </div>
 </template>
 
 <script>
-import DatePicker from 'v-calendar/lib/components/date-picker.umd'
-import dayjs from 'dayjs'
+import { DatePicker } from 'v-calendar'
+import 'v-calendar/style.css'
 
 export default {
   components: { 'v-date-picker': DatePicker },
-
   props: {
     mode: {
       type: String,
-      default: 'single',
+      default: 'date',
     },
-    name: { String },
-    required: { Boolean },
-    value: {},
+    name: String,
+    required: Boolean,
+    modelValue: {},
   },
-
   data() {
     return {
-      mutableValue: this.value || null,
+      date: this.modelValue || null,
     }
   },
-  computed: {
-    date: {
-      get() {
-        if (!this.mutableValue) {
-          return null
-        }
-
-        return new Date(this.mutableValue)
-      },
-      set(value) {
-        this.mutableValue = value
-        this.$emit('input', value)
-      },
-    },
-    timestamp() {
-      return this.date ? dayjs(this.date).format('YYYY-MM-DD') : null
-    },
-  },
-
   watch: {
-    value(value) {
-      this.mutableValue = value
+    date(newValue) {
+      this.$emit('update:modelValue', newValue)
+    },
+    modelValue(newValue) {
+      this.date = newValue
     },
   },
 }

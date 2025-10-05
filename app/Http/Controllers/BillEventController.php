@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use DateInterval;
+use DateTime;
 use Illuminate\Support\Facades\Request;
 
 class BillEventController
@@ -20,7 +22,7 @@ class BillEventController
                         'url' => route('bills.show', $bill->id),
                         'paid' => $bill->paid,
                         'start' => $date,
-                        'end' => $date,
+                        'end' => (new DateTime($date))->add(new DateInterval('P1D'))->format('Y-m-d'),
                     ];
                 }
             });

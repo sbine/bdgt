@@ -31,10 +31,8 @@
         @number($account->interest)%
     </p>
 
-    <div class="bg-white rounded-xs shadow-sm p-6 mt-6">
-        <h3 class="font-light text-2xl mb-6">{{ trans('labels.transactions.plural') }}</h3>
-
-        <transactions-table :transactions='@json($account->transactions)'></transactions-table>
+    <div class="bg-white rounded-xs shadow-sm mt-6">
+        <transactions-table title="{{ trans('labels.transactions.plural') }}" :transactions='@json($account->transactions)'></transactions-table>
     </div>
 
     <toggle class="flex justify-end">

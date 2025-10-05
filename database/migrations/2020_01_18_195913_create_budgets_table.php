@@ -13,9 +13,9 @@ return new class extends Migration
             $table->integer('month');
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->decimal('budgeted', 12, 3);
-            $table->decimal('spent', 12, 3);
-            $table->decimal('balance', 12, 3);
+            $table->decimal('budgeted', 12, 3)->default(0);
+            $table->decimal('spent', 12, 3)->default(0);
+            $table->decimal('balance', 12, 3)->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')

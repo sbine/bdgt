@@ -1,36 +1,35 @@
 <script>
+import { h } from 'vue'
 import dayjs from 'dayjs'
 
-export default {
-  functional: true,
+function FormatterDate(props) {
+  function date(value) {
+    return dayjs(value).format('MM/DD/YYYY')
+  }
 
-  props: {
-    diff: Boolean,
-    time: String,
-    unit: String,
-  },
+  function diff(value, unit = 'day') {
+    const days = dayjs(value).diff(dayjs(), unit)
+    const units = Math.abs(days) === 1 ? 'day' : 'days'
 
-  render(h, context) {
-    function date(value) {
-      return dayjs(value).format('MM/DD/YYYY')
+    if (days === 0) {
+      return 'today'
     }
 
-    function diff(value, unit = 'day') {
-      const days = dayjs(value).diff(dayjs(), unit)
-      const units = Math.abs(days) === 1 ? 'day' : 'days'
-
-      if (days === 0) {
-        return 'today'
-      }
-
-      if (isNaN(days)) {
-        return 'N/A'
-      }
-
-      return days > 0 ? 'in ' + Math.abs(days) + ' ' + units : Math.abs(days) + ' ' + units + ' ago'
+    if (isNaN(days)) {
+      return 'N/A'
     }
 
-    return h('span', {}, context.props.diff ? diff(context.props.time, context.props.unit) : date(context.props.time))
-  },
+    return days > 0 ? 'in ' + Math.abs(days) + ' ' + units : Math.abs(days) + ' ' + units + ' ago'
+  }
+
+  return h('span', props.diff ? diff(props.time, props.unit) : date(props.time))
 }
+
+FormatterDate.props = {
+  diff: Boolean,
+  time: String,
+  unit: String,
+}
+
+export default FormatterDate
 </script>
