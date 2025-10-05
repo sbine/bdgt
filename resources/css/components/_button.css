@@ -1,5 +1,6 @@
 .button {
     @apply bg-gray-300;
+    @apply cursor-pointer;
     @apply inline-block;
     @apply px-4;
     @apply py-2;

@@ -16,60 +16,58 @@
             </div>
 
             <div class="w-full grow lg:flex lg:items-center lg:w-auto" :class="{ hidden: ! isOn }">
-                <div class="lg:flex lg:items-center lg:grow">
-                    <template v-cloak>
-                        @auth
-                        <div class="{{ (request()->route()->getName() == 'dashboard' ? 'active' : '') }}">
-                            <a class="nav-item mr-4" href="{{ route('dashboard') }}">{{ trans('labels.dashboard.singular') }}</a>
-                        </div>
-                        <div class="{{ (strpos(request()->route()->getName(), 'accounts') !== false ? 'active' : '') }}">
-                            <a class="nav-item mr-4" href="{{ route('accounts.index') }}">{{ trans('labels.accounts.plural') }}</a>
-                        </div>
-                        <div class="{{ (strpos(request()->route()->getName(), 'categories') !== false ? 'active' : '') }}">
-                            <a class="nav-item mr-4" href="{{ route('categories.index') }}">{{ trans('labels.categories.plural') }}</a>
-                        </div>
-                        <div class="{{ (strpos(request()->route()->getName(), 'goals') !== false ? 'active' : '') }}">
-                            <a class="nav-item mr-4" href="{{ route('goals.index') }}">{{ trans('labels.goals.plural') }}</a>
-                        </div>
-                        <div class="{{ (strpos(request()->route()->getName(), 'bills') !== false ? 'active' : '') }}">
-                            <a class="nav-item mr-4" href="{{ route('bills.index') }}">{{ trans('labels.bills.plural') }}</a>
-                        </div>
+                <template class="lg:flex lg:items-center lg:grow" v-cloak>
+                    @auth
+                    <div class="{{ (request()->route()->getName() == 'dashboard' ? 'active' : '') }}">
+                        <a class="nav-item mr-4" href="{{ route('dashboard') }}">{{ trans('labels.dashboard.singular') }}</a>
+                    </div>
+                    <div class="{{ (strpos(request()->route()->getName(), 'accounts') !== false ? 'active' : '') }}">
+                        <a class="nav-item mr-4" href="{{ route('accounts.index') }}">{{ trans('labels.accounts.plural') }}</a>
+                    </div>
+                    <div class="{{ (strpos(request()->route()->getName(), 'categories') !== false ? 'active' : '') }}">
+                        <a class="nav-item mr-4" href="{{ route('categories.index') }}">{{ trans('labels.categories.plural') }}</a>
+                    </div>
+                    <div class="{{ (strpos(request()->route()->getName(), 'goals') !== false ? 'active' : '') }}">
+                        <a class="nav-item mr-4" href="{{ route('goals.index') }}">{{ trans('labels.goals.plural') }}</a>
+                    </div>
+                    <div class="{{ (strpos(request()->route()->getName(), 'bills') !== false ? 'active' : '') }}">
+                        <a class="nav-item mr-4" href="{{ route('bills.index') }}">{{ trans('labels.bills.plural') }}</a>
+                    </div>
 
-                        <toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
-                            <template v-slot="{ isOn, toggle }">
-                                <a class="nav-item mr-4" href="#" @click.prevent="toggle">
-                                    {{ trans('labels.reports.plural') }}
-                                    <font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
-                                </a>
+                    <toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'reports') !== false ? 'active' : '') }}">
+                        <template v-slot="{ isOn, toggle }">
+                            <a class="nav-item mr-4" href="#" @click.prevent="toggle">
+                                {{ trans('labels.reports.plural') }}
+                                <font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
+                            </a>
 
-                                <div v-if="isOn" class="absolute bg-white shadow-md rounded-sm mt-1 z-30">
-                                    <div {{ (strpos(request()->route()->getName(), 'reports.spending_by_category') !== false ? 'active' : '') }}>
-                                        <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('reports.show', 'categorial') }}">{{ trans('labels.reports.spending_by_category') }}</a>
-                                    </div>
-                                    <div {{ (strpos(request()->route()->getName(), 'reports.spending_over_time') !== false ? 'active' : '') }}>
-                                        <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('reports.show', 'spending') }}">{{ trans('labels.reports.spending_over_time') }}</a>
-                                    </div>
+                            <div v-if="isOn" class="absolute bg-white shadow-md rounded-sm mt-1 z-30">
+                                <div class="{{ (strpos(request()->route()->getName(), 'reports.spending_by_category') !== false ? 'active' : '') }}">
+                                    <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('reports.show', 'categorial') }}">{{ trans('labels.reports.spending_by_category') }}</a>
                                 </div>
-                            </template>
-                        </toggle>
-                        @endauth
-
-                        <toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'calculators') !== false ? 'active' : '') }}">
-                            <template v-slot="{ isOn, toggle }">
-                                <a class="nav-item mr-4" href="#" @click.prevent="toggle">
-                                    {{ trans('labels.calculators.plural') }}
-                                    <font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
-                                </a>
-
-                                <div v-if="isOn" class="absolute bg-white shadow-md rounded-sm mt-1 z-30">
-                                    <div {{ (strpos(request()->route()->getName(), 'calculators.debt') !== false ? 'active' : '') }}>
-                                        <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('calculators.debt') }}">{{ trans('labels.calculators.debt.label') }}</a>
-                                    </div>
+                                <div class="{{ (strpos(request()->route()->getName(), 'reports.spending_over_time') !== false ? 'active' : '') }}">
+                                    <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('reports.show', 'spending') }}">{{ trans('labels.reports.spending_over_time') }}</a>
                                 </div>
-                            </template>
-                        </toggle>
-                    </template>
-                </div>
+                            </div>
+                        </template>
+                    </toggle>
+                    @endauth
+
+                    <toggle close-on-blur class="{{ (strpos(request()->route()->getName(), 'calculators') !== false ? 'active' : '') }}">
+                        <template v-slot="{ isOn, toggle }">
+                            <a class="nav-item mr-4" href="#" @click.prevent="toggle">
+                                {{ trans('labels.calculators.plural') }}
+                                <font-awesome-icon :icon="isOn ? 'caret-up' : 'caret-down'" class="ml-2"></font-awesome-icon>
+                            </a>
+
+                            <div v-if="isOn" class="absolute bg-white shadow-md rounded-sm mt-1 z-30">
+                                <div class="{{ (strpos(request()->route()->getName(), 'calculators.debt') !== false ? 'active' : '') }}">
+                                    <a class="block text-gray-800 hover:text-gray-600 p-4" href="{{ route('calculators.debt') }}">{{ trans('labels.calculators.debt.label') }}</a>
+                                </div>
+                            </div>
+                        </template>
+                    </toggle>
+                </template>
 
                 <div class="lg:flex items-center -mr-2">
                     <toggle close-on-blur>

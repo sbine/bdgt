@@ -22,7 +22,7 @@ class Goal extends Model
     protected $casts = [
         'amount' => 'float',
         'balance' => 'float',
-        'goal_date' => 'date',
+        'goal_date' => 'date:Y-m-d',
     ];
 
     public function getAchievedAttribute(): bool

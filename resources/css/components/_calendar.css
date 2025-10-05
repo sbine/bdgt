@@ -1,22 +1,41 @@
-.vuecal--events-on-month-view {
-    .vuecal__menu {
-        .active {
-            @apply border-blue-600;
-            @apply border-b-3;
-            @apply text-blue-600;
-        }
+.vuecal__menu {
+    .active {
+        @apply border-blue-600;
+        @apply border-b-3;
+        @apply text-blue-600;
     }
+}
 
-    .vuecal__title-bar {
-        @apply bg-blue-800!;
-        @apply text-white;
+.vuecal__title-bar {
+    @apply bg-blue-800!;
+    @apply text-white;
+
+    .vuecal__title small {
+        @apply hidden!;
     }
+}
 
+.vuecal__event {
+    @apply bg-transparent!;
+    @apply rounded-xs;
+}
+
+.vuecal__event-title {
+    @apply px-1;
+    @apply py-0.5;
+    @apply rounded-sm;
+}
+
+.vuecal--month-view {
     .vuecal__cell-content {
         @apply h-full;
     }
 
-    .vuecal__event {
-        @apply rounded-xs;
+    .vuecal__cell-events {
+        @apply p-0!;
+    }
+
+    .vuecal__event-details {
+        @apply block!;
     }
 }

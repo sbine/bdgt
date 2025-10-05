@@ -21,12 +21,12 @@ class Bill extends Model
     ];
 
     protected $casts = [
-        'start_date' => 'date',
+        'start_date' => 'date:Y-m-d',
     ];
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class)->ordered();
     }
 
     public function getTotalAttribute()

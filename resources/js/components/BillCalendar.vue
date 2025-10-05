@@ -1,17 +1,15 @@
 <template>
   <vue-cal
     :events="events"
-    :disable-views="['years', 'year', 'day']"
+    :events-on-month-view="true"
+    :views="['week', 'month']"
     :time="false"
-    default-view="month"
-    events-on-month-view="short"
-    @ready="fetchEvents($event.startDate, $event.endDate)"
-    @view-change="fetchEvents($event.startDate, $event.endDate)"
+    view="month"
+    @ready="({ view }) => fetchEvents(view.start, view.end)"
+    @view-change="(view) => fetchEvents(view.start, view.end)"
   >
-    <div slot="no-event" />
-
     <template #title="{ title }">
-      <h2 class="text-xl">{{ title }}</h2>
+      <h2 class="text-xl" v-html="title" />
     </template>
 
     <template #event="{ event }">
@@ -31,8 +29,8 @@
 <script>
 import axios from 'axios'
 import dayjs from 'dayjs'
-import VueCal from 'vue-cal'
-import 'vue-cal/dist/vuecal.css'
+import { VueCal } from 'vue-cal'
+import 'vue-cal/style'
 
 export default {
   components: { VueCal },

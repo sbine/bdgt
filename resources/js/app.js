@@ -1,22 +1,27 @@
 import './bootstrap'
-import Vue from 'vue/dist/vue'
+import { createApp } from 'vue'
+
+const app = createApp({})
 
 /**
  * Vue Internationalization/Translations
  */
+// Generate this file using `npm run i18n`
 import languageBundle from './i18n'
-import VueI18n from 'vue-i18n'
-Vue.use(VueI18n)
+import { createI18n } from 'vue-i18n'
 
-const i18n = new VueI18n({
+const i18n = createI18n({
+  legacy: false,
   locale: window.Locale,
   messages: languageBundle,
 })
 
+app.use(i18n)
+
 /**
  * Font Awesome
  */
-import { library, config, dom } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faCaretDown,
   faCaretUp,
@@ -28,6 +33,7 @@ import {
   faDollarSign,
   faPencilAlt,
   faPlus,
+  faSearch,
   faSort,
   faSortDown,
   faSortUp,
@@ -47,6 +53,7 @@ library.add(
   faDollarSign,
   faPencilAlt,
   faPlus,
+  faSearch,
   faSort,
   faSortDown,
   faSortUp,
@@ -58,33 +65,23 @@ library.add(
   faFlag
 )
 
-/**
- * Ensure vue-tables-2 sorting icons can be replaced with font-awesome chevrons
- */
-config.autoReplaceSvg = 'nest'
-dom.watch()
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('font-awesome-layers', FontAwesomeLayers)
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('font-awesome-layers', FontAwesomeLayers)
 
 /**
- * Vue-Tables-2
+ * DataTables
  */
-import { ClientTable } from 'vue-tables-2'
-import TailwindTheme from './themes/vue-tables-tailwind-theme'
-Vue.use(
-  ClientTable,
-  {
-    sortIcon: {
-      is: 'fa-sort',
-      base: 'fas',
-      up: 'fa-sort-up',
-      down: 'fa-sort-down',
+import PrimeVue from 'primevue/config'
+import Lara from '@primevue/themes/lara'
+
+app.use(PrimeVue, {
+  theme: {
+    preset: Lara,
+    options: {
+      darkModeSelector: '.dark-mode',
     },
   },
-  false,
-  TailwindTheme
-)
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -94,10 +91,7 @@ Vue.use(
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = import.meta.glob('./**/*.vue')
-Object.keys(files).map((key) => Vue.component(key.split('/').pop().split('.')[0], files[key]))
+const files = Object.entries(import.meta.glob('./**/*.vue', { eager: true }))
+files.forEach(([path, module]) => app.component(path.split('/').pop().split('.')[0], module.default))
 
-const app = new Vue({
-  el: '#app',
-  i18n,
-})
+app.mount('#app')

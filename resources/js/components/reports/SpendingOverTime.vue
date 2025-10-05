@@ -1,13 +1,21 @@
 <template>
   <div class="w-full max-w-6xl mx-auto relative">
     <v-date-picker
-      class="absolute right-0 mr-6"
       style="min-width: 210px"
-      mode="range"
-      v-model="range"
-      @input="fetchData"
+      mode="date"
+      v-model.range="range"
+      @update:modelValue="fetchData"
+      @ready="fetchData"
       :popover="{ placement: 'bottom', visibility: 'click' }"
-    />
+    >
+      <template v-slot="{ inputEvents }">
+        <div class="absolute right-0 mr-6 flex justify-center items-center">
+          <input type="text" class="input-text" :value="formatDate(range.start)" v-on="inputEvents.start" />
+          <span class="px-2">-</span>
+          <input type="text" class="input-text" :value="formatDate(range.end)" v-on="inputEvents.end" />
+        </div>
+      </template>
+    </v-date-picker>
 
     <h1 class="w-full md:text-center text-gray-800 text-xl mb-1">
       {{ $t('labels.reports.spending_over_time') }}
@@ -15,14 +23,16 @@
 
     <h2 class="w-full md:text-center font-bold text-gray-700 text-lg mb-6">{{ total }}</h2>
 
-    <apexchart type="bar" :options="chartOptions" :series="datasets" />
+    <div v-show="!datasets.length > 0" class="text-center">No results for time period</div>
+    <apexchart v-show="!!datasets.length > 0" type="bar" :options="chartOptions" :series="datasets" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import VueApexCharts from 'vue-apexcharts'
-import DatePicker from 'v-calendar/lib/components/date-picker.umd'
+import VueApexCharts from 'vue3-apexcharts'
+import { DatePicker } from 'v-calendar'
+import 'v-calendar/style.css'
 import dayjs from 'dayjs'
 import colors from './ReportColors'
 import { formatMoney } from '../../utils'
@@ -75,6 +85,9 @@ export default {
           },
           position: 'right',
         },
+        noData: {
+          text: 'No results',
+        },
         states: {
           active: {
             filter: {
@@ -116,6 +129,9 @@ export default {
   },
 
   methods: {
+    formatDate(date) {
+      return dayjs(date).format('MM/DD/YYYY')
+    },
     fetchData() {
       axios
         .post(this.url, {

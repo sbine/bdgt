@@ -21,6 +21,7 @@ class CalculatorTest extends DuskTestCase
                 ->assertSee(Carbon::now()->addYear()->addMonths(2)->format('F jS, Y'))
                 ->assertSee('$67.21')
                 ->dragRight('.vue-slider-dot-handle', 40)
+                ->pause(100)
                 ->releaseMouse()
                 ->moveMouse(20, 20)
                 ->assertSee(Carbon::now()->addYear()->subMonth()->format('F jS, Y'))

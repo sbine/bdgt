@@ -46,11 +46,8 @@ class Datepicker extends BaseComponent
         $browser
             ->click('@datepicker-trigger')
             ->waitFor('.vc-title')
-            // Click the overlay element before selecting a date
-            // to prevent the exception "element click intercepted"
-            ->click('.vc-popover-content-wrapper')
             // For now, just select the last day of the first week
-            ->click('.vc-grid-cell-col-7.vc-grid-cell-row--6')
+            ->click('.on-top.on-right')
             ->click('@datepicker-trigger')
             ->waitUntilMissing('.vc-title');
     }

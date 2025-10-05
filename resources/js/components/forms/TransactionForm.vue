@@ -148,115 +148,101 @@
   </modal>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
+import { useEventBus } from '../../composables/useEventBus'
 
-export default {
-  props: {
-    accounts: { type: Array, required: true },
-    bills: { type: Array, required: true },
-    categories: { type: Array, required: true },
-    flairs: { type: Array, required: true },
+const props = defineProps({
+  accounts: { type: Array, required: true },
+  bills: { type: Array, required: true },
+  categories: { type: Array, required: true },
+  flairs: { type: Array, required: true },
+})
+
+const form = ref(null)
+const id = ref(null)
+const action = ref(null)
+const transaction = ref({})
+
+const formAction = computed(() => {
+  if (editing.value || deleting.value) {
+    return `/api/transactions/${id.value}`
+  }
+  return '/api/transactions/create'
+})
+
+const formMethod = computed(() => {
+  if (editing.value) return 'PUT'
+  if (deleting.value) return 'DELETE'
+  return 'POST'
+})
+
+const creating = computed(() => action.value === 'create')
+const editing = computed(() => action.value === 'edit')
+const deleting = computed(() => action.value === 'delete')
+
+const transactionAmount = computed({
+  get() {
+    return transaction.value
+      ? transaction.value.inflow
+        ? transaction.value.amount
+        : -1 * transaction.value.amount
+      : null
   },
-
-  data() {
-    return {
-      id: null,
-      action: null,
-      transaction: {},
-    }
+  set(value) {
+    transaction.value.amount = transaction.value.inflow ? value : -1 * value
   },
+})
 
-  computed: {
-    formAction() {
-      if (this.editing || this.deleting) {
-        return `/api/transactions/${this.id}`
-      }
-
-      return '/api/transactions/create'
-    },
-    formMethod() {
-      if (this.editing) {
-        return 'PUT'
-      }
-      if (this.deleting) {
-        return 'DELETE'
-      }
-
-      return 'POST'
-    },
-    creating() {
-      return this.action === 'create'
-    },
-    editing() {
-      return this.action === 'edit'
-    },
-    deleting() {
-      return this.action === 'delete'
-    },
-    transactionAmount: {
-      get() {
-        return this.transaction
-          ? this.transaction.inflow
-            ? this.transaction.amount
-            : -1 * this.transaction.amount
-          : null
-      },
-      set(value) {
-        this.transaction.amount = this.transaction.inflow ? value : -1 * value
-      },
-    },
-  },
-
-  methods: {
-    async fetchTransaction() {
-      await axios
-        .get(`/api/transactions/${this.id}`)
-        .then((response) => {
-          this.transaction = response.data.data
-        })
-        .catch((error) => {
-          console.log('Error fetching transaction', error)
-        })
-    },
-    save() {
-      if (!this.$refs.form.checkValidity()) {
-        this.$refs.form.reportValidity()
-
-        return false
-      }
-
-      axios({
-        method: this.formMethod,
-        url: this.formAction,
-        data: {
-          ...this.transaction,
-        },
-      })
-        .then((response) => {
-          this.reset()
-          window.location.reload()
-        })
-        .catch((error) => {
-          console.log('Error saving transaction', error)
-        })
-    },
-    reset() {
-      this.id = null
-      this.action = null
-    },
-  },
-
-  created() {
-    this.$root.$on('editTransaction', async (id) => {
-      this.id = id
-      await this.fetchTransaction()
-      this.action = 'edit'
-    })
-    this.$root.$on('deleteTransaction', (id) => {
-      this.id = id
-      this.action = 'delete'
-    })
-  },
+const fetchTransaction = async () => {
+  try {
+    const response = await axios.get(`/api/transactions/${id.value}`)
+    transaction.value = response.data.data
+  } catch (error) {
+    console.log('Error fetching transaction', error)
+  }
 }
+
+const save = () => {
+  if (!form.value.checkValidity()) {
+    form.value.reportValidity()
+    return false
+  }
+
+  axios({
+    method: formMethod.value,
+    url: formAction.value,
+    data: {
+      ...transaction.value,
+    },
+  })
+    .then((response) => {
+      reset()
+      window.location.reload()
+    })
+    .catch((error) => {
+      console.log('Error saving transaction', error)
+    })
+}
+
+const reset = () => {
+  id.value = null
+  action.value = null
+}
+
+const eventBus = useEventBus()
+
+onMounted(() => {
+  eventBus.on('editTransaction', async (transactionId) => {
+    id.value = transactionId
+    await fetchTransaction()
+    action.value = 'edit'
+  })
+
+  eventBus.on('deleteTransaction', (transactionId) => {
+    id.value = transactionId
+    action.value = 'delete'
+  })
+})
 </script>
