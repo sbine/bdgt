@@ -34,7 +34,7 @@ class BillTest extends DuskTestCase
                 ->type('amount', $bill->amount)
                 ->type('frequency', $bill->frequency)
                 ->press('Save')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($bill->label)
                 ->logout();
         });
@@ -65,7 +65,7 @@ class BillTest extends DuskTestCase
                 ->type('[name="label"]', $bill->label)
                 ->type('amount', $bill->amount)
                 ->press('Edit')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($bill->label)
                 ->assertSee($bill->amount)
                 ->logout();
@@ -87,7 +87,7 @@ class BillTest extends DuskTestCase
                 ->waitForText('Delete Bill')
                 ->screenshot('features/Bill_Delete')
                 ->press('Delete')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertDontSee($bill->label)
                 ->logout();
         });

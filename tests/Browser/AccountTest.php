@@ -34,7 +34,7 @@ class AccountTest extends DuskTestCase
                 ->type('balance', $account->balance)
                 ->type('interest', $account->interest)
                 ->press('Save')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($account->name)
                 ->logout();
         });
@@ -66,7 +66,7 @@ class AccountTest extends DuskTestCase
                 ->type('balance', $account->balance)
                 ->type('interest', $account->interest)
                 ->press('Edit')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($account->name)
                 ->assertSee($account->interest)
                 ->logout();
@@ -88,7 +88,7 @@ class AccountTest extends DuskTestCase
                 ->waitForText('Delete Account')
                 ->screenshot('features/Account_Delete')
                 ->press('Delete')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertDontSee($account->name)
                 ->logout();
         });

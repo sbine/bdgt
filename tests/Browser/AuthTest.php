@@ -26,7 +26,7 @@ class AuthTest extends DuskTestCase
                 ->type('password_confirmation', 'password')
                 ->screenshot('features/Auth_Register')
                 ->press('Register')
-                ->assertPathIs((new Dashboard)->url())
+                ->waitForLocation((new Dashboard)->url())
                 ->logout();
         });
     }
@@ -43,7 +43,7 @@ class AuthTest extends DuskTestCase
                 ->type('password', 'password')
                 ->screenshot('features/Auth_Login')
                 ->press('Login')
-                ->assertPathIs((new Dashboard)->url())
+                ->waitForLocation((new Dashboard)->url())
                 ->logout();
         });
     }
@@ -57,7 +57,7 @@ class AuthTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit(new Dashboard)
                 ->press('Logout')
-                ->assertPathIs('/')
+                ->waitForLocation('/')
                 ->screenshot('features/Landing_Page')
                 ->assertGuest();
         });
@@ -72,11 +72,11 @@ class AuthTest extends DuskTestCase
                 ->visit(route('login'))
                 ->assertSee('Login')
                 ->clickLink('Forgot your password?')
-                ->assertRouteIs('password.request')
+                ->waitForLocation(route('password.request'))
                 ->type('email', $user->email)
                 ->screenshot('features/Auth_Forgot_Password')
                 ->press('Send Password Reset Link')
-                ->assertPathIs('/forgot-password');
+                ->waitForLocation('/forgot-password');
         });
     }
 }

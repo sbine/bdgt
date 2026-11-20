@@ -28,7 +28,7 @@ class CategoryTest extends DuskTestCase
                 ->type('[name="label"]', $category->label)
                 ->type('budgeted', $category->budgeted)
                 ->press('Save')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($category->label)
                 ->logout();
         });
@@ -54,7 +54,7 @@ class CategoryTest extends DuskTestCase
                 ->type('[name="label"]', $category->label)
                 ->type('budgeted', $category->budgeted)
                 ->press('Edit')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($category->label)
                 ->assertSee($category->budgeted)
                 ->logout();
@@ -76,7 +76,7 @@ class CategoryTest extends DuskTestCase
                 ->waitForText('Delete Category')
                 ->screenshot('features/Category_Delete')
                 ->press('Delete')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertDontSee($category->label)
                 ->logout();
         });

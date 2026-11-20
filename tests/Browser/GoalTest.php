@@ -35,7 +35,7 @@ class GoalTest extends DuskTestCase
                 // Ensure we don't select the hidden balance input
                 ->type('[type="number"][name="balance"]', $goal->balance)
                 ->press('Save')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($goal->label)
                 ->logout();
         });
@@ -65,7 +65,7 @@ class GoalTest extends DuskTestCase
                 ->type('[name="label"]', $goal->label)
                 ->type('balance', $goal->balance)
                 ->press('Edit')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($goal->label)
                 ->assertSee($goal->balance)
                 ->logout();
@@ -87,7 +87,7 @@ class GoalTest extends DuskTestCase
                 ->waitForText('Delete Goal')
                 ->screenshot('features/Goal_Delete')
                 ->press('Delete')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertDontSee($goal->label)
                 ->logout();
         });

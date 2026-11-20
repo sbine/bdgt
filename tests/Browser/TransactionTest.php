@@ -41,7 +41,7 @@ class TransactionTest extends DuskTestCase
                 ->select('account_id', $transaction->account_id)
                 ->select('category_id', $category->id)
                 ->press('Save')
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($transaction->payee)
                 ->logout();
         });
@@ -68,7 +68,7 @@ class TransactionTest extends DuskTestCase
                     $browser->fillTransaction($transaction);
                 })
                 ->waitForReload()
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertSee($transaction->payee)
                 ->assertSee($transaction->amount)
                 ->logout();
@@ -92,7 +92,7 @@ class TransactionTest extends DuskTestCase
                     $browser->click('@save-button');
                 })
                 ->waitForReload()
-                ->assertVisible('.alert--success')
+                ->waitFor('.alert--success')
                 ->assertDontSee($transaction->payee)
                 ->logout();
         });

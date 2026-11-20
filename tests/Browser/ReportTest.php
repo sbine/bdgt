@@ -30,7 +30,7 @@ class ReportTest extends DuskTestCase
             $browser
                 ->loginAs($user)
                 ->visit(route('reports.show', 'categorial'))
-                ->assertSee('Spending By Category')
+                ->waitForText('Spending By Category')
                 // Let the report finish loading
                 ->pause(800)
                 ->screenshot('features/Report_Spending_By_Category')
@@ -53,7 +53,7 @@ class ReportTest extends DuskTestCase
             $browser
                 ->loginAs($user)
                 ->visit(route('reports.show', 'spending'))
-                ->assertSee('Spending Over Time')
+                ->waitForText('Spending Over Time')
                 // @TODO: This report fails in SQLite due to `IF` and `DATE_FORMAT`
                 ->pause(800)
                 ->screenshot('features/Report_Spending_Over_Time')
