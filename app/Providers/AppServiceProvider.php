@@ -6,7 +6,6 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
 use Sbine\Tenancy\Tenant;
@@ -34,11 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (! $this->app->environment('testing')) {
-            // utf8mb4 max key length
-            Schema::defaultStringLength(191);
-        }
-
         RateLimiter::for('exports', function () {
             return Limit::perMinute(5);
         });

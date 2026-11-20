@@ -48,10 +48,10 @@ restart: down up ## restart all docker containers
 #################################
 
 bash: ## open docker bash via ssh
-	bash -c "docker-compose exec -u www-data php bash"
+	bash -c "docker-compose exec -u www-data laravel bash"
 
 bash-root: ## open docker bash via ssh as root
-	bash -c "docker-compose exec -u root php bash"
+	bash -c "docker-compose exec -u root laravel bash"
 
 bash-db: ## open docker bash via ssh as root
 	bash -c "docker-compose exec mysql bash"
@@ -59,19 +59,19 @@ bash-db: ## open docker bash via ssh as root
 ## Forwarding commands
 #################################
 php: ## forward php command to container
-	docker-compose exec -u www-data php bash -c 'php ${ARGS}'
+	docker-compose exec -u www-data laravel bash -c 'php ${ARGS}'
 
 composer: ## forward composer command to container
-	docker-compose exec -u www-data php bash -c 'composer ${ARGS}'
+	docker-compose exec -u www-data laravel bash -c 'composer ${ARGS}'
 
 npm: ## forward npm command to container
-	docker-compose exec -u www-data php bash -c 'npm ${ARGS}'
+	docker-compose exec -u www-data laravel bash -c 'npm ${ARGS}'
 
 art: ## forward artisan command to container example `make art "make:model Sample -fs"`
-	docker-compose exec -T -u www-data php bash -c 'php artisan ${ARGS}'
+	docker-compose exec -T -u www-data laravel bash -c 'php artisan ${ARGS}'
 
 tinker: ## forward tinker command to container
-	docker-compose exec -u www-data php bash -c 'php artisan tinker ${ARGS}'
+	docker-compose exec -u www-data laravel bash -c 'php artisan tinker ${ARGS}'
 
 ## Builds Assets / Node commands
 #################################

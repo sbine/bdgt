@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use Illuminate\Support\Facades\Request;
 
 class AccountController extends Controller
 {
@@ -26,7 +25,7 @@ class AccountController extends Controller
             'interest' => 'required|numeric',
         ]);
 
-        if ($account = Account::create(Request::all())) {
+        if ($account = Account::create(request()->all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.created'));
         }
 
@@ -40,7 +39,7 @@ class AccountController extends Controller
 
     public function update(Account $account)
     {
-        if ($account->update(Request::all())) {
+        if ($account->update(request()->all())) {
             return redirect(route('accounts.show', $account->id))->with('alerts.success', trans('crud.accounts.updated'));
         }
 

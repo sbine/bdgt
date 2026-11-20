@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
-use Illuminate\Support\Facades\Request;
 
 class GoalController extends Controller
 {
@@ -26,7 +25,7 @@ class GoalController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        if ($goal = Goal::create(Request::all())) {
+        if ($goal = Goal::create(request()->all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.created'));
         }
 
@@ -40,7 +39,7 @@ class GoalController extends Controller
 
     public function update(Goal $goal)
     {
-        if ($goal->update(Request::all())) {
+        if ($goal->update(request()->all())) {
             return redirect(route('goals.show', $goal->id))->with('alerts.success', trans('crud.goals.updated'));
         }
 

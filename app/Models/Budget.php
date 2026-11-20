@@ -52,12 +52,11 @@ class Budget extends Model
             return 0;
         }
 
-        $total = 0;
-        foreach ($this->category->transactions()->forMonth($this->date)->get() as $transaction) {
-            if (! $transaction->inflow) {
-                $total += $transaction->amount;
-            }
-        }
+        $total = $this->category
+            ->transactions()
+            ->forMonth($this->date)
+            ->where('inflow', false)
+            ->sum('amount');
 
         $this->spent = $total;
 

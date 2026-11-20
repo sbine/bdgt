@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Reports\ReportFactory;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Request;
 
 class ReportController extends Controller
 {
@@ -25,8 +24,8 @@ class ReportController extends Controller
 
     public function ajax($type)
     {
-        $startDate = new Carbon(Request::input('startDate'));
-        $endDate = new Carbon(Request::input('endDate'));
+        $startDate = new Carbon(request()->input('startDate'));
+        $endDate = new Carbon(request()->input('endDate'));
         if ($startDate->diffInDays($endDate) > 366) {
             $endDate = $startDate->copy()->addYear();
         }

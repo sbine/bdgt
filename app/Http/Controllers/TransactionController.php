@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use Illuminate\Support\Facades\Request;
 
 class TransactionController extends Controller
 {
@@ -18,7 +17,7 @@ class TransactionController extends Controller
             'category_id' => 'nullable|numeric',
         ]);
 
-        if (Transaction::create(Request::all())) {
+        if (Transaction::create(request()->all())) {
             return redirect()->back()->with('alerts.success', trans('crud.transactions.created'));
         }
 

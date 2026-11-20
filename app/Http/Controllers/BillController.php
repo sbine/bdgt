@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use Illuminate\Support\Facades\Request;
 
 class BillController extends Controller
 {
@@ -26,7 +25,7 @@ class BillController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        if ($bill = Bill::create(Request::all())) {
+        if ($bill = Bill::create(request()->all())) {
             return redirect(route('bills.show', $bill->id))->with('alerts.success', trans('crud.bills.created'));
         }
 
@@ -40,7 +39,7 @@ class BillController extends Controller
 
     public function update(Bill $bill)
     {
-        if ($bill->update(Request::all())) {
+        if ($bill->update(request()->all())) {
             return redirect(route('bills.show', $bill->id))->with('alerts.success', trans('crud.bills.updated'));
         }
 

@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use DateInterval;
 use DateTime;
-use Illuminate\Support\Facades\Request;
 
 class BillEventController
 {
     public function __invoke()
     {
         $billsByDate = [];
-        if (Request::has(['start', 'end'])) {
+        if (request()->has(['start', 'end'])) {
             Bill::with('transactions')->get()->each(function ($bill) use (&$billsByDate) {
-                $dueDates = $bill->getDueDatesForInterval(Request::get('start'), Request::get('end'));
+                $dueDates = $bill->getDueDatesForInterval(request()->get('start'), request()->get('end'));
 
                 foreach ($dueDates as $date) {
                     $billsByDate[] = [

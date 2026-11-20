@@ -11,7 +11,7 @@ use PhpCsFixer\Finder;
  * php vendor/bin/php-cs-fixer describe <rule_name>
  */
 
-return Config::create()
+return new Config()
     ->setFinder(
         Finder::create()
             ->exclude('bootstrap')
