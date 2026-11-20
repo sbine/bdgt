@@ -6,13 +6,11 @@ use Illuminate\Support\Facades\Auth;
 
 trait BelongsToUser
 {
-    protected static function bootBelongsToUser(): void
+    protected function initializeBelongsToUser(): void
     {
-        static::creating(function ($model) {
-            if (Auth::check() && ! $model->user_id) {
-                $model->user_id = Auth::id();
-            }
-        });
+        if (Auth::check() && ! $this->user_id) {
+            $this->user_id = Auth::id();
+        }
     }
 
     protected function getArrayableItems(array $values)

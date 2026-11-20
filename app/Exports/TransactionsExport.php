@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Transaction;
+use Illuminate\Support\Enumerable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -30,9 +31,9 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
     }
 
     /**
-    * @return \Illuminate\Support\Collection
+    * @return \Illuminate\Support\Enumerable
     */
-    public function collection()
+    public function collection(): Enumerable
     {
         $transactions = Transaction::with([
             'account' => function ($query) {
@@ -45,7 +46,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
                 $query->select('id', 'label');
             },
         ])->ordered()
-          ->get();
+        ->get();
 
         return $transactions;
     }
@@ -66,7 +67,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, W
     public function columnFormats(): array
     {
         return [
-            'F' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'F' => NumberFormat::FORMAT_CURRENCY_USD,
         ];
     }
 }
