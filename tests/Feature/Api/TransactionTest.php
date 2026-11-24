@@ -56,7 +56,7 @@ class TransactionTest extends TestCase
         $this
             ->actingAs(User::factory()->create())
             ->get(route('api.transactions.show', $transaction->id))
-            ->assertForbidden();
+            ->assertNotFound();
     }
 
     public function test_user_can_edit_their_own_transaction()
@@ -91,7 +91,7 @@ class TransactionTest extends TestCase
         $this
             ->actingAs(User::factory()->create())
             ->put(route('api.transactions.update', $transaction->id), $updatedTransaction)
-            ->assertForbidden();
+            ->assertNotFound();
     }
 
     public function test_user_can_delete_their_own_transaction()
@@ -121,6 +121,6 @@ class TransactionTest extends TestCase
         $this
             ->actingAs(User::factory()->create())
             ->delete(route('api.transactions.destroy', $transaction->id))
-            ->assertForbidden();
+            ->assertNotFound();
     }
 }

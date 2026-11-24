@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(5);
         });
 
-        $this->app->singleton(Tenant::class, function () {
+        $this->app->bindIf(Tenant::class, function () {
             // Throw an AuthenticatedException if no auth user is found
             return new Tenant(Auth::authenticate());
         });
