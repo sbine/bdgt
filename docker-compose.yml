@@ -2,11 +2,11 @@
 services:
   laravel:
     build:
-      context: ./vendor/laravel/sail/runtimes/8.4
+      context: ./vendor/laravel/sail/runtimes/8.5
       dockerfile: Dockerfile
       args:
         WWWGROUP: '${WWWGROUP}'
-    image: sail-8.4/app
+    image: sail-8.5/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
@@ -43,11 +43,15 @@ services:
     networks:
       - sail
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-p${DB_PASSWORD}'
       retries: 3
       timeout: 5s
   selenium:
-    image: 'selenium/standalone-chromium'
+    image: selenium/standalone-chromium
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     volumes:

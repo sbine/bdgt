@@ -3,13 +3,13 @@
     @apply py-2;
     @apply text-gray-600;
     @apply text-sm;
+}
 
-    &::before {
-        @apply px-3;
-        @apply text-gray-500;
+.breadcrumb::before {
+    @apply px-3;
+    @apply text-gray-500;
 
-        content: "/\00a0";
+    content: "/\00a0";
 
-        @apply lg:px-4;
-    }
+    @apply lg:px-4;
 }

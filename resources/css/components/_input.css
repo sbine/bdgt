@@ -5,14 +5,14 @@
     @apply rounded-sm;
     @apply px-2;
     @apply py-1;
+}
 
-    &[type="number"] {
-        @apply pr-0;
-    }
+.input-text[type="number"] {
+    @apply pr-0;
+}
 
-    &:focus {
-        @apply outline-hidden;
-    }
+.input-text:focus {
+    @apply outline-hidden;
 }
 
 .input-radio {

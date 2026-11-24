@@ -29,7 +29,7 @@ class SpendingByCategory implements Reportable
         // Limit it to our date range and group by category
         $results = Transaction::selectRaw('SUM(amount) AS total, categories.label AS category')
                         ->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d 23:59:59')])
-                        ->groupBy('transactions.category_id')
+                        ->groupBy(['transactions.category_id', 'categories.label'])
                         ->join('categories', 'category_id', '=', 'categories.id')
                         ->orderByDesc('total')
                         ->get();

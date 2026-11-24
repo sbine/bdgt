@@ -9,22 +9,22 @@
 
     @apply sm:flex;
     @apply sm:items-center;
+}
 
-    &__label {
-        @apply inline-block;
-        @apply mb-1;
+.form-row__label {
+    @apply inline-block;
+    @apply mb-1;
 
-        @apply sm:mb-0;
-        @apply sm:pr-4;
-        @apply sm:text-right;
-        @apply w-2/5;
-    }
+    @apply sm:mb-0;
+    @apply sm:pr-4;
+    @apply sm:text-right;
+    @apply w-2/5;
+}
 
-    &__input {
-        @apply sm:w-3/5;
+.form-row__input {
+    @apply sm:w-3/5;
 
-        .input-text {
-            @apply w-full;
-        }
+    .input-text {
+        @apply w-full;
     }
 }

@@ -6,44 +6,45 @@
     @apply py-2;
     @apply rounded-sm;
     @apply text-gray-700;
+}
 
-    &:hover {
-        @apply bg-gray-400;
-    }
+.button:hover {
+    @apply bg-gray-400;
+}
 
-    &--primary {
-        @apply bg-blue-600!;
-        @apply text-gray-100;
+.button--primary {
+    @apply bg-blue-600!;
+    @apply text-gray-100;
+}
 
-        &:hover {
-            @apply bg-blue-700;
-        }
-    }
+.button--primary:hover {
+    @apply bg-blue-700;
+}
 
-    &--success {
-        @apply bg-green-600;
-        @apply text-gray-100;
+.button--success {
+    @apply bg-green-600;
+    @apply text-gray-100;
+}
 
-        &:hover {
-            @apply bg-green-700;
-        }
-    }
+.button--success:hover {
+    @apply bg-green-700;
+}
 
-    &--warning {
-        @apply bg-orange-400;
-        @apply text-gray-800;
+.button--warning {
+    @apply bg-orange-400;
+    @apply text-gray-800;
+}
 
-        &:hover {
-            @apply bg-orange-500;
-        }
-    }
+.button--warning:hover {
+    @apply bg-orange-500;
+}
 
-    &--danger {
-        @apply bg-red-400;
-        @apply text-gray-100;
+.button--danger {
+    @apply bg-red-400;
+    @apply text-gray-100;
 
-        &:hover {
-            @apply bg-red-500;
-        }
-    }
+}
+
+.button--danger:hover {
+    @apply bg-red-500;
 }

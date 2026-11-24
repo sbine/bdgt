@@ -19,10 +19,10 @@
             @apply px-3;
             @apply py-4;
         }
+    }
 
-        &:hover {
-            @apply bg-gray-100;
-        }
+    .p-datatable-tbody tr:hover {
+        @apply bg-gray-100;
     }
 }
 
@@ -41,20 +41,20 @@
         @apply min-w-0;
         @apply text-blue-700;
 
-        &.p-disabled {
+        .p-disabled {
             @apply text-gray-400;
             @apply cursor-not-allowed;
         }
 
-        &.p-active {
+        .p-active {
             @apply font-semibold;
             @apply text-blue-900;
             @apply bg-blue-100;
         }
+    }
 
-        &:hover:not(.p-disabled) {
-            @apply bg-gray-100;
-        }
+    .p-button:hover:not(.p-disabled) {
+        @apply bg-gray-100;
     }
 }
 
@@ -66,15 +66,15 @@
     @apply border-gray-300;
     @apply rounded;
     @apply w-64;
+}
 
-    &::placeholder {
-        @apply text-gray-400;
-    }
+.p-inputtext::placeholder {
+    @apply text-gray-400;
+}
 
-    &:focus {
-        @apply outline-none;
-        @apply border-blue-500;
-        @apply ring-2;
-        @apply ring-blue-200;
-    }
+.p-inputtext:focus {
+    @apply outline-none;
+    @apply border-blue-500;
+    @apply ring-2;
+    @apply ring-blue-200;
 }

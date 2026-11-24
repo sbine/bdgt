@@ -666,26 +666,26 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa"
+                "reference": "9bef884e12278a7b89b64adbfb9379c021d3c102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
-                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/9bef884e12278a7b89b64adbfb9379c021d3c102",
+                "reference": "9bef884e12278a7b89b64adbfb9379c021d3c102",
                 "shasum": ""
             },
             "require": {
-                "doctrine/lexer": "^2.0 || ^3.0",
+                "doctrine/lexer": "^3.0.3",
                 "php": ">=8.1",
-                "symfony/polyfill-intl-idn": "^1.26"
+                "symfony/polyfill-intl-idn": "^1.43"
             },
             "require-dev": {
-                "phpunit/phpunit": "^10.2",
-                "vimeo/psalm": "^5.12"
+                "phpunit/phpunit": "^10.5.67",
+                "vimeo/psalm": "^5.26.1"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -721,7 +721,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/4.0.4"
+                "source": "https://github.com/egulias/EmailValidator/tree/4.0.5"
             },
             "funding": [
                 {
@@ -729,8 +729,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-06T22:45:56+00:00",
-            "published-time": "2025-03-20T21:39:03+00:00"
+            "time": "2026-11-22T16:52:20+00:00",
+            "published-time": "2026-11-22T22:05:57+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -869,22 +869,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "8.5.2",
+            "version": "8.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "8e893188e1ac92b457eca35ddf2b574024b66280"
+                "reference": "ba6574fd975ab16f87dc356729a36777c03851e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8e893188e1ac92b457eca35ddf2b574024b66280",
-                "reference": "8e893188e1ac92b457eca35ddf2b574024b66280",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ba6574fd975ab16f87dc356729a36777c03851e8",
+                "reference": "ba6574fd975ab16f87dc356729a36777c03851e8",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^3.1",
-                "guzzlehttp/psr7": "^3.4",
+                "guzzlehttp/promises": "^3.2",
+                "guzzlehttp/psr7": "^3.6",
                 "php": "^7.4 || ^8.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
@@ -976,7 +976,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/8.5.2"
+                "source": "https://github.com/guzzle/guzzle/tree/8.6.0"
             },
             "funding": [
                 {
@@ -992,21 +992,21 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-17T16:24:00+00:00",
-            "published-time": "2026-11-17T16:24:22+00:00"
+            "time": "2026-11-22T16:48:13+00:00",
+            "published-time": "2026-11-22T16:50:37+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "863d10526fe8232e79a8005220472ea553fd0b82"
+                "reference": "a201cc78db93065f891278f86eaeaa1c97c5a158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/863d10526fe8232e79a8005220472ea553fd0b82",
-                "reference": "863d10526fe8232e79a8005220472ea553fd0b82",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/a201cc78db93065f891278f86eaeaa1c97c5a158",
+                "reference": "a201cc78db93065f891278f86eaeaa1c97c5a158",
                 "shasum": ""
             },
             "require": {
@@ -1061,7 +1061,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/3.1.1"
+                "source": "https://github.com/guzzle/promises/tree/3.2.0"
             },
             "funding": [
                 {
@@ -1077,21 +1077,21 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-20T00:03:31+00:00",
-            "published-time": "2026-11-20T00:04:39+00:00"
+            "time": "2026-11-21T03:48:02+00:00",
+            "published-time": "2026-11-21T03:48:27+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "3.5.1",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "ef2058cc884d864affa6ef7cd23a68d45e015c2f"
+                "reference": "1fa0f8319c046b7dec80030460254283d851388e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/ef2058cc884d864affa6ef7cd23a68d45e015c2f",
-                "reference": "ef2058cc884d864affa6ef7cd23a68d45e015c2f",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/1fa0f8319c046b7dec80030460254283d851388e",
+                "reference": "1fa0f8319c046b7dec80030460254283d851388e",
                 "shasum": ""
             },
             "require": {
@@ -1183,7 +1183,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/3.5.1"
+                "source": "https://github.com/guzzle/psr7/tree/3.6.0"
             },
             "funding": [
                 {
@@ -1199,8 +1199,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-19T20:35:18+00:00",
-            "published-time": "2026-11-19T20:36:27+00:00"
+            "time": "2026-11-22T00:00:35+00:00",
+            "published-time": "2026-11-22T00:01:04+00:00"
         },
         {
             "name": "guzzlehttp/uri-template",
@@ -3186,16 +3186,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "5.11.0",
+            "version": "5.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "3aa1f0d0f3c658b803c18050ac49244d07d96907"
+                "reference": "f03bcf6cbcae3a719b9b56c32077379b5cde2190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/3aa1f0d0f3c658b803c18050ac49244d07d96907",
-                "reference": "3aa1f0d0f3c658b803c18050ac49244d07d96907",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/f03bcf6cbcae3a719b9b56c32077379b5cde2190",
+                "reference": "f03bcf6cbcae3a719b9b56c32077379b5cde2190",
                 "shasum": ""
             },
             "require": {
@@ -3293,10 +3293,10 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/5.11.0"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/5.12.0"
             },
-            "time": "2026-11-08T06:29:49+00:00",
-            "published-time": "2026-11-08T06:49:56+00:00"
+            "time": "2026-11-22T06:48:07+00:00",
+            "published-time": "2026-11-22T07:25:13+00:00"
         },
         {
             "name": "phpoffice/wmf",
@@ -4068,20 +4068,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sbine/simple-tenancy.git",
-                "reference": "6c005d15183c579bc7f8dc453cb48fb0cb597b46"
+                "reference": "a82553919ad507de82fd8e8fcef4fa6f19a6354b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sbine/simple-tenancy/zipball/6c005d15183c579bc7f8dc453cb48fb0cb597b46",
-                "reference": "6c005d15183c579bc7f8dc453cb48fb0cb597b46",
+                "url": "https://api.github.com/repos/sbine/simple-tenancy/zipball/a82553919ad507de82fd8e8fcef4fa6f19a6354b",
+                "reference": "a82553919ad507de82fd8e8fcef4fa6f19a6354b",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": ">=9.0",
-                "php": "^8.2"
+                "laravel/framework": ">=10.0",
+                "php": "^8.3"
             },
             "require-dev": {
-                "orchestra/testbench": ">=7.0"
+                "orchestra/testbench": ">=8.0"
             },
             "default-branch": true,
             "type": "library",
@@ -4118,8 +4118,8 @@
                 "issues": "https://github.com/sbine/simple-tenancy/issues",
                 "source": "https://github.com/sbine/simple-tenancy/tree/main"
             },
-            "time": "2026-11-20T04:42:16+00:00",
-            "published-time": "2026-11-20T04:42:40+00:00"
+            "time": "2026-11-24T00:45:13+00:00",
+            "published-time": "2026-11-24T00:46:07+00:00"
         },
         {
             "name": "symfony/clock",
@@ -6854,16 +6854,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v5.8.0",
+            "version": "v5.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpdotenv/phpdotenv.git",
-                "reference": "96149103e62ac67e915f6d2ef59b72dee2e011e0"
+                "reference": "ba37876e98122ca15151247ce1187d20ee8bf4e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpdotenv/phpdotenv/zipball/96149103e62ac67e915f6d2ef59b72dee2e011e0",
-                "reference": "96149103e62ac67e915f6d2ef59b72dee2e011e0",
+                "url": "https://api.github.com/repos/phpdotenv/phpdotenv/zipball/ba37876e98122ca15151247ce1187d20ee8bf4e0",
+                "reference": "ba37876e98122ca15151247ce1187d20ee8bf4e0",
                 "shasum": ""
             },
             "require": {
@@ -6922,7 +6922,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpdotenv/phpdotenv/issues",
-                "source": "https://github.com/phpdotenv/phpdotenv/tree/v5.8.0"
+                "source": "https://github.com/phpdotenv/phpdotenv/tree/v5.8.1"
             },
             "funding": [
                 {
@@ -6934,8 +6934,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-25T16:26:19+00:00",
-            "published-time": "2026-10-25T16:26:50+00:00"
+            "time": "2026-11-23T00:53:11+00:00",
+            "published-time": "2026-11-23T00:53:39+00:00"
         },
         {
             "name": "voku/portable-ascii",
@@ -9481,12 +9481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "f066424a52de94a2510cfc188077ca396546bad1"
+                "reference": "9b14985ecfc98a89626ef5c83c7af75a9f39b350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f066424a52de94a2510cfc188077ca396546bad1",
-                "reference": "f066424a52de94a2510cfc188077ca396546bad1",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9b14985ecfc98a89626ef5c83c7af75a9f39b350",
+                "reference": "9b14985ecfc98a89626ef5c83c7af75a9f39b350",
                 "shasum": ""
             },
             "conflict": {
@@ -9563,10 +9563,12 @@
                 "bacula-web/bacula-web": "<9.7.1",
                 "badaso/core": "<=2.9.11",
                 "bagisto/bagisto": "<=2.3.15",
+                "baldinof/roadrunner-bundle": ">=3.0.1,<3.2.4",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
                 "barryvdh/laravel-translation-manager": "<0.6.8",
                 "barzahlen/barzahlen-php": "<2.0.1",
+                "baserproject/baser-core": "<5.3",
                 "baserproject/basercms": "<=5.2.2",
                 "bassjobsen/bootstrap-3-typeahead": ">4.0.2",
                 "bazaarvoice/bazaarvoice-magento2-ext": ">=8,<9.1.11",
@@ -9584,7 +9586,7 @@
                 "blueways/bw-captcha": ">=4,<5.4.2",
                 "bmarshall511/wordpress_zero_spam": "<5.2.13",
                 "bolt/bolt": "<3.7.2",
-                "bolt/core": "<=4.2",
+                "bolt/core": "<6.1.5",
                 "born05/craft-twofactorauthentication": "<3.3.4",
                 "bottelet/flarepoint": "<2.2.1",
                 "bref/bref": "<2.1.17",
@@ -10092,7 +10094,7 @@
                 "nette/application": ">=2,<2.0.19|>=2.1,<2.1.13|>=2.2,<2.2.10|>=2.3,<2.3.14|>=2.4,<2.4.16|>=3,<3.0.6",
                 "nette/nette": ">=2,<2.0.19|>=2.1,<2.1.13",
                 "neuron-core/neuron-ai": "<=2.8.11",
-                "nilsteampassnet/teampass": "<3.1.3.1-dev",
+                "nilsteampassnet/teampass": "<3.2.2",
                 "nitsan/ns-backup": "<13.0.1",
                 "nitsan/ns-t3ai": "<14.0.2",
                 "nonfiction/nterchange": "<4.1.1",
@@ -10204,7 +10206,7 @@
                 "pocketmine/pocketmine-mp": "<5.44.2",
                 "pocketmine/raklib": ">=0.14,<0.14.6|>=0.15,<0.15.1",
                 "pontedilana/php-weasyprint": "<=2.5.1",
-                "poweradmin/poweradmin": "<4.2.5|>=4.3,<4.3.4",
+                "poweradmin/poweradmin": "<4.2.6|>=4.3,<4.3.5|>=4.4,<4.4.1",
                 "predis/predis": ">=3.0.0.0-RC1,<3.3",
                 "pressbooks/pressbooks": "<5.18",
                 "prestashop/autoupgrade": ">=4,<4.10.1",
@@ -10655,8 +10657,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-19T23:24:59+00:00",
-            "published-time": "2026-11-19T23:25:03+00:00"
+            "time": "2026-11-22T21:37:04+00:00",
+            "published-time": "2026-11-22T21:37:09+00:00"
         },
         {
             "name": "sebastian/cli-parser",

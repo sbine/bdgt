@@ -2,8 +2,8 @@
     @apply block;
     @apply text-gray-400;
     @apply p-3;
+}
 
-    &:hover {
-        @apply text-white;
-    }
+.nav-item:hover {
+    @apply text-white;
 }

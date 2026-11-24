@@ -14,3 +14,4 @@ Homestead.json
 *.map
 .idea
 .phpunit.result.cache
+/.phpunit.cache
